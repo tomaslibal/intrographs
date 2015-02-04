@@ -40,6 +40,25 @@ Graph.prototype.addVertex = function(props) {
 };
 
 /*
+ * Name of the graph is a conventional name based on number of vertices and
+ * edges in the graph (or graphs that are isomorphic to that graph).
+ *
+ * For instance, a graph of one vertex and zero edges is known as N_1. It is 
+ * an instance of a null graph. Null graph is a graph N_k of k vertices and 
+ * zero edges.
+ *
+ * C_k...cyclic graphs
+ * K_k...connected graphs
+ * N_k...null graphs
+ * ...
+ */
+Graph.prototype.getName = function() {
+    "use strict";
+
+    return "v=" + this.vertices.length + ", e=" + this.edges.length;
+};
+
+/*
  * Vertex JavaScript constructor
  *
  * Each vertex of a graph is an object constructed by this function.
