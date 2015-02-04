@@ -84,3 +84,7 @@ function Vertex(props) {
      */
     this.name = props.name || null;
  }
+
+if ("undefined" !== typeof process && process.env) {
+    module.exports.Graph = Graph;
+}
