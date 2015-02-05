@@ -3,12 +3,36 @@
  * a 2D space.
  *
  */
-function graphRenderer2D(BaseRenderer2D) {
+function GraphRenderer2D(baseRenderer2D) {
     "use strict";
 
-    if("function" !== typeof BaseRenderer2D) {
-        return new Error("BaseRenderer2D must be a function");
+    if("object" !== typeof baseRenderer2D) {
+        throw new Error("BaseRenderer2D must be an object");
+        return;
     }
 
-    this.renderer = new BaseRenderer2D();
+    this.renderer = baseRenderer2D;
+    extendObj(this.__proto__, baseRenderer2D.__proto__);
 }
+
+function extendObj(base, extra) {
+    "use strict";
+
+    var prop;
+
+    for(prop in extra) {
+        if (!extra.hasOwnProperty(prop)) {
+            continue;
+        }
+
+        base[prop] = extra[prop];
+    }
+
+    return base;
+}
+
+GraphRenderer2D.prototype.render = function() {
+    "use strict";
+};
+
+
