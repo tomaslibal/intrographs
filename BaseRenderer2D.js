@@ -1,7 +1,7 @@
 /*
  * Renderer is a high level interface for drawing into HTML canvas
  */
-function Renderer(args) {
+function BaseRenderer2D(args) {
     "use strict";
 
     args = args || {};
