@@ -47,14 +47,30 @@ Graph.prototype.addVertex = function(props) {
  * an instance of a null graph. Null graph is a graph N_k of k vertices and 
  * zero edges.
  *
- * C_k...cyclic graphs
- * K_k...connected graphs
- * N_k...null graphs
- * ...
+ * C_k...cyclic graphs (cycle graph)
+ *    Is a graph on k nodes containing a single cycle through all nodes 
+ *    (Weisstein, Eric W. "Cycle Graph." 
+ *    http://mathworld.wolfram.com/CycleGraph.html)
+ *
+ * K_k...connected graphs (complete graph)
+ *    In complete graph every vertex is connected to all other vertices.
+ *
+ * N_k...null graphs (empty graph)
+ *    A null graph is a graph with one or more vertices and no edges.
+ *
+ * X_k...antiprism graph, 
+ * ...gear graph, 
+ * ...prism graph, 
+ * ...star graph, 
+ * ...and wheel graph.
  */
 Graph.prototype.getName = function() {
     "use strict";
 
+    /* 
+     * For now the name is returned in its general form which consists of 
+     * the number of vertices and edges in the graph.
+     */
     return "v=" + this.vertices.length + ", e=" + this.edges.length;
 };
 
