@@ -13,6 +13,8 @@ function GraphRenderer2D(baseRenderer2D) {
 
     this.renderer = baseRenderer2D;
     extendObj(this.__proto__, baseRenderer2D.__proto__);
+
+    this.canvas = null;
 }
 
 function extendObj(base, extra) {
@@ -31,8 +33,28 @@ function extendObj(base, extra) {
     return base;
 }
 
-GraphRenderer2D.prototype.render = function() {
+GraphRenderer2D.prototype.setCanvas = function(canvas) {
+    this.canvas = canvas;
+};
+
+GraphRenderer2D.prototype.render = function(graph) {
     "use strict";
+
+    /*
+     * Get 2D context of the canvas
+     */
+    var ctx = this.getContext(this.canvas);
+
+    /*
+     * Render vertices
+     */
+    var vertices = graph.vertices;
+    var k = vertices.length;
+    var i = 0;
+    for(; i < k; i++) {
+        this.renderer.paint.dot(ctx, vertices[i].x, vertices[i].y);
+    }
+
 };
 
 
