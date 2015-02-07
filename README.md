@@ -3,6 +3,14 @@
 Inspired by the graph theory, this software is a graphical tool that models
 graphs.
 
+## Install
+
+    make install
+
+## Run
+
+    make run
+
 ## Difference between pure mathematical graphs and graphs in computer science
 
 In pure mathematics a graph is an object that consists of the two sets:
