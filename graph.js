@@ -29,6 +29,13 @@ function Graph() {
     this.edges = [];
 }
 
+/*
+ * Creates a new vertex and passes the @param props to Vertex's constructor.
+ *
+ * @todo add a method that takes a Vertex and pushes it onto Graph.vertices
+ * directly. At the moment "new" is called on Vertex inside Graph which tighly
+ * couples these two classes/objects together.
+ */
 Graph.prototype.addVertex = function(props) {
     "use strict";
 
@@ -75,6 +82,27 @@ Graph.prototype.getName = function() {
 };
 
 /*
+ * Utility function that returns void 0 for methods on objects that have not
+ * yet been implemented.
+ *
+ * @return void
+ */
+function voidFunction() {
+    "use strict";
+
+    return void 0;
+}
+
+Graph.prototype.isCycleGraph = voidFunction;
+Graph.prototype.isConnectedGraph = voidFunction;
+Graph.prototype.isNullGraph = voidFunction;
+Graph.prototype.isGearGraph = voidFunction;
+Graph.prototype.isPrismGraph = voidFunction;
+Graph.prototype.isStarGraph = voidFunction;
+Graph.prototype.isWheelGraph = voidFunction;
+Graph.prototype.isAntiprismGraph = voidFunction;
+
+/*
  * Vertex JavaScript constructor
  *
  * Each vertex of a graph is an object constructed by this function.
@@ -101,6 +129,14 @@ function Vertex(props) {
     this.name = props.name || null;
  }
 
+/*
+ * #NODE_JS_ENV
+ *
+ * For node.js environment only
+ */
 if ("undefined" !== typeof process && process.env) {
     module.exports.Graph = Graph;
 }
+/*
+ * #/NODE_JS_ENV/
+ */
