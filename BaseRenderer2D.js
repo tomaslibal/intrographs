@@ -29,7 +29,7 @@ BaseRenderer2DPrototype = {
         }
 
         try {
-            ctx = canvas.getContext2d();
+            ctx = canvas.getContext("2d");
         } catch (e) {
             return 3;
         }
