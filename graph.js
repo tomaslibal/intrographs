@@ -103,6 +103,27 @@ Graph.prototype.isWheelGraph = voidFunction;
 Graph.prototype.isAntiprismGraph = voidFunction;
 
 /*
+ * Each vertex has a label so that the edges can be defined as a set of two
+ * vertices like { A, B } for example. This method takes the label of the 
+ * vertex and returns that Vertex object.
+ */
+Graph.prototype.lookupVertex = function(graphVertices, label) {
+    "use strict";
+
+    var l = graphVertices.length;
+    var i = 0;
+    
+    for(; i < l; i++) {
+        if (graphVertices[i].name === label) {
+            return graphVertices[i];
+        }
+    }
+
+    return -1;
+}
+
+
+/*
  * Vertex JavaScript constructor
  *
  * Each vertex of a graph is an object constructed by this function.
