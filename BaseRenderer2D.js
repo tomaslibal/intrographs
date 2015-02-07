@@ -14,6 +14,27 @@ BaseRenderer2DPrototype = {
         "use strict";
 
         this.canvas = canvas;
+    },
+    getContext: function(canvas) {
+        "use strict";
+
+        var ctx = null;
+
+        if (!canvas || "object" !== typeof canvas) {
+            return 1;
+        }
+
+        if (canvas.toString && canvas.toString() !== "[object HTMLCanvasElement]") {
+            return 2;
+        }
+
+        try {
+            ctx = canvas.getContext2d();
+        } catch (e) {
+            return 3;
+        }
+
+        return ctx;
     }
 };
 
