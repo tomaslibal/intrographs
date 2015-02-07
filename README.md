@@ -21,3 +21,4 @@ have different meanings.
 ## Bibliography
 
 1. Trudeau, J. R. (1993) Introduction to Graph Theory. Published by Dover.
+2. Weisstein, Eric W. "Simple Graph." From MathWorld--A Wolfram Web Resource. http://mathworld.wolfram.com/SimpleGraph.html. Retrieved 7th February 2015.
