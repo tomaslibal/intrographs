@@ -35,6 +35,20 @@ BaseRenderer2DPrototype = {
         }
 
         return ctx;
+    },
+    paint: {
+        dot: function(ctx, x, y) {
+            "use strict";
+
+            ctx.beginPath();
+            /*
+             * ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, [anticlockwise])
+             */
+            ctx.ellipse(x, y, 1, 1, 0, 0, 2*Math.PI);
+
+            ctx.stroke();
+        }
+
     }
 };
 
