@@ -47,6 +47,14 @@ BaseRenderer2DPrototype = {
             ctx.ellipse(x, y, 1, 1, 0, 0, 2*Math.PI);
 
             ctx.stroke();
+        },
+        segment: function(x0, y0, x1, y1) {
+            "use strict";
+
+            ctx.beginPath();
+            ctx.moveTo(x0, y0);
+            ctx.lineTo(x1, y1);
+            ctx.stroke();
         }
 
     }
