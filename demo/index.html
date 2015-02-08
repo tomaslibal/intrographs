@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Demo - N_1 graph</title>
+	<title>Demo - K_3 graph</title>
 </head>
 <body>
     <canvas width="640" height="480" id="canvas">
@@ -12,7 +12,13 @@
     <script src="../src/render/GraphRenderer2D.js"></script>
 
     <script>
-        var N1 = getGraph();
+        var K3 = getGraph();
+        K3.addVertex({ name: "B" });
+        K3.addVertex({ name: "C" });
+
+        K3.addEdge(["A", "B"]);
+        K3.addEdge(["A", "C"]);
+        K3.addEdge(["B", "C"]);
     
         var baseRenderer = new BaseRenderer2D();
         var graphRenderer = new GraphRenderer2D(baseRenderer);
@@ -22,7 +28,7 @@
         var ctx = baseRenderer.getContext(canvas);
 
         graphRenderer.setCanvas(canvas);
-        graphRenderer.render(N1);
+        graphRenderer.render(K3);
     </script>
 </body>
 </html>
