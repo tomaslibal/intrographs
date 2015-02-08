@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Demo - N_1 graph</title>
+</head>
+<body>
+    <canvas width="640" height="480" id="canvas">
+
+    <script src="../src/Graph.js"></script>
+    <script src="../src/render/BaseRenderer2D.js"></script>
+    <script src="../src/render/GraphRenderer2D.js"></script>
+
+    <script>
+        var N1 = getGraph();
+    
+        var baseRenderer = new BaseRenderer2D();
+        var graphRenderer = new GraphRenderer2D(baseRenderer);
+
+        var canvas = document.querySelector("#canvas");
+
+        var ctx = baseRenderer.getContext(canvas);
+
+        graphRenderer.setCanvas(canvas);
+        graphRenderer.render(N1);
+    </script>
+</body>
+</html>
