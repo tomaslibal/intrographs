@@ -27,6 +27,20 @@ function Graph() {
 
     this.vertices = [];
     this.edges = [];
+
+    this.properties = {
+        /*
+         * A graph is planar if it can be drawn in a 2D space without edge
+         * crossings.
+         *
+         * Euler first described the relation between the number of vertices, 
+         * edges and faces and planar graphs (Nishizeki and Chiba(2008), p. vii). 
+         * 
+         * Kuratowski's theorem: ...
+         *
+         */
+        planar: CONSTS.UNKNOWN
+    };
 }
 
 /*
