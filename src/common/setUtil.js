@@ -7,7 +7,7 @@ var setUtil = {
     isSet: function(set) {
         "use strict";
 
-        not_implemented();
+        not_implemented("setUtil.isSet");
     },
     /*
      * Definition 2: A set containing no elements is called a null set.
@@ -16,7 +16,7 @@ var setUtil = {
      */
     isNullSet: function(set) {
         "use strict";
-        not_implemented();
+        not_implemented("setUtil.isNullSet");
     },
     /*
      * Definition 3: set A is said to be a subset of B if every element of A
@@ -24,7 +24,7 @@ var setUtil = {
      */
     isSubset: function(a, b) {
         "use strict";
-        not_implemented();
+        not_implemented("setUtil.isSubset");
     },
     /*
      * Definition 4: sets A and B are said to be equal when A is a subset of B
@@ -32,13 +32,23 @@ var setUtil = {
      */
     equals: function(a, b) {
         "use strict";
-        not_implemented();
+        not_implemented("setUtil.equals");
     }
 
 };
 
 function not_implemented() {
     "use strict";
-
-    throw new Error("Not yet implemented");
+        
+    var str = "Not yet implemented!";
+          
+    if (fcn) {
+        str = fcn + ": " + str;
+    }
+             
+    if (msg) {
+        str += " " + msg;
+    }
+                  
+    throw new Error(str);
 }
