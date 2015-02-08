@@ -34,6 +34,8 @@ function extendObj(base, extra) {
 }
 
 GraphRenderer2D.prototype.setCanvas = function(canvas) {
+    "use strict";
+
     this.canvas = canvas;
 };
 
@@ -44,6 +46,12 @@ GraphRenderer2D.prototype.render = function(graph) {
      * Get 2D context of the canvas
      */
     var ctx = this.getContext(this.canvas);
+
+    /*
+     * Space out vertices so that they won't overlap on the same x, y 
+     * coordinates.
+     */
+    graph.spaceOutVerticesRandom(graph.vertices);
 
     /*
      * Render vertices
