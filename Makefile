@@ -1,5 +1,5 @@
 test:
-	./node_modules/mocha/bin/mocha graphTest.js
+	./node_modules/mocha/bin/mocha test/graphTest.js
 
 run: local openChrome
 
