@@ -63,6 +63,25 @@ GraphRenderer2D.prototype.render = function(graph) {
         this.renderer.paint.dot(ctx, vertices[i].x, vertices[i].y);
     }
 
+    /*
+     * Render edges
+     */
+    var edges = graph.edges;
+    i = 0;
+    k = edges.length;
+    /*
+     * Start point of the edge (which is a line segment)
+     */
+    var s;
+    /*
+     * End point of the edge
+     */
+    var e;
+    for(; i < k; i++) {
+        s = graph.lookupVertex(vertices, edges[i][0]);
+        e = graph.lookupVertex(vertices, edges[i][1]);
+        this.renderer.paint.segment(s.x, s.y, e.x, e.y);
+    }
 };
 
 
