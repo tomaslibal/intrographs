@@ -33,3 +33,4 @@ have different meanings.
 3. Weisstein, Eric W. "Planar Graph." From MathWorld--A Wolfram Web Resource. http://mathworld.wolfram.com/PlanarGraph.html
 4. Auslander, L. and Parter, S. "On Imbedding Graphs in the Sphere." J. Math. Mechanics 10, 517-523, 1961.
 5. Skiena, S. "Planar Graphs." §6.5 in Implementing Discrete Mathematics: Combinatorics and Graph Theory with Mathematica. Reading, MA: Addison-Wesley, pp. 247-253, 1990.
+6. Takao Nishizeki, Norishige Chibalanar (2008) Graphs: Theory and Algorithm. Dover.
