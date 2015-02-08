@@ -83,6 +83,12 @@ Graph.prototype.addVertex = function(props) {
     return v;
 };
 
+Graph.prototype.addEdge = function(edge) {
+    "use strict";
+
+    return this.edges.push(edge);
+};
+
 /*
  * Name of the graph is a conventional name based on number of vertices and
  * edges in the graph (or graphs that are isomorphic to that graph).
