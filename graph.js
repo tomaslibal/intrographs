@@ -6,8 +6,22 @@
  *   b) set of edges, e.g. { { A, B }, { A, C }, { B, D } }
  *
  * To get an elementary graph N_1 (Null Graph of one 1 vertex) call the factory
- * function `void getGraph()`.
+ * function `void getGraph()`. This returns an object which is an instance of
+ * `Graph`.
  */
+
+/*
+ * Constants definitions
+ *
+ */
+var CONSTS = {
+    /*
+     * Used in Graph.properties. Unknown is assigned to properties like is 
+     * the graph planar, before these properties are calculated/resolved.
+     */
+    UNKNOWN: -1
+};
+
 function getGraph() {
     "use strict";
 
@@ -38,8 +52,16 @@ function Graph() {
          * 
          * Kuratowski's theorem: ...
          *
+         * Wolfram (..) accounts that most algorithms for checking graph 
+         * planarity are difficult to implement and have running time O(n^3)
+         * citing Auslander and Parter (1961) (Skiena 1990, p. 247)
+         *
          */
-        planar: CONSTS.UNKNOWN
+        planar: CONSTS.UNKNOWN,
+        /*
+         * A graph is in one piece if 
+         */
+        inOnePiece: CONSTS.UNKNOWN
     };
 }
 
