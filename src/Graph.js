@@ -45,7 +45,8 @@ function Graph() {
     this.properties = {
         /*
          * A graph is planar if it can be drawn in a 2D space without edge
-         * crossings.
+         * crossings. More precisely, it is planar if it is isomorphic to 
+         * a graph that can be drawn without edge crossings (Trudeau (1993, p. 64)).
          *
          * Euler first described the relation between the number of vertices, 
          * edges and faces and planar graphs (Nishizeki and Chiba(2008), p. vii). 
