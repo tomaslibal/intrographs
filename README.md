@@ -30,3 +30,6 @@ have different meanings.
 
 1. Trudeau, J. R. (1993) Introduction to Graph Theory. Published by Dover.
 2. Weisstein, Eric W. "Simple Graph." From MathWorld--A Wolfram Web Resource. http://mathworld.wolfram.com/SimpleGraph.html. Retrieved 7th February 2015.
+3. Weisstein, Eric W. "Planar Graph." From MathWorld--A Wolfram Web Resource. http://mathworld.wolfram.com/PlanarGraph.html
+4. Auslander, L. and Parter, S. "On Imbedding Graphs in the Sphere." J. Math. Mechanics 10, 517-523, 1961.
+5. Skiena, S. "Planar Graphs." §6.5 in Implementing Discrete Mathematics: Combinatorics and Graph Theory with Mathematica. Reading, MA: Addison-Wesley, pp. 247-253, 1990.
