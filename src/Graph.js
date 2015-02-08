@@ -157,7 +157,40 @@ Graph.prototype.lookupVertex = function(graphVertices, label) {
     }
 
     return -1;
-}
+};
+
+/*
+ * takes a vertex set and assigns each vertex a pair of random x, y coordinates
+ *
+ * @param Vertex[] graphVertices
+ * @return Vertex[]
+ */
+Graph.prototype.spaceOutVerticesRandom = function(graphVertices) {
+    "use strict";
+
+    var i = 0;
+
+    for(; i < graphVertices.length; i++) {
+        /*
+         * NB: the range depends on the size of the canvas. This object does not
+         * know about the canvas's dimensions so these values should be 
+         * injected.
+         */
+        graphVertices[i].x = this.getRandom(0, 500);
+        graphVertices[i].y = this.getRandom(0, 500);
+    }
+
+    return graphVertices;
+};
+
+/*
+ * Utility function to get an arbitrary random number
+ */
+Graph.prototype.getRandom = function(min, max) {
+    "use strict";
+
+    return Math.ceil((Math.random() * (max - min))) + min;
+};
 
 
 /*
