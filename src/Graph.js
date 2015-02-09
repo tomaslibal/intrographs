@@ -55,7 +55,10 @@ function Graph() {
          *
          * Wolfram (..) accounts that most algorithms for checking graph 
          * planarity are difficult to implement and have running time O(n^3)
-         * citing Auslander and Parter (1961) (Skiena 1990, p. 247)
+         * citing Auslander and Parter (1961) (Skiena 1990, p. 247). On the
+         * other hand, Nishizeki and Chiba say that Hopcroft and Tarjan have
+         * reported on an linear time algorithm that tests planarity of a graph
+         * (2008, p. vii).
          *
          */
         planar: CONSTS.UNKNOWN,
