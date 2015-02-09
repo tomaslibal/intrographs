@@ -176,6 +176,11 @@ Graph.prototype.lookupVertex = function(graphVertices, label) {
     var l = graphVertices.length;
     var i = 0;
     
+    /*
+     * NB: to improve efficiency it might be good to explore if this lookup
+     * can be implemented using a hash table. Then looking up a vertex would
+     * be as simple as checking if(graphVerticesTable[lable])... 
+     */
     for(; i < l; i++) {
         if (graphVertices[i].name === label) {
             return graphVertices[i];
