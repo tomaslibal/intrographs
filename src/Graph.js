@@ -252,6 +252,16 @@ function Vertex(props) {
  }
 
 /*
+ * Edge is a set of two vertices that are connected by the edge.
+ *
+ */
+function Edge() {
+    "use strict";
+
+    this.connects = null;
+}
+
+/*
  * #NODE_JS_ENV
  *
  * For node.js environment only
