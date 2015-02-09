@@ -22,11 +22,24 @@ var CONSTS = {
     UNKNOWN: -1
 };
 
+/*
+ * getGraph factory returns a new Graph object
+ *
+ * @return object{Graph}
+ */
 function getGraph() {
     "use strict";
 
+    /*
+     * calling 'new' inside a function tighly couples Graph to this function
+     * however, the Graph class is defined in this file so it is fine for now.
+     */
     var g = new Graph();
 
+    /*
+     * By definition, the vertex set is a non empty set so we assign one vertex
+     * when the graph's created.
+     */
     g.addVertex({ name: "A" });
 
     return g;
