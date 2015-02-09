@@ -76,7 +76,11 @@ function Graph() {
          */
         planar: CONSTS.UNKNOWN,
         /*
-         * A graph is in one piece if 
+         * A graph is in one piece if is it connected, i.e. every vertex is
+         * connected by a walk. A walk is a sequence of vertices v1, v2, ..., vm
+         * (vertices do not have to be distinct in a walk) where v1 is connected
+         * by an edge to v2, v2 is connected to v3 and v_(m-1) is connected to
+         * v_m.
          */
         inOnePiece: CONSTS.UNKNOWN
     };
