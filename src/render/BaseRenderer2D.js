@@ -15,6 +15,11 @@ BaseRenderer2DPrototype = {
 
         this.canvas = canvas;
     },
+    setStrokeColor: function(color) {
+        "use strict";
+
+        ctx.strokeStyle = color;
+    },
     getContext: function(canvas) {
         "use strict";
 
