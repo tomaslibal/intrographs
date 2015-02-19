@@ -11,11 +11,31 @@ function GraphRenderer2D(baseRenderer2D) {
     }
 
     this.renderer = baseRenderer2D;
+    /*
+     * __proto__ is DEPRECATED!
+     */
     extendObj(this.__proto__, baseRenderer2D.__proto__);
 
     this.canvas = null;
+
+    this.vertexCl = '#aa4400';
+    this.nodeCl = '#a0a0a0';
 }
 
+/*
+ * Takes two objects `base` and `extra` and extends `base` with all properties
+ * of `extra`.
+ *
+ * Example
+ *
+ * var base = { bar: 1, foo: 2 };
+ * var extra = { focia: 'foo', baz: 10 };
+ * 
+ * extendObj(base, extra) => {
+ *   bar: 1, foo: 2, focia: 'foo', baz: 10
+ * }
+ *
+ */
 function extendObj(base, extra) {
     "use strict";
 
@@ -53,6 +73,11 @@ GraphRenderer2D.prototype.render = function(graph) {
     graph.spaceOutVerticesRandom(graph.vertices);
 
     /*
+     *
+     */
+    this.renderer.setStrokeColor(this.vertexCl);
+
+    /*
      * Render vertices
      */
     var vertices = graph.vertices;
@@ -61,6 +86,11 @@ GraphRenderer2D.prototype.render = function(graph) {
     for(; i < k; i++) {
         this.renderer.paint.dot(ctx, vertices[i].x, vertices[i].y);
     }
+
+    /*
+     *
+     */
+    this.renderer.setStrokeColor(this.nodeCl);
 
     /*
      * Render edges
