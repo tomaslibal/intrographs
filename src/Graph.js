@@ -46,6 +46,16 @@ function getGraph() {
 }
 
 /*
+ * NODE_JS_ONLY
+ */
+if ("undefined" !== typeof process && process.env) {
+    var mathUtil = require('./common/mathUtil');
+}
+/*
+ * #NODE_JS_ONLY
+ */
+
+/*
  * Graph JavaScript constructor
  *
  */
@@ -207,22 +217,12 @@ Graph.prototype.spaceOutVerticesRandom = function(graphVertices) {
          * know about the canvas's dimensions so these values should be 
          * injected.
          */
-        graphVertices[i].x = this.getRandom(0, 500);
-        graphVertices[i].y = this.getRandom(0, 500);
+        graphVertices[i].x = mathUtil.getRandomArbitrary(0, 500);
+        graphVertices[i].y = mathUtil.getRandomArbitrary(0, 500);
     }
 
     return graphVertices;
 };
-
-/*
- * Utility function to get an arbitrary random number
- */
-Graph.prototype.getRandom = function(min, max) {
-    "use strict";
-
-    return Math.ceil((Math.random() * (max - min))) + min;
-};
-
 
 /*
  * Vertex JavaScript constructor
