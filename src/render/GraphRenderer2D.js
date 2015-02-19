@@ -8,7 +8,6 @@ function GraphRenderer2D(baseRenderer2D) {
 
     if("object" !== typeof baseRenderer2D) {
         throw new Error("BaseRenderer2D must be an object");
-        return;
     }
 
     this.renderer = baseRenderer2D;
