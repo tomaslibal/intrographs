@@ -2,8 +2,10 @@
   "private": true,
   "scripts": {
     "server": "make local",
-    "build": "mkdir -p build && node_modules/babel/bin/babel.js src/**/*.js -d build",
-    "browserify": "mkdir -p dist && node_modules/browserify/bin/cmd.js build/src/main.js -o dist/out.js"
+    "transpile": "mkdir -p build && node_modules/babel/bin/babel.js src/ -d build",
+    "pack": "mkdir -p dist && node_modules/browserify/bin/cmd.js build/demo.js -o dist/out.js",
+    "build": "npm run clear && npm run transpile && npm run pack",
+    "clear": "rm -rf build && rm -rf dist"
   },
   "devDependencies": {
     "babel": "^5.8.21",
