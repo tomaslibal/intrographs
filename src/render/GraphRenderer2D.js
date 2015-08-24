@@ -4,6 +4,7 @@
  *
  */
 import BaseRenderer2D from "./BaseRenderer2D";
+import VertexRenderable from "../presentation/VertexRenderable.js";
 
 export default class GraphRenderer2D extends BaseRenderer2D {
 
@@ -42,13 +43,13 @@ export default class GraphRenderer2D extends BaseRenderer2D {
         /*
          * Render vertices
          */
-        var vertices = graph.vertices;
-        var k = vertices.length;
-        var i = 0;
-        for(; i < k; i++) {
-            this.renderer.paint.dot(ctx, vertices[i].x, vertices[i].y);
-        }
-
+        let vertices = graph.vertices;
+        graph.vertices.map(vertex => {
+            return new VertexRenderable({ 'posX': vertex.x, 'posY': vertex.y });
+        }).forEach(renderable => {
+            renderable.render(this);
+        });
+        
         /*
          *
          */
@@ -58,8 +59,8 @@ export default class GraphRenderer2D extends BaseRenderer2D {
          * Render edges
          */
         var edges = graph.edges;
-        i = 0;
-        k = edges.length;
+        let i = 0;
+        let k = edges.length;
         /*
          * Start point of the edge (which is a line segment)
          */
