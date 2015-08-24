@@ -14,7 +14,7 @@ export default class MathUtil {
      * not seem to include seed function.
      *
      */
-    getRandomArbitrary(min=0, max=65536) {
+    static getRandomArbitrary(min=0, max=65536) {
         return Math.ceil((Math.random() * (max - min))) + min;
     }
 }
