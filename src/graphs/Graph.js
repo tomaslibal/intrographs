@@ -12,12 +12,7 @@
 
 import Vertex from "Vertex";
 import Edge from "Edge";
-
- /*
-  * Constants definitions
-  *
-  */
-const UNKNOWN = -1;
+import CONSTS from "../common/constants";
 
 class Graph {
 
@@ -44,7 +39,7 @@ class Graph {
              * (2008, p. vii).
              *
              */
-            planar: UNKNOWN,
+            planar: CONSTS.UNKNOWN,
             /*
              * A graph is in one piece if is it connected, i.e. every vertex is
              * connected by a walk. A walk is a sequence of vertices v1, v2, ..., vm
@@ -52,7 +47,7 @@ class Graph {
              * by an edge to v2, v2 is connected to v3 and v_(m-1) is connected to
              * v_m.
              */
-            inOnePiece: UNKNOWN
+            inOnePiece: CONSTS.UNKNOWN
         };
     }
 
