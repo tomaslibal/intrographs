@@ -7,32 +7,8 @@
     <style>canvas { border: 1px solid #c0c0c0; }</style>
 </head>
 <body>
-    <canvas width="640" height="480" id="canvas">
+    <canvas width="640" height="480" id="canvas"></canvas>
 
-    <script src="../src/common/setUtil.js"></script>
-    <script src="../src/common/mathUtil.js"></script>
-    <script src="../src/Graph.js"></script>
-    <script src="../src/render/BaseRenderer2D.js"></script>
-    <script src="../src/render/GraphRenderer2D.js"></script>
-
-    <script>
-        var K3 = getGraph();
-        K3.addVertex({ name: "B" });
-        K3.addVertex({ name: "C" });
-
-        K3.addEdge(["A", "B"]);
-        K3.addEdge(["A", "C"]);
-        K3.addEdge(["B", "C"]);
-    
-        var baseRenderer = new BaseRenderer2D();
-        var graphRenderer = new GraphRenderer2D(baseRenderer);
-
-        var canvas = document.querySelector("#canvas");
-
-        var ctx = baseRenderer.getContext(canvas);
-
-        graphRenderer.setCanvas(canvas);
-        graphRenderer.render(K3);
-    </script>
+    <script src="/dist/out.js"></script>
 </body>
 </html>
