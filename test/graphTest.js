@@ -45,6 +45,50 @@ describe('Graph', () => {
             assert.equal(2, g.vertices.length);
             assert.equal(0, g.edges.length);
         });
+
+        it('assigns the new vertex\'s name as supplied', () => {
+            g.addVertex({'name':'Sun'});
+            assert.equal('Sun', g.vertices[0].name);
+        })
+    });
+
+    describe('edges', () => {
+        let g;
+
+        beforeEach(() => {
+            g = new Graph();
+        });
+
+        it('adds a new edge if both vertices exist', () => {
+            g.addVertex({'name':'A'});
+            g.addVertex({'name':'B'});
+
+            g.addEdge(['A', 'B']);
+            assert.equal(1, g.edges.length);
+        });
+
+        it('adds a second edge if all vertices exist', () => {
+            g.addVertex({'name':'A'});
+            g.addVertex({'name':'B'});
+            g.addVertex({'name':'C'});
+
+            g.addEdge(['A', 'B']);
+            g.addEdge(['A', 'C']);
+
+            assert.equal(2, g.edges.length);
+        });
+
+        it('won\'t add an edge if at least one of the vertices does not exist', () => {
+            g.addVertex({'name':'Foo'});
+
+            g.addEdge(['Foo', 'Bar']);
+            assert.equal(0, g.edges.length);
+        });
+
+        it('won\'t add an edge if neither vertex exists', () => {
+            g.addEdge(['Minky', 'Binky']);
+            assert.equal(0, g.edges.length);
+        });
     });
 
 });
