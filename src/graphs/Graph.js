@@ -191,26 +191,3 @@ function getGraph() {
 
     return g;
 }
-
-/*
- * NODE_JS_ONLY
- */
-if ("undefined" !== typeof process && process.env) {
-    var mathUtil = require('./common/mathUtil');
-}
-/*
- * #NODE_JS_ONLY
- */
-
-
-/*
- * #NODE_JS_ENV
- *
- * For node.js environment only
- */
-if ("undefined" !== typeof process && process.env) {
-    module.exports.Graph = Graph;
-}
-/*
- * #/NODE_JS_ENV/
- */
