@@ -3,7 +3,7 @@
  * a 2D space.
  *
  */
-import BaseRenderer2D from "BaseRenderer2D";
+import BaseRenderer2D from "./BaseRenderer2D";
 
 export default class GraphRenderer2D extends BaseRenderer2D {
 
@@ -37,7 +37,7 @@ export default class GraphRenderer2D extends BaseRenderer2D {
         /*
          *
          */
-        this.renderer.setStrokeColor(this.vertexCl);
+        this.renderer.setStrokeColor(ctx, this.vertexCl);
 
         /*
          * Render vertices
@@ -52,7 +52,7 @@ export default class GraphRenderer2D extends BaseRenderer2D {
         /*
          *
          */
-        this.renderer.setStrokeColor(this.nodeCl);
+        this.renderer.setStrokeColor(ctx, this.nodeCl);
 
         /*
          * Render edges

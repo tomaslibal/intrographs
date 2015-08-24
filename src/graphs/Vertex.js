@@ -4,11 +4,11 @@
  * Each vertex of a graph is an object constructed by this function.
  */
 export default class Vertex {
-    constructor() {
+    constructor(p) {
         /*
          * Ensure that props is not null but rather is an object;
          */
-        props = props || {};
+        let props = p || {};
 
         /*
          * For graphical purposes, a vertex has [x, y] coordinates in the pixel

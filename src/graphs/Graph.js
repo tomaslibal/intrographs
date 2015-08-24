@@ -10,9 +10,10 @@
  * `Graph`.
  */
 
-import Vertex from "Vertex";
-import Edge from "Edge";
+import Vertex from "./Vertex";
+import Edge from "./Edge";
 import CONSTS from "../common/constants";
+import MathUtil from "../common/MathUtil";
 
 class Graph {
 
@@ -158,8 +159,8 @@ class Graph {
              * know about the canvas's dimensions so these values should be
              * injected.
              */
-            graphVertices[i].x = mathUtil.getRandomArbitrary(0, 500);
-            graphVertices[i].y = mathUtil.getRandomArbitrary(0, 500);
+            graphVertices[i].x = MathUtil.getRandomArbitrary(0, 500);
+            graphVertices[i].y = MathUtil.getRandomArbitrary(0, 500);
         }
 
         return graphVertices;
@@ -191,3 +192,5 @@ function getGraph() {
 
     return g;
 }
+
+export { Graph, getGraph };

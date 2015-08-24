@@ -3,7 +3,7 @@
  */
 export default class BaseRenderer2D {
 
-    constructor({canvasObj: canvas}) {
+    constructor(canvas) {
         this.canvas = canvas || null;
 
         this.paint = {
@@ -29,7 +29,7 @@ export default class BaseRenderer2D {
     setCanvas(canvas) {
         this.canvas = canvas;
     }
-    setStrokeColor(color) {
+    setStrokeColor(ctx, color) {
         ctx.strokeStyle = color;
     }
     getContext(canvas) {
