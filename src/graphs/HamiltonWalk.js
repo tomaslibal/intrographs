@@ -1,24 +1,16 @@
 /*
- * A Hamilton walk is a sequence of vertices A_n, A_n+1, ..., A_k in which every
+ * A Hamilton walk is a sequence of vertices A_n, A_{n+1}, ..., A_k in which every
  * vertex of the graph is visited exactly once.
  *
  */
-function HamiltonWalkUtil()
-{
-    "use strict";
+import CONSTS from "../common/constants";
 
-    var CONSTS = {
-        NOT_FOUND: -1
-    };
+export default class HamiltonWalk {
+    constructor() {
 
-    function hasHamiltonWalk(graph)
-    {
-        return CONSTS.NOT_FOUND;
     }
 
-    return {
-        hasHamiltonWalk: hasHamiltonWalk
-    };
+    hasHamiltonWalk(graph) {
+        return CONSTS.NOT_FOUND;
+    }
 }
-
-var hamiltonWalk = HamiltonWalkUtil();
