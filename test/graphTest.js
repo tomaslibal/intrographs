@@ -1,16 +1,10 @@
 /*
- * Test subject
+ * Import the Software Under Test
  */
-var Graph = require("../src/Graph").Graph;
+import { Graph, getGraph } from "../src/graphs/Graph";
 
-/*
- * Test dependencies
- */
-var assert = require("assert");
+let assert = require("assert");
 
-/*
- * Test the Graph class
- */
 describe('Graph', function() {
     "use strict";
 

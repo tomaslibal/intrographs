@@ -5,7 +5,8 @@
     "transpile": "mkdir -p build && node_modules/babel/bin/babel.js src/ -d build",
     "pack": "mkdir -p dist && node_modules/browserify/bin/cmd.js build/demo.js -o dist/out.js",
     "build": "npm run clear && npm run transpile && npm run pack",
-    "clear": "rm -rf build && rm -rf dist"
+    "clear": "rm -rf build && rm -rf dist",
+    "test": "make test"
   },
   "devDependencies": {
     "babel": "^5.8.21",
