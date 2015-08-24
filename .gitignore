@@ -3,5 +3,10 @@ node_modules
 *.*~
 *~
 
+build
+dist
+
+nohup.out
+
 # swap files
 *.swp
