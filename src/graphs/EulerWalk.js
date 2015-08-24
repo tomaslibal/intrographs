@@ -3,24 +3,15 @@
  * where each edge is visited exactly once.
  *
  */
-function EulerWalkUtil()
-{
-    "use strict";
+import CONSTS from "../common/constants";
 
-    this.CONSTS = {
-        NOT_FOUND: -1
-    };
+export default class EulerWalk {
+    
+    constructor() {
 
-    var CONSTS = this.CONSTS;
-
-    function hasEulerWalk(graph) {
-        return CONSTS.NOT_FOUND;
     }
 
-    return {
-        hasEulerWalk: hasEulerWalk
-    };
+    hasEulerWalk(graph) {
+        return CONSTS.NOT_FOUND;
+    }
 }
-
-var eulerWalk = EulerWalkUtil();
-
