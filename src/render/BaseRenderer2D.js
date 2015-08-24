@@ -1,28 +1,38 @@
 /*
  * Renderer is a high level interface for drawing into HTML canvas
  */
-function BaseRenderer2D(args) {
-    "use strict";
+export default class BaseRenderer2D {
 
-    args = args || {};
+    constructor({canvasObj: canvas}) {
+        this.canvas = canvas || null;
 
-    this.canvas = args.canvas || null;
-}
+        this.paint = {
+            dot(ctx, x, y) {
+                ctx.beginPath();
+                /*
+                 * ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, [anticlockwise])
+                 */
+                ctx.ellipse(x, y, 1, 1, 0, 0, 2*Math.PI);
 
-BaseRenderer2DPrototype = {
-    setCanvas: function(canvas) {
-        "use strict";
+                ctx.stroke();
+            },
+            segment(ctx, x0, y0, x1, y1) {
+                ctx.beginPath();
+                ctx.moveTo(x0, y0);
+                ctx.lineTo(x1, y1);
+                ctx.stroke();
+            }
 
+        }
+    }
+
+    setCanvas(canvas) {
         this.canvas = canvas;
-    },
-    setStrokeColor: function(color) {
-        "use strict";
-
+    }
+    setStrokeColor(color) {
         ctx.strokeStyle = color;
-    },
-    getContext: function(canvas) {
-        "use strict";
-
+    }
+    getContext(canvas) {
         var ctx = null;
 
         if (!canvas || "object" !== typeof canvas) {
@@ -40,29 +50,5 @@ BaseRenderer2DPrototype = {
         }
 
         return ctx;
-    },
-    paint: {
-        dot: function(ctx, x, y) {
-            "use strict";
-
-            ctx.beginPath();
-            /*
-             * ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, [anticlockwise])
-             */
-            ctx.ellipse(x, y, 1, 1, 0, 0, 2*Math.PI);
-
-            ctx.stroke();
-        },
-        segment: function(x0, y0, x1, y1) {
-            "use strict";
-
-            ctx.beginPath();
-            ctx.moveTo(x0, y0);
-            ctx.lineTo(x1, y1);
-            ctx.stroke();
-        }
-
     }
-};
-
-BaseRenderer2D.prototype = BaseRenderer2DPrototype;
+}
