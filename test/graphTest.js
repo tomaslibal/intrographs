@@ -16,6 +16,11 @@ describe('Graph', function() {
             var tmp = new Graph();
             assert.equal(true, true === tmp instanceof Graph);
         });
+        it('has an empty set of vertices', () => {
+            let g = new Graph();
+            assert.equal(0, g.vertices.length);
+            assert.equal(0, g.edges.length);
+        });
     });
 
 });
