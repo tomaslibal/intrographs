@@ -1,5 +1,5 @@
 import HTMLElementController from "HTMLElementController";
 
-export default CanvasController extends HTMLElementController {
+export default class CanvasController extends HTMLElementController {
     
 }
