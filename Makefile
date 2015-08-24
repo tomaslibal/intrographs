@@ -1,6 +1,9 @@
 test:
 	./node_modules/mocha/bin/mocha --compilers js:babel/register
 
+install:
+	npm install && npm update
+
 run: local openChrome
 
 openChrome:
