@@ -5,6 +5,7 @@
  */
 import BaseRenderer2D from "./BaseRenderer2D";
 import VertexRenderable from "../presentation/VertexRenderable.js";
+import MathUtil from "../common/MathUtil";
 
 export default class GraphRenderer2D extends BaseRenderer2D {
 
