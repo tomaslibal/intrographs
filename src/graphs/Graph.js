@@ -30,9 +30,10 @@ class Graph {
              * Euler first described the relation between the number of vertices,
              * edges and faces and planar graphs (Nishizeki and Chiba(2008), p. vii).
              *
-             * Kuratowski's theorem: ...
+             * Kuratowski's theorem: if a graph contains a subgraph of K5 or K_3,3
+             * then it is non-planar (West, 1996).
              *
-             * Wolfram (..) accounts that most algorithms for checking graph
+             * Wolfram (2009) accounts that most algorithms for checking graph
              * planarity are difficult to implement and have running time O(n^3)
              * citing Auslander and Parter (1961) (Skiena 1990, p. 247). On the
              * other hand, Nishizeki and Chiba say that Hopcroft and Tarjan have
@@ -68,7 +69,7 @@ class Graph {
 
         return v;
     };
-    
+
     checkNumNonExistingVertices(verList=[]) {
         let nonExistingVertices = verList.map(v => {
             if (-1 === this.lookupVertex(this.vertices, v)) {
@@ -80,7 +81,7 @@ class Graph {
         .filter(val => {
             return val === 1 ? true : false;
         });
-        
+
         return nonExistingVertices.length;
     }
 
@@ -89,7 +90,7 @@ class Graph {
             throw new Error("Cannot add the edge! Some vertices do not exist in the graph");
             return;
         }
-        
+
         return this.edges.push(edge);
     };
 
