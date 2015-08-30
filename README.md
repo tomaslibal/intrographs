@@ -35,3 +35,4 @@ have different meanings.
 5. Skiena, S. "Planar Graphs." §6.5 in Implementing Discrete Mathematics: Combinatorics and Graph Theory with Mathematica. Reading, MA: Addison-Wesley, pp. 247-253, 1990.
 6. Takao Nishizeki, Norishige Chibalanar (2008) Graphs: Theory and Algorithm. Dover.
 7. Douglas B. West (1996) Introduction to Graph Theory. Prentice Hall.
+8. Ming-Yang Kao (2008) Encyclopedia of Algorithms. Springer Science & Business Media.

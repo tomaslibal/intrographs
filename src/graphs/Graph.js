@@ -70,6 +70,11 @@ class Graph {
         return v;
     };
 
+    /*
+     * Takes a list of names of vertices and checks if the graph
+     * has such vertices. Returns the number of vertices that
+     * were not found by the names.
+     */
     checkNumNonExistingVertices(verList=[]) {
         let nonExistingVertices = verList.map(v => {
             if (-1 === this.lookupVertex(this.vertices, v)) {
@@ -137,6 +142,21 @@ class Graph {
     isStarGraph() {}
     isWheelGraph() {}
     isAntiprismGraph() {}
+
+    /*
+     * Isomorphism of two graphs is a relation where the two graphs are said
+     * to be isomorphic if there exists a one-to-one correspondence between
+     * their vertex sets such that if two vertices are adjacent in one graph
+     * they are adjacent in the other graph as well (Trudeau, 1993, p. 35) or
+     * simply when the second graph is the copy of the first one (McKay, 1980
+     * in Kao, 2008, p. 373).
+     *
+     * Let there be graphs G1 = (V1, E1) and G2 = (V2, E2). If G1 = G2 the
+     * isomorphism  is automorphism of G1 (McKay, 1980 in Kao, 2008, p. 373).
+     */
+    isIsomorphic(graphB) {
+
+    }
 
     /*
      * Each vertex has a label so that the edges can be defined as a set of two
