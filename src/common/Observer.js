@@ -1,7 +1,7 @@
 export default class Observer {
 
     // observer is created from an object which acts as a source of events
-    constructor(from, name='untitle observer') {
+    constructor(from, name='untitled observer') {
 
     }
 
