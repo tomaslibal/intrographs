@@ -17,4 +17,15 @@ export default class MathUtil {
     static getRandomArbitrary(min=0, max=65536) {
         return Math.ceil((Math.random() * (max - min))) + min;
     }
+    
+    /*
+     * Gives real valued roots for a function
+     *     y = f(x) = ax^2 + bx + c
+     *
+     */
+    static quadRoots(a=0, b=0, c=0) {
+        const sqrt = Math.sqrt(b*b - 4*a*c);
+        
+        return [(-b + sqrt)/2*a, (-b - sqrt)/2*a];
+    }
 }
