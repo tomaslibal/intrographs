@@ -3,6 +3,10 @@
 Inspired by the graph theory, this software is a graphical tool that models
 graphs.
 
+The goal is to create a program that prints various graphs, lets the user
+to modify them, and it should also be able to give information on some graph
+properties like what type of graph it is, whether it is planar and so on.
+
 ## Difference between pure mathematical graphs and graphs in computer science
 
 In pure mathematics a graph is an object that consists of the two sets:
@@ -32,7 +36,10 @@ This is a JavaScript software tested to run in a browser.
 
 ### Run
 
-    npm run server && npm run firefox
+This launches a Python SimpleHTTPServer on the local machine's http://0.0.0.0:8080. Visit `http://0.0.0.0:8080/demo/`
+in a browser to use the demo.
+
+    npm run server
 
 ### Tests
 
