@@ -12,7 +12,8 @@ export default class BaseRenderer2D {
                 /*
                  * ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, [anticlockwise])
                  */
-                ctx.ellipse(x, y, 1, 1, 0, 0, 2*Math.PI);
+                ctx.arc(x, y, 1, 1, 2 * Math.PI);
+                //ctx.ellipse(x, y, 1, 1, 0, 0, 2*Math.PI); // not supported elsewhere than in Chrome
 
                 ctx.stroke();
             },
