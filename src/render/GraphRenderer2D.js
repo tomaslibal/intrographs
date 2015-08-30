@@ -20,6 +20,30 @@ export default class GraphRenderer2D extends BaseRenderer2D {
         this.vertexCl = '#aa4400';
         this.nodeCl = '#a0a0a0';
     }
+    
+    /*
+     * takes a vertex set and assigns each vertex a pair of random x, y coordinates
+     *
+     * @param Vertex[] graphVertices
+     * @return Vertex[]
+     */
+    spaceOutVerticesRandom(graphVertices) {
+        "use strict";
+
+        var i = 0;
+
+        for(; i < graphVertices.length; i++) {
+            /*
+             * NB: the range depends on the size of the canvas. This object does not
+             * know about the canvas's dimensions so these values should be
+             * injected.
+             */
+            graphVertices[i].x = MathUtil.getRandomArbitrary(0, 500);
+            graphVertices[i].y = MathUtil.getRandomArbitrary(0, 500);
+        }
+
+        return graphVertices;
+    };
 
     render(graph) {
         "use strict";
@@ -33,7 +57,7 @@ export default class GraphRenderer2D extends BaseRenderer2D {
          * Space out vertices so that they won't overlap on the same x, y
          * coordinates.
          */
-        graph.spaceOutVerticesRandom(graph.vertices);
+        this.spaceOutVerticesRandom(graph.vertices);
 
         /*
          *
