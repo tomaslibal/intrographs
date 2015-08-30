@@ -1,12 +1,13 @@
 {
   "private": true,
   "scripts": {
-    "server": "make local",
+    "server": "python -m SimpleHTTPServer 8080",
+    "firefox": "which firefox; if [ $? -eq 0 ]; then firefox http://localhost:8080/; else echo 'Error! Firefox not found'; fi",
     "transpile": "mkdir -p build && node_modules/babel/bin/babel.js src/ -d build",
     "pack": "mkdir -p dist && node_modules/browserify/bin/cmd.js build/demo.js -o dist/out.js",
     "build": "npm run clear && npm run transpile && npm run pack",
     "clear": "rm -rf build && rm -rf dist",
-    "test": "make test"
+    "test": "./node_modules/mocha/bin/mocha --compilers js:babel/register"
   },
   "devDependencies": {
     "babel": "^5.8.21",

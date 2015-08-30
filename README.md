@@ -5,11 +5,11 @@ graphs.
 
 ## Install
 
-    make install
+    npm run install
 
 ## Run
 
-    make run
+    npm run server && npm run firefox
 
 ## Difference between pure mathematical graphs and graphs in computer science
 
@@ -22,7 +22,7 @@ From the set theory we know that the order of elements in a set does not matter.
 Therefore all mathematical graphs are undirected.
 
 Computer scientists usually use slightly different definition of a graph which
-updates the second set with a set of ordered or unordered pairs. If the pair 
+updates the second set with a set of ordered or unordered pairs. If the pair
 (e.g. `(A, C)`) is ordered then the graph is directed as `(A, C)` and `(C, A)`
 have different meanings.
 
