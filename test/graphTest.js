@@ -4,6 +4,7 @@
 import { Graph, getGraph } from "../src/graphs/Graph";
 
 let assert = require("assert");
+let chai = require("chai");
 
 describe('Graph', () => {
     "use strict";
@@ -80,13 +81,19 @@ describe('Graph', () => {
 
         it('won\'t add an edge if at least one of the vertices does not exist', () => {
             g.addVertex({'name':'Foo'});
+            
+            chai.expect(() => {
+                g.addEdge(['Foo', 'Bar']);
+            }).to.throw('Cannot add the edge! Some vertices do not exist in the graph');
 
-            g.addEdge(['Foo', 'Bar']);
             assert.equal(0, g.edges.length);
         });
 
         it('won\'t add an edge if neither vertex exists', () => {
-            g.addEdge(['Minky', 'Binky']);
+            chai.expect(() => {
+                g.addEdge(['Minky', 'Binky'])
+            }).to.throw('Cannot add the edge! Some vertices do not exist in the graph');
+            
             assert.equal(0, g.edges.length);
         });
     });

@@ -68,8 +68,28 @@ class Graph {
 
         return v;
     };
+    
+    checkNumNonExistingVertices(verList=[]) {
+        let nonExistingVertices = verList.map(v => {
+            if (-1 === this.lookupVertex(this.vertices, v)) {
+                return 1; // vertex not found
+            } else {
+                return 0; // vertex found
+            }
+        })
+        .filter(val => {
+            return val === 1 ? true : false;
+        });
+        
+        return nonExistingVertices.length;
+    }
 
     addEdge(edge) {
+        if (this.checkNumNonExistingVertices(edge) > 0) {
+            throw new Error("Cannot add the edge! Some vertices do not exist in the graph");
+            return;
+        }
+        
         return this.edges.push(edge);
     };
 
