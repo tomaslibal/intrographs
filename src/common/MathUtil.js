@@ -5,6 +5,8 @@
  * In the future it should be possible to pass a math library to the Graph class
  * so that the class would use funtions from that injected library.
  */
+ import { unique } from "./eloquent";
+ 
 export default class MathUtil {
     /*
      * Function returns an integer number from within the given range [min,
@@ -26,6 +28,8 @@ export default class MathUtil {
     static quadRoots(a=0, b=0, c=0) {
         const sqrt = Math.sqrt(b*b - 4*a*c);
         
-        return [(-b + sqrt)/2*a, (-b - sqrt)/2*a];
+        let result = [(-b + sqrt)/2*a, (-b - sqrt)/2*a];
+        
+        return unique(result);
     }
 }

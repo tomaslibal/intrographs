@@ -4,6 +4,7 @@
  import MathUtil from "../src/common/MathUtil";
  
  let assert = require("assert");
+ let chai = require("chai");
  
  describe('MathUtil', () => {
 	"use strict";
@@ -12,5 +13,13 @@
 		 const result = MathUtil.getRandomArbitrary(0,1);
 		 assert.equal(true, result >= 0);
 		 assert.equal(true, result <= 1);
+	 });
+	 
+	 describe('quadRoots', () => {
+		 it('returns x=[2] for x^2-4x+4', () => {
+			 const result = MathUtil.quadRoots(1, -4, 4);
+			 chai.assert.deepEqual(result, [2]);
+		 });
+
 	 });
  });
