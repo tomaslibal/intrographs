@@ -3,14 +3,6 @@
 Inspired by the graph theory, this software is a graphical tool that models
 graphs.
 
-## Install
-
-    npm run install
-
-## Run
-
-    npm run server && npm run firefox
-
 ## Difference between pure mathematical graphs and graphs in computer science
 
 In pure mathematics a graph is an object that consists of the two sets:
@@ -25,6 +17,26 @@ Computer scientists usually use slightly different definition of a graph which
 updates the second set with a set of ordered or unordered pairs. If the pair
 (e.g. `(A, C)`) is ordered then the graph is directed as `(A, C)` and `(C, A)`
 have different meanings.
+
+## How-to's
+
+This is a JavaScript software tested to run in a browser.
+
+1. Install dependencies
+2. Run a local server
+3. Launch in a browser
+
+### Install dependencies
+
+    npm run install
+
+### Run
+
+    npm run server && npm run firefox
+
+### Tests
+
+    npm run test
 
 ## Bibliography
 
