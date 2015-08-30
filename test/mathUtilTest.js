@@ -21,5 +21,9 @@
 			 chai.assert.deepEqual(result, [2]);
 		 });
 
+		 it('returns x=[1, -2] for x^2+x-2', () => {
+			 const result = MathUtil.quadRoots(1, 1, -2);
+			 chai.assert.deepEqual(result, [1, -2]); 
+		 });
 	 });
  });
