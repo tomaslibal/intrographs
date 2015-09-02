@@ -71,6 +71,19 @@ class Graph {
     };
 
     /*
+     * Graph.vertices is an array of objects but from the mathematical point of
+     * view it is just a collection of distinct nodes. The Matrix module works
+     * with plain lists too, so this method maps the list of objects to a list
+     * of string names of those vertices.
+     *
+     */
+    getVerticesList() {
+        return this.vertices.map(vertex => {
+            return vertex.name;
+        });
+    }
+
+    /*
      * Takes a list of names of vertices and checks if the graph
      * has such vertices. Returns the number of vertices that
      * were not found by the names.

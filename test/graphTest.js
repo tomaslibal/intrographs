@@ -11,7 +11,7 @@ describe('Graph', () => {
 
     describe('constructor', () => {
         it('is defined and is a function', function() {
-            assert.equal(true, "function" === typeof Graph);    
+            assert.equal(true, "function" === typeof Graph);
         });
 
         it('returns a new object of Graph', () => {
@@ -50,7 +50,14 @@ describe('Graph', () => {
         it('assigns the new vertex\'s name as supplied', () => {
             g.addVertex({'name':'Sun'});
             assert.equal('Sun', g.vertices[0].name);
-        })
+        });
+
+        it('getVerticesList() returns an array of names of all vertices', () => {
+            g.addVertex({'name': 'foo'});
+            g.addVertex({'name': 'Z'});
+
+            assert.deepEqual(['foo', 'Z'], g.getVerticesList());
+        });
     });
 
     describe('edges', () => {
@@ -81,7 +88,7 @@ describe('Graph', () => {
 
         it('won\'t add an edge if at least one of the vertices does not exist', () => {
             g.addVertex({'name':'Foo'});
-            
+
             chai.expect(() => {
                 g.addEdge(['Foo', 'Bar']);
             }).to.throw('Cannot add the edge! Some vertices do not exist in the graph');
@@ -93,7 +100,7 @@ describe('Graph', () => {
             chai.expect(() => {
                 g.addEdge(['Minky', 'Binky'])
             }).to.throw('Cannot add the edge! Some vertices do not exist in the graph');
-            
+
             assert.equal(0, g.edges.length);
         });
     });
