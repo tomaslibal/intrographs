@@ -32,10 +32,12 @@ export default class MathUtil {
 		return null;
 	}
 
-        const sqrt = Math.sqrt(b*b - 4*a*c);
+        if (discr == 0) {
+		return [(-b)/2*a];
+	}
+
+        const sqrt = Math.sqrt(discr);
         
-        let result = [(-b + sqrt)/2*a, (-b - sqrt)/2*a];
-        
-        return unique(result);
+        return [(-b + sqrt)/2*a, (-b - sqrt)/2*a];
     }
 }

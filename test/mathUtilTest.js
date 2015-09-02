@@ -20,12 +20,12 @@
 		 	const result = MathUtil.quadRoots(1, 5, 100);
 			chai.assert.equal(result, null);
 		 });
-		 it('returns x=[2] for x^2-4x+4', () => {
+		 it('returns one root x=[2] for x^2-4x+4 (discriminant = 0)', () => {
 			 const result = MathUtil.quadRoots(1, -4, 4);
 			 chai.assert.deepEqual([2], result);
 		 });
 
-		 it('returns x=[1, -2] for x^2+x-2', () => {
+		 it('returns two roots x=[1, -2] for x^2+x-2 (discriminant > 0)', () => {
 			 const result = MathUtil.quadRoots(1, 1, -2);
 			 chai.assert.deepEqual([1, -2], result); 
 		 });
