@@ -1,18 +1,22 @@
 import { Graph } from "./Graph";
 import { assert } from "../common/assert";
 
-export default class CyclicGraph {
-	
-	constructor(v=3) {
+export default class CyclicGraphFactory {
+
+	constructor() {
+		throw new Error("Use the static method 'create' to create new Cyclic Graphs");
+	}
+
+	static create(v=3) {
 		assert(v>=3);
-		
+
 		let c = new Graph();
-		
-		// add vertices	
+
+		// add vertices
 		for(let i = 0; i < v; i++) {
 			c.addVertex({'name': `v${i}`});
 		}
-		
+
 		// add cyclical edges
 		c.vertices.forEach((val, idx, arr) => {
 			if (idx < (arr.length-1)) {
@@ -23,7 +27,7 @@ export default class CyclicGraph {
 				c.addEdge([`v0`, `v${idx}`]);
 			}
 		});
-		
-		this.graph = c;
+
+		return c;
 	}
 }
