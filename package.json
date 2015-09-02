@@ -7,7 +7,7 @@
     "pack": "mkdir -p dist && node_modules/browserify/bin/cmd.js build/demo.js -o dist/out.js",
     "build": "npm run clear && npm run transpile && npm run pack",
     "clear": "rm -rf build && rm -rf dist",
-    "test": "./node_modules/mocha/bin/mocha --compilers js:babel/register"
+    "test": "./node_modules/mocha/bin/mocha --compilers js:babel/register --recursive"
   },
   "devDependencies": {
     "babel": "^5.8.21",
