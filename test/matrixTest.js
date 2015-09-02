@@ -17,4 +17,9 @@ describe('Matrix', () => {
 		chai.assert.equal(arr.length, 4);
 		chai.assert.equal(arr[0].length, 3);
 	});
+
+	it('.fromGraph creates an adjacency matrix for a given graph', () => {
+		let mat = Matrix.fromGraph(['a','b','c'], [['a','b'],['a','c']]); 
+		chai.assert.deepEqual(mat, [[0, 1, 1], [1, 0, 0], [1, 0, 0]]);
+	});	
 });
