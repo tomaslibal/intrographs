@@ -26,6 +26,12 @@ export default class MathUtil {
      *
      */
     static quadRoots(a=0, b=0, c=0) {
+        const discr = b*b - 4*a*c;
+
+	if (discr < 0) {
+		return null;
+	}
+
         const sqrt = Math.sqrt(b*b - 4*a*c);
         
         let result = [(-b + sqrt)/2*a, (-b - sqrt)/2*a];

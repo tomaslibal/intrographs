@@ -16,6 +16,10 @@
 	 });
 	 
 	 describe('quadRoots', () => {
+                 it('returns null when discriminant < 0', () => {
+		 	const result = MathUtil.quadRoots(1, 5, 100);
+			chai.assert.equal(null, result);
+		 });
 		 it('returns x=[2] for x^2-4x+4', () => {
 			 const result = MathUtil.quadRoots(1, -4, 4);
 			 chai.assert.deepEqual(result, [2]);
