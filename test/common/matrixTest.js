@@ -1,11 +1,11 @@
 /*
  *  * Import the Software Under Test
  *   */
-import Matrix from "../src/common/Matrix";
- 
+import Matrix from "../../src/common/Matrix";
+
 let assert = require("assert");
 let chai = require("chai");
- 
+
 describe('Matrix', () => {
 	it('.init returns an m*n array of zero\'s', () => {
 		let arr = Matrix.init(1, 1);
@@ -19,7 +19,7 @@ describe('Matrix', () => {
 	});
 
 	it('.fromGraph creates an adjacency matrix for a given graph', () => {
-		let mat = Matrix.fromGraph(['a','b','c'], [['a','b'],['a','c']]); 
+		let mat = Matrix.fromGraph(['a','b','c'], [['a','b'],['a','c']]);
 		chai.assert.deepEqual(mat, [[0, 1, 1], [1, 0, 0], [1, 0, 0]]);
-	});	
+	});
 });
