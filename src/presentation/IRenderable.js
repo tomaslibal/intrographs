@@ -5,7 +5,7 @@ export default class IRenderable {
         this.y = y || 0;
     }
 
-    render(graphRenderer) {
+    render() {
 
     }
 
