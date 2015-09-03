@@ -1,3 +1,9 @@
+/*
+ * Scene renders the Graph+Bg+Info.
+ *
+ * This should not know about HTML.
+ *
+ */
 export default class Scene {
 
 	constructor(graph=null, background=null, minidisplay=null) {
@@ -9,4 +15,7 @@ export default class Scene {
 	        this.playState = 'paused';
 	}
 
+	renderAll() {
+		this.background.render();
+	}
 }
