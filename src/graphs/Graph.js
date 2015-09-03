@@ -103,13 +103,21 @@ class Graph {
         return nonExistingVertices.length;
     }
 
+    /*
+     * Takes an array of form [v1, v2]
+     */
     addEdge(edge) {
         if (this.checkNumNonExistingVertices(edge) > 0) {
             throw new Error("Cannot add the edge! Some vertices do not exist in the graph");
             return;
         }
 
-        return this.edges.push(edge);
+        try {
+            const e = new Edge(edge);
+            return this.edges.push(e);
+        }catch(e) {
+            return null;
+        }
     };
 
     /*

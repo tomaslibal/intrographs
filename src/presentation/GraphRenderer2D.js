@@ -90,8 +90,8 @@ export default class GraphRenderer2D extends BaseRenderer2D {
          */
         var e;
         for(; i < k; i++) {
-            s = graph.lookupVertex(vertices, edges[i][0]);
-            e = graph.lookupVertex(vertices, edges[i][1]);
+            s = graph.lookupVertex(vertices, edges[i].connects[0]);
+            e = graph.lookupVertex(vertices, edges[i].connects[1]);
             this.paint.segment(ctx, s.x, s.y, e.x, e.y);
         }
     }
