@@ -14,11 +14,11 @@ describe('Scene', () => {
 	};
 
     let mockGraph = {
-    
+        render: sinon.stub() 
     };
 
     let mockMinidisplay = {
-
+        render: sinon.stub()
     };
 
 	beforeEach(() => {
@@ -42,7 +42,18 @@ describe('Scene', () => {
 
 	it('renderAll() calls render() on background, graph and minidisplay properties', () => {
 	    scene.renderAll();
-        assert(mockBg.render.calledOnce);	
-	});	
+        assert(mockBg.render.calledOnce);
+        assert(mockGraph.render.calledOnce);
+        assert(mockMinidisplay.render.calledOnce);	
+	});
+
+    it('renderAll() wont call thru to background, graph and minidisplay if they are null', () => {
+        let emptyScene = new Scene();
+        chai.assert.isNull(emptyScene.background);
+        chai.assert.isNull(emptyScene.graph);
+        chai.assert.isNull(emptyScene.minidisplay);
+        
+        emptyScene.renderAll();
+    });	
 
 });

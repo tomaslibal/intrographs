@@ -16,6 +16,8 @@ export default class Scene {
 	}
 
 	renderAll() {
-		this.background.render();
+		if (this.background)  this.background.render();
+		if (this.graph)       this.graph.render();
+		if (this.minidisplay) this.minidisplay.render();
 	}
 }
