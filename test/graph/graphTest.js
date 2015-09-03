@@ -1,7 +1,7 @@
 /*
  * Import the Software Under Test
  */
-import { Graph, getGraph } from "../src/graphs/Graph";
+import { Graph, getGraph } from "../../src/graphs/Graph";
 
 let assert = require("assert");
 let chai = require("chai");
