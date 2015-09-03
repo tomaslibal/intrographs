@@ -3,7 +3,7 @@
  *
  */
 export default class Edge {
-    constructor() {
-        this.connects = null;
+    constructor([e1, e2]) {
+        this.connects = [e1, e2];
     }
 }
