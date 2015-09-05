@@ -1,4 +1,4 @@
-import Scene from "./Scene";
+import Scene from "../Scene";
 import HTMLGraph from "./HTMLGraph";
 import HTMLMinidisplay from "./HTMLMinidisplay";
 import HTMLBackground from "./HTMLBackground";

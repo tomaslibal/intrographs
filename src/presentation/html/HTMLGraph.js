@@ -1,5 +1,5 @@
-import IRenderable from "./IRenderable";
-import GraphRenderer2D from "./GraphRenderer2D";
+import IRenderable from "../IRenderable";
+import GraphRenderer2D from "../GraphRenderer2D";
 
 export default class HTMLGraph extends IRenderable {
 
