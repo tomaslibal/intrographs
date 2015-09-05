@@ -8,6 +8,8 @@ export default class HTMLBackground extends IRenderable {
 		this.height = 480;
 		this.width = 640;
 		this.document = documentObj;
+
+		this.bg = this.document.createElement('div');
 	}
 
 	render() {

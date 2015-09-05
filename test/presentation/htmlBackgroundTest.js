@@ -9,7 +9,7 @@ describe('HTMLBackground', () => {
 
 	let bg = null;
 	let mockDocument = {
-
+		createElement: sinon.stub()
 	};
 
 	beforeEach(() => {
@@ -21,9 +21,18 @@ describe('HTMLBackground', () => {
 		chai.assert.property(bg, 'width');
 	});
 
-	it('constructor takes one argument which is the document object', () => {
-		chai.assert.property(bg, 'document');
-		chai.assert.deepEqual(bg.document, mockDocument);
+
+
+	describe('constructor', () => {
+			it('takes one argument which is the document object', () => {
+				chai.assert.property(bg, 'document');
+				chai.assert.deepEqual(bg.document, mockDocument);
+			});
+
+			it('creates a div HTML element that represents the background', () => {
+				assert(mockDocument.createElement.calledWith('div'));
+				chai.assert.property(bg, 'bg');
+			});
 	});
 
 });
