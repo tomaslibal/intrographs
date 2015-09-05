@@ -20,7 +20,7 @@ Therefore all mathematical graphs are undirected.
 Computer scientists usually use slightly different definition of a graph which
 updates the second set with a set of ordered or unordered pairs. If the pair
 (e.g. `(A, C)`) is ordered then the graph is directed as `(A, C)` and `(C, A)`
-have different meanings.
+have different meanings in that case.
 
 ## How-to's
 
