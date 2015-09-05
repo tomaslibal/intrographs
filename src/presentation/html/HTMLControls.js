@@ -9,6 +9,6 @@ export default class HTMLControls extends IRenderable {
 	}
 
 	createElementAppend(elementType, parentElement) {
-		parentElement.appendChild(this.document.createElement(elementType));
+		return parentElement.appendChild(this.document.createElement(elementType));
 	}
 }

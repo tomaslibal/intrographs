@@ -39,6 +39,15 @@ describe('HTMLControls', () => {
 			assert(mockDocument.createElement.calledWith('input'));
 			assert(mockParent.appendChild.calledWith(mockNewElement));
 		});
+
+		it('returns the newly created element', () => {
+			let mockParent = {
+				appendChild(child) { return child; }
+			};
+
+			let element = ctrl.createElementAppend('input', mockParent);
+			chai.assert.deepEqual(element, mockNewElement);
+		});
 	});
 
 });
