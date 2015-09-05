@@ -18,6 +18,6 @@ export default class Vertex {
          */
         this.label = p.label || null;
 
-        // this.symbol = Symbol(this.name);
+        this.symbol = Symbol(this.name);
     }
 }
