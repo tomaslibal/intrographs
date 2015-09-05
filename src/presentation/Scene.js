@@ -6,10 +6,11 @@
  */
 export default class Scene {
 
-	constructor(graph=null, background=null, minidisplay=null) {
+	constructor(graph=null, background=null, minidisplay=null, controls=null) {
 		this.background = background;
 		this.graph = graph;
 		this.minidisplay = minidisplay;
+		this.controls = controls;
 
 		this.clock = 0;
 	        this.playState = 'paused';
@@ -19,5 +20,6 @@ export default class Scene {
 		if (this.background)  this.background.render();
 		if (this.graph)       this.graph.render();
 		if (this.minidisplay) this.minidisplay.render();
+		if (this.controls)    this.controls.render();
 	}
 }

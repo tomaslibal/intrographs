@@ -14,21 +14,26 @@ describe('Scene', () => {
 	};
 
     let mockGraph = {
-        render: sinon.stub() 
+        render: sinon.stub()
     };
 
     let mockMinidisplay = {
         render: sinon.stub()
     };
 
+	let mockControls = {
+		render: sinon.stub()
+	};
+
 	beforeEach(() => {
-		scene = new Scene(mockGraph, mockBg, mockMinidisplay);
+		scene = new Scene(mockGraph, mockBg, mockMinidisplay, mockControls);
 	});
 
-	it('has background, graph, and minidisplay properties', () => {
+	it('has background, graph, minidisplay, and controls properties', () => {
 		chai.assert.isDefined(scene.background);
 		chai.assert.isDefined(scene.graph);
 		chai.assert.isDefined(scene.minidisplay);
+		chai.assert.property(scene, 'controls');
 
 });
 
@@ -40,20 +45,22 @@ describe('Scene', () => {
 		chai.assert.equal(scene.playState, 'paused');
 	});
 
-	it('renderAll() calls render() on background, graph and minidisplay properties', () => {
+	it('renderAll() calls render() on background, graph, minidisplay, and controls properties', () => {
 	    scene.renderAll();
         assert(mockBg.render.calledOnce);
         assert(mockGraph.render.calledOnce);
-        assert(mockMinidisplay.render.calledOnce);	
+        assert(mockMinidisplay.render.calledOnce);
+		assert(mockControls.render.calledOnce);
 	});
 
-    it('renderAll() wont call thru to background, graph and minidisplay if they are null', () => {
+    it('renderAll() wont call thru to background, graph, minidisplay, and controls if they are null', () => {
         let emptyScene = new Scene();
         chai.assert.isNull(emptyScene.background);
         chai.assert.isNull(emptyScene.graph);
         chai.assert.isNull(emptyScene.minidisplay);
-        
+		chai.assert.isNull(emptyScene.controls);
+
         emptyScene.renderAll();
-    });	
+    });
 
 });
