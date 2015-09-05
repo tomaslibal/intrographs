@@ -30,12 +30,11 @@ describe('Scene', () => {
 	});
 
 	it('has background, graph, minidisplay, and controls properties', () => {
-		chai.assert.isDefined(scene.background);
-		chai.assert.isDefined(scene.graph);
-		chai.assert.isDefined(scene.minidisplay);
+		chai.assert.property(scene, 'background');
+		chai.assert.property(scene, 'graph');
+		chai.assert.property(scene, 'minidisplay');
 		chai.assert.property(scene, 'controls');
-
-});
+	});
 
 	it('initializes with clock count 0', () => {
 		chai.assert.equal(scene.clock, 0);
