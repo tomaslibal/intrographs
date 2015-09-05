@@ -4,6 +4,9 @@ export default class HTMLBackground extends IRenderable {
 
 	constructor() {
 		super({ 'posX': 0, 'posY': 0 });
+
+		this.height = 480;
+		this.width = 640;
 	}
 
 }
