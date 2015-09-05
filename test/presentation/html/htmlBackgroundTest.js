@@ -1,5 +1,5 @@
 // import s.u.t.
-import HTMLBackground from "../../src/presentation/HTMLBackground";
+import HTMLBackground from "../../../src/presentation/html/HTMLBackground";
 
 let assert = require("assert");
 let chai = require("chai");
