@@ -9,8 +9,12 @@ describe('HTMLControls', () => {
 
 	let ctrl = null;
 
-	let mockDocument = {
+	let mockNewElement = {
 
+	};
+
+	let mockDocument = {
+		createElement: sinon.stub().returns(mockNewElement)
 	};
 
 	beforeEach(() => {
@@ -21,6 +25,19 @@ describe('HTMLControls', () => {
 		it('takes one argument which is the document object', () => {
 			chai.assert.property(ctrl, 'document');
 			chai.assert.deepEqual(ctrl.document, mockDocument);
+		});
+	});
+
+	describe('createElementAppend', () => {
+		it('creates a new element of specified type and appends it to the parent element', () => {
+			let mockParent = {
+				appendChild: sinon.stub()
+			};
+
+			ctrl.createElementAppend('input', mockParent);
+
+			assert(mockDocument.createElement.calledWith('input'));
+			assert(mockParent.appendChild.calledWith(mockNewElement));
 		});
 	});
 
