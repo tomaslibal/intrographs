@@ -4,23 +4,20 @@
  * Each vertex of a graph is an object constructed by this function.
  */
 export default class Vertex {
-    constructor(p) {
-        /*
-         * Ensure that props is not null but rather is an object;
-         */
-        let props = p || {};
+    constructor(p={}) {
 
         /*
-         * For graphical purposes, a vertex has [x, y] coordinates in the pixel
-         * space associated with it.
-         */
-        this.x = props.x || 0;
-        this.y = props.y || 0;
-
-        /*
-         * Arbitrary name
+         * Arbitrary name/identifier
          *
          */
-        this.name = props.name || null;
+        this.name = p.name || null;
+
+        /*
+         * Optional label
+         *
+         */
+        this.label = p.label || null;
+
+        // this.symbol = Symbol(this.name);
     }
 }
