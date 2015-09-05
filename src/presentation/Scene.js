@@ -13,7 +13,7 @@ export default class Scene {
 		this.controls = controls;
 
 		this.clock = 0;
-	        this.playState = 'paused';
+	    this.playState = 'paused';
 	}
 
 	renderAll() {
