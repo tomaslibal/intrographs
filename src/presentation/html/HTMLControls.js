@@ -14,7 +14,7 @@ export default class HTMLControls extends IRenderable {
 
 	renderAddVertexForm() {
 		if ('undefined' === typeof this.addVertexForm) {
-			this.addVertexForm = '';
+			this.addVertexForm = this.document.createElement('div');
 		}
 	}
 

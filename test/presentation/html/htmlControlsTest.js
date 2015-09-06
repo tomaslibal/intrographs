@@ -140,12 +140,13 @@ describe('HTMLControls', () => {
 	});
 
 	describe('renderAddVertexForm', () => {
-		it('creates a addVertexForm property if it does not exist', () => {
+		it('creates a addVertexForm property if it does not exist and assigns it a new <div> element', () => {
 			chai.assert.notProperty(ctrl, 'addVertexForm');
 
 			ctrl.renderAddVertexForm();
 
 			chai.assert.property(ctrl, 'addVertexForm');
+			assert(ctrl.document.createElement.calledWith('div'));
 		});
 	});
 
