@@ -17,8 +17,14 @@ describe('HTMLControls', () => {
 		appendChild(child) { return child; }
 	};
 
+	let mockBody = {
+		appendChild: sinon.stub()
+	}
+
 	let mockDocument = {
-		createElement: sinon.stub().returns(mockNewElement)
+		createElement: sinon.stub().returns(mockNewElement),
+		querySelector: sinon.stub(),
+		body: mockBody
 	};
 
 	beforeEach(() => {
@@ -28,6 +34,8 @@ describe('HTMLControls', () => {
 		sinon.spy(ctrl, 'createLabelAppend');
 		sinon.spy(ctrl, 'createInputAppend');
 		sinon.spy(ctrl, 'createButtonAppend');
+
+		mockDocument.querySelector.withArgs('.addVertexForm').returns(null);
 	});
 
 	describe('contructor', () => {
@@ -174,7 +182,12 @@ describe('HTMLControls', () => {
 
 			assert(ctrl.createButtonAppend.calledWith('Add', ctrl.addVertexForm));
 		});
-		
+		it('appends addVertexForm to document.body if not found in document.body', () => {
+			ctrl.renderAddVertexForm();
+
+			assert(mockDocument.querySelector.calledWith('.addVertexForm'));
+			assert(mockBody.appendChild.calledWith(ctrl.addVertexForm));
+		});
 	});
 
 });

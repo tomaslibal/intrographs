@@ -27,6 +27,10 @@ export default class HTMLControls extends IRenderable {
 			inputLabel = this.createInputAppend({ id: 'vertexLabel', 'type': 'text' }, this.addVertexForm);
 			buttonAdd = this.createButtonAppend('Add', this.addVertexForm);
 		}
+
+		if (this.document.querySelector('.addVertexForm') === null) {
+			this.document.body.appendChild(this.addVertexForm);
+		}
 	}
 
 	renderAddEdgeForm() {}
