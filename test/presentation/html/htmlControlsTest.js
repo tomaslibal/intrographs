@@ -139,4 +139,14 @@ describe('HTMLControls', () => {
 		});
 	});
 
+	describe('renderAddVertexForm', () => {
+		it('creates a addVertexForm property if it does not exist', () => {
+			chai.assert.notProperty(ctrl, 'addVertexForm');
+
+			ctrl.renderAddVertexForm();
+
+			chai.assert.property(ctrl, 'addVertexForm');
+		});
+	});
+
 });

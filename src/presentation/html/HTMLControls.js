@@ -12,7 +12,12 @@ export default class HTMLControls extends IRenderable {
 		return parentElement.appendChild(this.document.createElement(elementType));
 	}
 
-	renderAddVertexForm() {}
+	renderAddVertexForm() {
+		if ('undefined' === typeof this.addVertexForm) {
+			this.addVertexForm = '';
+		}
+	}
+
 	renderAddEdgeForm() {}
 
 	render() {
