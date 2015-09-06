@@ -24,7 +24,7 @@ describe('HTMLGraph', () => {
 	});
 
 	describe('setUp', () => {
-		it('subscribes to "controls.add.vertex" event on the controls object', () => {
+		it('creates an observable from the controls object', () => {
 			chai.assert.property(htmlGraph, 'ctrlObservable');
 			assert(htmlGraph.ctrlObservable instanceof Observable);
 		});
