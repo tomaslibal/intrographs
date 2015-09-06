@@ -1,6 +1,6 @@
-import IRenderable from "../IRenderable";
+import { ObservableRenderable } from "../../presentation/ObservableRenderable";
 
-export default class HTMLControls extends IRenderable {
+export default class HTMLControls extends ObservableRenderable {
 
 	constructor(documentObj) {
 		super({ 'posX': 0, 'posY': 0 });
