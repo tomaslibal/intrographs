@@ -1,7 +1,8 @@
-import IRenderable from "../IRenderable";
 import GraphRenderer2D from "../GraphRenderer2D";
+import { ObservableRenderable } from "../../presentation/ObservableRenderable";
+import Observable from "../../common/Observable";
 
-export default class HTMLGraph extends IRenderable {
+export default class HTMLGraph extends ObservableRenderable {
 
 	constructor(graph) {
 		const x = 0;
@@ -12,6 +13,14 @@ export default class HTMLGraph extends IRenderable {
 		this.graph = graph;
 		this.x = x;
 		this.y = y;
+
+		this.setUp();
+	}
+
+	setUp() {
+		if (this.graph.controls) {
+			this.ctrlObservable = new Observable(this.graph.controls);
+		}
 	}
 
 	render() {
