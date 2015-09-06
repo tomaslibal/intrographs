@@ -22,5 +22,10 @@ export default class HTMLControls extends IRenderable {
 
 	// createButtonAppend() {}
 	// createInputAppend() {}
-	// createLabelAppend() {}
+
+	createLabelAppend(label, parent) {
+		let labelElement = this.createElementAppend('p', parent);
+		labelElement.innerHTML = label;
+		return labelElement;
+	}
 }

@@ -10,7 +10,7 @@ describe('HTMLControls', () => {
 	let ctrl = null;
 
 	let mockNewElement = {
-
+		innerHTML: ''
 	};
 
 	let mockDocument = {
@@ -19,6 +19,8 @@ describe('HTMLControls', () => {
 
 	beforeEach(() => {
 		ctrl = new HTMLControls(mockDocument);
+
+		sinon.spy(ctrl, 'createElementAppend');
 	});
 
 	describe('contructor', () => {
@@ -47,6 +49,30 @@ describe('HTMLControls', () => {
 
 			let element = ctrl.createElementAppend('input', mockParent);
 			chai.assert.deepEqual(element, mockNewElement);
+		});
+	});
+
+	describe('createLabelAppend', () => {
+		it('creates a <p> element, assigns innerHTML as the label and appends it to the parent', () => {
+			let mockParent = {
+				appendChild(child) { return child; }
+			};
+
+			sinon.spy(mockParent, 'appendChild');
+
+			ctrl.createLabelAppend('LabelCaption', mockParent);
+
+			assert(ctrl.createElementAppend.calledWith('p', mockParent));
+			chai.assert.equal(mockNewElement.innerHTML, 'LabelCaption');
+		});
+		it('returns the newly created <p> element', () => {
+			let mockParent = {
+				appendChild(child) { return child; }
+			};
+
+			let labelElement = ctrl.createLabelAppend('LabelCaption', mockParent);
+			
+			chai.assert.deepEqual(labelElement, mockNewElement);
 		});
 	});
 
