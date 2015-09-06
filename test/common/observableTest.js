@@ -1,5 +1,5 @@
 // import s.u.t.
-import Observer from "../../src/common/Observable";
+import Observable from "../../src/common/Observable";
 
 let assert = require("assert");
 let chai = require("chai");
@@ -27,7 +27,7 @@ describe('Observable', () => {
 	};
 
 	beforeEach('setup', () => {
-		observable = new Observer(mockSource, 'foo42');
+		observable = new Observable(mockSource, 'foo42');
 
 
 	});
@@ -36,7 +36,7 @@ describe('Observable', () => {
 		it('throws an exception if the source object does not implement method "addEventListener"', () => {
 			let throws = null;
 			let fn = () => {
-				throws = new Observer({});
+				throws = new Observable({});
 			}
 			chai.expect(fn).to.throw(Error);
 		});
