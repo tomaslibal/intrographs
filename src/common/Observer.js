@@ -6,6 +6,7 @@ export default class Observer {
             throw new Error("The source object does not seem to implement the Observable interface");
         }
 
+        this.source = source;
         this.name = name;
     }
 

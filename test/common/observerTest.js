@@ -25,6 +25,9 @@ describe('Observer', () => {
 			}
 			chai.expect(fn).to.throw(Error);
 		});
+		it('stores the source object reference so that the client code can later subscribe to events', () => {
+			chai.assert.deepEqual(observer.source, mockSource);
+		});
 		it('sets property name to the value from the second argument', () => {
 			chai.assert.equal(observer.name, 'foo42');
 		});
