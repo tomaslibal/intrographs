@@ -28,6 +28,9 @@ describe('HTMLGraph', () => {
 			chai.assert.property(htmlGraph, 'ctrlObservable');
 			assert(htmlGraph.ctrlObservable instanceof Observable);
 		});
+		it('subscribes to "controls.add.vertex" event on the controls observable', () => {
+			assert(mockControls.addEventListener.calledWith('controls.add.vertex', sinon.match.func));
+		});
 		it('does not create a new observable if graph.controls is undefined', () => {
 			let mockGraphWithoutControls = {};
 

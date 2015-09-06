@@ -20,6 +20,7 @@ export default class HTMLGraph extends ObservableRenderable {
 	setUp() {
 		if (this.graph.controls) {
 			this.ctrlObservable = new Observable(this.graph.controls);
+			this.ctrlObservable.subscribe('controls.add.vertex');
 		}
 	}
 
