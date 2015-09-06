@@ -2,7 +2,7 @@ export default class Observable {
 
     // observer is created from an object which acts as a source of events
     constructor(source={}, name='untitled observer') {
-        if (!source.addEventListener) {
+        if ('function' !== typeof source.addEventListener) {
             throw new Error('The source object does not seem to implement the Observable interface');
         }
 
