@@ -10,7 +10,9 @@ describe('HTMLControls', () => {
 	let ctrl = null;
 
 	let mockNewElement = {
-		innerHTML: ''
+		innerHTML: '',
+		id: '',
+		'type': ''
 	};
 
 	let mockDocument = {
@@ -97,6 +99,32 @@ describe('HTMLControls', () => {
 			let buttonElement = ctrl.createButtonAppend('ButtonCaption', mockParent);
 
 			chai.assert.deepEqual(buttonElement, mockNewElement);
+		});
+	});
+
+	describe('createInputAppend', () => {
+		it(`creates an <input> element, assigns "id" and "type" attributes as specified and appends it
+			to the parent`, () => {
+			let mockParent = {
+				appendChild(child) { return child; }
+			};
+
+			sinon.spy(mockParent, 'appendChild');
+
+			ctrl.createInputAppend({ id: 'foo', 'type': 'text' }, mockParent);
+
+			assert(ctrl.createElementAppend.calledWith('input', mockParent));
+			chai.assert.equal(mockNewElement.id, 'foo');
+			chai.assert.equal(mockNewElement.type, 'text');
+		});
+		it('returns the newly created <input> element', () => {
+			let mockParent = {
+				appendChild(child) { return child; }
+			};
+
+			let inputElement = ctrl.createInputAppend({ id: 'foo', 'type': 'text' }, mockParent);
+
+			chai.assert.deepEqual(inputElement, mockNewElement);
 		});
 	});
 
