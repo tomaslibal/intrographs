@@ -21,12 +21,14 @@ export default class HTMLGraph extends ObservableRenderable {
 		if (this.graph.controls) {
 			this.ctrlObservable = new Observable(this.graph.controls);
 			this.ctrlObservable.subscribe('controls.add.vertex');
-			this.ctrlObservable.forEach(this._handleNewVertexEvent);
+			this._boundHandleNewVertexEvent = this._handleNewVertexEvent.bind(this);
+			this.ctrlObservable.forEach(this._boundHandleNewVertexEvent);
 		}
 	}
 
-	_handleNewVertexEvent(event) {
-		
+	_handleNewVertexEvent({ 'id': id, 'label': label }) {
+		this.graph.addVertex({ 'name': id, 'label': label });
+		this.render();
 	}
 
 	render() {

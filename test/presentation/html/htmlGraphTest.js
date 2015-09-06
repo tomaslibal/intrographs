@@ -32,13 +32,15 @@ describe('HTMLGraph', () => {
 	};
 
 	let mockGraph = {
-		controls: mockControls
+		controls: mockControls,
+		addVertex: sinon.stub()
 	};
 
 	beforeEach('setup test fixtures', () => {
 		sinon.spy(mockControls, 'addEventListener');
 
 		htmlGraph = new HTMLGraph(mockGraph);
+		htmlGraph.render = sinon.stub()
 	});
 
 	afterEach('restore spies', () => {
@@ -72,6 +74,14 @@ describe('HTMLGraph', () => {
 			chai.assert.notProperty(htmlGraphWithoutControls, 'ctrlObservable');
 		});
 	});
+
+	describe('on controls.add.vertex events', () => {
+		it('adds the new vertex and repaints the canvas', () => {
+			mockControls.notify('controls.add.vertex');
+
+			assert(htmlGraph.graph.addVertex.calledWith({ 'name': 'v900', 'label': 'V900' }));
+		});
+	})
 
 
 });
