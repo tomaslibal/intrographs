@@ -14,7 +14,7 @@ let scene = new HTMLScene(K3, document);
 scene.renderAll();
 
 // Extra, Prints the graph as an adjacency matrix to the console
-import MatrixPrinter from "./presentation/MatrixPrinter";
-import Matrix from "./common/Matrix";
-let mat = Matrix.fromGraph(K3.getVerticesList(), K3.edges);
-console.log(MatrixPrinter.ascii(mat));
+// import MatrixPrinter from "./presentation/MatrixPrinter";
+// import Matrix from "./common/Matrix";
+// let mat = Matrix.fromGraph(K3.getVerticesList(), K3.edges);
+// console.log(MatrixPrinter.ascii(mat));
