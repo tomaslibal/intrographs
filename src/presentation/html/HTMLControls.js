@@ -15,7 +15,9 @@ export default class HTMLControls extends ObservableRenderable {
 	appendElementIfNotPresent(element, parent) {
 		if (parent.querySelector(`.${element.className}`) === null) {
 			parent.appendChild(element);
+			return true;
 		}
+		return false;
 	}
 
 	renderAddVertexForm() {
