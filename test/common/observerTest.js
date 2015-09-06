@@ -9,13 +9,27 @@ describe('Observer', () => {
 
 	let observer = null;
 
+	let mockEvent = {};
+
 	let mockSource = {
-		addEventListener: sinon.stub(),
-		removeEventListener: sinon.stub()
+		addEventListener(eventType, callback) {
+			this.callbacks = this.callbacks || [];
+			this.callbacks.push({ eventType: eventType, callback: callback });
+		},
+		removeEventListener: sinon.stub(),
+		notify(signalEventType) {
+			this.callbacks.forEach(({ eventType: eventType, callback: callback }) => {
+				if (signalEventType === eventType) {
+					callback.call(undefined, mockEvent);
+				}
+			});
+		}
 	};
 
 	beforeEach('setup', () => {
 		observer = new Observer(mockSource, 'foo42');
+
+
 	});
 
 	describe('constructor', () => {
@@ -42,6 +56,8 @@ describe('Observer', () => {
 
 	describe('subscribe', () => {
 		it('registers a listener on the source object for the given event type', () => {
+			sinon.spy(mockSource, 'addEventListener');
+
 			observer.subscribe('customEvent');
 
 			assert(mockSource.addEventListener.calledWith('customEvent', sinon.match.func));
@@ -92,6 +108,19 @@ describe('Observer', () => {
 
 			chai.expect(fn).to.throw(Error);
 			chai.assert.deepEqual(observer._forEachCallbacks, []);
+		});
+		it('invokes all stored callbacks when the source object notifies the observable about a new event', () => {
+			let callback = sinon.stub();
+			let callback2 = sinon.stub();
+
+			observer.subscribe('fusionStart');
+			observer.forEach(callback);
+			observer.forEach(callback2);
+
+			mockSource.notify('fusionStart');
+
+			assert(callback.calledOnce);
+			assert(callback2.calledOnce);
 		});
 	})
 
