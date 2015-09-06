@@ -13,8 +13,19 @@ export default class HTMLControls extends IRenderable {
 	}
 
 	renderAddVertexForm() {
+		let label = null;
+		let inputId = null;
+		let inputLabel = null;
+		let buttonAdd = null;
+
 		if ('undefined' === typeof this.addVertexForm) {
 			this.addVertexForm = this.document.createElement('div');
+			this.addVertexForm.className = 'addVertexForm';
+
+			label = this.createLabelAppend('Add Vertex', this.addVertexForm);
+			inputId = this.createInputAppend({ id: 'vertexId', 'type': 'text' }, this.addVertexForm);
+			inputLabel = this.createInputAppend({ id: 'vertexLabel', 'type': 'text' }, this.addVertexForm);
+			buttonAdd = this.createButtonAppend('Add', this.addVertexForm);
 		}
 	}
 

@@ -12,7 +12,9 @@ describe('HTMLControls', () => {
 	let mockNewElement = {
 		innerHTML: '',
 		id: '',
-		'type': ''
+		'type': '',
+		className: '',
+		appendChild(child) { return child; }
 	};
 
 	let mockDocument = {
@@ -23,6 +25,9 @@ describe('HTMLControls', () => {
 		ctrl = new HTMLControls(mockDocument);
 
 		sinon.spy(ctrl, 'createElementAppend');
+		sinon.spy(ctrl, 'createLabelAppend');
+		sinon.spy(ctrl, 'createInputAppend');
+		sinon.spy(ctrl, 'createButtonAppend');
 	});
 
 	describe('contructor', () => {
@@ -140,14 +145,36 @@ describe('HTMLControls', () => {
 	});
 
 	describe('renderAddVertexForm', () => {
-		it('creates a addVertexForm property if it does not exist and assigns it a new <div> element', () => {
+		it('creates a addVertexForm property if it does not exist and assigns it a new <div> element with class "addVertexForm"', () => {
 			chai.assert.notProperty(ctrl, 'addVertexForm');
 
 			ctrl.renderAddVertexForm();
 
 			chai.assert.property(ctrl, 'addVertexForm');
 			assert(ctrl.document.createElement.calledWith('div'));
+			chai.assert.equal(ctrl.addVertexForm.className, 'addVertexForm');
 		});
+		it('creates a new label "Add Vertex" and appends it to the <div> element', () => {
+			ctrl.renderAddVertexForm();
+
+			assert(ctrl.createLabelAppend.calledWith('Add Vertex', ctrl.addVertexForm));
+		});
+		it('creates a new input of type text and id="vertexId" and appends it to the <div> element', () => {
+			ctrl.renderAddVertexForm();
+
+			assert(ctrl.createInputAppend.calledWith({ id: 'vertexId', 'type': 'text' }, ctrl.addVertexForm));
+		});
+		it('creates a new input of type text and id="vertexLabel" and appends it to the <div> element', () => {
+			ctrl.renderAddVertexForm();
+
+			assert(ctrl.createInputAppend.calledWith({ id: 'vertexLabel', 'type': 'text' }, ctrl.addVertexForm));
+		});
+		it('creates a new button with innerHTML "Add" and appends it to the <div> element', () => {
+			ctrl.renderAddVertexForm();
+
+			assert(ctrl.createButtonAppend.calledWith('Add', ctrl.addVertexForm));
+		});
+		
 	});
 
 });
