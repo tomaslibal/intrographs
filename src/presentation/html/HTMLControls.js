@@ -34,7 +34,7 @@ export default class HTMLControls extends IRenderable {
 			buttonAdd = this.createButtonAppend('Add', this.addVertexForm);
 		}
 
-		this.appendElementIfNotPresent(this.addVertexForm, this.document);
+		this.appendElementIfNotPresent(this.addVertexForm, this.document.body);
 	}
 
 	renderAddEdgeForm() {}

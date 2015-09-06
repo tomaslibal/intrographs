@@ -18,6 +18,7 @@ describe('HTMLControls', () => {
 	};
 
 	let mockBody = {
+		querySelector: sinon.stub().returns(null),
 		appendChild: sinon.stub()
 	}
 
@@ -186,8 +187,8 @@ describe('HTMLControls', () => {
 		it('appends addVertexForm to document.body if not found in document.body', () => {
 			ctrl.renderAddVertexForm();
 
-			assert(mockDocument.querySelector.calledWith('.addVertexForm'));
-			assert(mockDocument.appendChild.calledWith(ctrl.addVertexForm));
+			assert(mockBody.querySelector.calledWith('.addVertexForm'));
+			assert(mockBody.appendChild.calledWith(ctrl.addVertexForm));
 		});
 	});
 
