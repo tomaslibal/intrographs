@@ -1,7 +1,7 @@
 // interim "main" entry point
 
 import { Graph, getGraph } from "./graphs/Graph";
-import HTMLScene from "./presentation/HTMLScene";
+import HTMLScene from "./presentation/html/HTMLScene";
 
 let K3 = getGraph();
 K3.addVertex({ name: "B" });
@@ -10,7 +10,7 @@ K3.addEdge(["A", "B"]);
 K3.addEdge(["A", "C"]);
 K3.addEdge(["B", "C"]);
 
-let scene = new HTMLScene(K3);
+let scene = new HTMLScene(K3, document);
 scene.renderAll();
 
 // Extra, Prints the graph as an adjacency matrix to the console
