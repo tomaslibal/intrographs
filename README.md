@@ -22,6 +22,10 @@ updates the second set with a set of ordered or unordered pairs. If the pair
 (e.g. `(A, C)`) is ordered then the graph is directed as `(A, C)` and `(C, A)`
 have different meanings in that case.
 
+## Other tools like Gephi
+
+[Gephi](https://gephi.github.io) is my favorite tool for graph network analysis. Although some features of `intrographs` are similar, I'm not trying to recreate it. Instead of using it as a data lab for analyzing real-life data, I would like intrographs to be more an educational software which lets users run algorithms like A*, depth-first-search, etc. on various graphs.
+
 ## How-to's
 
 This is a JavaScript software tested to run in a browser. Because this is a development version, you will have to build the target on your machine.
