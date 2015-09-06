@@ -12,7 +12,15 @@ export default class HTMLScene extends Scene {
 		let htmlGraph = new HTMLGraph(graph);
 		let controls = new HTMLControls(document);
 
+		htmlGraph.controls = controls;
+
 		super(htmlGraph, bg, minidisplay, controls);
+
+		this.setupAll();
+	}
+
+	setupAll() {
+		this.graph.setUp();
 	}
 
 }

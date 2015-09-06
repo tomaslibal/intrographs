@@ -14,7 +14,8 @@ describe('HTMLControls', () => {
 		id: '',
 		'type': '',
 		className: '',
-		appendChild(child) { return child; }
+		appendChild(child) { return child; },
+		addEventListener: sinon.stub()
 	};
 
 	let mockBody = {
@@ -189,6 +190,11 @@ describe('HTMLControls', () => {
 
 			assert(mockBody.querySelector.calledWith('.addVertexForm'));
 			assert(mockBody.appendChild.calledWith(ctrl.addVertexForm));
+		});
+		it('adds event listener on the button listening to click events', () => {
+			ctrl.renderAddVertexForm();
+
+			assert(mockNewElement.addEventListener.calledWith('click', sinon.match.func));
 		});
 	});
 

@@ -32,7 +32,6 @@ describe('HTMLGraph', () => {
 	};
 
 	let mockGraph = {
-		controls: mockControls,
 		addVertex: sinon.stub()
 	};
 
@@ -40,7 +39,9 @@ describe('HTMLGraph', () => {
 		sinon.spy(mockControls, 'addEventListener');
 
 		htmlGraph = new HTMLGraph(mockGraph);
-		htmlGraph.render = sinon.stub()
+		htmlGraph.controls = mockControls;
+		htmlGraph.setUp();
+		htmlGraph.render = sinon.stub();
 	});
 
 	afterEach('restore spies', () => {

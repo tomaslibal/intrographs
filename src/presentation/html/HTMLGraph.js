@@ -13,13 +13,11 @@ export default class HTMLGraph extends ObservableRenderable {
 		this.graph = graph;
 		this.x = x;
 		this.y = y;
-
-		this.setUp();
 	}
 
 	setUp() {
-		if (this.graph.controls) {
-			this.ctrlObservable = new Observable(this.graph.controls);
+		if (this.controls) {
+			this.ctrlObservable = new Observable(this.controls);
 			this.ctrlObservable.subscribe('controls.add.vertex');
 			this._boundHandleNewVertexEvent = this._handleNewVertexEvent.bind(this);
 			this.ctrlObservable.forEach(this._boundHandleNewVertexEvent);
@@ -37,6 +35,7 @@ export default class HTMLGraph extends ObservableRenderable {
 		let ctx = graphRenderer.getContext(canvas);
 
 		graphRenderer.setCanvas(canvas);
+		graphRenderer.clearCanvas(ctx);
 		graphRenderer.render(this.graph);
 	}
 

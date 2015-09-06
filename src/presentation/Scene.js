@@ -14,8 +14,6 @@ export default class Scene {
 
 		this.clock = 0;
 	    this.playState = 'paused';
-
-		if (this.graph) this.graph.controls = controls;
 	}
 
 	renderAll() {
