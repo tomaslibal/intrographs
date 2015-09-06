@@ -50,4 +50,15 @@ describe('HTMLControls', () => {
 		});
 	});
 
+	describe('render method', () => {
+		it('invokes renderAddVertexForm and renderAddEdgeForm', () => {
+			sinon.spy(ctrl, 'renderAddVertexForm');
+			sinon.spy(ctrl, 'renderAddEdgeForm');
+
+			ctrl.render();
+			assert(ctrl.renderAddVertexForm.calledOnce);
+			assert(ctrl.renderAddEdgeForm.calledOnce);
+		});
+	});
+
 });

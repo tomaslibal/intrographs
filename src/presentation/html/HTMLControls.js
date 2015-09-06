@@ -11,4 +11,16 @@ export default class HTMLControls extends IRenderable {
 	createElementAppend(elementType, parentElement) {
 		return parentElement.appendChild(this.document.createElement(elementType));
 	}
+
+	renderAddVertexForm() {}
+	renderAddEdgeForm() {}
+
+	render() {
+		this.renderAddVertexForm();
+		this.renderAddEdgeForm();
+	}
+
+	// createButtonAppend() {}
+	// createInputAppend() {}
+	// createLabelAppend() {}
 }
