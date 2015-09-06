@@ -1,4 +1,4 @@
-export default class Observer {
+export default class Observable {
 
     // observer is created from an object which acts as a source of events
     constructor(source={}, name='untitled observer') {

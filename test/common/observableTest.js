@@ -1,13 +1,13 @@
 // import s.u.t.
-import Observer from "../../src/common/Observer";
+import Observer from "../../src/common/Observable";
 
 let assert = require("assert");
 let chai = require("chai");
 let sinon = require("sinon");
 
-describe('Observer', () => {
+describe('Observable', () => {
 
-	let observer = null;
+	let observable = null;
 
 	let mockEvent = {};
 
@@ -27,7 +27,7 @@ describe('Observer', () => {
 	};
 
 	beforeEach('setup', () => {
-		observer = new Observer(mockSource, 'foo42');
+		observable = new Observer(mockSource, 'foo42');
 
 
 	});
@@ -41,16 +41,16 @@ describe('Observer', () => {
 			chai.expect(fn).to.throw(Error);
 		});
 		it('stores the source object reference so that the client code can later subscribe to events', () => {
-			chai.assert.deepEqual(observer.source, mockSource);
+			chai.assert.deepEqual(observable.source, mockSource);
 		});
 		it('sets property "name" to the value from the second argument', () => {
-			chai.assert.equal(observer.name, 'foo42');
+			chai.assert.equal(observable.name, 'foo42');
 		});
 		it('sets property "_subscribedEvents" to an empty array', () => {
-			chai.assert.deepEqual(observer._subscribedEvents, []);
+			chai.assert.deepEqual(observable._subscribedEvents, []);
 		});
 		it('sets property "_forEachCallbacks" to an empty array', () => {
-			chai.assert.deepEqual(observer._forEachCallbacks, []);
+			chai.assert.deepEqual(observable._forEachCallbacks, []);
 		});
 	});
 
@@ -58,24 +58,24 @@ describe('Observer', () => {
 		it('registers a listener on the source object for the given event type', () => {
 			sinon.spy(mockSource, 'addEventListener');
 
-			observer.subscribe('customEvent');
+			observable.subscribe('customEvent');
 
 			assert(mockSource.addEventListener.calledWith('customEvent', sinon.match.func));
 		});
 		it('stores the eventType in property _subscribedEvents', () => {
-			observer.subscribe('minky');
+			observable.subscribe('minky');
 
-			chai.assert.property(observer, '_subscribedEvents');
-			chai.assert.deepEqual(observer._subscribedEvents, ['minky']);
+			chai.assert.property(observable, '_subscribedEvents');
+			chai.assert.deepEqual(observable._subscribedEvents, ['minky']);
 
-			observer.subscribe('binky');
-			chai.assert.deepEqual(observer._subscribedEvents, ['minky', 'binky']);
+			observable.subscribe('binky');
+			chai.assert.deepEqual(observable._subscribedEvents, ['minky', 'binky']);
 		});
 	});
 
 	describe('dispose', () => {
 		it('unregisters a listener on the source object for the given event type', () => {
-			observer.dispose('customEvent2');
+			observable.dispose('customEvent2');
 
 			assert(mockSource.removeEventListener.calledWith('customEvent2', sinon.match.func));
 		});
@@ -84,38 +84,38 @@ describe('Observer', () => {
 	describe('forEach', () => {
 		it('throws an Error if no event has been subscribed to and will not add the callback to the _forEachCallbacks array', () => {
 			let fn = () => {
-				observer.forEach(() => {});
+				observable.forEach(() => {});
 			};
 
 			chai.expect(fn).to.throw(Error);
-			chai.assert.deepEqual(observer._forEachCallbacks, []);
+			chai.assert.deepEqual(observable._forEachCallbacks, []);
 		});
 		it('stores the callback in _forEachCallbacks array', () => {
 			let callback = sinon.stub();
 
-			observer.subscribe('fusionStart');
+			observable.subscribe('fusionStart');
 
-			observer.forEach(callback);
+			observable.forEach(callback);
 
-			chai.assert.deepEqual(observer._forEachCallbacks, [callback]);
+			chai.assert.deepEqual(observable._forEachCallbacks, [callback]);
 		});
 		it('throws an Error if callback is not a function and will not add the argument to the _forEachCallbacks array', () => {
-			observer.subscribe('fusionStart');
+			observable.subscribe('fusionStart');
 
 			let fn = () => {
-				observer.forEach('bar');
+				observable.forEach('bar');
 			};
 
 			chai.expect(fn).to.throw(Error);
-			chai.assert.deepEqual(observer._forEachCallbacks, []);
+			chai.assert.deepEqual(observable._forEachCallbacks, []);
 		});
 		it('invokes all stored callbacks when the source object notifies the observable about a new event', () => {
 			let callback = sinon.stub();
 			let callback2 = sinon.stub();
 
-			observer.subscribe('fusionStart');
-			observer.forEach(callback);
-			observer.forEach(callback2);
+			observable.subscribe('fusionStart');
+			observable.forEach(callback);
+			observable.forEach(callback2);
 
 			mockSource.notify('fusionStart');
 
