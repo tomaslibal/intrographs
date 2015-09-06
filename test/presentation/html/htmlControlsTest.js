@@ -24,7 +24,8 @@ describe('HTMLControls', () => {
 	let mockDocument = {
 		createElement: sinon.stub().returns(mockNewElement),
 		querySelector: sinon.stub(),
-		body: mockBody
+		body: mockBody,
+		appendChild: sinon.stub()
 	};
 
 	beforeEach(() => {
@@ -186,7 +187,7 @@ describe('HTMLControls', () => {
 			ctrl.renderAddVertexForm();
 
 			assert(mockDocument.querySelector.calledWith('.addVertexForm'));
-			assert(mockBody.appendChild.calledWith(ctrl.addVertexForm));
+			assert(mockDocument.appendChild.calledWith(ctrl.addVertexForm));
 		});
 	});
 

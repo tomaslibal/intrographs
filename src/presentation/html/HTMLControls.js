@@ -12,6 +12,12 @@ export default class HTMLControls extends IRenderable {
 		return parentElement.appendChild(this.document.createElement(elementType));
 	}
 
+	appendElementIfNotPresent(element, parent) {
+		if (parent.querySelector(`.${element.className}`) === null) {
+			parent.appendChild(element);
+		}
+	}
+
 	renderAddVertexForm() {
 		let label = null;
 		let inputId = null;
@@ -28,9 +34,7 @@ export default class HTMLControls extends IRenderable {
 			buttonAdd = this.createButtonAppend('Add', this.addVertexForm);
 		}
 
-		if (this.document.querySelector('.addVertexForm') === null) {
-			this.document.body.appendChild(this.addVertexForm);
-		}
+		this.appendElementIfNotPresent(this.addVertexForm, this.document);
 	}
 
 	renderAddEdgeForm() {}
