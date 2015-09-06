@@ -71,8 +71,32 @@ describe('HTMLControls', () => {
 			};
 
 			let labelElement = ctrl.createLabelAppend('LabelCaption', mockParent);
-			
+
 			chai.assert.deepEqual(labelElement, mockNewElement);
+		});
+	});
+
+	describe('createButtonAppend', () => {
+		it('creates a <button> element, assigns innerHTML as the label and appends it to the parent', () => {
+			let mockParent = {
+				appendChild(child) { return child; }
+			};
+
+			sinon.spy(mockParent, 'appendChild');
+
+			ctrl.createButtonAppend('ButtonCaption', mockParent);
+
+			assert(ctrl.createElementAppend.calledWith('button', mockParent));
+			chai.assert.equal(mockNewElement.innerHTML, 'ButtonCaption');
+		});
+		it('returns the newly created <button> element', () => {
+			let mockParent = {
+				appendChild(child) { return child; }
+			};
+
+			let buttonElement = ctrl.createButtonAppend('ButtonCaption', mockParent);
+
+			chai.assert.deepEqual(buttonElement, mockNewElement);
 		});
 	});
 

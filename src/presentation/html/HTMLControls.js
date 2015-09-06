@@ -20,7 +20,11 @@ export default class HTMLControls extends IRenderable {
 		this.renderAddEdgeForm();
 	}
 
-	// createButtonAppend() {}
+	createButtonAppend(label, parent) {
+		let buttonElement = this.createElementAppend('button', parent);
+		buttonElement.innerHTML = label;
+		return buttonElement;
+	}
 	// createInputAppend() {}
 
 	createLabelAppend(label, parent) {
