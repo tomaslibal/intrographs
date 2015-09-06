@@ -62,4 +62,9 @@ describe('Scene', () => {
         emptyScene.renderAll();
     });
 
+	it(`adds a reference of the "controls" object to the graph object because the graph will subscribe to
+		events in controls (like add new vertex, edge etc.)`, () => {
+		chai.assert.deepEqual(scene.graph.controls, mockControls);
+	});
+
 });
