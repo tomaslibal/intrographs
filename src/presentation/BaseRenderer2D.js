@@ -23,8 +23,11 @@ export default class BaseRenderer2D {
                 ctx.lineTo(x1, y1);
                 ctx.stroke();
             }
-
         }
+    }
+
+    clearCanvas(ctx) {
+        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
     setCanvas(canvas) {
