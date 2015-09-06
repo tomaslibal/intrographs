@@ -10,7 +10,8 @@ describe('Observer', () => {
 	let observer = null;
 
 	let mockSource = {
-		addEventListener: sinon.stub()
+		addEventListener: sinon.stub(),
+		removeEventListener: sinon.stub()
 	};
 
 	beforeEach('setup', () => {
@@ -30,6 +31,22 @@ describe('Observer', () => {
 		});
 		it('sets property name to the value from the second argument', () => {
 			chai.assert.equal(observer.name, 'foo42');
+		});
+	});
+
+	describe('subscribe', () => {
+		it('registers a listener on the source object for the given event type', () => {
+			observer.subscribe('customEvent');
+
+			assert(mockSource.addEventListener.calledWith('customEvent', sinon.match.func));
+		});
+	});
+
+	describe('dispose', () => {
+		it('unregisters a listener on the source object for the given event type', () => {
+			observer.dispose('customEvent2');
+
+			assert(mockSource.removeEventListener.calledWith('customEvent2', sinon.match.func));
 		});
 	});
 

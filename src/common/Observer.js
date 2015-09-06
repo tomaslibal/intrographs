@@ -10,9 +10,17 @@ export default class Observer {
         this.name = name;
     }
 
+    _handleNewEvent(event) {
+
+    }
+
     // subscribe, dispose to certain events on the underlying object
-    subscribe() {}
+    subscribe(eventType) {
+        this.source.addEventListener(eventType, this._handleNewEvent);
+    }
     //notify() {} // notify happens on the underlying object
-    dispose() {}
+    dispose(eventType) {
+        this.source.removeEventListener(eventType, this._handleNewEvent);
+    }
 
 }
