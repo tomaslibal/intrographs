@@ -13,6 +13,10 @@ describe('CSSStyles', () => {
 		getComputedStyle: sinon.stub()
 	};
 
+	let mockElement = {
+
+	};
+
 	beforeEach(() => {
 		cssStyles = new CSSStyles(mockWindow);
 	});
@@ -28,6 +32,18 @@ describe('CSSStyles', () => {
 
 			chai.expect(throws).to.throw(Error);
 			chai.expect(wontThrow).not.to.throw();
+		});
+		it('assigns property .window to the window object', () => {
+			chai.assert.property(cssStyles, 'window');
+			chai.assert.deepEqual(cssStyles.window, mockWindow);
+		});
+	});
+
+	describe('getAllStyles', () => {
+		it('returns CSS Properties list of the given element using the window.getComputedStyle method', () => {
+			cssStyles.getAllStyles(mockElement);
+
+			assert(mockWindow.getComputedStyle.calledWith(mockElement));
 		});
 	});
 });

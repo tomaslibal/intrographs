@@ -5,5 +5,11 @@ export default class CSSStyles {
 			throw new Error('You must supply the window object to the constructor');
 			return;
 		}
+
+		this.window = windowObj;
+	}
+
+	getAllStyles(element=null) {
+		return this.window.getComputedStyle(element);
 	}
 }
