@@ -18,7 +18,7 @@ describe('CSSStyles', () => {
 	};
 
 	let mockElement = {
-
+		style: {}
 	};
 
 	beforeEach(() => {
@@ -56,6 +56,14 @@ describe('CSSStyles', () => {
 			let res = cssStyles.getStyle(mockElement, 'height');
 
 			chai.assert.equal(res, '640px');
+		});
+	});
+
+	describe('setStyle', () => {
+		it('sets the inline style of the element to the given value', () => {
+			cssStyles.setStyle(mockElement, 'border', '2px solid blue');
+
+			chai.assert.equal(mockElement.style.border, '2px solid blue');
 		});
 	});
 });

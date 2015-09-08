@@ -17,4 +17,8 @@ export default class CSSStyles {
 		const styles = this.getAllStyles(element);
 		return styles[styleName];
 	}
+
+	setStyle(element, styleName, value) {
+		element.style[styleName] = value;
+	}
 }
