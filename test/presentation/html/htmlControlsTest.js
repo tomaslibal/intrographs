@@ -144,6 +144,30 @@ describe('HTMLControls', () => {
 		});
 	});
 
+	describe('createSpanAppend', () => {
+		it('creates a <span> element with specified innerHTML and appends it to the parent', () => {
+			let mockParent = {
+				appendChild(child) { return child }
+			};
+
+			sinon.spy(mockParent, 'appendChild');
+
+			ctrl.createSpanAppend({ innerHTML: 'bar' }, mockParent);
+
+			assert(ctrl.createElementAppend.calledWith('span', mockParent));
+			chai.assert.equal(mockNewElement.innerHTML, 'bar');
+		});
+		it('returns the newly created <span> element', () => {
+			let mockParent = {
+				appendChild(child) { return child; }
+			};
+
+			let spanElement = ctrl.createSpanAppend({ innerHTML: 'foo' }, mockParent);
+
+			chai.assert.deepEqual(spanElement, mockNewElement);
+		});
+	});
+
 	describe('render method', () => {
 		it('invokes renderAddVertexForm and renderAddEdgeForm', () => {
 			sinon.spy(ctrl, 'renderAddVertexForm');
@@ -164,6 +188,17 @@ describe('HTMLControls', () => {
 			chai.assert.property(ctrl, 'addEdgeForm');
 			assert(ctrl.document.createElement.calledWith('div'));
 			chai.assert.equal(ctrl.addEdgeForm.className, 'addEdgeForm');
+		});
+		it('creates a new label "Add Edge" and appends it to the <div> element', () => {
+			ctrl.renderAddEdgeForm();
+
+			assert(ctrl.createLabelAppend.calledWith('Add Edge', ctrl.addEdgeForm));
+		});
+		it.skip('creates two text inputs with IDs "vertex1" and "vertex2" and appends it to the <div> element', () => {
+			ctrl.renderAddEdgeForm();
+
+			assert(ctrl.createInputAppend.calledWith({ id: 'vertex1', 'type': 'text' }, ctrl.addEdgeForm));
+			assert(ctrl.createInputAppend.calledWith({ id: 'vertex2', 'type': 'text' }, ctrl.addEdgeForm));
 		});
 	});
 

@@ -49,10 +49,13 @@ export default class HTMLControls extends ObservableRenderable {
 	}
 
 	renderAddEdgeForm() {
+		let label = null;
 
 		if('undefined' === typeof this.addEdgeForm) {
 			this.addEdgeForm = this.document.createElement('div');
 			this.addEdgeForm.className = 'addEdgeForm';
+
+			label = this.createLabelAppend('Add Edge', this.addEdgeForm);
 		}
 	}
 
@@ -78,5 +81,11 @@ export default class HTMLControls extends ObservableRenderable {
 		let labelElement = this.createElementAppend('p', parent);
 		labelElement.innerHTML = label;
 		return labelElement;
+	}
+
+	createSpanAppend({ innerHTML: innerHTML }, parent) {
+		let spanElement = this.createElementAppend('span', parent);
+		spanElement.innerHTML = innerHTML;
+		return spanElement;
 	}
 }
