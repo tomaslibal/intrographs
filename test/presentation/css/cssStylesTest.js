@@ -9,8 +9,12 @@ describe('CSSStyles', () => {
 
 	let cssStyles = null;
 
+	let mockCSSStylesList = {
+		height: '640px'
+	};
+
 	let mockWindow = {
-		getComputedStyle: sinon.stub()
+		getComputedStyle: sinon.stub().returns(mockCSSStylesList)
 	};
 
 	let mockElement = {
@@ -44,6 +48,14 @@ describe('CSSStyles', () => {
 			cssStyles.getAllStyles(mockElement);
 
 			assert(mockWindow.getComputedStyle.calledWith(mockElement));
+		});
+	});
+
+	describe('getStyle', () => {
+		it('returns value of the CSS compted style for a given element and style name', () => {
+			let res = cssStyles.getStyle(mockElement, 'height');
+
+			chai.assert.equal(res, '640px');
 		});
 	});
 });

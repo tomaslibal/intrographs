@@ -12,4 +12,9 @@ export default class CSSStyles {
 	getAllStyles(element=null) {
 		return this.window.getComputedStyle(element);
 	}
+
+	getStyle(element, styleName) {
+		const styles = this.getAllStyles(element);
+		return styles[styleName];
+	}
 }
