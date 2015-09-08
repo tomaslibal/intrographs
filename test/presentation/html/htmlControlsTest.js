@@ -286,6 +286,12 @@ describe('HTMLControls', () => {
 
 				assert(ctrl.cssStyles.setStyle.calledWith(ctrl.addVertexForm, 'position', 'absolute'));
 			});
+			it('sets styles top = 10px, right = 10px on the form', () => {
+				ctrl.renderAddVertexForm();
+
+				assert(ctrl.cssStyles.setStyle.calledWith(ctrl.addVertexForm, 'top', '10px'));
+				assert(ctrl.cssStyles.setStyle.calledWith(ctrl.addVertexForm, 'right', '10px'));
+			});
 		});
 	});
 

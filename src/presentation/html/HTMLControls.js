@@ -46,6 +46,8 @@ export default class HTMLControls extends ObservableRenderable {
 			buttonAdd = this.createButtonAppend('Add', this.addVertexForm);
 
 			this.cssStyles.setStyle(this.addVertexForm, 'position', 'absolute');
+			this.cssStyles.setStyle(this.addVertexForm, 'top', '10px');
+			this.cssStyles.setStyle(this.addVertexForm, 'right', '10px');
 		}
 
 		if (this.appendElementIfNotPresent(this.addVertexForm, this.document.body)) {
