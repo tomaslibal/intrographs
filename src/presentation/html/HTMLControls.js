@@ -1,11 +1,15 @@
 import { ObservableRenderable } from "../../presentation/ObservableRenderable";
+import CSSStyles from "../../presentation/css/CSSStyles";
 
 export default class HTMLControls extends ObservableRenderable {
 
-	constructor(documentObj) {
+	constructor(windowObj) {
 		super({ 'posX': 0, 'posY': 0 });
 
+		let documentObj = windowObj.document;
+
 		this.document = documentObj;
+		this.cssStyles = new CSSStyles(windowObj);
 	}
 
 	createElementAppend(elementType, parentElement) {
@@ -40,6 +44,8 @@ export default class HTMLControls extends ObservableRenderable {
 			inputId = this.createInputAppend({ id: 'vertexId', 'type': 'text' }, this.addVertexForm);
 			inputLabel = this.createInputAppend({ id: 'vertexLabel', 'type': 'text' }, this.addVertexForm);
 			buttonAdd = this.createButtonAppend('Add', this.addVertexForm);
+
+			this.cssStyles.setStyle(this.addVertexForm, 'position', 'absolute');
 		}
 
 		if (this.appendElementIfNotPresent(this.addVertexForm, this.document.body)) {
@@ -70,7 +76,7 @@ export default class HTMLControls extends ObservableRenderable {
 		}
 
 		if (this.appendElementIfNotPresent(this.addEdgeForm, this.document.body)) {
-			
+
 		}
 	}
 

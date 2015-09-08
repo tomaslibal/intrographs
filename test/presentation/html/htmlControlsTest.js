@@ -14,6 +14,7 @@ describe('HTMLControls', () => {
 		id: '',
 		'type': '',
 		className: '',
+		style: {},
 		appendChild(child) { return child; },
 		addEventListener: sinon.stub()
 	};
@@ -30,20 +31,26 @@ describe('HTMLControls', () => {
 		appendChild: sinon.stub()
 	};
 
+	let mockWindow = {
+		document: mockDocument,
+		getComputedStyle: sinon.stub()
+	}
+
 	beforeEach(() => {
-		ctrl = new HTMLControls(mockDocument);
+		ctrl = new HTMLControls(mockWindow);
 
 		sinon.spy(ctrl, 'createElementAppend');
 		sinon.spy(ctrl, 'createLabelAppend');
 		sinon.spy(ctrl, 'createInputAppend');
 		sinon.spy(ctrl, 'createButtonAppend');
 		sinon.spy(ctrl, 'createSpanAppend');
+		sinon.spy(ctrl.cssStyles, 'setStyle');
 
 		mockDocument.querySelector.withArgs('.addVertexForm').returns(null);
 	});
 
 	describe('contructor', () => {
-		it('takes one argument which is the document object', () => {
+		it('takes one argument which is the window object and assigns .document property to window.document', () => {
 			chai.assert.property(ctrl, 'document');
 			chai.assert.deepEqual(ctrl.document, mockDocument);
 		});
@@ -269,6 +276,16 @@ describe('HTMLControls', () => {
 
 			chai.assert.equal(ret1, true);
 			chai.assert.equal(ret2, false);
+		});
+	});
+
+	describe('CSS Styles', () => {
+		describe('Add Vertex Form', () => {
+			it('sets position absolute on the form', () => {
+				ctrl.renderAddVertexForm();
+
+				assert(ctrl.cssStyles.setStyle.calledWith(ctrl.addVertexForm, 'position', 'absolute'));
+			});
 		});
 	});
 
