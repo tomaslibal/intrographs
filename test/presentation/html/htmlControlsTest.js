@@ -239,10 +239,20 @@ describe('HTMLControls', () => {
 
 			assert(ctrl.createLabelAppend.calledWith('Add Vertex', ctrl.addVertexForm));
 		});
+		it('creates a new space "ID" and appends it to the <div> element', () => {
+			ctrl.renderAddVertexForm();
+
+			assert(ctrl.createSpanAppend.calledWith({ innerHTML: 'ID' }, ctrl.addVertexForm));
+		});
 		it('creates a new input of type text and id="vertexId" and appends it to the <div> element', () => {
 			ctrl.renderAddVertexForm();
 
 			assert(ctrl.createInputAppend.calledWith({ id: 'vertexId', 'type': 'text' }, ctrl.addVertexForm));
+		});
+		it('creates a new space "Label" and appends it to the <div> element', () => {
+			ctrl.renderAddVertexForm();
+
+			assert(ctrl.createSpanAppend.calledWith({ innerHTML: 'Label' }, ctrl.addVertexForm));
 		});
 		it('creates a new input of type text and id="vertexLabel" and appends it to the <div> element', () => {
 			ctrl.renderAddVertexForm();

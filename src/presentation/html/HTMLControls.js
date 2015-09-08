@@ -32,7 +32,9 @@ export default class HTMLControls extends ObservableRenderable {
 
 	renderAddVertexForm() {
 		let label = null;
+		let spanId = null;
 		let inputId = null;
+		let spanLabel = null;
 		let inputLabel = null;
 		let buttonAdd = null;
 
@@ -41,7 +43,9 @@ export default class HTMLControls extends ObservableRenderable {
 			this.addVertexForm.className = 'addVertexForm';
 
 			label = this.createLabelAppend('Add Vertex', this.addVertexForm);
+			spanId = this.createSpanAppend({ innerHTML: 'ID' }, this.addVertexForm);
 			inputId = this.createInputAppend({ id: 'vertexId', 'type': 'text' }, this.addVertexForm);
+			spanLabel = this.createSpanAppend({ innerHTML: 'Label' }, this.addVertexForm);
 			inputLabel = this.createInputAppend({ id: 'vertexLabel', 'type': 'text' }, this.addVertexForm);
 			buttonAdd = this.createButtonAppend('Add', this.addVertexForm);
 
