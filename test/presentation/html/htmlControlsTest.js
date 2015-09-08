@@ -37,6 +37,7 @@ describe('HTMLControls', () => {
 		sinon.spy(ctrl, 'createLabelAppend');
 		sinon.spy(ctrl, 'createInputAppend');
 		sinon.spy(ctrl, 'createButtonAppend');
+		sinon.spy(ctrl, 'createSpanAppend');
 
 		mockDocument.querySelector.withArgs('.addVertexForm').returns(null);
 	});
@@ -194,11 +195,19 @@ describe('HTMLControls', () => {
 
 			assert(ctrl.createLabelAppend.calledWith('Add Edge', ctrl.addEdgeForm));
 		});
-		it.skip('creates two text inputs with IDs "vertex1" and "vertex2" and appends it to the <div> element', () => {
+		it(`creates two text inputs with IDs "vertex1" and "vertex2" and corresponding two spans
+			to give captions to the inputs and appends it to the <div> element`, () => {
 			ctrl.renderAddEdgeForm();
 
+			assert(ctrl.createSpanAppend.calledWith({ innerHTML: 'Vertex 1' }, ctrl.addEdgeForm));
 			assert(ctrl.createInputAppend.calledWith({ id: 'vertex1', 'type': 'text' }, ctrl.addEdgeForm));
+			assert(ctrl.createSpanAppend.calledWith({ innerHTML: 'Vertex 2' }, ctrl.addEdgeForm));
 			assert(ctrl.createInputAppend.calledWith({ id: 'vertex2', 'type': 'text' }, ctrl.addEdgeForm));
+		});
+		it('creates a button with caption "Add Edge" and appends it to the <div> element', () => {
+			ctrl.renderAddEdgeForm();
+
+			assert(ctrl.createButtonAppend.calledWith('Add Edge', ctrl.addEdgeForm));
 		});
 	});
 
