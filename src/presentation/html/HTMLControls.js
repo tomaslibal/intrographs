@@ -68,6 +68,10 @@ export default class HTMLControls extends ObservableRenderable {
 			input2 = this.createInputAppend({ id: 'vertex2', 'type': 'text' }, this.addEdgeForm);
 			buttonAdd = this.createButtonAppend('Add Edge', this.addEdgeForm);
 		}
+
+		if (this.appendElementIfNotPresent(this.addEdgeForm, this.document.body)) {
+			
+		}
 	}
 
 	render() {

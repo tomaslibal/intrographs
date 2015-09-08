@@ -209,6 +209,12 @@ describe('HTMLControls', () => {
 
 			assert(ctrl.createButtonAppend.calledWith('Add Edge', ctrl.addEdgeForm));
 		});
+		it('appends addEdgeForm to document.body if not found in document.body', () => {
+			ctrl.renderAddEdgeForm();
+
+			assert(mockBody.querySelector.calledWith('.addEdgeForm'));
+			assert(mockBody.appendChild.calledWith(ctrl.addEdgeForm));
+		});
 	});
 
 	describe('renderAddVertexForm', () => {
