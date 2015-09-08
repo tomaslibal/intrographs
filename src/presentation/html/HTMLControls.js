@@ -22,7 +22,7 @@ export default class HTMLControls extends ObservableRenderable {
 
 	_addVertexButtonHandler() {
 		const id = 'testId';
-		const label = 'testLabel'; 
+		const label = 'testLabel';
 		this.notify('controls.add.vertex', { 'id': id, 'label': label });
 	}
 
@@ -48,7 +48,13 @@ export default class HTMLControls extends ObservableRenderable {
 		}
 	}
 
-	renderAddEdgeForm() {}
+	renderAddEdgeForm() {
+
+		if('undefined' === typeof this.addEdgeForm) {
+			this.addEdgeForm = this.document.createElement('div');
+			this.addEdgeForm.className = 'addEdgeForm';
+		}
+	}
 
 	render() {
 		this.renderAddVertexForm();

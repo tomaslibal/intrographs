@@ -155,6 +155,18 @@ describe('HTMLControls', () => {
 		});
 	});
 
+	describe('renderAddEdgeForm', () => {
+		it('creates "addEdgeForm" property if it does not exist and assigns it a new <div> element with class "addEdgeForm"', () => {
+			chai.assert.notProperty(ctrl, 'addEdgeForm');
+
+			ctrl.renderAddEdgeForm();
+
+			chai.assert.property(ctrl, 'addEdgeForm');
+			assert(ctrl.document.createElement.calledWith('div'));
+			chai.assert.equal(ctrl.addEdgeForm.className, 'addEdgeForm');
+		});
+	});
+
 	describe('renderAddVertexForm', () => {
 		it('creates a addVertexForm property if it does not exist and assigns it a new <div> element with class "addVertexForm"', () => {
 			chai.assert.notProperty(ctrl, 'addVertexForm');
