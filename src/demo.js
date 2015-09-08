@@ -10,7 +10,7 @@ K3.addEdge(["A", "B"]);
 K3.addEdge(["A", "C"]);
 K3.addEdge(["B", "C"]);
 
-let scene = new HTMLScene(K3, document);
+let scene = new HTMLScene(K3, window);
 scene.renderAll();
 
 // Extra, Prints the graph as an adjacency matrix to the console
