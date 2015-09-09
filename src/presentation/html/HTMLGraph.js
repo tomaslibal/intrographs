@@ -53,6 +53,9 @@ export default class HTMLGraph extends ObservableRenderable {
 	_handleNewEdgeEvent({ 'vertex1': v1, 'vertex2': v2 }) {
 		this.graph.addEdge([v1, v2]);
 		this.render();
+
+		this.edgeList.list.push([v1, v2]);
+		this.edgeList.render();
 	}
 
 	render() {

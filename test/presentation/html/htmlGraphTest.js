@@ -128,6 +128,15 @@ describe('HTMLGraph', () => {
 			assert(htmlGraph.graph.addEdge.calledWith(['m', 'n']));
 			assert(htmlGraph.render.calledOnce);
 		});
+		it('adds the new edge to the edgeList and repaints the list', () => {
+			sinon.spy(htmlGraph.edgeList, 'render');
+			sinon.spy(htmlGraph.edgeList.list, 'push');
+
+			mockControls.notify('controls.add.edge', { 'vertex1': 'ver1', 'vertex2': 'ver2' });
+
+			assert(htmlGraph.edgeList.list.push.calledWith(['ver1', 'ver2']));
+			assert(htmlGraph.edgeList.render.calledOnce);
+		});
 	});
 
 	describe('render', () => {
