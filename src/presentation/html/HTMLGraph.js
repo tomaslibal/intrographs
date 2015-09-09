@@ -1,10 +1,11 @@
 import GraphRenderer2D from "../GraphRenderer2D";
 import { ObservableRenderable } from "../../presentation/ObservableRenderable";
 import Observable from "../../common/Observable";
+import HTMLList from "./HTMLList";
 
 export default class HTMLGraph extends ObservableRenderable {
 
-	constructor(graph) {
+	constructor(graph, document) {
 		const x = 0;
 		const y = 0;
 
@@ -13,6 +14,9 @@ export default class HTMLGraph extends ObservableRenderable {
 		this.graph = graph;
 		this.x = x;
 		this.y = y;
+
+		this.vertexList = new HTMLList(document.createElement('div'));
+		this.edgeList = new HTMLList(document.createElement('div'));
 	}
 
 	setUp() {

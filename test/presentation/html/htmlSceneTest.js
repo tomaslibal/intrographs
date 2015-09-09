@@ -23,8 +23,12 @@ describe('HTMLScene', () => {
 		height: 0
 	};
 
+	let mockElement = {
+		innerHTML: ''
+	};
+
 	let mockDocument = {
-		createElement: sinon.stub(),
+		createElement: sinon.stub().returns(mockElement),
 		querySelector: sinon.stub().returns(mockCanvas)
 	};
 

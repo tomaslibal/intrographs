@@ -17,7 +17,7 @@ export default class HTMLScene extends Scene {
 
 		let bg = new HTMLBackground(document);
 		let minidisplay = new HTMLMinidisplay();
-		let htmlGraph = new HTMLGraph(graph);
+		let htmlGraph = new HTMLGraph(graph, document);
 		let controls = new HTMLControls(windowObj);
 
 		htmlGraph.controls = controls;

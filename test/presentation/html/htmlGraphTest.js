@@ -1,6 +1,7 @@
 // import s.u.t.
 import HTMLGraph from "../../../src/presentation/html/HTMLGraph";
 
+import HTMLList from '../../../src/presentation/html/HTMLList';
 import Observable from "../../../src/common/Observable";
 
 let assert = require("assert");
@@ -36,10 +37,18 @@ describe('HTMLGraph', () => {
 		addEdge: sinon.stub()
 	};
 
+	let mockElement = {
+		innerHTML: ''
+	};
+
+	let mockDocument = {
+		createElement: sinon.stub().returns(mockElement)
+	};
+
 	beforeEach('setup test fixtures', () => {
 		sinon.spy(mockControls, 'addEventListener');
 
-		htmlGraph = new HTMLGraph(mockGraph);
+		htmlGraph = new HTMLGraph(mockGraph, mockDocument);
 		htmlGraph.controls = mockControls;
 		htmlGraph.setUp();
 		htmlGraph.render = sinon.stub();
@@ -48,6 +57,16 @@ describe('HTMLGraph', () => {
 	afterEach('restore spies', () => {
 		mockControls.addEventListener.restore();
 		mockControls.callbacks = [];
+	});
+
+	describe('constructor', () => {
+		it('instantiates two instances of HTMLList (for vertex and edge lists)', () => {
+			chai.assert.property(htmlGraph, 'vertexList');
+			chai.assert.property(htmlGraph, 'edgeList');
+
+			assert(htmlGraph.vertexList instanceof HTMLList);
+			assert(htmlGraph.edgeList instanceof HTMLList);
+		});
 	});
 
 	describe('setUp', () => {
@@ -71,7 +90,7 @@ describe('HTMLGraph', () => {
 		it('does not create a new observable if graph.controls is undefined', () => {
 			let mockGraphWithoutControls = {};
 
-			let htmlGraphWithoutControls = new HTMLGraph(mockGraphWithoutControls);
+			let htmlGraphWithoutControls = new HTMLGraph(mockGraphWithoutControls, mockDocument);
 
 			chai.assert.notProperty(htmlGraphWithoutControls, 'ctrlObservable');
 		});
