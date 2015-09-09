@@ -25,8 +25,8 @@ export default class HTMLControls extends ObservableRenderable {
 	}
 
 	_addVertexButtonHandler() {
-		const id = 'testId';
-		const label = 'testLabel';
+		const id = this.addVertexForm.querySelector('#vertexId').value;
+		const label = this.addVertexForm.querySelector('#vertexLabel').value;
 		this.notify('controls.add.vertex', { 'id': id, 'label': label });
 	}
 

@@ -15,8 +15,10 @@ describe('HTMLControls', () => {
 		'type': '',
 		className: '',
 		style: {},
+		value: '',
 		appendChild(child) { return child; },
-		addEventListener: sinon.stub()
+		addEventListener: sinon.stub(),
+		querySelector: sinon.stub()
 	};
 
 	let mockBody = {
@@ -45,6 +47,7 @@ describe('HTMLControls', () => {
 		sinon.spy(ctrl, 'createButtonAppend');
 		sinon.spy(ctrl, 'createSpanAppend');
 		sinon.spy(ctrl.cssStyles, 'setStyle');
+		sinon.spy(ctrl, 'notify');
 
 		mockDocument.querySelector.withArgs('.addVertexForm').returns(null);
 	});
@@ -274,6 +277,16 @@ describe('HTMLControls', () => {
 			ctrl.renderAddVertexForm();
 
 			assert(mockNewElement.addEventListener.calledWith('click', ctrl._boundAddVertexButtonHandler));
+		});
+		it('sends notification to its observers that new vertex has been added', () => {
+			mockNewElement.querySelector.withArgs('#vertexId').returns({'value': 'a'});
+			mockNewElement.querySelector.withArgs('#vertexLabel').returns({'value': 'vertexA'});
+			ctrl.renderAddVertexForm();
+			ctrl._addVertexButtonHandler();
+
+			assert(ctrl.addVertexForm.querySelector.calledWith('#vertexId'));
+			assert(ctrl.addVertexForm.querySelector.calledWith('#vertexLabel'));
+			assert(ctrl.notify.calledWith('controls.add.vertex', { 'id': 'a', 'label': 'vertexA'}));
 		});
 	});
 
