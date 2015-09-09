@@ -9,4 +9,12 @@ export default class HTMLList {
 		this.parent = parentElement;
 		this.list = [];
 	}
+
+	render() {
+		let str = this.list.reduce((prev, curr, idx) => {
+			return prev + ', ' + curr;
+		});
+
+		this.parent.innerHTML = str;
+	}
 }

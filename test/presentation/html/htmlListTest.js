@@ -10,11 +10,13 @@ describe('HTMLList', () => {
 	let htmlList = null;
 
 	let mockParentElement = {
-
+		innerHTML: ''
 	};
 
 	beforeEach(() => {
 		htmlList = new HTMLList(mockParentElement);
+
+		sinon.spy(htmlList.list, 'reduce');
 	});
 
 	describe('constructor', () => {
@@ -37,6 +39,16 @@ describe('HTMLList', () => {
 		it('assigns property .list to an empty array', () => {
 			chai.assert.property(htmlList, 'list');
 			chai.assert.deepEqual(htmlList.list, []);
+		});
+	});
+
+	describe('render', () => {
+		it('flattens the .list array to string "el1, el2, ..., elN" and assigns this strings as innerHTML of the parent element', () => {
+			htmlList.list.push('a', 'b', 'c', 'd');
+			htmlList.render();
+
+			assert(htmlList.list.reduce.calledWith(sinon.match.func));
+			chai.assert.equal(htmlList.parent.innerHTML, 'a, b, c, d');
 		});
 	});
 
