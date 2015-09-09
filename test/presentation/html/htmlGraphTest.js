@@ -22,17 +22,18 @@ describe('HTMLGraph', () => {
 			this.callbacks.push({ eventType: eventType, callback: callback });
 		},
 		removeEventListener: sinon.stub(),
-		notify(signalEventType) {
+		notify(signalEventType, event=mockEvent) {
 			this.callbacks.forEach(({ eventType: eventType, callback: callback }) => {
 				if (signalEventType === eventType) {
-					callback.call(undefined, mockEvent);
+					callback.call(undefined, event);
 				}
 			});
 		}
 	};
 
 	let mockGraph = {
-		addVertex: sinon.stub()
+		addVertex: sinon.stub(),
+		addEdge: sinon.stub()
 	};
 
 	beforeEach('setup test fixtures', () => {
@@ -81,8 +82,18 @@ describe('HTMLGraph', () => {
 			mockControls.notify('controls.add.vertex');
 
 			assert(htmlGraph.graph.addVertex.calledWith({ 'name': 'v900', 'label': 'V900' }));
+			assert(htmlGraph.render.calledOnce);
 		});
-	})
+	});
+
+	describe('on controls.add.edge events', () => {
+		it('adds the new edge and repaints the canvas', () => {
+			mockControls.notify('controls.add.edge', { 'vertex1': 'm', 'vertex2': 'n' });
+
+			assert(htmlGraph.graph.addEdge.calledWith(['m', 'n']));
+			assert(htmlGraph.render.calledOnce);
+		});
+	});
 
 
 });

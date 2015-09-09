@@ -21,11 +21,21 @@ export default class HTMLGraph extends ObservableRenderable {
 			this.ctrlObservable.subscribe('controls.add.vertex');
 			this._boundHandleNewVertexEvent = this._handleNewVertexEvent.bind(this);
 			this.ctrlObservable.forEach(this._boundHandleNewVertexEvent);
+
+			this.ctrlObservableNewEdge = new Observable(this.controls);
+			this.ctrlObservableNewEdge.subscribe('controls.add.edge');
+			this._boundHandleNewEdgeEvent = this._handleNewEdgeEvent.bind(this);
+			this.ctrlObservableNewEdge.forEach(this._boundHandleNewEdgeEvent);
 		}
 	}
 
 	_handleNewVertexEvent({ 'id': id, 'label': label }) {
 		this.graph.addVertex({ 'name': id, 'label': label });
+		this.render();
+	}
+
+	_handleNewEdgeEvent({ 'vertex1': v1, 'vertex2': v2 }) {
+		this.graph.addEdge([v1, v2]);
 		this.render();
 	}
 
