@@ -273,7 +273,7 @@ describe('HTMLControls', () => {
 		it('adds event listener on the button listening to click events', () => {
 			ctrl.renderAddVertexForm();
 
-			assert(mockNewElement.addEventListener.calledWith('click', sinon.match.func));
+			assert(mockNewElement.addEventListener.calledWith('click', ctrl._boundAddVertexButtonHandler));
 		});
 	});
 
