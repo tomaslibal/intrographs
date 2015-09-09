@@ -225,6 +225,21 @@ describe('HTMLControls', () => {
 			assert(mockBody.querySelector.calledWith('.addEdgeForm'));
 			assert(mockBody.appendChild.calledWith(ctrl.addEdgeForm));
 		});
+		it('adds event listener on the button listening to click events', () => {
+			ctrl.renderAddEdgeForm();
+
+			assert(mockNewElement.addEventListener.calledWith('click', ctrl._boundAddEdgeButtonHandler));
+		});
+		it('sends notification to its observers that new edge has been added', () => {
+			mockNewElement.querySelector.withArgs('#vertex1').returns({'value': 'x'});
+			mockNewElement.querySelector.withArgs('#vertex2').returns({'value': 'y'});
+			ctrl.renderAddEdgeForm();
+			ctrl._addEdgeButtonHandler();
+
+			assert(ctrl.addEdgeForm.querySelector.calledWith('#vertex1'));
+			assert(ctrl.addEdgeForm.querySelector.calledWith('#vertex2'));
+			assert(ctrl.notify.calledWith('controls.add.edge', { 'vertex1': 'x', 'vertex2': 'y'}));
+		});
 	});
 
 	describe('renderAddVertexForm', () => {

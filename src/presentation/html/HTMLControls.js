@@ -30,6 +30,12 @@ export default class HTMLControls extends ObservableRenderable {
 		this.notify('controls.add.vertex', { 'id': id, 'label': label });
 	}
 
+	_addEdgeButtonHandler() {
+		const v1 = this.addEdgeForm.querySelector('#vertex1').value;
+		const v2 = this.addEdgeForm.querySelector('#vertex2').value;
+		this.notify('controls.add.edge', { 'vertex1': v1, 'vertex2': v2 });
+	}
+
 	renderAddVertexForm() {
 		let label = null;
 		let spanId = null;
@@ -86,7 +92,8 @@ export default class HTMLControls extends ObservableRenderable {
 		}
 
 		if (this.appendElementIfNotPresent(this.addEdgeForm, this.document.body)) {
-
+			this._boundAddEdgeButtonHandler = this._addEdgeButtonHandler.bind(this);
+			buttonAdd.addEventListener('click', this._boundAddEdgeButtonHandler);
 		}
 	}
 
