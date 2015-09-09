@@ -34,7 +34,9 @@ describe('HTMLGraph', () => {
 
 	let mockGraph = {
 		addVertex: sinon.stub(),
-		addEdge: sinon.stub()
+		addEdge: sinon.stub(),
+		vertices: [{name:'x'}, {name:'y'}],
+		edges: [{connects:['x', 'y']}]
 	};
 
 	let mockElement = {
@@ -42,7 +44,8 @@ describe('HTMLGraph', () => {
 	};
 
 	let mockDocument = {
-		createElement: sinon.stub().returns(mockElement)
+		createElement: sinon.stub().returns(mockElement),
+		querySelector: sinon.stub()
 	};
 
 	beforeEach('setup test fixtures', () => {
@@ -94,6 +97,10 @@ describe('HTMLGraph', () => {
 
 			chai.assert.notProperty(htmlGraphWithoutControls, 'ctrlObservable');
 		});
+		it('pushes the existing vertices to the vertexList.list array', () => {
+			chai.assert.deepEqual(htmlGraph.vertexList.list, ['x', 'y']);
+			chai.assert.deepEqual(htmlGraph.edgeList.list, [['x', 'y']]);
+		});
 	});
 
 	describe('on controls.add.vertex events', () => {
@@ -114,5 +121,18 @@ describe('HTMLGraph', () => {
 		});
 	});
 
-
+	describe('render', () => {
+		// skipped because the GraphRenderer2D in the render() method needs to be mocked
+		it.skip('invokes this.vertexList.render', () => {
+			sinon.spy(htmlGraph.vertexList, 'render');
+			htmlGraph.render();
+			assert(htmlGraph.vertexList.render.calledOnce);
+		});
+		// skipped because the GraphRenderer2D in the render() method needs to be mocked
+		it.skip('invokes this.edgeList.render', () => {
+			sinon.spy(htmlGraph.edgeList, 'render');
+			htmlGraph.render();
+			assert(htmlGraph.edgeList.render.calledOnce);
+		});
+	});
 });

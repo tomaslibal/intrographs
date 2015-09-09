@@ -14,6 +14,7 @@ export default class HTMLGraph extends ObservableRenderable {
 		this.graph = graph;
 		this.x = x;
 		this.y = y;
+		this.document = document;
 
 		this.vertexList = new HTMLList(document.createElement('div'));
 		this.edgeList = new HTMLList(document.createElement('div'));
@@ -31,6 +32,14 @@ export default class HTMLGraph extends ObservableRenderable {
 			this._boundHandleNewEdgeEvent = this._handleNewEdgeEvent.bind(this);
 			this.ctrlObservableNewEdge.forEach(this._boundHandleNewEdgeEvent);
 		}
+		
+		this.graph.vertices.forEach(vertex => {
+			this.vertexList.list.push(vertex.name);
+		});
+
+		this.graph.edges.forEach(edge => {
+			this.edgeList.list.push(edge.connects);
+		});
 	}
 
 	_handleNewVertexEvent({ 'id': id, 'label': label }) {
@@ -45,12 +54,15 @@ export default class HTMLGraph extends ObservableRenderable {
 
 	render() {
 		let graphRenderer = new GraphRenderer2D();
-		let canvas = document.querySelector("#canvas");
+		let canvas = this.document.querySelector("#canvas");
 		let ctx = graphRenderer.getContext(canvas);
 
 		graphRenderer.setCanvas(canvas);
 		graphRenderer.clearCanvas(ctx);
 		graphRenderer.render(this.graph);
+
+		this.vertexList.render();
+		this.edgeList.render();
 	}
 
 }

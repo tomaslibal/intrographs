@@ -15,7 +15,8 @@ describe('HTMLScene', () => {
 	let htmlScene = null;
 
 	let mockGraph = {
-
+		vertices: [{name:'x'}, {name:'y'}],
+		edges: [{connects:['x', 'y']}]
 	};
 
 	let mockCanvas = {
