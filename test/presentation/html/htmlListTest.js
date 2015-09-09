@@ -9,30 +9,30 @@ describe('HTMLList', () => {
 
 	let htmlList = null;
 
-	let mockDocument = {
+	let mockParentElement = {
 
 	};
 
 	beforeEach(() => {
-		htmlList = new HTMLList(mockDocument);
+		htmlList = new HTMLList(mockParentElement);
 	});
 
 	describe('constructor', () => {
-		it('takes a Document object', () => {
+		it('takes a parent element', () => {
 			let throws = () => {
 				const list = new HTMLList();
 			};
 
 			let wontThrow = () => {
-				const list = new HTMLList(mockDocument);
+				const list = new HTMLList(mockParentElement);
 			};
 
-			chai.expect(throws).to.throw('Constructor must be supplied with the Document object');
+			chai.expect(throws).to.throw('Constructor must be supplied with a parent element');
 			chai.expect(wontThrow).not.to.throw();
 		});
-		it('assigns property .document to the supplied document object', () => {
-			chai.assert.property(htmlList, 'document');
-			chai.assert.deepEqual(htmlList.document, mockDocument);
+		it('assigns property .parent to the supplied parent element', () => {
+			chai.assert.property(htmlList, 'parent');
+			chai.assert.deepEqual(htmlList.parent, mockParentElement);
 		});
 		it('assigns property .list to an empty array', () => {
 			chai.assert.property(htmlList, 'list');

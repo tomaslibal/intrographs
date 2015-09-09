@@ -1,12 +1,12 @@
 export default class HTMLList {
 
-	constructor(documentObj=null) {
-		if (documentObj === null) {
-			throw new Error('Constructor must be supplied with the Document object');
+	constructor(parentElement=null) {
+		if (parentElement === null) {
+			throw new Error('Constructor must be supplied with a parent element');
 			return;
 		}
 
-		this.document = documentObj;
+		this.parent = parentElement;
 		this.list = [];
 	}
 }
