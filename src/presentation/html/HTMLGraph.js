@@ -32,7 +32,7 @@ export default class HTMLGraph extends ObservableRenderable {
 			this._boundHandleNewEdgeEvent = this._handleNewEdgeEvent.bind(this);
 			this.ctrlObservableNewEdge.forEach(this._boundHandleNewEdgeEvent);
 		}
-		
+
 		this.graph.vertices.forEach(vertex => {
 			this.vertexList.list.push(vertex.name);
 		});
@@ -45,6 +45,9 @@ export default class HTMLGraph extends ObservableRenderable {
 	_handleNewVertexEvent({ 'id': id, 'label': label }) {
 		this.graph.addVertex({ 'name': id, 'label': label });
 		this.render();
+
+		this.vertexList.list.push(id);
+		this.vertexList.render();
 	}
 
 	_handleNewEdgeEvent({ 'vertex1': v1, 'vertex2': v2 }) {

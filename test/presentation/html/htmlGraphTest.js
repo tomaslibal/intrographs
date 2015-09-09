@@ -110,6 +110,15 @@ describe('HTMLGraph', () => {
 			assert(htmlGraph.graph.addVertex.calledWith({ 'name': 'v900', 'label': 'V900' }));
 			assert(htmlGraph.render.calledOnce);
 		});
+		it('adds the new vertex to the vertexList and repaints the list', () => {
+			sinon.spy(htmlGraph.vertexList, 'render');
+			sinon.spy(htmlGraph.vertexList.list, 'push');
+
+			mockControls.notify('controls.add.vertex', { 'id': 'ver1' });
+
+			assert(htmlGraph.vertexList.list.push.calledWith('ver1'));
+			assert(htmlGraph.vertexList.render.calledOnce);
+		});
 	});
 
 	describe('on controls.add.edge events', () => {
