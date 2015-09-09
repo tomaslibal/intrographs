@@ -34,6 +34,10 @@ describe('HTMLList', () => {
 			chai.assert.property(htmlList, 'document');
 			chai.assert.deepEqual(htmlList.document, mockDocument);
 		});
+		it('assigns property .list to an empty array', () => {
+			chai.assert.property(htmlList, 'list');
+			chai.assert.deepEqual(htmlList.list, []);
+		});
 	});
 
 });

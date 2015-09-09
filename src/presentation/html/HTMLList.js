@@ -7,5 +7,6 @@ export default class HTMLList {
 		}
 
 		this.document = documentObj;
+		this.list = [];
 	}
 }
