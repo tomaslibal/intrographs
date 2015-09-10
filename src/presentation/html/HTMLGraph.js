@@ -16,8 +16,21 @@ export default class HTMLGraph extends ObservableRenderable {
 		this.y = y;
 		this.document = document;
 
-		this.vertexList = new HTMLList(document, document.createElement('div'));
-		this.edgeList = new HTMLList(document, document.createElement('div'));
+		let vertexListParentElement = document.createElement('div');
+		vertexListParentElement.style.position = 'absolute';
+		vertexListParentElement.style.left = '10px';
+		vertexListParentElement.style.bottom = '40px';
+		vertexListParentElement.innerHTML = '<span>Vertices: </span>';
+		document.body.appendChild(vertexListParentElement);
+		this.vertexList = new HTMLList(document, vertexListParentElement);
+
+		let edgeListParentElement = document.createElement('div');
+		edgeListParentElement.style.position = 'absolute';
+		edgeListParentElement.style.left = '10px';
+		edgeListParentElement.style.bottom = '20px';
+		edgeListParentElement.innerHTML = '<span>Edges: </span>';
+		document.body.appendChild(edgeListParentElement);
+		this.edgeList = new HTMLList(document, edgeListParentElement);
 	}
 
 	setUp() {

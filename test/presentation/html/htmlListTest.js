@@ -53,8 +53,8 @@ describe('HTMLList', () => {
 			chai.assert.property(htmlList, 'list');
 			chai.assert.deepEqual(htmlList.list, []);
 		});
-		it('creates a <div> element that will be appended to the parent', () => {
-			assert(htmlList.document.createElement.calledWith('div'));
+		it('creates a <span> element that will be appended to the parent', () => {
+			assert(htmlList.document.createElement.calledWith('span'));
 			assert(htmlList.parent.appendChild.calledWith(mockNewElement));
 		});
 	});

@@ -26,12 +26,15 @@ describe('HTMLScene', () => {
 
 	let mockElement = {
 		innerHTML: '',
-		appendChild: sinon.stub()
+		appendChild: sinon.stub(),
+		style: {}
 	};
 
 	let mockDocument = {
 		createElement: sinon.stub().returns(mockElement),
-		querySelector: sinon.stub().returns(mockCanvas)
+		querySelector: sinon.stub().returns(mockCanvas),
+		appendChild: sinon.stub(),
+		body: mockElement
 	};
 
 	let mockWindow = {

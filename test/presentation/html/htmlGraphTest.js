@@ -41,12 +41,15 @@ describe('HTMLGraph', () => {
 
 	let mockElement = {
 		innerHTML: '',
-		appendChild: sinon.stub()
+		appendChild: sinon.stub(),
+		style: {}
 	};
 
 	let mockDocument = {
 		createElement: sinon.stub().returns(mockElement),
-		querySelector: sinon.stub()
+		querySelector: sinon.stub(),
+		appendChild: sinon.stub(),
+		body: mockElement
 	};
 
 	beforeEach('setup test fixtures', () => {
