@@ -16,8 +16,8 @@ export default class HTMLGraph extends ObservableRenderable {
 		this.y = y;
 		this.document = document;
 
-		this.vertexList = new HTMLList(document.createElement('div'));
-		this.edgeList = new HTMLList(document.createElement('div'));
+		this.vertexList = new HTMLList(document, document.createElement('div'));
+		this.edgeList = new HTMLList(document, document.createElement('div'));
 	}
 
 	setUp() {
