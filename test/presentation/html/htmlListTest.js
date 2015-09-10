@@ -60,12 +60,12 @@ describe('HTMLList', () => {
 	});
 
 	describe('render', () => {
-		it('flattens the .list array to string "el1, el2, ..., elN" and assigns this strings as innerHTML of the parent element', () => {
+		it('flattens the .list array to string "el1, el2, ..., elN" and assigns this strings as innerHTML of the listElement', () => {
 			htmlList.list.push('a', 'b', 'c', 'd');
 			htmlList.render();
 
 			assert(htmlList.list.reduce.calledWith(sinon.match.func));
-			chai.assert.equal(htmlList.parent.innerHTML, 'a, b, c, d');
+			chai.assert.equal(htmlList.listElement.innerHTML, 'a, b, c, d');
 		});
 	});
 

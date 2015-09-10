@@ -18,6 +18,6 @@ export default class HTMLList {
 			return prev + ', ' + curr;
 		});
 
-		this.parent.innerHTML = str;
+		this.listElement.innerHTML = str;
 	}
 }
