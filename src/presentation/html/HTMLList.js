@@ -8,6 +8,8 @@ export default class HTMLList {
 
 		this.document = documentObj;
 		this.parent = parentElement;
+		this.listElement = this.document.createElement('div');
+		this.parent.appendChild(this.listElement);
 		this.list = [];
 	}
 

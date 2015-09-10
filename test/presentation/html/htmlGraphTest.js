@@ -40,7 +40,8 @@ describe('HTMLGraph', () => {
 	};
 
 	let mockElement = {
-		innerHTML: ''
+		innerHTML: '',
+		appendChild: sinon.stub()
 	};
 
 	let mockDocument = {

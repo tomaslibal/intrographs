@@ -10,11 +10,16 @@ describe('HTMLList', () => {
 	let htmlList = null;
 
 	let mockParentElement = {
+		innerHTML: '',
+		appendChild: sinon.stub()
+	};
+
+	let mockNewElement = {
 		innerHTML: ''
 	};
 
 	let mockDocument = {
-
+		createElement: sinon.stub().returns(mockNewElement)
 	};
 
 	beforeEach(() => {
@@ -49,7 +54,8 @@ describe('HTMLList', () => {
 			chai.assert.deepEqual(htmlList.list, []);
 		});
 		it('creates a <div> element that will be appended to the parent', () => {
-
+			assert(htmlList.document.createElement.calledWith('div'));
+			assert(htmlList.parent.appendChild.calledWith(mockNewElement));
 		});
 	});
 
