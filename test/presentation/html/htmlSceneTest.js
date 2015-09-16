@@ -6,6 +6,8 @@ import HTMLMinidisplay from "../../../src/presentation/html/HTMLMinidisplay";
 import HTMLGraph from "../../../src/presentation/html/HTMLGraph";
 import HTMLControls from "../../../src/presentation/html/HTMLControls";
 
+import { mockHTMLElement as mockElement, mockHTMLElement as mockCanvas, mockDocument, mockWindow } from "../../mocks/htmlMocks";
+
 let assert = require("assert");
 let chai = require("chai");
 let sinon = require("sinon");
@@ -19,29 +21,7 @@ describe('HTMLScene', () => {
 		edges: [{connects:['x', 'y']}]
 	};
 
-	let mockCanvas = {
-		width: 0,
-		height: 0
-	};
-
-	let mockElement = {
-		innerHTML: '',
-		appendChild: sinon.stub(),
-		style: {}
-	};
-
-	let mockDocument = {
-		createElement: sinon.stub().returns(mockElement),
-		querySelector: sinon.stub().returns(mockCanvas),
-		appendChild: sinon.stub(),
-		body: mockElement
-	};
-
-	let mockWindow = {
-		document: mockDocument,
-		innerWidth: 640,
-		innerHeight: 480
-	};
+	mockDocument.querySelector.returns(mockCanvas);
 
 	beforeEach(() => {
 		htmlScene = new HTMLScene(mockGraph, mockWindow);

@@ -7,6 +7,8 @@ let mockHTMLElement = {
 	className: '',
 	style: {},
 	value: '',
+	width: 0,
+	height: 0,
 	appendChild(child) { return child; },
 	addEventListener: sinon.stub(),
 	querySelector: sinon.stub()
@@ -27,7 +29,9 @@ let mockDocument = {
 
 let mockWindow = {
 	document: mockDocument,
-	getComputedStyle: sinon.stub()
+	getComputedStyle: sinon.stub(),
+	innerWidth: 640,
+	innerHeight: 480
 };
 
 export { mockDocument, mockHTMLElement, mockDocumentBody, mockWindow };
