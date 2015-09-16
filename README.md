@@ -62,3 +62,4 @@ in a browser to use the demo.
 7. Douglas B. West (1996) *Introduction to Graph Theory.* Prentice Hall.
 8. Ming-Yang Kao (2008) *Encyclopedia of Algorithms.* Springer Science & Business Media.
 9. Balakrishnan, V. K. (1996) *Introductory Discrete Mathematics.* Reprint, USA: Dover.
+10. Chiba, N. and Nischizeki T. (2008) *Planar Graphs: Theory and Algorithms.* Reprint, USA: Courier Corporation.
