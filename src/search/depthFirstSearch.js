@@ -1,3 +1,9 @@
+/*
+ * Depth-first search.
+ *
+ * Algorithm inspired by Chiba and Nishizeki (2008, p. 30).
+ */
+ 
 // u = vertex to be found
 // path = array of visited nodes in order of visit
 function dfs(graph, u, path=[]) {
