@@ -1,5 +1,6 @@
 // import s.u.t.
 import HTMLBackground from "../../../src/presentation/html/HTMLBackground";
+import { mockDocument } from "../../mocks/htmlMocks";
 
 let assert = require("assert");
 let chai = require("chai");
@@ -8,9 +9,6 @@ let sinon = require("sinon");
 describe('HTMLBackground', () => {
 
 	let bg = null;
-	let mockDocument = {
-		createElement: sinon.stub()
-	};
 
 	beforeEach(() => {
 		bg = new HTMLBackground(mockDocument);
