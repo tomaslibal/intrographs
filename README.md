@@ -24,7 +24,7 @@ have different meanings in that case.
 
 ## Other tools like Gephi
 
-[Gephi](https://gephi.github.io) is my favorite tool for graph network analysis. Although some features of `intrographs` are similar, I'm not trying to recreate it. Instead of using it as a data lab for analyzing real-life data, I would like intrographs to be more an educational software which lets users run algorithms like A*, depth-first-search, etc. on various graphs.
+[Gephi](https://gephi.github.io) is my favorite tool for graph network analysis. Although some (intended) features of `intrographs` are similar, I'm not trying to recreate Gephi. Instead of using it as a data lab for analyzing real-life data, I would like intrographs to be more an educational software which lets users run algorithms like A*, depth-first-search, etc. on various graphs.
 
 ## How-to's
 
