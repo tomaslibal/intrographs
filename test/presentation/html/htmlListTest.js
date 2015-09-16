@@ -1,6 +1,8 @@
 // import s.u.t.
 import HTMLList from '../../../src/presentation/html/HTMLList';
 
+import { mockHTMLElement as mockNewElement, mockHTMLElement as mockParentElement, mockDocument } from "../../mocks/htmlMocks";
+
 let assert = require("assert");
 let chai = require("chai");
 let sinon = require("sinon");
@@ -8,19 +10,6 @@ let sinon = require("sinon");
 describe('HTMLList', () => {
 
 	let htmlList = null;
-
-	let mockParentElement = {
-		innerHTML: '',
-		appendChild: sinon.stub()
-	};
-
-	let mockNewElement = {
-		innerHTML: ''
-	};
-
-	let mockDocument = {
-		createElement: sinon.stub().returns(mockNewElement)
-	};
 
 	beforeEach(() => {
 		htmlList = new HTMLList(mockDocument, mockParentElement);
