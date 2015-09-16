@@ -105,5 +105,31 @@ describe('Graph', () => {
         });
     });
 
+    describe('adj(v)', () => {
+        let g;
+
+        beforeEach(() => {
+            g = new Graph();
+        });
+
+        it('finds all adjacent vertices to vertex v', () => {
+            g.addVertex({'name':'A'});
+            g.addVertex({'name':'B'});
+            g.addVertex({'name':'C'});
+            g.addVertex({'name':'D'});
+            g.addVertex({'name':'E'});
+
+            g.addEdge(['A', 'B']);
+            g.addEdge(['A', 'D']);
+            g.addEdge(['B', 'D']);
+            g.addEdge(['B', 'E']);
+            g.addEdge(['B', 'C']);
+
+            const r = g.adj('B');
+
+            chai.assert.deepEqual(r, ['A', 'D', 'E', 'C']);
+       });
+    });
+
 });
 

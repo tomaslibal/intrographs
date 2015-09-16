@@ -121,6 +121,27 @@ class Graph {
     };
 
     /*
+     * returns an array of adjacent vertices' names
+     *
+     * v = return vertices that are adjacent to this given vertex
+     */
+    adj(v) {
+        let list = [];
+
+        this.edges.forEach(e => {
+            let pos = e.connects.indexOf(v);
+            if (pos > -1 && pos === 0) {
+                list.push(e.connects[1]);
+            }
+            if (pos > -1 && pos === 1) {
+                list.push(e.connects[0]);
+            }
+        });
+
+        return list;
+    }
+
+    /*
      * Name of the graph is a conventional name based on number of vertices and
      * edges in the graph (or graphs that are isomorphic to that graph).
      *
