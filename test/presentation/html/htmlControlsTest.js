@@ -1,5 +1,6 @@
 // import s.u.t.
 import HTMLControls from "../../../src/presentation/html/HTMLControls";
+import { mockHTMLElement as mockNewElement, mockDocumentBody as mockBody, mockDocument, mockWindow} from "../../mocks/htmlMocks";
 
 let assert = require("assert");
 let chai = require("chai");
@@ -8,35 +9,6 @@ let sinon = require("sinon");
 describe('HTMLControls', () => {
 
 	let ctrl = null;
-
-	let mockNewElement = {
-		innerHTML: '',
-		id: '',
-		'type': '',
-		className: '',
-		style: {},
-		value: '',
-		appendChild(child) { return child; },
-		addEventListener: sinon.stub(),
-		querySelector: sinon.stub()
-	};
-
-	let mockBody = {
-		querySelector: sinon.stub().returns(null),
-		appendChild: sinon.stub()
-	}
-
-	let mockDocument = {
-		createElement: sinon.stub().returns(mockNewElement),
-		querySelector: sinon.stub(),
-		body: mockBody,
-		appendChild: sinon.stub()
-	};
-
-	let mockWindow = {
-		document: mockDocument,
-		getComputedStyle: sinon.stub()
-	}
 
 	beforeEach(() => {
 		ctrl = new HTMLControls(mockWindow);
