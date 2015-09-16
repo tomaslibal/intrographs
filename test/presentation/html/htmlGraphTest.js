@@ -4,6 +4,8 @@ import HTMLGraph from "../../../src/presentation/html/HTMLGraph";
 import HTMLList from '../../../src/presentation/html/HTMLList';
 import Observable from "../../../src/common/Observable";
 
+import { mockHTMLElement as mockElement, mockDocument } from "../../mocks/htmlMocks";
+
 let assert = require("assert");
 let chai = require("chai");
 let sinon = require("sinon");
@@ -37,19 +39,6 @@ describe('HTMLGraph', () => {
 		addEdge: sinon.stub(),
 		vertices: [{name:'x'}, {name:'y'}],
 		edges: [{connects:['x', 'y']}]
-	};
-
-	let mockElement = {
-		innerHTML: '',
-		appendChild: sinon.stub(),
-		style: {}
-	};
-
-	let mockDocument = {
-		createElement: sinon.stub().returns(mockElement),
-		querySelector: sinon.stub(),
-		appendChild: sinon.stub(),
-		body: mockElement
 	};
 
 	beforeEach('setup test fixtures', () => {
