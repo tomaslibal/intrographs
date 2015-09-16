@@ -1,6 +1,8 @@
 // import s.u.t.
 import HTMLWindow from '../../../src/presentation/html/HTMLWindow';
 
+import { mockWindow } from '../../mocks/htmlMocks';
+
 let chai = require('chai');
 let assert = require('assert');
 let sinon = require('sinon');
@@ -8,12 +10,7 @@ let sinon = require('sinon');
 describe('HTMLWindow', () => {
 
 	let htmlWin;
-
-	let mockWindow = {
-		innerWidth: 640,
-		innerHeight: 480
-	};
-
+	
 	beforeEach(() => {
 		htmlWin = new HTMLWindow(mockWindow);
 	});
