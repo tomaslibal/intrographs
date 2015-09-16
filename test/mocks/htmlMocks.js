@@ -34,4 +34,9 @@ let mockWindow = {
 	innerHeight: 480
 };
 
-export { mockDocument, mockHTMLElement, mockDocumentBody, mockWindow };
+// CanvasRenderingContext2d
+let mockCtx2d = {
+	clearRect: sinon.stub()
+};
+
+export { mockDocument, mockHTMLElement, mockDocumentBody, mockWindow, mockCtx2d };

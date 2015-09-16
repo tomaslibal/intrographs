@@ -1,5 +1,7 @@
 // import s.u.t.
-import BaseRenderer2D from "../../src/presentation/BaseRenderer2D";
+import BaseRenderer2D from '../../src/presentation/BaseRenderer2D';
+
+import { mockHTMLElement as mockCanvas, mockCtx2d as mockCtx } from '../mocks/htmlMocks';
 
 let assert = require("assert");
 let chai = require("chai");
@@ -8,15 +10,6 @@ let sinon = require("sinon");
 describe('BaseRenderer2D', () => {
 
 	let rend = null;
-
-	let mockCtx = {
-		clearRect: sinon.stub()
-	};
-
-	let mockCanvas = {
-		width: 123,
-		height: 123
-	};
 
 	beforeEach(() => {
 		rend = new BaseRenderer2D();
