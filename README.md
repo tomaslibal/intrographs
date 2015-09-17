@@ -11,8 +11,8 @@ properties like what type of graph it is, whether it is planar and so on.
 
 In pure mathematics a graph is an object that consists of the two sets:
 
-1. Set of vertices, e.g. { A, B, C }
-2. Set of edges, where each edge is defined as a set of two vertices which it connects.
+1. Non-empty set of vertices, e.g. { A, B, C }
+2. Set of edges, where each edge is defined as a subset of two vertices on which the edge is incident. This set may be empty.
 
 From the set theory we know that the order of elements in a set does not matter.
 Therefore all mathematical graphs are undirected.
