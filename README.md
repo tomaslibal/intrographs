@@ -31,14 +31,21 @@ have different meanings in that case.
 This is a JavaScript software tested to run in a browser. Because this is a development version, you will have to build the target on your machine.
 
 1. Install dependencies
-2. Run a local server
-3. Launch in a browser
+2. Build the out.js
+3. Run a local server
+4. Launch in a browser
 
 ### Install dependencies
 
 Use `npm` or install dependencies individually in `node_modules`. Your system should have Node.js installed and have it in the PATH environmental variable (on *NIX systems). Additionally, Python version 2.x is used for running a local HTTP server but it is not necessary.
 
     npm run install
+
+### Build
+
+The build process takes the ES2015 source files and produces ES5.1 equivalent files and then packs them together into one file `dist/out.js`.
+
+    npm run build
 
 ### Run
 
