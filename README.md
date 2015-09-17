@@ -42,8 +42,8 @@ Use `npm` or install dependencies individually in `node_modules`. Your system sh
 
 ### Run
 
-This launches a Python SimpleHTTPServer on the local machine's http://0.0.0.0:8080. Visit `http://0.0.0.0:8080/demo/`
-in a browser to use the demo.
+This launches a Python SimpleHTTPServer on the local machine's http://0.0.0.0:8080. Visit `http://0.0.0.0:8080/html/`
+in a browser to use the browser app.
 
     npm run server
 
