@@ -11,7 +11,7 @@
  * a st-numbering algorithm and a data structure called PQ-tree (Chiba and Nishizeke, 2008, p. 33). St-numbering or
  * source-sink numbering assigns numbers to vertices such that number 1 (source) and N (sink) (N being the total number of vertices)
  * are next to each other and also every node has two adjacent nodes such that one adj. node has lower number and 
- * the other one has a higher number (Moehring, H. R., 1997, p. 357).
+ * the other one has a higher number (Wada, K. et al., 1997, p. 357).
  */
  
 export default class PlanarityTester {
