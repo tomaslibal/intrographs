@@ -56,10 +56,11 @@ in a browser to use the demo.
 1. Trudeau, J. R. (1993) *Introduction to Graph Theory.* Dover.
 2. Weisstein, Eric W. "Simple Graph." From MathWorld--A Wolfram Web Resource. http://mathworld.wolfram.com/SimpleGraph.html. Retrieved 7th February 2015.
 3. Weisstein, Eric W. (2009) "Planar Graph." From MathWorld--A Wolfram Web Resource. http://mathworld.wolfram.com/PlanarGraph.html
-4. Auslander, L. and Parter, S. "On Imbedding Graphs in the Sphere." J. Math. Mechanics 10, 517-523, 1961.
+4. Auslander, L. and Parter, S. "On Embedding Graphs in the Sphere." J. Math. Mechanics 10, 517-523, 1961.
 5. Skiena, S. "Planar Graphs." §6.5 in Implementing Discrete Mathematics: Combinatorics and Graph Theory with Mathematica. Reading, MA: Addison-Wesley, pp. 247-253, 1990.
 6. Takao Nishizeki, Norishige Chibalanar (2008) *Graphs: Theory and Algorithm.* Dover.
 7. Douglas B. West (1996) *Introduction to Graph Theory.* Prentice Hall.
 8. Ming-Yang Kao (2008) *Encyclopedia of Algorithms.* Springer Science & Business Media.
 9. Balakrishnan, V. K. (1996) *Introductory Discrete Mathematics.* Reprint, USA: Dover.
 10. Chiba, N. and Nishizeki T. (2008) *Planar Graphs: Theory and Algorithms.* Reprint, USA: Courier Corporation.
+11. Moehring, H. R. (1997) "Graph-Theoretic Concepts in Computer Science: 23rd International Workshop, WG'97, Berlin, Germany" June 18-20, 1997. Proceedings, Volume 23
