@@ -28,6 +28,23 @@ describe('Connectednes Tester', () => {
 			const res = ConnectednessTest.isConnected(g);
 			chai.assert.equal(res, true);
 		});
+
+		it('returns false if the graph has two components', () => {
+			let g = new Graph();
+			g.addVertex({name:'a'});
+			g.addVertex({name:'b'});
+			g.addVertex({name:'c'});
+			g.addVertex({name:'d'});
+			g.addVertex({name:'e'});
+
+			g.addEdge(['a', 'b']);
+			g.addEdge(['a', 'c']);
+			// second component:
+			g.addEdge(['e', 'd']);
+
+			const res = ConnectednessTest.isConnected(g);
+			chai.assert.equal(res, false);
+		});
 	});
 
 });
