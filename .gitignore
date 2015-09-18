@@ -10,3 +10,14 @@ nohup.out
 
 # swap files
 *.swp
+
+# ignore LaTeX output
+docs/*.blg
+docs/*.aux
+docs/*.bbl
+docs/*.pdf
+docs/*.log
+docs/*.dvi
+docs/*.xml
+docs/*.bcf
+docs/*.bib
