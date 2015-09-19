@@ -165,18 +165,6 @@ describe('HTMLControls', () => {
 		});
 	});
 
-	describe('appendElementIfNotPresent', () => {
-		it('returns boolean: true if appended, false if it did not append', () => {
-			sinon.spy(ctrl, 'appendElementIfNotPresent');
-			const ret1 = ctrl.appendElementIfNotPresent(mockNewElement, mockBody);
-			mockBody.querySelector.returns(mockNewElement);
-			const ret2 = ctrl.appendElementIfNotPresent(mockNewElement, mockBody);
-
-			chai.assert.equal(ret1, true);
-			chai.assert.equal(ret2, false);
-		});
-	});
-
 	describe('CSS Styles', () => {
 		describe('Add Vertex Form', () => {
 			it('sets position absolute on the form', () => {

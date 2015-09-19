@@ -47,6 +47,18 @@ describe('HTMLElementController', () => {
 		});
 	});
 
+	describe('appendElementIfNotPresent', () => {
+		it('returns boolean: true if appended, false if it did not append', () => {
+			sinon.spy(elementCtrl, 'appendElementIfNotPresent');
+			const ret1 = elementCtrl.appendElementIfNotPresent(mockNewElement, mockBody);
+			mockBody.querySelector.returns(mockNewElement);
+			const ret2 = elementCtrl.appendElementIfNotPresent(mockNewElement, mockBody);
+
+			chai.assert.equal(ret1, true);
+			chai.assert.equal(ret2, false);
+		});
+	});
+
 	describe('createLabelAppend', () => {
 		it('creates a <p> element, assigns innerHTML as the label and appends it to the parent', () => {
 			let mockParent = {
