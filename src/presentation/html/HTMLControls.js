@@ -11,7 +11,7 @@ export default class HTMLControls extends ObservableRenderable {
 
 		this.document = documentObj;
 		this.cssStyles = new CSSStyles(windowObj);
-		this.elementCtrl = new HTMLElementController();
+		this.elementCtrl = new HTMLElementController(documentObj);
 	}
 
 	createElementAppend(elementType, parentElement) {
