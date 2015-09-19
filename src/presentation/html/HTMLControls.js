@@ -15,15 +15,11 @@ export default class HTMLControls extends ObservableRenderable {
 	}
 
 	createElementAppend(elementType, parentElement) {
-		return parentElement.appendChild(this.document.createElement(elementType));
+		return this.elementCtrl.createElementAppend(elementType, parentElement);
 	}
 
 	appendElementIfNotPresent(element, parent) {
-		if (parent.querySelector(`.${element.className}`) === null) {
-			parent.appendChild(element);
-			return true;
-		}
-		return false;
+		return this.elementCtrl.appendElementIfNotPresent(element, parent);
 	}
 
 	_addVertexButtonHandler() {
@@ -105,27 +101,18 @@ export default class HTMLControls extends ObservableRenderable {
 	}
 
 	createButtonAppend(label, parent) {
-		let buttonElement = this.createElementAppend('button', parent);
-		buttonElement.innerHTML = label;
-		return buttonElement;
+		return this.elementCtrl.createButtonAppend(label, parent);
 	}
 
 	createInputAppend({ 'id': id, 'type': typeAttr }, parent) {
-		let inputElement = this.createElementAppend('input', parent);
-		inputElement.id = id;
-		inputElement.type = typeAttr;
-		return inputElement;
+		return this.elementCtrl.createInputAppend({ 'id': id, 'type': typeAttr }, parent);
 	}
 
 	createLabelAppend(label, parent) {
-		let labelElement = this.createElementAppend('p', parent);
-		labelElement.innerHTML = label;
-		return labelElement;
+		return this.elementCtrl.createLabelAppend(label, parent);
 	}
 
 	createSpanAppend({ innerHTML: innerHTML }, parent) {
-		let spanElement = this.createElementAppend('span', parent);
-		spanElement.innerHTML = innerHTML;
-		return spanElement;
+		return this.elementCtrl.createSpanAppend({ innerHTML: innerHTML }, parent);
 	}
 }
