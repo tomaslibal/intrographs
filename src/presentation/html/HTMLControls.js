@@ -23,9 +23,16 @@ export default class HTMLControls extends ObservableRenderable {
 	}
 
 	_addVertexButtonHandler() {
-		const id = this.addVertexForm.querySelector('#vertexId').value;
-		const label = this.addVertexForm.querySelector('#vertexLabel').value;
+		let vertexId = this.addVertexForm.querySelector('#vertexId');
+		let vertexLabel = this.addVertexForm.querySelector('#vertexLabel');
+
+		const id = vertexId.value;
+		const label = vertexLabel.value;
+
 		this.notify('controls.add.vertex', { 'id': id, 'label': label });
+
+		vertexId.value = '';
+		vertexLabel.value = '';
 	}
 
 	_addEdgeButtonHandler() {

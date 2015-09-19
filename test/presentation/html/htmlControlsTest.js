@@ -163,6 +163,17 @@ describe('HTMLControls', () => {
 			assert(ctrl.addVertexForm.querySelector.calledWith('#vertexLabel'));
 			assert(ctrl.notify.calledWith('controls.add.vertex', { 'id': 'a', 'label': 'vertexA'}));
 		});
+		it('removes any text value from the inputs when the add button is clicked', () => {
+			mockNewElement.value = 'foo';
+
+			ctrl.renderAddVertexForm();
+			ctrl.addVertexForm.querySelector.withArgs('#vertexId').returns(mockNewElement);
+			ctrl.addVertexForm.querySelector.withArgs('#vertexLabel').returns(mockNewElement);
+
+			ctrl._addVertexButtonHandler();
+
+			chai.assert.equal(mockNewElement.value, '');
+		});
 	});
 
 	describe('CSS Styles', () => {
