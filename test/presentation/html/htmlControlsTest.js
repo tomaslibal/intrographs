@@ -100,6 +100,17 @@ describe('HTMLControls', () => {
 			assert(ctrl.addEdgeForm.querySelector.calledWith('#vertex2'));
 			assert(ctrl.notify.calledWith('controls.add.edge', { 'vertex1': 'x', 'vertex2': 'y'}));
 		});
+		it('removes any text value from the inputs when the add button is clicked', () => {
+			mockNewElement.value = 'foo';
+
+			ctrl.renderAddEdgeForm();
+			ctrl.addEdgeForm.querySelector.withArgs('#vertex1').returns(mockNewElement);
+			ctrl.addEdgeForm.querySelector.withArgs('#vertex2').returns(mockNewElement);
+
+			ctrl._addEdgeButtonHandler();
+
+			chai.assert.equal(mockNewElement.value, '');
+		});
 	});
 
 	describe('renderAddVertexForm', () => {

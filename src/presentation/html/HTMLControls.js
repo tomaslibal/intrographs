@@ -36,9 +36,16 @@ export default class HTMLControls extends ObservableRenderable {
 	}
 
 	_addEdgeButtonHandler() {
-		const v1 = this.addEdgeForm.querySelector('#vertex1').value;
-		const v2 = this.addEdgeForm.querySelector('#vertex2').value;
+		let vertex1 = this.addEdgeForm.querySelector('#vertex1');
+		let vertex2 = this.addEdgeForm.querySelector('#vertex2');
+
+		const v1 = vertex1.value;
+		const v2 = vertex2.value;
+
 		this.notify('controls.add.edge', { 'vertex1': v1, 'vertex2': v2 });
+
+		vertex1.value = '';
+		vertex2.value = '';
 	}
 
 	renderAddVertexForm() {
