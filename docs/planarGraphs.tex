@@ -1,0 +1,85 @@
+\begin{filecontents*}{resplanar.bib}
+@book{nishizeki2008planar,
+    title={Planar Graphs: Theory and Algorithms},
+    author="Takao {Nishizeki} and Norishige {Chiba}",
+    isbn={9780486466712},
+    year={2008},
+    publisher={Dover Publications}
+  }
+  @inproceedings{wada1997Biconnected,
+    author={Wada K. and Chen W. and Luo Y. and Kawaguchi K.},
+    title={Optimal Fault-Tolerant ATM-Routings for Biconnected Graphs},
+    booktitle={Graph-Theoretic Concepts in Computer Science: 23rd International Workshop, WG'97, Berlin, Germany. Proceedings},
+    editor={M{\"o}hring, R.H.},
+    year={1997},
+    volume={23rd},
+    pages={354-358},
+    month={June 18-20},
+    series={Lecture Notes in Computer Science},
+    publisher={Springer}
+  }
+  @book{deo1974graphs,
+    author="Narsingh {Deo}",
+    title={Graph Theory: With Applications to Engineering and Computer Science},
+    publisher={Delhi: PHI Learning Private Limited},
+    year={1974}
+  }
+  @misc{weisstein2009planar,
+    author="Eric W. {Weisstein}",
+    title={Planar Graph},
+    howpublished={\url{http://mathworld.wolfram.com/PlanarGraph.html}},
+    note={Accessed: 19th September 2015}
+  }
+  @misc{weisstein1999dual,
+    author="Eric W. {Weisstein}",
+    title={Combinatorial Dual Graph},
+    howpublished={\url{http://mathworld.wolfram.com/CombinatorialDualGraph.html}},
+    note={Accessed: 19th September 2015}
+  }
+  @article{fary1948,
+    author="Istvan {Fary}",
+    title={On Straight Line Representation of Planar Graphs},
+    journal={Acta Sci. Math.},
+    year={1948},
+    volume={11},
+    pages={229-233}
+    }
+\end{filecontents*}
+
+\documentclass[11pt]{article}
+
+\usepackage[backend=biber]{biblatex}
+\addbibresource{resplanar.bib}
+
+\title{Planar Graphs and Algorithms}
+\author{Tomas Libal}
+\date{September 19, 2015}
+
+\begin{document}
+
+\maketitle
+
+Planar graph is a graph that can be drawn geometrically on a plane without edge crossings (other than edge crossings at the vertices). This is called \textit{embedding on a plane}~\autocite[90]{deo1974graphs}. Nishizeki and Chiba~\autocite[11]{nishizeki2008planar} give a corollary which says that a planar graph has no vertex of degree $ > 5 $.
+
+One could use the Kuratowski's Theorem from which we know that a graph is planar if it does not contain subgraphs of $ K_5 $ or UG (the utility graph, also known as $ K_{3,3} $). Although, this algorithm's running time will grow exponentially to the number of edges, because it needs to check every subgraph of whose there are $ 2^m $ (m = num. of edges) subgraphs in every graph~\autocite[23]{nishizeki2008planar}.
+
+Planarity has additional conditions such as the combinatorial dual graph conditionand others, see~\autocite{weisstein2009planar,weisstein1999dual}. If a graph has planar embedding, its edges can be drawn as straight lines~\autocite{fary1948,deo1974graphs,weisstein2009planar}.
+
+An algorithm described in Nishizeke and Chiba~\autocite{nishizeki2008planar} which is based on vertex addition algorithm and uses the st-numbering algorithm and a data structure called PQ-tree~\autocite[33]{nishizeki2008planar} can be used for plnarity testing of biconnected graphs. St-numbering or source-sink numbering assigns numbers to vertices such that number 1 (source) and $ N $ (sink) ($ N $ being the total number of vertices) are next to each other and also every node has two adjacent nodes such that one adj. node has a lower number and the other one has a higher number as Wada et al. explain~\autocite[357]{wada1997Biconnected}:
+
+\begin{quote}
+  Given an edge \textit{(s, t)} of a biconnected graph graph $ G = (V, E) $, a bijective function $ g: V \rightarrow \{ 1, 2, ..., |V|=n \} $ is called an st-numbering if the following conditions are satisfied:
+
+  \begin{itemize}
+  \item $ g(s) = 1 $, $ g(t) = n $ and
+    \item every node $ v \in V - \{ s, t \} $ has two adjacent nodes $ u $ and $ w $ such that $ g(u) < g(v) < g(w) $.
+  \end{itemize}
+\end{quote}
+
+
+
+
+\sloppy
+\printbibliography
+
+\end{document}
