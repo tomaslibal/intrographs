@@ -1,5 +1,6 @@
 import { ObservableRenderable } from "../../presentation/ObservableRenderable";
 import CSSStyles from "../../presentation/css/CSSStyles";
+import HTMLElementController from './HTMLElementController';
 
 export default class HTMLControls extends ObservableRenderable {
 
@@ -10,6 +11,7 @@ export default class HTMLControls extends ObservableRenderable {
 
 		this.document = documentObj;
 		this.cssStyles = new CSSStyles(windowObj);
+		this.elementCtrl = new HTMLElementController();
 	}
 
 	createElementAppend(elementType, parentElement) {

@@ -2,6 +2,8 @@
 import HTMLControls from "../../../src/presentation/html/HTMLControls";
 import { mockHTMLElement as mockNewElement, mockDocumentBody as mockBody, mockDocument, mockWindow} from "../../mocks/htmlMocks";
 
+import HTMLElementController from '../../../src/presentation/html/HTMLElementController';
+
 let assert = require("assert");
 let chai = require("chai");
 let sinon = require("sinon");
@@ -28,6 +30,10 @@ describe('HTMLControls', () => {
 		it('takes one argument which is the window object and assigns .document property to window.document', () => {
 			chai.assert.property(ctrl, 'document');
 			chai.assert.deepEqual(ctrl.document, mockDocument);
+		});
+		it('instantiates HTMLElementController which will be used to create element', () => {
+			chai.assert.property(ctrl, 'elementCtrl');
+			chai.assert.equal(ctrl.elementCtrl instanceof HTMLElementController, true);
 		});
 	});
 
