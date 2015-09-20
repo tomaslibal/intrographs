@@ -53,6 +53,8 @@ export default class HTMLScene extends Scene {
 		let canvas = this.document.querySelector('#canvas');
 		const [width, height] = this.htmlWindow.dims();
 
+		this.canvas = canvas;
+
 		canvas.width = width;
 		canvas.height = height;
 

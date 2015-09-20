@@ -78,7 +78,12 @@ describe('HTMLScene', () => {
 			chai.assert.equal(mockCanvas.width, mockWindow.innerWidth);
 			chai.assert.equal(mockCanvas.height, mockWindow.innerHeight);
 		});
-	
+
+		it('stores the reference to the canvas', () => {
+			htmlScene.setupCanvas();
+
+			chai.assert.property(htmlScene, 'canvas');
+		});
 
 		it('creates observables for mousedown, mouseup and mousemove events on the canvas', () => {
 			htmlScene.setupCanvas();
