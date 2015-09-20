@@ -30,6 +30,8 @@ export default class HTMLScene extends Scene {
 		this.htmlWindow = new HTMLWindow(this.window);
 
 		this.setupAll();
+
+		this.mouseDown = false;
 	}
 
 	setupAll() {
@@ -38,11 +40,11 @@ export default class HTMLScene extends Scene {
 	}
 
 	canvasMouseDownHandler() {
-
+		this.mouseDown = true;
 	}
 
 	canvasMouseUpHandler() {
-
+		this.mouseDown = false;
 	}
 
 	canvasMouseMoveHandler() {

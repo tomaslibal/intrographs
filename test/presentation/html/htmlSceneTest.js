@@ -94,4 +94,24 @@ describe('HTMLScene', () => {
 		});
 	});
 
+	describe('Translating the origin', () => {
+		it('is activated on mouse down', () => {
+			chai.assert.equal(htmlScene.mouseDown, false);
+
+			htmlScene.canvasMouseDownHandler();
+
+			chai.assert.equal(htmlScene.mouseDown, true);
+		});
+
+		it('is deactivated on mouse up', () => {
+			htmlScene.canvasMouseDownHandler();
+
+			chai.assert.equal(htmlScene.mouseDown, true);
+
+			htmlScene.canvasMouseUpHandler();
+
+			chai.assert.equal(htmlScene.mouseDown, false);
+		});
+	});
+
 });
