@@ -11,12 +11,12 @@ export default class BaseRenderer2D {
         this.prevOriginY = 0;
 
         this.paint = {
-            dot(ctx, x, y) {
+            dot(ctx, x, y, radius=1) {
                 ctx.beginPath();
                 /*
                  * ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, [anticlockwise])
                  */
-                ctx.arc(x, y, 1, 1, 2 * Math.PI);
+                ctx.arc(x, y, radius, 0, 2 * Math.PI);
                 //ctx.ellipse(x, y, 1, 1, 0, 0, 2*Math.PI); // not supported elsewhere than in Chrome
 
                 ctx.stroke();
