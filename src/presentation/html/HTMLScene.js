@@ -4,6 +4,7 @@ import HTMLMinidisplay from "./HTMLMinidisplay";
 import HTMLBackground from "./HTMLBackground";
 import HTMLControls from "./HTMLControls";
 import HTMLWindow from "./HTMLWindow";
+import Observable from "../../common/Observable";
 
 export default class HTMLScene extends Scene {
 
@@ -36,12 +37,39 @@ export default class HTMLScene extends Scene {
 		this.setupCanvas();
 	}
 
+	canvasMouseDownHandler() {
+
+	}
+
+	canvasMouseUpHandler() {
+
+	}
+
+	canvasMouseMoveHandler() {
+
+	}
+
 	setupCanvas() {
 		let canvas = this.document.querySelector('#canvas');
 		const [width, height] = this.htmlWindow.dims();
 
 		canvas.width = width;
 		canvas.height = height;
+
+		this.canvasObservableMouseDown = new Observable(canvas);
+		this._boundCanvasMouseDownHandler = this.canvasMouseDownHandler.bind(this);
+		this.canvasObservableMouseDown.subscribe('mousedown');
+		this.canvasObservableMouseDown.forEach(this._boundCanvasMouseDownHandler);
+
+		this.canvasObservableMouseUp = new Observable(canvas);
+		this.canvasObservableMouseUp.subscribe('mouseup');
+		this._boundCanvasMouseUpHandler = this.canvasMouseUpHandler.bind(this);
+		this.canvasObservableMouseUp.forEach(this._boundCanvasMouseUpHandler);
+
+		this.canvasObservableMouseMove = new Observable(canvas);
+		this.canvasObservableMouseMove.subscribe('mousemove');
+		this._boundCanvasMouseMoveHandler = this.canvasMouseMoveHandler.bind(this);
+		this.canvasObservableMouseMove.forEach(this._boundCanvasMouseMoveHandler);
 	}
 
 }

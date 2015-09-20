@@ -5,6 +5,7 @@ import HTMLBackground from "../../../src/presentation/html/HTMLBackground";
 import HTMLMinidisplay from "../../../src/presentation/html/HTMLMinidisplay";
 import HTMLGraph from "../../../src/presentation/html/HTMLGraph";
 import HTMLControls from "../../../src/presentation/html/HTMLControls";
+import Observable from "../../../src/common/Observable";
 
 import { mockHTMLElement as mockElement, mockHTMLElement as mockCanvas, mockDocument, mockWindow } from "../../mocks/htmlMocks";
 
@@ -76,6 +77,15 @@ describe('HTMLScene', () => {
 
 			chai.assert.equal(mockCanvas.width, mockWindow.innerWidth);
 			chai.assert.equal(mockCanvas.height, mockWindow.innerHeight);
+		});
+	
+
+		it('creates observables for mousedown, mouseup and mousemove events on the canvas', () => {
+			htmlScene.setupCanvas();
+
+			assert(htmlScene.canvasObservableMouseDown instanceof Observable);
+			assert(htmlScene.canvasObservableMouseUp instanceof Observable);
+			assert(htmlScene.canvasObservableMouseMove instanceof Observable);
 		});
 	});
 
