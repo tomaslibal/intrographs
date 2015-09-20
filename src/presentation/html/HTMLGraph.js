@@ -31,6 +31,15 @@ export default class HTMLGraph extends ObservableRenderable {
 		edgeListParentElement.innerHTML = '<span>Edges: </span>';
 		document.body.appendChild(edgeListParentElement);
 		this.edgeList = new HTMLList(document, edgeListParentElement);
+
+		let graphRenderer = new GraphRenderer2D();
+		let canvas = this.document.querySelector("#canvas");
+		let ctx = graphRenderer.getContext(canvas);
+		graphRenderer.setCanvas(canvas);
+
+		this.graphRenderer = graphRenderer;
+		this.canvas = canvas;
+		this.ctx = ctx;
 	}
 
 	setUp() {
@@ -72,13 +81,9 @@ export default class HTMLGraph extends ObservableRenderable {
 	}
 
 	render() {
-		let graphRenderer = new GraphRenderer2D();
-		let canvas = this.document.querySelector("#canvas");
-		let ctx = graphRenderer.getContext(canvas);
 
-		graphRenderer.setCanvas(canvas);
-		graphRenderer.clearCanvas(ctx);
-		graphRenderer.render(this.graph);
+		this.graphRenderer.clearCanvas(this.ctx);
+		this.graphRenderer.render(this.graph);
 
 		this.vertexList.render();
 		this.edgeList.render();

@@ -47,8 +47,20 @@ export default class HTMLScene extends Scene {
 		this.mouseDown = false;
 	}
 
-	canvasMouseMoveHandler() {
+	canvasMouseMoveHandler(ev) {
+		if (this.mouseDown) {
+			const dx = -(this.lastScreenX - ev.screenX);
+			const dy = -(this.lastScreenY - ev.screenY);
 
+			const canvas = this.document.querySelector("#canvas");
+			let ctx = canvas.getContext('2d');
+			ctx.translate(dx, dy);
+
+			this.graph.render();
+		}
+
+		this.lastScreenX = ev.screenX;
+		this.lastScreenY = ev.screenY;
 	}
 
 	setupCanvas() {

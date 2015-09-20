@@ -26,6 +26,8 @@ export default class GraphRenderer2D extends BaseRenderer2D {
     spaceOutVerticesRandom(graphVertices) {
         "use strict";
 
+
+
         var i = 0;
 
         for(; i < graphVertices.length; i++) {
@@ -52,8 +54,14 @@ export default class GraphRenderer2D extends BaseRenderer2D {
         /*
          * Space out vertices so that they won't overlap on the same x, y
          * coordinates.
+         *
+         * Do this only to vertices that have no {x, y} coordinates yet
          */
-        this.spaceOutVerticesRandom(graph.vertices);
+        let verticesNeedingDimensions = graph.vertices.filter(ver => {
+           return 'undefined' === typeof ver.x || 'undefined' === typeof ver.y;
+        });
+        
+        this.spaceOutVerticesRandom(verticesNeedingDimensions);
 
         /*
          *

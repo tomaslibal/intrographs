@@ -5,6 +5,10 @@ export default class BaseRenderer2D {
 
     constructor(canvas) {
         this.canvas = canvas || null;
+        this.originX = 0;
+        this.originY = 0;
+        this.prevOriginX = 0;
+        this.prevOriginY = 0;
 
         this.paint = {
             dot(ctx, x, y) {
@@ -26,8 +30,27 @@ export default class BaseRenderer2D {
         }
     }
 
+    pushTranslate(ctx, x, y) {
+        this.prevOriginX = this.originX;
+        this.prevOriginY = this.originY;
+
+        this.originX = x;
+        this.originY = y;
+
+        ctx.translate(x, y);
+    }
+
+    popTranslate(ctx) {
+        this.originX = this.prevOriginX;
+        this.originY = this.prevOriginY;
+
+        ctx.translate(this.originX, this.originY);
+    }
+
     clearCanvas(ctx) {
+        this.pushTranslate(ctx, 0, 0);
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.popTranslate(ctx);
     }
 
     setCanvas(canvas) {

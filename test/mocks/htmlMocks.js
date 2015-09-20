@@ -36,7 +36,8 @@ let mockWindow = {
 
 // CanvasRenderingContext2d
 let mockCtx2d = {
-	clearRect: sinon.stub()
+	clearRect: sinon.stub(),
+	translate: sinon.stub()
 };
 
 export { mockDocument, mockHTMLElement, mockDocumentBody, mockWindow, mockCtx2d };
