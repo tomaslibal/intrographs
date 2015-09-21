@@ -1,0 +1,72 @@
+\begin{filecontents*}{rescommgraph}
+  @misc{weissteinXXXXantiprism,
+    author="Eric W. {Weisstein}",
+    title={},
+    howpublished={},
+    note={Accessed: 19 September 2015}
+  }
+\end{filecontents*}
+
+\documentclass[11pt]{article}
+
+\usepackage{tikz}
+
+\usepackage[backend=biber]{biblatex}
+\addbibresource{resplanar.bib}
+
+\title{Common Graphs and Graph Types}
+\author{Tomas Libal}
+\date{September 21, 2015}   
+
+\begin{document}
+
+\maketitle
+
+Let graph $ G = (V, E) $ have a vertex set $ V $ and an edge set $ E $. The vertex set is a non-empty set of distinct vertices $ n_1, n_2, ..., n_k $ where $ k = |V| $ and the edge set, which can be empty, contains subsets of two vertices $ \{n_j, n_k\} \in V $, and $ j, k\ \in \{1, 2, ..., k\} $.
+
+\tikzstyle{vertex}=[circle,fill=yellow!50,minimum size=20pt,inner sep=0pt]
+\tikzstyle{edge}=[draw,thick,-]
+
+\begin{figure}[h]
+  \caption{Geometrical drawing of a graph}
+  \label{fig:graph1}
+\begin{tikzpicture}[scale=1.0, auto, swap]
+
+  \node[vertex] (vertex1) at (5, 5) {v1};
+  \node[vertex] (vertex2) at (2, 3) {v2};
+  \node[vertex] (vertex3) at (2, 7) {v3};
+  \node[vertex] (vertex4) at (7, 6) {v4};
+  \node[vertex] (vertex5) at (3, 2) {v5};
+
+\path[edge] (vertex1) edge (vertex2);
+\path[edge] (vertex1) edge (vertex3);
+\path[edge] (vertex3) edge (vertex4);
+\path[edge] (vertex4) edge (vertex1);
+\path[edge] (vertex4) edge (vertex3);
+\path[edge] (vertex2) edge (vertex5);
+\path[edge] (vertex2) edge (vertex3);
+\end{tikzpicture}
+\end{figure}
+
+If there are no self-loops, that is, there are no edges incident on sets $ \{ n_j, n_j\} \in V, j \in {1, 2, ..., k} $ then we call the graph \textit{simple}.
+
+If some edges are incident on the same set of vertices then we call the object a \textit{multigraph} as can be seen in Figure~\ref{fig:multi}.
+
+\begin{figure}[h]
+  \caption{Embedding of a multigraph on a plane}
+  \label{fig:multi}
+  \begin{tikzpicture}
+    \node[vertex] (v1) at (3, 3) {m1};
+    \node[vertex] (v2) at (1, 1) {m2};
+    \node[vertex] (v3) at (5, 1) {m3};
+
+    \path[edge] (v1) edge (v2);
+    \path[edge] (v1) edge (v3);
+    \path[edge] (v2) edge [bend right] (v1);
+    \path[edge] (v2) edge [bend left] (v1);
+  \end{tikzpicture}
+\end{figure}
+
+In \textit{directed graphs} or \textit{digraphs} the edge set $ E $ consists of ordered pairs $ \{(n_j, n_k) | j,k \in \{1, 2, ..., k\}\} $ so each edges has a direction leaving node $ n_j $ to $ n_k $.
+
+\end{document}
