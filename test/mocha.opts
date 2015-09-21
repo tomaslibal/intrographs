@@ -1,3 +1,2 @@
---reporter min 
+--reporter progress
 --ui tdd
---bail
