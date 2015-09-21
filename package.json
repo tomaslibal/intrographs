@@ -7,12 +7,14 @@
     "pack": "mkdir -p dist && node_modules/browserify/bin/cmd.js build/demo.js -o dist/out.js",
     "build": "npm run clear && npm run transpile && npm run pack",
     "clear": "rm -rf build && rm -rf dist",
-    "test": "./node_modules/mocha/bin/mocha --compilers js:babel/register --recursive"
+    "test": "./node_modules/mocha/bin/mocha --compilers js:babel/register --recursive",
+    "sloccount": " node_modules/cloc/lib/cloc docs html src test"
   },
   "devDependencies": {
     "babel": "^5.8.21",
     "browserify": "^11.0.1",
     "chai": "^3.2.0",
+    "cloc": "^1.0.4",
     "mocha": "^2.1.0",
     "sinon": "^1.16.1"
   }
