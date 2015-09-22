@@ -48,6 +48,8 @@
 
 \documentclass[11pt]{article}
 
+\usepackage{tikz}
+
 \usepackage[backend=biber]{biblatex}
 \addbibresource{resplanar.bib}
 
@@ -65,9 +67,39 @@ and Chiba~\autocite[11]{nishizeki2008planar} give a corollary which says that a 
 degree $ > 5 $.
 
 One could use the Kuratowski's Theorem from which we know that a graph is planar if it does not contain subgraphs
-of $ K_5 $ or UG (the utility graph, also known as $ K_{3,3} $). Although, this algorithm's running time will
+of $ K_5 $ or UG (the utility graph, also known as $ K_{3,3}, see Figure~\ref{fig:uggraph} $). Although, this algorithm's running time will
 grow exponentially to the number of edges, because it needs to check every subgraph of whose there are $ 2^m $ 
 (m = num. of edges) subgraphs in every graph~\autocite[23]{nishizeki2008planar}.
+
+\tikzstyle{vertex}=[circle,fill=yellow!50,minimum size=20pt,inner sep=0pt]
+\tikzstyle{edge}=[]
+
+\begin{figure}[h]
+\caption{UG -- Utility Graph}
+\label{fig:uggraph}
+\begin{tikzpicture}
+	\node[vertex] (A) at (0, 3) {A}; % household 1
+    \node[vertex] (B) at (3, 3) {B}; % household 2
+    \node[vertex] (C) at (6, 3) {C}; % household 3
+    
+    \node[vertex] (X) at (0, 0) {X}; % electricity
+    \node[vertex] (Y) at (3, 0) {Y}; % gas
+    \node[vertex] (Z) at (6, 0) {Z}; % water
+    
+    \path[edge] (A) edge (X);
+    \path[edge] (A) edge (Y);
+    \path[edge] (A) edge (Z);
+    
+    \path[edge] (B) edge (X);
+    \path[edge] (B) edge (Y);
+    \path[edge] (B) edge (Z);
+    
+    \path[edge] (C) edge (X);
+    \path[edge] (C) edge (Y);
+    \path[edge] (C) edge (Z);
+    
+\end{tikzpicture}
+\end{figure}
 
 Planarity has additional conditions such as the combinatorial dual graph conditionand others, 
 see~\autocite{weisstein2009planar,weisstein1999dual}. If a graph has planar embedding, its edges can be drawn 
