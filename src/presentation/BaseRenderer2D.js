@@ -31,20 +31,20 @@ export default class BaseRenderer2D {
     }
 
     pushTranslate(ctx, x, y) {
-        this.prevOriginX = this.originX;
-        this.prevOriginY = this.originY;
+        this.prevOriginX = this.tX;
+        this.prevOriginY = this.tY;
 
-        this.originX = x;
-        this.originY = y;
+        this.tX = x;
+        this.tY = y;
 
         ctx.translate(x, y);
     }
 
     popTranslate(ctx) {
-        this.originX = this.prevOriginX;
-        this.originY = this.prevOriginY;
+        this.tX = this.prevOriginX;
+        this.tY = this.prevOriginY;
 
-        ctx.translate(this.originX, this.originY);
+        ctx.translate(this.tX, this.tY);
     }
 
     clearCanvas(ctx) {

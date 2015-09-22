@@ -52,9 +52,8 @@ export default class HTMLScene extends Scene {
 			const dx = -(this.lastScreenX - ev.screenX);
 			const dy = -(this.lastScreenY - ev.screenY);
 
-			const canvas = this.document.querySelector("#canvas");
-			let ctx = canvas.getContext('2d');
-			ctx.translate(dx, dy);
+			this.graph.graphRenderer.tX = dx;
+			this.graph.graphRenderer.tY = dy;
 
 			this.graph.render();
 		}
