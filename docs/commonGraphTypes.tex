@@ -74,4 +74,37 @@ Figure~\ref{fig:multi}.
 In \textit{directed graphs} or \textit{digraphs} the edge set $ E $ consists of ordered pairs $ \{(n_j, n_k) | j,k \in \{1, 2, ..., k\}\} $ 
 so each edges has a direction leaving node $ n_j $ to $ n_k $.
 
+\tikzstyle{smallvertex}=[circle,fill=red!75,minimum size=5pt,inner sep=0pt]
+\tikzstyle{lightedge}=[color=black!40]
+
+\begin{figure}[h]
+\caption{3-antiprism graph}
+\label{fig:3antiprism}
+\begin{tikzpicture}
+    \node[smallvertex] (A) at (0, 6) {};
+    \node[smallvertex] (B) at (0, 0) {};
+    \node[smallvertex] (C1) at (2, 3) {};
+    \node[smallvertex] (C2) at (3, 2.5) {};
+    \node[smallvertex] (C3) at (3, 3.5) {};
+    \node[smallvertex] (C) at (6, 3) {};
+    
+    \path[lightedge] (A) edge (B);
+    \path[lightedge] (A) edge (C1);
+    \path[lightedge] (A) edge (C3);
+    
+    \path[lightedge] (B) edge (C1);
+    \path[lightedge] (B) edge (C2);
+    \path[lightedge] (B) edge (C);
+    
+    \path[lightedge] (C1) edge (C2);
+    \path[lightedge] (C2) edge (C3);
+    \path[lightedge] (C1) edge (C3);
+    
+    \path[lightedge] (C) edge (A);
+    \path[lightedge] (C) edge (C2);
+    \path[lightedge] (C) edge (C3);
+    
+\end{tikzpicture}
+\end{figure}
+
 \end{document}
