@@ -22,7 +22,9 @@
 
 \maketitle
 
-Let graph $ G = (V, E) $ have a vertex set $ V $ and an edge set $ E $. The vertex set is a non-empty set of distinct vertices $ n_1, n_2, ..., n_k $ where $ k = |V| $ and the edge set, which can be empty, contains subsets of two vertices $ \{n_j, n_k\} \in V $, and $ j, k\ \in \{1, 2, ..., k\} $.
+Let graph $ G = (V, E) $ have a vertex set $ V $ and an edge set $ E $. The vertex set is a non-empty set of distinct 
+vertices $ n_1, n_2, ..., n_k $ where $ k = |V| $ and the edge set, which can be empty, contains subsets of two 
+vertices $ \{n_j, n_k\} \in V $, and $ j, k\ \in \{1, 2, ..., k\} $.
 
 \tikzstyle{vertex}=[circle,fill=yellow!50,minimum size=20pt,inner sep=0pt]
 \tikzstyle{edge}=[draw,thick,-]
@@ -48,9 +50,11 @@ Let graph $ G = (V, E) $ have a vertex set $ V $ and an edge set $ E $. The vert
 \end{tikzpicture}
 \end{figure}
 
-If there are no self-loops, that is, there are no edges incident on sets $ \{ n_j, n_j\} \in V, j \in {1, 2, ..., k} $ then we call the graph \textit{simple}.
+If there are no self-loops, that is, there are no edges incident on sets $ \{ n_j, n_j\} \in V, j \in {1, 2, ..., k} $ 
+then we call the graph \textit{simple}.
 
-If some edges are incident on the same set of vertices then we call the object a \textit{multigraph} as can be seen in Figure~\ref{fig:multi}.
+If some edges are incident on the same set of vertices then we call the object a \textit{multigraph} as can be seen in 
+Figure~\ref{fig:multi}.
 
 \begin{figure}[h]
   \caption{Embedding of a multigraph on a plane}
@@ -67,6 +71,7 @@ If some edges are incident on the same set of vertices then we call the object a
   \end{tikzpicture}
 \end{figure}
 
-In \textit{directed graphs} or \textit{digraphs} the edge set $ E $ consists of ordered pairs $ \{(n_j, n_k) | j,k \in \{1, 2, ..., k\}\} $ so each edges has a direction leaving node $ n_j $ to $ n_k $.
+In \textit{directed graphs} or \textit{digraphs} the edge set $ E $ consists of ordered pairs $ \{(n_j, n_k) | j,k \in \{1, 2, ..., k\}\} $ 
+so each edges has a direction leaving node $ n_j $ to $ n_k $.
 
 \end{document}
