@@ -14,7 +14,7 @@ export default class GraphRenderer2D extends BaseRenderer2D {
 
         this.canvas = null;
         this.vertexCl = '#aa4400';
-        this.nodeCl = '#a0a0a0';
+        this.edgeCl = '#a0a0a0';
     }
 
     /*
@@ -60,7 +60,7 @@ export default class GraphRenderer2D extends BaseRenderer2D {
         let verticesNeedingDimensions = graph.vertices.filter(ver => {
            return 'undefined' === typeof ver.x || 'undefined' === typeof ver.y;
         });
-        
+
         this.spaceOutVerticesRandom(verticesNeedingDimensions);
 
         /*
@@ -81,7 +81,7 @@ export default class GraphRenderer2D extends BaseRenderer2D {
         /*
          *
          */
-        this.setStrokeColor(ctx, this.nodeCl);
+        this.setStrokeColor(ctx, this.edgeCl);
 
         /*
          * Render edges
