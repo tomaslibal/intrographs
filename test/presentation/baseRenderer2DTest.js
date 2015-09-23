@@ -24,9 +24,15 @@ describe('BaseRenderer2D', () => {
 		assert(mockCtx.clearRect.calledWith(0, 0, mockCanvas.width, mockCanvas.height));
 	});
 
+	it('setCanvas stores the references to the canvas', () => {
+		rend.setCanvas(mockCanvas);
+
+		chai.assert.deepEqual(rend.canvas, mockCanvas);
+	});
+
 	it('stores the CanvasRenderingContext2D as a property when setting a canvas', () => {
 		rend.setCanvas(mockCanvas);
-		
+
 		chai.expect(rend.getContext.calledWith(mockCanvas)).to.be.true;
 		chai.assert.property(rend, 'ctx');
 
