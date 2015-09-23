@@ -40,4 +40,7 @@ let mockCtx2d = {
 	translate: sinon.stub()
 };
 
-export { mockDocument, mockHTMLElement, mockDocumentBody, mockWindow, mockCtx2d };
+let mockCanvas = Object.create(mockHTMLElement);
+mockCanvas.getContext = sinon.stub().returns(mockCtx2d);
+
+export { mockDocument, mockHTMLElement, mockDocumentBody, mockWindow, mockCanvas, mockCtx2d };

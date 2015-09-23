@@ -47,7 +47,11 @@ export default class BaseRenderer2D {
         ctx.translate(this.tX, this.tY);
     }
 
-    clearCanvas(ctx) {
+    clearCanvas(ctx=null) {
+        if (null === ctx) {
+            ctx = this.ctx;
+        }
+        
         this.pushTranslate(ctx, 0, 0);
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.popTranslate(ctx);
@@ -56,7 +60,7 @@ export default class BaseRenderer2D {
     setCanvas(canvas) {
         this.canvas = canvas;
 
-        this.ctx = this.getContext(canvas);
+        this.ctx = this.canvas.getContext(canvas);
     }
     setStrokeColor(ctx, color) {
         ctx.strokeStyle = color;

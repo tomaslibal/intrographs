@@ -1,7 +1,7 @@
 // import s.u.t.
 import BaseRenderer2D from '../../src/presentation/BaseRenderer2D';
 
-import { mockHTMLElement as mockCanvas, mockCtx2d as mockCtx } from '../mocks/htmlMocks';
+import { mockCanvas, mockCtx2d as mockCtx } from '../mocks/htmlMocks';
 
 let assert = require("assert");
 let chai = require("chai");
@@ -12,9 +12,7 @@ describe('BaseRenderer2D', () => {
 	let rend = null;
 
 	beforeEach(() => {
-		rend = new BaseRenderer2D();
-
-		sinon.spy(rend, 'getContext');
+		rend = new BaseRenderer2D(mockCanvas);
 	});
 
 	it('.clearCanvas() clears the whole canvas by calling clearRect on the context2D', () => {
@@ -33,8 +31,20 @@ describe('BaseRenderer2D', () => {
 	it('stores the CanvasRenderingContext2D as a property when setting a canvas', () => {
 		rend.setCanvas(mockCanvas);
 
-		chai.expect(rend.getContext.calledWith(mockCanvas)).to.be.true;
+		chai.expect(rend.canvas.getContext.calledWith(mockCanvas)).to.be.true;
 		chai.assert.property(rend, 'ctx');
+
+	});
+
+	it('clearCanvas uses clearRect to clear all pixels of the canvas', () => {
+		sinon.spy(rend, 'pushTranslate');
+		sinon.spy(rend, 'popTranslate');
+
+		rend.setCanvas(mockCanvas);
+
+		rend.clearCanvas();
+
+		chai.expect(rend.ctx.clearRect.calledWith(0, 0, rend.canvas.width, rend.canvas.height)).to.be.true;
 
 	});
 });
