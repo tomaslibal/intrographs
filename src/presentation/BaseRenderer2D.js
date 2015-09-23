@@ -28,6 +28,10 @@ export default class BaseRenderer2D {
                 ctx.stroke();
             }
         }
+
+        if (this.canvas) {
+            this.ctx = this.canvas.getContext('2d');
+        }
     }
 
     pushTranslate(ctx, x, y) {
@@ -51,7 +55,7 @@ export default class BaseRenderer2D {
         if (null === ctx) {
             ctx = this.ctx;
         }
-        
+
         this.pushTranslate(ctx, 0, 0);
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.popTranslate(ctx);

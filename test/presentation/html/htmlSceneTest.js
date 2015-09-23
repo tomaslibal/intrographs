@@ -7,7 +7,7 @@ import HTMLGraph from "../../../src/presentation/html/HTMLGraph";
 import HTMLControls from "../../../src/presentation/html/HTMLControls";
 import Observable from "../../../src/common/Observable";
 
-import { mockHTMLElement as mockElement, mockHTMLElement as mockCanvas, mockDocument, mockWindow } from "../../mocks/htmlMocks";
+import { mockHTMLElement as mockElement, mockCanvas, mockDocument, mockWindow } from "../../mocks/htmlMocks";
 
 let assert = require("assert");
 let chai = require("chai");

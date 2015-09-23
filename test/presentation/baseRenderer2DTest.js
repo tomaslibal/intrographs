@@ -15,6 +15,14 @@ describe('BaseRenderer2D', () => {
 		rend = new BaseRenderer2D(mockCanvas);
 	});
 
+	describe('constructor', () => {
+		it('stores the reference to the canvas and gets the 2d context', () => {
+			chai.assert.deepEqual(rend.canvas, mockCanvas);
+			chai.expect(mockCanvas.getContext.calledWith('2d')).to.be.true;
+			chai.assert.deepEqual(rend.ctx, mockCtx);
+		});
+	});
+
 	it('.clearCanvas() clears the whole canvas by calling clearRect on the context2D', () => {
 		rend.setCanvas(mockCanvas);
 		rend.clearCanvas(mockCtx);
