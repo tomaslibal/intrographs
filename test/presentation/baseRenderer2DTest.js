@@ -13,6 +13,8 @@ describe('BaseRenderer2D', () => {
 
 	beforeEach(() => {
 		rend = new BaseRenderer2D();
+
+		sinon.spy(rend, 'getContext');
 	});
 
 	it('.clearCanvas() clears the whole canvas by calling clearRect on the context2D', () => {
@@ -20,5 +22,13 @@ describe('BaseRenderer2D', () => {
 		rend.clearCanvas(mockCtx);
 
 		assert(mockCtx.clearRect.calledWith(0, 0, mockCanvas.width, mockCanvas.height));
+	});
+
+	it('stores the CanvasRenderingContext2D as a property when setting a canvas', () => {
+		rend.setCanvas(mockCanvas);
+		
+		chai.expect(rend.getContext.calledWith(mockCanvas)).to.be.true;
+		chai.assert.property(rend, 'ctx');
+
 	});
 });

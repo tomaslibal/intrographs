@@ -55,6 +55,8 @@ export default class BaseRenderer2D {
 
     setCanvas(canvas) {
         this.canvas = canvas;
+
+        this.ctx = this.getContext(canvas);
     }
     setStrokeColor(ctx, color) {
         ctx.strokeStyle = color;
