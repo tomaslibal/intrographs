@@ -151,4 +151,64 @@ so each edges has a direction leaving node $ n_j $ to $ n_k $.
 \caption{Antiprism graphs}
 \end{figure}
 
+Bipartite graph's vertex set is divided into two sets in which vertices from one set can be adjacent only to vertices in the other set. This is a special case of the \textit{k}--partite graph where $ k = 2 $.
+
+\tikzstyle{smvertex2}=[circle,fill=blue!75,minimum size=5pt, inner sep=0pt]
+\begin{figure}[ht]
+
+	\begin{subfigure}{0.3\textwidth}
+      \caption{A bipartite graph with 7 nodes}
+      \label{fig:bipartite1}
+
+      \begin{tikzpicture}
+          \node[smallvertex] (A) at (0, 6) {};
+          \node[smallvertex] (B) at (0, 4) {};
+          \node[smallvertex] (C) at (0, 2) {};
+          \node[smallvertex] (D) at (0, 0) {};
+
+          \node[smvertex2] (X) at (3, 5) {};
+          \node[smvertex2] (Y) at (3, 3) {};
+          \node[smvertex2] (Z) at (3, 1) {};
+
+          \path[lightedge] (A) edge (X);
+          \path[lightedge] (A) edge (Z);
+          \path[lightedge] (B) edge (X);
+          \path[lightedge] (C) edge (Z);
+          \path[lightedge] (C) edge (X);
+          \path[lightedge] (D) edge (X);
+          \path[lightedge] (D) edge (Y);
+          \path[lightedge] (D) edge (Z);
+
+      \end{tikzpicture}
+    \end{subfigure}%
+    \hfill
+    \begin{subfigure}{0.3\textwidth}
+    	\caption{A complete bipartite graph with 6 nodes}
+     	\label{fig:bipartite1}
+
+      \begin{tikzpicture}
+          \node[smallvertex] (A) at (0, 6) {};
+          \node[smallvertex] (B) at (0, 4) {};
+          \node[smallvertex] (C) at (0, 2) {};
+
+          \node[smvertex2] (X) at (3, 6) {};
+          \node[smvertex2] (Y) at (3, 4) {};
+          \node[smvertex2] (Z) at (3, 2) {};
+
+          \path[lightedge] (A) edge (X);
+          \path[lightedge] (A) edge (Y);
+          \path[lightedge] (A) edge (Z);
+          \path[lightedge] (B) edge (X);
+          \path[lightedge] (B) edge (Y);
+          \path[lightedge] (B) edge (Z);
+          \path[lightedge] (C) edge (X);
+          \path[lightedge] (C) edge (Y);
+          \path[lightedge] (C) edge (Z);
+
+      \end{tikzpicture}
+    \end{subfigure}
+    \caption{Bipartite graphs}
+\end{figure}
+
+
 \end{document}
