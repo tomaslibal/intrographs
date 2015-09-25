@@ -1,5 +1,15 @@
 let sinon = require("sinon");
 
+function extend(parent, child) {
+    let obj = Object.create(parent);
+    
+    for(let key of Object.keys(child)) {
+    	obj[key] = child[key];
+    }
+    
+    return obj;
+}
+
 let NodeTypeValues = {
     'ELEMENT_NODE': 1,
     'TEXT_NODE': 3,
@@ -15,7 +25,7 @@ let mockNode = {
     ownerDocument: null	
 };
 
-let mockHTMLElement = {
+let mockHTMLElement = extend(mockNode, {
 	innerHTML: '',
 	id: '',
 	'type': '',
@@ -27,7 +37,8 @@ let mockHTMLElement = {
 	appendChild(child) { return child; },
 	addEventListener: sinon.stub(),
 	querySelector: sinon.stub()
-};
+});
+
 sinon.spy(mockHTMLElement, 'appendChild');
 
 let mockDocumentBody = {
