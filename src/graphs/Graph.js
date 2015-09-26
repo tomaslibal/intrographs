@@ -225,6 +225,14 @@ class Graph {
         return -1;
     };
 
+    /*
+     * Returns the degree of a vertex
+     *
+     */
+    deg(v) {
+        return this.adj(v).length;
+    }
+
 }
 
 

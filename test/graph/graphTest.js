@@ -131,5 +131,24 @@ describe('Graph', () => {
        });
     });
 
+    describe('dev(v)', () => {
+       it('returns the degree of a vertex', () => {
+           let g = new Graph();
+           g.addVertex({'name':'A'});
+           g.addVertex({'name':'B'});
+           g.addVertex({'name':'C'});
+           g.addVertex({'name':'D'});
+
+           g.addEdge(['A', 'B']);
+           g.addEdge(['A', 'C']);
+           g.addEdge(['A', 'D']);
+
+           g.addEdge(['C', 'D']);
+
+           chai.assert.equal(g.deg('A'), 3);
+           chai.assert.equal(g.deg('C'), 2);
+           chai.assert.equal(g.deg('B'), 1);
+       });
+    });
 });
 
