@@ -71,3 +71,4 @@ in a browser to use the browser app.
 9. Balakrishnan, V. K. (1996) *Introductory Discrete Mathematics.* Reprint, USA: Dover.
 10. Chiba, N. and Nishizeki T. (2008) *Planar Graphs: Theory and Algorithms.* Reprint, USA: Courier Corporation.
 11. Moehring, H. R. (1997) "Graph-Theoretic Concepts in Computer Science: 23rd International Workshop, WG'97, Berlin, Germany" June 18-20, 1997. Proceedings, Volume 23
+12. Skiena, S. (2009) *The Algorithm Design Manual.* London: Springer.

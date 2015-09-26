@@ -124,7 +124,7 @@ class Graph {
     /*
      * returns an array of adjacent vertices' names
      *
-     * v = return vertices that are adjacent to this given vertex
+     * v: string = return vertices that are adjacent to this given vertex's name
      */
     adj(v, e=null) {
         let list = [];
