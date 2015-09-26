@@ -17,6 +17,11 @@ function spanTree(graph, v=null) {
 		start = graph.lookupVertex(graph.vertices, v);
 	}
 
+	if (start === -1) {
+		throw new Error('Start node does not exist');
+		return;
+	}
+
 	// mark the start node as "old"
 	start._span_label = 1;
 

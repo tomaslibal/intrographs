@@ -31,4 +31,12 @@ describe('Spanning Tree', () => {
 		chai.assert.deepEqual(tree, ['A', 'B', 'C', 'D']);
 	});
 
+	it('throws an error if given a start node that does not exist in the graph', () => {
+		const throws = () => {
+			const tree = spanTree(g, 'X')
+		};
+
+		chai.expect(throws).to.throw('Start node does not exist');
+	});
+
 });
