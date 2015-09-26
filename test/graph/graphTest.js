@@ -146,9 +146,27 @@ describe('Graph', () => {
            g.addEdge(['C', 'D']);
 
            chai.assert.equal(g.deg('A'), 3);
-           chai.assert.equal(g.deg('C'), 2);
            chai.assert.equal(g.deg('B'), 1);
+           chai.assert.equal(g.deg('C'), 2);
+           chai.assert.equal(g.deg('D'), 2);
        });
+    });
+
+    describe('findLowestDegreeVertex', () => {
+        it('correctly finds the lowest degree vertex B', () => {
+           let g = new Graph();
+           g.addVertex({'name':'A'});
+           const lowest = g.addVertex({'name':'B'});
+           g.addVertex({'name':'C'});
+           g.addVertex({'name':'D'});
+
+           g.addEdge(['A', 'B']);
+           g.addEdge(['A', 'C']);
+           g.addEdge(['A', 'D']);
+           g.addEdge(['C', 'D']);
+
+           chai.assert.deepEqual(g.findLowestDegreeVertex(g.vertices, g.edges), lowest);
+        });
     });
 });
 

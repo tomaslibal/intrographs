@@ -10,10 +10,11 @@
  * `Graph`.
  */
 
-import Vertex from "./Vertex";
-import Edge from "./Edge";
-import CONSTS from "../common/constants";
-import MathUtil from "../common/MathUtil";
+import Vertex from './Vertex';
+import Edge from './Edge';
+import CONSTS from '../common/constants';
+import MathUtil from '../common/MathUtil';
+import { shuffleArray } from '../common/eloquent';
 
 class Graph {
 
@@ -125,10 +126,14 @@ class Graph {
      *
      * v = return vertices that are adjacent to this given vertex
      */
-    adj(v) {
+    adj(v, e=null) {
         let list = [];
 
-        this.edges.forEach(e => {
+        if (e === null) {
+            e = this.edges;
+        }
+
+        e.forEach(e => {
             let pos = e.connects.indexOf(v);
             if (pos > -1 && pos === 0) {
                 list.push(e.connects[1]);
@@ -229,8 +234,29 @@ class Graph {
      * Returns the degree of a vertex
      *
      */
-    deg(v) {
-        return this.adj(v).length;
+    deg(v, e) {
+        return this.adj(v, e).length;
+    }
+
+    /*
+     * Returns the name of the lowest degree vertex of a given graph
+     *
+     */
+    findLowestDegreeVertex(vertexObjectList, edgeObjectList) {
+        let lowest = null;
+        let deg = 999999;
+
+        vertexObjectList = shuffleArray(vertexObjectList);
+
+        vertexObjectList.forEach(vertex => {
+            let d = this.deg(vertex.name, edgeObjectList);
+            if (d < deg) {
+                deg = d;
+                lowest = vertex;
+            }
+        });
+
+        return lowest;
     }
 
 }
