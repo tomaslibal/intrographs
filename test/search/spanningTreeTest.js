@@ -1,5 +1,5 @@
 // import s.u.t
-import { spanTree } from '../../src/search/spanningTree';
+import { spanTree, __RewireAPI__ as SpanTreeRewireAPI } from '../../src/search/spanningTree';
 
 import { Graph } from '../../src/graphs/Graph';
 
@@ -29,6 +29,16 @@ describe('Spanning Tree', () => {
 		const tree = spanTree(g, 'A');
 
 		chai.assert.deepEqual(tree, ['A', 'B', 'C', 'D']);
+	});
+
+	it('finds a span tree in a cyclic graph C_4 with a random starting node', () => {
+		SpanTreeRewireAPI.__Rewire__('MathUtil', {
+			getRandomArbitrary: function(a, b) { return 1; }
+		});
+
+		const tree = spanTree(g);
+
+		chai.assert.deepEqual(tree, ['B', 'A', 'D', 'C']);
 	});
 
 	it('throws an error if given a start node that does not exist in the graph', () => {
