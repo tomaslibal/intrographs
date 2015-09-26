@@ -6,12 +6,19 @@ function spanTree(graph, v=null) {
 		ver._span_label = 0;
 	});
 
+	let start;
+
 	if (v === null) {
 		const len = graph.vertices.length;
 		const rand = MathUtil.getRandomArbitrary(0, len-1);
 		v = graph.vertices[rand].name;
-		graph.vertices[rand]._span_label = 1;
+		start = graph.vertices[rand];
+	} else {
+		start = graph.lookupVertex(graph.vertices, v);
 	}
+
+	// mark the start node as "old"
+	start._span_label = 1;
 
 	let tree = [v];
 
