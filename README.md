@@ -7,6 +7,20 @@ The goal is to create a program that prints various graphs, lets the user
 to modify them, and it should also be able to give information on some graph
 properties like what type of graph it is, whether it is planar and so on.
 
+## Features
+
+**Graph rendering**: renders a graph with vertices and nodes
+
+**Properties testing**:
+
+- connectedness tester
+
+**Other algorithms**:
+
+- returns an independent set
+- returns a spanning tree
+- depth first search (DFS)
+
 ## Difference between pure mathematical graphs and graphs in computer science
 
 In pure mathematics a graph is an object that consists of the two sets:
