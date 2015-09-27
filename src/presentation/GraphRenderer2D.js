@@ -26,9 +26,7 @@ export default class GraphRenderer2D extends BaseRenderer2D {
     spaceOutVerticesRandom(graphVertices) {
         "use strict";
 
-
-
-        var i = 0;
+        let i = 0;
 
         for(; i < graphVertices.length; i++) {
             /*
@@ -49,7 +47,7 @@ export default class GraphRenderer2D extends BaseRenderer2D {
         /*
          * Get 2D context of the canvas
          */
-        var ctx = this.getContext(this.canvas);
+        let ctx = this.getContext(this.canvas);
 
         /*
          * Space out vertices so that they won't overlap on the same x, y
@@ -86,17 +84,17 @@ export default class GraphRenderer2D extends BaseRenderer2D {
         /*
          * Render edges
          */
-        var edges = graph.edges;
+        let edges = graph.edges;
         let i = 0;
         let k = edges.length;
         /*
          * Start point of the edge (which is a line segment)
          */
-        var s;
+        let s;
         /*
          * End point of the edge
          */
-        var e;
+        let e;
         for(; i < k; i++) {
             s = graph.lookupVertex(vertices, edges[i].connects[0]);
             e = graph.lookupVertex(vertices, edges[i].connects[1]);
