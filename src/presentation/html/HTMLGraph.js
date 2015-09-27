@@ -89,4 +89,15 @@ export default class HTMLGraph extends ObservableRenderable {
 		this.edgeList.render();
 	}
 
+	getVertexByCoords({ 'x': x, 'y': y }) {
+		const LENIENCY = 5;
+
+		return this.graph.vertices.filter(vertex => {
+			const dx = Math.abs(vertex.x - x);
+			const dy = Math.abs(vertex.y - y);
+
+			return dx <= LENIENCY && dy <= LENIENCY;
+		});
+	}
+
 }

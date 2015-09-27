@@ -41,6 +41,26 @@ export default class GraphRenderer2D extends BaseRenderer2D {
         return graphVertices;
     };
 
+    spaceOutVerticesAtFixedDistanceRandom(vertexList, distance=15) {
+        return vertexList.forEach((vertex, idx, all) => {
+            if (idx === 0 && !this.lastVertexX) {
+                vertex.x = MathUtil.getRandomArbitrary(100, 500);
+                vertex.y = MathUtil.getRandomArbitrary(0, 500);
+            } else if(idx === 0 && this.lastVertexX) {
+                const coords = this.findRandomCoordsAtGivenDistance(this.lastVertexX, this.lastVertexY, distance);
+                vertex.x = coords[0];
+                vertex.y = coords[1];
+            } else {
+                const prev = all[idx-1];
+                const coords = this.findRandomCoordsAtGivenDistance(prev.x, prev.y, distance);
+                vertex.x = coords[0];
+                vertex.y = coords[1];
+            }
+            this.lastVertexX = vertex.x;
+            this.lastVertexY = vertex.y;
+        });
+    }
+
     /*
      * Finds a random point at a given distance from the origin point.
      * In other words, the origin is a center of a circle of radius=distance and
@@ -71,8 +91,6 @@ export default class GraphRenderer2D extends BaseRenderer2D {
         const useFirstOrSecondSolution = MathUtil.getRandomArbitrary(0, 1);
         return [randX, res[useFirstOrSecondSolution]];
     }
-
-
 
     checkVertexCollision(v1, v2) {
         const LENIENCY = 5; // vertices must be at least this much apart
@@ -105,7 +123,7 @@ export default class GraphRenderer2D extends BaseRenderer2D {
            return 'undefined' === typeof ver.x || 'undefined' === typeof ver.y;
         });
 
-        this.spaceOutVerticesRandom(verticesNeedingDimensions);
+        this.spaceOutVerticesAtFixedDistanceRandom(verticesNeedingDimensions, 30);
 
         /*
          *

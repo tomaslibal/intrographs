@@ -29,6 +29,9 @@ export default class HTMLScene extends Scene {
 		this.document = document;
 		this.htmlWindow = new HTMLWindow(this.window);
 
+		this.translatedX = 0;
+		this.translatedY = 0;
+
 		this.setupAll();
 
 		this.mouseDown = false;
@@ -39,8 +42,16 @@ export default class HTMLScene extends Scene {
 		this.setupCanvas();
 	}
 
-	canvasMouseDownHandler() {
+	canvasMouseDownHandler(event) {
 		this.mouseDown = true;
+
+		let x = event.clientX - this.translatedX;
+		let y = event.clientY - this.translatedY;
+		const rect = canvas.getBoundingClientRect() // adjust for scroll left/top
+        x += - rect.left;
+        y += - rect.top;
+		const vertexAtClick = this.graph.getVertexByCoords({'x': x, 'y': y});
+		console.log(vertexAtClick);
 	}
 
 	canvasMouseUpHandler() {
@@ -54,6 +65,9 @@ export default class HTMLScene extends Scene {
 
 			this.graph.graphRenderer.tX = dx;
 			this.graph.graphRenderer.tY = dy;
+
+			this.translatedX += dx;
+			this.translatedY += dy;
 
 			this.graph.render();
 		}
