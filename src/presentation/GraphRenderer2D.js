@@ -41,6 +41,39 @@ export default class GraphRenderer2D extends BaseRenderer2D {
         return graphVertices;
     };
 
+    /*
+     * Finds a random point at a given distance from the origin point.
+     * In other words, the origin is a center of a circle of radius=distance and
+     * the result is a random point (x, y) on that circle.
+     *
+     */
+    findRandomCoordsAtGivenDistance(originX, originY, distance=15) {
+        const randX = MathUtil.getRandomArbitrary(originX-distance, originX+distance);
+
+        const c = (distance*distance - originX*originX - originY*originY + 2*originX*randX - randX*randX);
+        const b = +2*originY;
+        const a = -1;
+
+        let res = MathUtil.quadRoots(a, b, c);
+
+        // if discrimintant < 0, we would get no solution
+        while(res === null) {
+            res = this.findRandomCoordsAtGivenDistance(originX, originY, distance);
+        }
+
+        // if discriminant == 0 we only get one solution
+        if (res.length === 1) {
+            return [randX, res[0]];
+        }
+
+        // else, discriminant > 0 and we have two solutions for the point Y
+        // and we will choose one at random
+        const useFirstOrSecondSolution = MathUtil.getRandomArbitrary(0, 1);
+        return [randX, res[useFirstOrSecondSolution]];
+    }
+
+
+
     checkVertexCollision(v1, v2) {
         const LENIENCY = 5; // vertices must be at least this much apart
 

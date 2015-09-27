@@ -60,4 +60,17 @@ describe('GraphRenderer2D', () => {
 			chai.assert.equal(graphRenderer.checkVertexCollision(v1, v2), false);
 		});
 	});
+
+	describe('findRandomCoordsAtGivenDistance', () => {
+		graphRenderer = new GraphRenderer2D();
+		let [x, y] = graphRenderer.findRandomCoordsAtGivenDistance(100, 100, 15);
+
+		// x \in [85, 115]
+		// y \in [85, 115]
+		const dx = Math.abs(x - 100);
+		const dy = Math.abs(y - 100);
+
+		chai.assert.isBelow(dx, 15);
+		chai.assert.isBelow(dy, 15);
+	});
 });
