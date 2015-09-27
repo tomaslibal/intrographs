@@ -41,6 +41,19 @@ export default class GraphRenderer2D extends BaseRenderer2D {
         return graphVertices;
     };
 
+    checkVertexCollision(v1, v2) {
+        const LENIENCY = 5; // vertices must be at least this much apart
+
+        const aDifX = Math.abs(v1.x - v2.x);
+        const aDifY = Math.abs(v1.y - v2.y);
+
+        if (aDifX < LENIENCY && aDifY < LENIENCY) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     render(graph) {
         "use strict";
 
