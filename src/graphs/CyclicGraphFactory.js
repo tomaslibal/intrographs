@@ -1,10 +1,11 @@
-import { Graph } from "./Graph";
-import { assert } from "../common/assert";
+import IGraphFactory from './IGraphFactory';
+import { Graph } from './Graph';
+import { assert } from '../common/assert';
 
-export default class CyclicGraphFactory {
+export default class CyclicGraphFactory extends IGraphFactory {
 
 	constructor() {
-		throw new Error("Use the static method 'create' to create new Cyclic Graphs");
+		super('Cyclic');
 	}
 
 	static create(v=3) {
