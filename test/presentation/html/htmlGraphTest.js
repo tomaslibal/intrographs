@@ -37,7 +37,7 @@ describe('HTMLGraph', () => {
 	let mockGraph = {
 		addVertex: sinon.stub(),
 		addEdge: sinon.stub(),
-		vertices: [{name:'x'}, {name:'y'}],
+		vertices: [{name:'x', 'x':100,'y':200}, {name:'y','x':300,'y': 400}],
 		edges: [{connects:['x', 'y']}]
 	};
 
@@ -144,6 +144,20 @@ describe('HTMLGraph', () => {
 			sinon.spy(htmlGraph.edgeList, 'render');
 			htmlGraph.render();
 			assert(htmlGraph.edgeList.render.calledOnce);
+		});
+	});
+
+	describe('getVertexByCoords', () => {
+		it('returns an array of vertices whose dx and dy are <= 5', () => {
+			const v = htmlGraph.getVertexByCoords({'x': 101, 'y': 198});
+
+			chai.assert.deepEqual(v, [htmlGraph.graph.vertices[0]]);
+		});
+
+		it('returns an empty array when no vertices are near the click', () => {
+			const v = htmlGraph.getVertexByCoords({'x': 999, 'y': 999});
+
+			chai.assert.deepEqual(v, []);
 		});
 	});
 });
