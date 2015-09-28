@@ -25,6 +25,15 @@ let mockNode = {
     ownerDocument: null
 };
 
+let mockDOMClientRectangle = {
+	bottom: 0,
+	height: 0,
+	left: 0,
+	right: 0,
+	top: 0,
+	width: 0
+};
+
 let mockHTMLElement = extend(mockNode, {
 	innerHTML: '',
 	id: '',
@@ -36,7 +45,8 @@ let mockHTMLElement = extend(mockNode, {
 	height: 0,
 	appendChild(child) { return child; },
 	addEventListener: sinon.stub(),
-	querySelector: sinon.stub()
+	querySelector: sinon.stub(),
+	getBoundingClientRect: sinon.stub().returns(mockDOMClientRectangle)
 });
 
 sinon.spy(mockHTMLElement, 'appendChild');
@@ -68,6 +78,5 @@ let mockCtx2d = {
 
 let mockCanvas = Object.create(mockHTMLElement);
 mockCanvas.getContext = sinon.stub().returns(mockCtx2d);
-mockCanvas.getBoundingClientRect = sinon.stub();
 
 export { mockDocument, mockHTMLElement, mockDocumentBody, mockWindow, mockCanvas, mockCtx2d };
