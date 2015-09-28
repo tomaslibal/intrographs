@@ -47,7 +47,7 @@ export default class HTMLScene extends Scene {
 
 		let x = event.clientX - this.translatedX;
 		let y = event.clientY - this.translatedY;
-		const rect = canvas.getBoundingClientRect() // adjust for scroll left/top
+		const rect = this.canvas.getBoundingClientRect(); // adjust for scroll left/top
         x += - rect.left;
         y += - rect.top;
 		const vertexAtClick = this.graph.getVertexByCoords({'x': x, 'y': y});

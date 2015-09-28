@@ -22,6 +22,11 @@ describe('HTMLScene', () => {
 		edges: [{connects:['x', 'y']}]
 	};
 
+	let mockMouseEvent = {
+		clientX: 1,
+		clientY: 1
+	};
+
 	mockDocument.querySelector.returns(mockCanvas);
 
 	beforeEach(() => {
@@ -98,13 +103,13 @@ describe('HTMLScene', () => {
 		it('is activated on mouse down', () => {
 			chai.assert.equal(htmlScene.mouseDown, false);
 
-			htmlScene.canvasMouseDownHandler();
+			htmlScene.canvasMouseDownHandler(mockMouseEvent);
 
 			chai.assert.equal(htmlScene.mouseDown, true);
 		});
 
 		it('is deactivated on mouse up', () => {
-			htmlScene.canvasMouseDownHandler();
+			htmlScene.canvasMouseDownHandler(mockMouseEvent);
 
 			chai.assert.equal(htmlScene.mouseDown, true);
 
