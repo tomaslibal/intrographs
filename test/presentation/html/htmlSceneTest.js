@@ -119,4 +119,22 @@ describe('HTMLScene', () => {
 		});
 	});
 
+	describe('Selecting the vertices', () => {
+		it('calls getVertexByCoords on mousedown with the translated location of a click', () => {
+			sinon.spy(htmlScene.graph, 'getVertexByCoords');
+
+			const originalRect = mockCanvas.getBoundingClientRect();
+			mockCanvas.getBoundingClientRect.returns({
+				left: 50,
+				top: -50
+			});
+
+			htmlScene.canvasMouseDownHandler(mockMouseEvent);
+
+			chai.assert.isTrue(htmlScene.graph.getVertexByCoords.calledWith({'x': 1-50, 'y': 1+50}));
+
+			mockCanvas.getBoundingClientRect.returns(originalRect);
+		});
+	});
+
 });
