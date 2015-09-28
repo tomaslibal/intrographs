@@ -2,11 +2,11 @@ let sinon = require("sinon");
 
 function extend(parent, child) {
     let obj = Object.create(parent);
-    
+
     for(let key of Object.keys(child)) {
     	obj[key] = child[key];
     }
-    
+
     return obj;
 }
 
@@ -22,7 +22,7 @@ let NodeTypeValues = {
 
 let mockNode = {
     nodeType: NodeTypeValues.ELEMENT_NODE,
-    ownerDocument: null	
+    ownerDocument: null
 };
 
 let mockHTMLElement = extend(mockNode, {
@@ -68,5 +68,6 @@ let mockCtx2d = {
 
 let mockCanvas = Object.create(mockHTMLElement);
 mockCanvas.getContext = sinon.stub().returns(mockCtx2d);
+mockCanvas.getBoundingClientRect = sinon.stub();
 
 export { mockDocument, mockHTMLElement, mockDocumentBody, mockWindow, mockCanvas, mockCtx2d };
