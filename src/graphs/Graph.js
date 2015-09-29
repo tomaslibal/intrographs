@@ -267,7 +267,7 @@ class Graph {
      * returns Object { "vertex": ['adj1', 'adj2', ...], ... }
      */
     getAdjList(v, e) {
-        var adj = {};
+        let adj = {};
     
         v.forEach(vertex => {
             adj[vertex] = [];
