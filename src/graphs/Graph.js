@@ -258,6 +258,27 @@ class Graph {
 
         return lowest;
     }
+    
+    /*
+     * Creates an adjacency list for each vertex.
+     *
+     * v Array<String>: vertices
+     * e Array<Array<String>>: edges
+     * returns Object { "vertex": ['adj1', 'adj2', ...], ... }
+     */
+    getAdjList(v, e) {
+        var adj = {};
+    
+        v.forEach(vertex => {
+            adj[vertex] = [];
+            e.forEach(edge => {
+                if (edge[0] === vertex) { adj[vertex].push(edge[1]) }
+                if (edge[1] === vertex) { adj[vertex].push(edge[0]) }
+            });
+        });
+        return adj;
+    }
+
 
 }
 
