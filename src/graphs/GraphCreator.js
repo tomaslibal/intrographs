@@ -2,7 +2,7 @@
  * Returns an instance of the Graph class.
  *
  */
-export default class GraphFactory {
+export default class GraphCreator {
 	
 	static fromName() {
 
