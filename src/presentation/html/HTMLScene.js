@@ -35,6 +35,7 @@ export default class HTMLScene extends Scene {
 		this.setupAll();
 
 		this.mouseDown = false;
+		this.vertexDrag = false;
 	}
 
 	setupAll() {
@@ -51,15 +52,20 @@ export default class HTMLScene extends Scene {
         x += - rect.left;
         y += - rect.top;
 		const vertexAtClick = this.graph.getVertexByCoords({'x': x, 'y': y});
-		console.log(vertexAtClick);
+		if (vertexAtClick.length > 0) {
+			this.vertexDrag = vertexAtClick;
+		} else {
+			this.vertexDrag = false;
+		}
 	}
 
 	canvasMouseUpHandler() {
 		this.mouseDown = false;
+		this.vertexDrag = false;
 	}
 
 	canvasMouseMoveHandler(ev) {
-		if (this.mouseDown) {
+		if (this.mouseDown && this.vertexDrag === false) {
 			const dx = -(this.lastScreenX - ev.screenX);
 			const dy = -(this.lastScreenY - ev.screenY);
 
@@ -70,6 +76,17 @@ export default class HTMLScene extends Scene {
 			this.translatedY += dy;
 
 			this.graph.render();
+		}
+		if (this.mouseDown && this.vertexDrag !== false) {
+			const dx = -(this.lastScreenX - ev.screenX);
+			const dy = -(this.lastScreenY - ev.screenY);
+
+			this.vertexDrag.forEach(v => {
+				v.x += dx;
+				v.y += dy;
+			});
+
+			this.graph.renderVertexChanges({'translatedX': this.translatedX, 'translatedY': this.translatedY});
 		}
 
 		this.lastScreenX = ev.screenX;

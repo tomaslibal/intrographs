@@ -35,8 +35,8 @@ export default class BaseRenderer2D {
     }
 
     pushTranslate(ctx, x, y) {
-        this.prevOriginX = this.tX;
-        this.prevOriginY = this.tY;
+        this.prevOriginX = this.tX || 0;
+        this.prevOriginY = this.tY || 0;
 
         this.tX = x;
         this.tY = y;

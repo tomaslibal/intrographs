@@ -89,6 +89,15 @@ export default class HTMLGraph extends ObservableRenderable {
 		this.edgeList.render();
 	}
 
+	renderVertexChanges({'translatedX': translatedX, 'translatedY': translatedY}) {
+		this.ctx.save();
+		this.ctx.translate(-translatedX, -translatedY);
+		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		this.ctx.restore();
+
+		this.graphRenderer.render(this.graph);
+	}
+
 	getVertexByCoords({ 'x': x, 'y': y }) {
 		const LENIENCY = 5;
 

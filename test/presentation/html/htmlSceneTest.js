@@ -135,6 +135,22 @@ describe('HTMLScene', () => {
 
 			mockCanvas.getBoundingClientRect.returns(originalRect);
 		});
+
+		it('sets HTMLScene.vertexDrag to the Array<Vertex> of selected vertices at mouse coords', () => {
+			sinon.stub(htmlScene.graph, 'getVertexByCoords');
+			htmlScene.graph.getVertexByCoords.returns(['foo', 'bar']);
+			htmlScene.canvasMouseDownHandler(mockMouseEvent);
+
+			chai.assert.deepEqual(htmlScene.vertexDrag, ['foo', 'bar']);
+		});
+
+		it('sets HTMLScene.vertexDrag to false on mouseUp', () => {
+			htmlScene.vertexDrag = 'minky';
+
+			htmlScene.canvasMouseUpHandler();
+
+			chai.assert.equal(htmlScene.vertexDrag, false);
+		});
 	});
 
 });
