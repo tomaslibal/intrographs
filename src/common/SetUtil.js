@@ -1,7 +1,3 @@
-let not_implemented = (fncName) => {
-    throw new Error(`${fncName}: Not yet implemented!`);
-}
-
 /*
  * SetUtil uses Array<any> representation for a set.
  */
