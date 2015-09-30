@@ -51,8 +51,20 @@ export default class SetUtil {
      * Definition 3: set A is said to be a subset of B if every element of A
      * is also an element of B.
      */
-    static isSubset(a, b) {
-        not_implemented("setUtil.isSubset");
+    static isSubset(a=[], b=[]) {
+        if (a.length > b.length) {
+            return false;
+        }
+
+        let result = true;
+
+        a.forEach(val => {
+           if (b.indexOf(val) === -1) {
+               result = false;
+           }
+        });
+
+        return result;
     }
 
     /*

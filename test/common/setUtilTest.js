@@ -60,5 +60,20 @@ describe('SetUtil', () => {
 		});
 	});
 
+	describe('isSubset', () => {
+		it('returns true if a is subset of b', () => {
+			const a = [99, 100, 101];
+			const b = [98, 99, 100, 101, 102, 103];
+
+			chai.assert.equal(SetUtil.isSubset(a, b), true);
+		});
+
+		it('returns false if a is not a subset of b', () => {
+			const a = [70, 100, 101];
+			const b = [200, 100, 101, 102, 103];
+
+			chai.assert.equal(SetUtil.isSubset(a, b), false);
+		});
+	});
 
 });
