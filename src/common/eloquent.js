@@ -37,3 +37,13 @@ export function shuffleArray(arr) {
     for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
     return arr;
 }
+
+export function extendObj(parent, child) {
+    let obj = Object.create(parent);
+
+    for(let key of Object.keys(child)) {
+    	obj[key] = child[key];
+    }
+
+    return obj;
+}

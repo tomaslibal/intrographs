@@ -1,14 +1,6 @@
+import { extendObj as extend } from '../../src/common/eloquent';
+
 let sinon = require("sinon");
-
-function extend(parent, child) {
-    let obj = Object.create(parent);
-
-    for(let key of Object.keys(child)) {
-    	obj[key] = child[key];
-    }
-
-    return obj;
-}
 
 let NodeTypeValues = {
     'ELEMENT_NODE': 1,
