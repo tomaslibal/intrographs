@@ -3,6 +3,11 @@ import { spanTree } from '../search/spanningTree';
 
 export default class ConnectednessTester {
 
+    /*
+     * Tests if the graph is in one piece.
+     *
+     * return bool
+     */
     static isConnected(graph) {
 
         let tree = spanTree(graph);
@@ -12,6 +17,16 @@ export default class ConnectednessTester {
         } else {
             return false;
         }
+    }
+    
+    /*
+     * Returns array containing subsets of vertices that are connected together. If the graph is
+     * in one piece, it returns an array of just one set which is the vertex set.
+     *
+     * return Array<Array<String>>
+     */
+    static getPieces() {
+        
     }
 
 }
