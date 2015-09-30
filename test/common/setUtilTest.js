@@ -74,6 +74,13 @@ describe('SetUtil', () => {
 
 			chai.assert.equal(SetUtil.isSubset(a, b), false);
 		});
+
+		it('returns false if len(a)>len(b)', () => {
+			const a = [1,2,3,4,5];
+			const b = [1,2,3];
+
+			chai.assert.equal(SetUtil.isSubset(a, b), false);
+		});
 	});
 
 });
