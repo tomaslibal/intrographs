@@ -70,7 +70,7 @@ describe('GraphRenderer2D', () => {
 		const dx = Math.abs(x - 100);
 		const dy = Math.abs(y - 100);
 
-		chai.assert.isBelow(dx, 15);
-		chai.assert.isBelow(dy, 15);
+		chai.assert.isBelow(dx, 16);
+		chai.assert.isBelow(dy, 16);
 	});
 });
