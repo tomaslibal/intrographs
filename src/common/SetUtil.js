@@ -40,8 +40,11 @@ export default class SetUtil {
      *
      * Theorem 1: There is only one empty set
      */
-    static isNullSet(set) {
-        not_implemented("setUtil.isNullSet");
+    static isNullSet(s=[]) {
+        if (s.length === 0) {
+            return true;
+        }
+        return false;
     }
 
     /*

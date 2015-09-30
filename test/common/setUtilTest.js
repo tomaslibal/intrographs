@@ -44,5 +44,21 @@ describe('SetUtil', () => {
 		});
 	});
 
+	describe('isNullSet', () => {
+		it('returns true if the array is empty', () => {
+			let inv = [];
+			const result = SetUtil.isNullSet(inv);
+
+			chai.assert.equal(result, true);
+		});
+
+		it('returns false if the array is non empty', () => {
+			let inv = [Infinity, -Infinity];
+			const result = SetUtil.isNullSet(inv);
+
+			chai.assert.equal(result, false);
+		});
+	});
+
 
 });
