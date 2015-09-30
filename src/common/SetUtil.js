@@ -71,8 +71,20 @@ export default class SetUtil {
      * Definition 4: sets A and B are said to be equal when A is a subset of B
      * and B is a subset of A.
      */
-    static equals(a, b) {
-        not_implemented("setUtil.equals");
+    static equals(a=[], b=[]) {
+        let eq = true;
+
+        if (a.length !== b.length) {
+            return false;
+        }
+
+        a.forEach(val => {
+           if(b.indexOf(val) === -1) {
+               eq = false;
+           }
+        });
+
+        return eq
     }
 
 }

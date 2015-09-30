@@ -83,4 +83,19 @@ describe('SetUtil', () => {
 		});
 	});
 
+	describe('equals', () => {
+		it('returns true when a equals b', () => {
+			const a = [1,2,3];
+			const b = [3,2,1];
+
+			chai.assert.equal(SetUtil.equals(a, b), true);
+		});
+
+		it('returns false when a does not equal b', () => {
+			const a = [4,5,6];
+			const b = [1,2,3];
+
+			chai.assert.equal(SetUtil.equals(a, b), false);
+		});
+	});
 });
