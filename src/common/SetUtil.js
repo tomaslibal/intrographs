@@ -2,14 +2,37 @@ let not_implemented = (fncName) => {
     throw new Error(`${fncName}: Not yet implemented!`);
 }
 
+/*
+ * SetUtil uses Array<any> representation for a set.
+ */
 export default class SetUtil {
     /*
-     * Definition 1: a set is a collection of distinc objects none of which is
+     * Definition 1: a set is a collection of distinct objects none of which is
      * the set itself.
      *
      */
-    static isSet(set) {
-        not_implemented("setUtil.isSet");
+    static isSet(s=[]) {
+        let selfRef = false;
+        let seen = [];
+        let result = true;
+
+        if (s.length === 0) {
+            return false;
+        }
+
+        s.forEach((obj, idx, arr) => {
+            if (obj === s) {
+                result = false;
+                return;
+            }
+            if (seen.indexOf(obj) > -1) {
+                result = false;
+                return;
+            }
+            seen.push(obj);
+        });
+
+        return result;
     }
 
     /*
