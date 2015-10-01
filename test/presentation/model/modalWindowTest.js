@@ -29,4 +29,26 @@ describe('ModalWindow', () => {
 		});
 	});
 
+	describe('toggle visibility', () => {
+		it('sets display to true and dispatches an event when show() called', () => {
+			sinon.spy(mwin, 'notify');
+
+			mwin.display = false;
+			mwin.show();
+
+			chai.assert.equal(mwin.display, true);
+			assert(mwin.notify.calledWith('visibilityChange', {'display': true}));
+		});
+
+		it('sets display to false and dispatches an event when hide() called', () => {
+			sinon.spy(mwin, 'notify');
+
+			mwin.display = true;
+			mwin.hide();
+
+			chai.assert.equal(mwin.display, false);
+			assert(mwin.notify.calledWith('visibilityChange', {'display': false}));
+		});
+	});
+
 });
