@@ -151,6 +151,20 @@ describe('HTMLScene', () => {
 
 			chai.assert.equal(htmlScene.vertexDrag, false);
 		});
+
+        it('updates x,y of the vertices in HTMLScene.vertexDrag on mouse move if HTMLScene.vertexDrag contains one or more vertices', () => {
+            htmlScene.mouseDown = true;
+            htmlScene.lastScreenX = 90;
+            htmlScene.lastScreenY = 190;
+            htmlScene.vertexDrag = [{'x': 1, 'y': 1}];
+            htmlScene.graph.renderVertexChanges = sinon.stub();
+            htmlScene.canvasMouseMoveHandler({
+                screenX: 100,
+                screenY: 200
+            });
+
+            chai.assert.deepEqual(htmlScene.vertexDrag, [{'x': 1+(100-90), 'y': 1+(200-190)}]);
+        });
 	});
 
 });
