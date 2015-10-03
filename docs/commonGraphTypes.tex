@@ -5,6 +5,12 @@
     howpublished={http://mathworld.wolfram.com/AntiprismGraph.html},
     note={Accessed: 19 September 2015}
   }
+  @book{balakrishnan1996,
+  author="V. K. {Balakrishnan}",
+  title={Introductory Discrete Mathematics},
+  publisher={Dover Publications},
+  year={1996}
+  }
 \end{filecontents*}
 
 \documentclass[11pt]{article}
@@ -24,9 +30,11 @@
 
 \maketitle
 
+\section{Graphs, digraphs and multigraphs}
+
 Let graph $ G = (V, E) $ have a vertex set $ V $ and an edge set $ E $. The vertex set is a non-empty set of distinct 
-vertices $ n_1, n_2, ..., n_k $ where $ k = |V| $ and the edge set, which can be empty, contains subsets of two 
-vertices $ \{n_j, n_k\} \in V $, and $ j, k\ \in \{1, 2, ..., k\} $.
+vertices $ v_1, v_2, ..., v_k $ where $ k = |V| $ and the edge set, which can be empty, contains subsets of two 
+vertices $ \{v_s, v_t\} \in V $, and $ s, t\ \in \{1, 2, ..., k\} $.
 
 \tikzstyle{vertex}=[circle,fill=yellow!50,minimum size=20pt,inner sep=0pt]
 \tikzstyle{edge}=[draw,thick,-]
@@ -52,7 +60,7 @@ vertices $ \{n_j, n_k\} \in V $, and $ j, k\ \in \{1, 2, ..., k\} $.
 \end{tikzpicture}
 \end{figure}
 
-If there are no self-loops, that is, there are no edges incident on sets $ \{ n_j, n_j\} \in V, j \in {1, 2, ..., k} $ 
+If there are no self-loops, that is, there are no edges incident on sets $ \{ v_s, v_s\} \in V, and s \in {1, 2, ..., k} $ 
 then we call the graph \textit{simple}.
 
 If some edges are incident on the same set of vertices then we call the object a \textit{multigraph} as can be seen in 
@@ -73,8 +81,12 @@ Figure~\ref{fig:multi}.
   \end{tikzpicture}
 \end{figure}
 
-In \textit{directed graphs} or \textit{digraphs} the edge set $ E $ consists of ordered pairs $ \{(n_j, n_k) | j,k \in \{1, 2, ..., k\}\} $ 
-so each edges has a direction leaving node $ n_j $ to $ n_k $.
+In \textit{directed graphs} or \textit{digraphs} the edge set $ E $ consists of ordered pairs $ \{(v_s, v_t) | s,t \in \{1, 2, ..., k\}\} $ 
+so each edges has a direction leaving node $ v_j $ to $ v_k $.
+
+\section{Some common graph types}
+
+Antiprism graph "is a graph corresponding to the skeleton of an antiprism"~\autocite{weisstein2008antiprism} (see Figures~\ref{fig:3antiprism} and~\ref{fig:4antiprism}.
 
 \tikzstyle{smallvertex}=[circle,fill=red!75,minimum size=5pt,inner sep=0pt]
 \tikzstyle{lightedge}=[color=black!40]
@@ -151,7 +163,7 @@ so each edges has a direction leaving node $ n_j $ to $ n_k $.
 \caption{Antiprism graphs}
 \end{figure}
 
-Bipartite graph's vertex set is divided into two sets in which vertices from one set can be adjacent only to vertices in the other set. This is a special case of the \textit{k}--partite graph where $ k = 2 $.
+Bipartite graph's vertex set can be partitioned into two disjoint sets~\autocite[122]{balakrishnan1996} in which vertices from one set can be adjacent only to vertices in the other set. This is a special case of the \textit{k}--partite graph where $ k = 2 $ (see Figure~\ref{fig:bipartitegroup}.
 
 \tikzstyle{smvertex2}=[circle,fill=blue!75,minimum size=5pt, inner sep=0pt]
 \begin{figure}[ht]
@@ -208,6 +220,7 @@ Bipartite graph's vertex set is divided into two sets in which vertices from one
       \end{tikzpicture}
     \end{subfigure}
     \caption{Bipartite graphs}
+    \label{fig:bipartitegroup}
 \end{figure}
 
 
