@@ -44,6 +44,15 @@
     volume={11},
     pages={229-233}
     }
+  @book{chartrand2010graphs,
+    title={Graphs \& Digraphs, Fifth Edition},
+    author={Chartrand, G. and Lesniak, L. and Zhang, P.},
+    isbn={9781439826270},
+    lccn={2010038198},
+    series={A Chapman \& Hall book},
+    year={2010},
+    publisher={Taylor and Francis}
+  }
 \end{filecontents*}
 
 \documentclass[11pt]{article}
@@ -66,10 +75,12 @@ crossings at the vertices). This is called \textit{embedding on a plane}~\autoci
 and Chiba~\autocite[11]{nishizeki2008planar} give a corollary which says that a planar graph has no vertex of
 degree $ > 5 $.
 
-One could use the Kuratowski's Theorem from which we know that a graph is planar if it does not contain subgraphs
+By the Kuratowski's Theorem we know that a graph is planar if it does not contain subgraphs
 of $ K_5 $ or UG (the utility graph, also known as $ K_{3,3} $, see Figure~\ref{fig:uggraph}). Although, this algorithm's running time will
 grow exponentially to the number of edges, because it needs to check every subgraph of whose there are $ 2^m $ 
 (m = num. of edges) subgraphs in every graph~\autocite[23]{nishizeki2008planar}.
+
+An extension of this theorem is provided by Wagner who formulated that no graph containing a minor of $ K_5 $ or $ K_{3,3} $ is planar~\autocite[307]{chartrand2010graphs}.
 
 \tikzstyle{vertex}=[circle,fill=yellow!50,minimum size=20pt,inner sep=0pt]
 \tikzstyle{edge}=[]
