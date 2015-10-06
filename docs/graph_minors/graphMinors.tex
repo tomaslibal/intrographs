@@ -1,0 +1,149 @@
+\begin{filecontents*}{resgraphminors.bib}
+@book{thulasiraman2011graphs,
+  title={Graphs: Theory and Algorithms},
+  author={Thulasiraman, K. and Swamy, M.N.S.},
+  isbn={9781118030257},
+  year={2011},
+  publisher={Wiley}
+}
+@misc{erikson2009topo,
+	title={Graph Minors},
+	author="Jeff {Erikson}",
+	howpublished={\url{http://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/graph-minors.pdf}},
+	note={Accessed: October 4, 2015}
+}
+@misc{pegg2005minor,
+	title={Graph Minor},
+	author={E. Pegg, Jr.},
+	howpublished={\url{http://mathworld.wolfram.com/GraphMinor.html}},
+	note={Accessed: October 4, 2015}
+}
+@book{chartrand2008chromatic,
+  title={Chromatic Graph Theory},
+  author="Gary {Chartrand} and Ping {Zhang}",
+  isbn={9781584888017},
+  series={Discrete Mathematics and Its Applications},
+  year={2008},
+  publisher={CRC Press}
+}
+\end{filecontents*}
+
+\documentclass[11pt]{article}
+
+\title{Graph family, minor, and forbidden minor}
+\author{Tomas Libal}
+\date{October 3, 2015}
+
+\usepackage{tikz}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage[backend=biber]{biblatex}
+\addbibresource{resgraphminors.bib}
+
+\begin{document}
+
+\maketitle
+
+\section{Subgraphs}
+
+A subgraph $ H = (V', E') $ of $ G = (V, E) $ is a graph whose vertex $ V' $ set is a subset of $ V $ and the edge set $ E' $ is a subset of $ E $. By the definition of a set, every set is subset of itself, so every graph is a subgraph of itself as well.
+
+\textit{Induced subgraph} $ H = (V', E') $ on a vertex set $ V' \subseteq V $ is called vertex-induced subgraph if $ E' $ contains automatically all edges from $ E $ which have vertices in $ V' $.
+
+Conversely, an induced subgraph $ I = (V'', E'') $ on an edge set $ E'' \subseteq E $ is called an edge-induced subgraph if all vertices in $ V'' $ are in $ E'' $ and there are no isolated vertices~\autocite[5]{thulasiraman2011graphs}.
+
+\section{Minors}
+
+\begin{quote}
+A minor of graph $ G $ is a graph obtained from G by contracting edges, deleting edges, and deleting isolated vertices; a proper minor of $ G $ is any minor other than G itself. (Erikson ~\autocite{erikson2009topo}).
+\end{quote}
+
+To obtain a minor, any edge contraction or deletion is arbitrary, save for the deletion of isolated vertices resulting from the aforementioned operations. These operations can be repeated as well~\autocite{pegg2005minor}.
+
+\tikzstyle{vertex}=[circle,fill=blue!75,minimum size=5pt,inner sep=0pt]
+\tikzstyle{vertexhl}=[circle,fill=red!75,minimum size=5pt,inner sep=0pt]
+\tikzstyle{edge}=[color=black!40]
+\tikzstyle{edgehl}=[color=red!40,thick,line width=1mm]
+
+\subsection{Edge deletion}
+
+In Figure~\ref{fig:edgedel} we delete the highlighted edge in red, resulting in the isolated vertex being also removed from this graph minor.
+
+\begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}[scale=0.5]
+	\node[vertex] (a) at (3, 5) {};
+	\node[vertex] (b) at (0, 0) {};
+	\node[vertex] (c) at (2, 2) {};
+	\node[vertex] (d) at (4, 1) {};
+
+	\path[edge] (a) edge (b);
+	\path[edge] (b) edge (c);
+	\path[edge] (a) edge (c);
+	\path[edgehl] (c) edge (d);
+
+        \coordinate (ar1) at (5, 2.5);
+	\coordinate (ar2) at (7, 2.5);
+
+	\draw [->,shorten >=0pt] (ar1) to node[auto] {} (ar2);
+
+	\node[vertex] (x) at (11, 5) {};
+	\node[vertex] (y) at (8, 0) {};
+	\node[vertex] (z) at (10, 2) {};
+
+	\path[edge] (x) edge (y);
+	\path[edge] (y) edge (z);
+	\path[edge] (x) edge (z);
+
+  \end{tikzpicture}
+
+  \caption{Edge deletion in an example}
+  \label{fig:edgedel}
+\end{figure}
+
+\subsection{Edge contraction}
+
+In the example of Figure~\ref{fig:edgecontr} an edge highlighted in red is contracted and as a result the orange edge merges with the original edge which is incident on the same vertices.
+
+\tikzstyle{edgeor}=[color=orange!40]
+
+\begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}[scale=0.5]
+	\node[vertex] (a) at (3, 5) {};
+	\node[vertex] (b) at (0, 0) {};
+	\node[vertex] (c) at (2, 2) {};
+	\node[vertex] (d) at (4, 1) {};
+
+	\path[edge] (a) edge (b);
+	\path[edgehl] (b) edge (c);
+	\path[edgeor] (a) edge (c);
+	\path[edge] (c) edge (d);
+
+        \coordinate (ar1) at (5, 2.5);
+	\coordinate (ar2) at (7, 2.5);
+
+	\draw [->,shorten >=0pt] (ar1) to node[auto] {} (ar2);
+
+	\node[vertex] (x) at (11, 5) {};
+	\node[vertex] (y) at (8, 0) {};
+	\node[vertex] (z) at (12, 1) {};
+
+	\path[edge] (x) edge (y);
+	\path[edge] (y) edge (z);
+
+  \end{tikzpicture}
+
+  \caption{Edge contration in an example}
+  \label{fig:edgecontr}
+\end{figure}
+
+\section{Forbidden minors}
+
+Graph $ H $ is a forbidden minor of a graph family $\mathcal{F} $ if $ H $ is not a minor of any graph in $ \mathcal{F} $. For example, if we consider the tree graph family, any graph which has loops is a forbidden minor of that family. Another example are graphs $ K_5 $ and $ K_{3, 3} $ as forbidden minors of planar graphs by the Wagner's theorem~\autocite[139]{chartrand2008chromatic}.
+
+\sloppy
+\printbibliography
+
+\end{document}
