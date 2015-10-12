@@ -1,3 +1,5 @@
-export default class breadthFirstSearch {
-
+function bfs() {
+  
 }
+
+export { bfs };
