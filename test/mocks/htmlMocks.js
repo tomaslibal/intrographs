@@ -26,12 +26,16 @@ let mockDOMClientRectangle = {
 	width: 0
 };
 
+let CSS2Properties = {
+	display: ''
+};
+
 let mockHTMLElement = extend(mockNode, {
 	innerHTML: '',
 	id: '',
 	'type': '',
 	className: '',
-	style: {},
+	style: CSS2Properties,
 	value: '',
 	width: 0,
 	height: 0,
