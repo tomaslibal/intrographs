@@ -1,6 +1,8 @@
 // import s.u.t.
 import ModalWindow from "../../../src/presentation/model/ModalWindow";
 
+import { mockDocument, mockHTMLElement } from '../../mocks/htmlMocks';
+
 let assert = require("assert");
 let chai = require("chai");
 let sinon = require("sinon");
@@ -10,7 +12,7 @@ describe('ModalWindow', () => {
 	let mwin;
 
 	beforeEach(() => {
-		mwin = new ModalWindow();
+		mwin = new ModalWindow(mockDocument);
 	});
 
 	describe('basic properties', () => {
@@ -48,6 +50,19 @@ describe('ModalWindow', () => {
 
 			chai.assert.equal(mwin.display, false);
 			assert(mwin.notify.calledWith('visibilityChange', {'display': false}));
+		});
+	});
+
+	describe('rendering', () => {
+		it('creates a containerElement if this.containerElement is null', () => {
+			mockDocument.createElement.returns(mockHTMLElement);
+			mwin.innerHTML = 'foo';
+			mwin.render();
+
+			chai.assert.deepEqual(mwin.containerElement, mockHTMLElement);
+			assert(mockDocument.createElement.calledWith('div'));
+			chai.assert.equal(mwin.containerElement.innerHTML, mwin.innerHTML);
+			assert(mockDocument.body.appendChild.calledWith(mockHTMLElement));
 		});
 	});
 

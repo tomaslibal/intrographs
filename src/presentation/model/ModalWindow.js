@@ -1,7 +1,7 @@
 import { ObservableRenderable } from '../ObservableRenderable';
 
 export default class ModalWindow extends ObservableRenderable {
-	constructor() {
+	constructor(document) {
 		super({'posX': 0, 'posY': 0});
 
 		this.x = 0;
@@ -10,6 +10,8 @@ export default class ModalWindow extends ObservableRenderable {
 		this.height = 100;
 		this.innerHTML = '';
 		this.display = false;
+		this.containerElement = null;
+		this.document = document;
 	}
 
 	show() {
@@ -19,5 +21,13 @@ export default class ModalWindow extends ObservableRenderable {
 	hide() {
 		this.display = false;
 		this.notify('visibilityChange', {'display':false});
+	}
+
+	render() {
+		if (this.containerElement === null) {
+			this.containerElement = this.document.createElement('div');
+			this.containerElement.innerHTML = this.innerHTML;
+			this.document.body.appendChild(this.containerElement);
+		}
 	}
 }
