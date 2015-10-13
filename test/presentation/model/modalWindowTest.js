@@ -51,6 +51,23 @@ describe('ModalWindow', () => {
 			chai.assert.equal(mwin.display, false);
 			assert(mwin.notify.calledWith('visibilityChange', {'display': false}));
 		});
+
+		it('does not dispatch visibilityChange event when display is false and hide() is called', () => {
+			sinon.spy(mwin, 'notify');
+			mwin.display = false;
+			mwin.hide();
+
+			assert(mwin.notify.notCalled);
+		});
+
+		it('does not dispatch visibilityChange event when display is true and show() is called', () => {
+			sinon.spy(mwin, 'notify');
+			mwin.display = true;
+			mwin.show();
+
+			assert(mwin.notify.notCalled);
+		});
+
 		it('changes style.display of the containerElement if it is not null', () => {
 			mwin.render();
 

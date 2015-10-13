@@ -17,22 +17,28 @@ export default class ModalWindow extends ObservableRenderable {
 	}
 
 	show() {
-		this.display = true;
 
 		if (this.containerElement) {
 			this.cssUtil.setStyle(this.containerElement, 'display', 'block');
 		}
 
-		this.notify('visibilityChange', {'display': true});
+		if (this.display != true) {
+			this.notify('visibilityChange', {'display': true});
+		}
+
+		this.display = true;
 	}
 	hide() {
-		this.display = false;
-
+		
 		if (this.containerElement) {
 			this.cssUtil.setStyle(this.containerElement, 'display', 'none');
 		}
 
-		this.notify('visibilityChange', {'display':false});
+		if (this.display != false) {
+			this.notify('visibilityChange', {'display':false});
+		}
+
+		this.display = false;
 	}
 
 	render() {
