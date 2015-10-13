@@ -2,7 +2,7 @@ import IRenderable from "./IRenderable";
 
 class ObservableRenderable extends IRenderable {
 
-	constructor({ 'posX': x, 'posY': y }) {
+	constructor({ 'posX': x, 'posY': y }={'posX':0, 'posY': 0}) {
 		super({ 'posX': x, 'posY': y });
 
 		this.callbacks = [];
