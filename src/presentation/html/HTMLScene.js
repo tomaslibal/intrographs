@@ -4,6 +4,8 @@ import HTMLMinidisplay from "./HTMLMinidisplay";
 import HTMLBackground from "./HTMLBackground";
 import HTMLControls from "./HTMLControls";
 import HTMLWindow from "./HTMLWindow";
+import MenuBar from "../model/MenuBar";
+import HTMLMenuBar from "./HTMLMenuBar";
 import Observable from "../../common/Observable";
 
 export default class HTMLScene extends Scene {
@@ -21,9 +23,14 @@ export default class HTMLScene extends Scene {
 		let htmlGraph = new HTMLGraph(graph, document);
 		let controls = new HTMLControls(windowObj);
 
+		let menuBarContainer = document.createElement('div');
+		document.body.appendChild(menuBarContainer);
+		let menuBarModel = new MenuBar();
+		let menuBar = new HTMLMenuBar(menuBarModel, menuBarContainer);
+
 		htmlGraph.controls = controls;
 
-		super(htmlGraph, bg, minidisplay, controls);
+		super(htmlGraph, bg, minidisplay, controls, menuBar);
 
 		this.window = windowObj;
 		this.document = document;
