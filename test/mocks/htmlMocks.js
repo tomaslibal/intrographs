@@ -56,7 +56,8 @@ let mockDocument = {
 	createElement: sinon.stub().returns(mockHTMLElement),
 	querySelector: sinon.stub(),
 	body: mockDocumentBody,
-	appendChild: sinon.stub()
+	appendChild: sinon.stub(),
+	defaultView: null
 };
 
 let mockWindow = {
@@ -65,6 +66,8 @@ let mockWindow = {
 	innerWidth: 640,
 	innerHeight: 480
 };
+
+mockDocument.defaultView = mockWindow;
 
 // CanvasRenderingContext2d
 let mockCtx2d = {
