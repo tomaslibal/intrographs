@@ -14,6 +14,11 @@ export default class ModalWindow extends ObservableRenderable {
 		this.containerElement = null;
 		this.document = window.document;
 		this.cssUtil = new CSSStyles(window);
+		this.content = null;
+	}
+
+	updateContent(newContent) {
+		this.content = newContent;
 	}
 
 	show() {
@@ -29,7 +34,7 @@ export default class ModalWindow extends ObservableRenderable {
 		this.display = true;
 	}
 	hide() {
-		
+
 		if (this.containerElement) {
 			this.cssUtil.setStyle(this.containerElement, 'display', 'none');
 		}
@@ -42,15 +47,6 @@ export default class ModalWindow extends ObservableRenderable {
 	}
 
 	render() {
-		if (this.containerElement === null) {
-			this.containerElement = this.document.createElement('div');
-			this.containerElement.innerHTML = this.innerHTML;
-			if (this.display) {
-				this.show();
-			} else {
-				this.hide();
-			}
-			this.document.body.appendChild(this.containerElement);
-		}
+
 	}
 }
