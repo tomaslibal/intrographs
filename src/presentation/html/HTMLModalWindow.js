@@ -1,9 +1,12 @@
 import ModalWindow from '../model/ModalWindow';
+import CSSStyles from '../css/CSSStyles';
 
 export default class HTMLModalWindow extends ModalWindow {
 
 	constructor(window) {
 		super(window);
+
+		this.cssUtil = new CSSStyles(window);
 
 		this.rendered = false;
 	}
@@ -11,6 +14,28 @@ export default class HTMLModalWindow extends ModalWindow {
 	closeWindowClickHandler(event) {
 		event.preventDefault();
 
+		if (this.containerElement) {
+			this.cssUtil.setStyle(this.containerElement, 'display', 'none');
+		}
+
+		super.hide();
+	}
+
+	show() {
+
+		if (this.containerElement) {
+			this.cssUtil.setStyle(this.containerElement, 'display', 'block');
+		}
+
+		super.show();
+	}
+
+	hide() {
+		if (this.containerElement) {
+			this.cssUtil.setStyle(this.containerElement, 'display', 'none');
+		}
+
+		super.hide();
 	}
 
 	getCloseWindowButton() {

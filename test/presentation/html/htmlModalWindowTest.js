@@ -64,4 +64,26 @@ describe('HTMLModalWindow', () => {
 			chai.assert.equal(htmlModal.containerElement.innerHTML, 'bar');
 		});
 	});
+
+	describe('close modal window button', () => {
+		it('prevents the default action on getting the event', () => {
+			let mockEvent = {
+				'preventDefault': sinon.stub()
+			};
+			htmlModal.closeWindowClickHandler(mockEvent);
+
+			assert(mockEvent.preventDefault.calledOnce);
+		});
+
+		it('sets display=false', () => {
+			let mockEvent = {
+				'preventDefault': sinon.stub()
+			};
+			htmlModal.closeWindowClickHandler(mockEvent);
+
+			chai.assert.equal(htmlModal.display, false);
+		});
+
+		it('test', () => {});
+	});
 });
