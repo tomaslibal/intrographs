@@ -42,5 +42,26 @@ describe('HTMLModalWindow', () => {
 			chai.assert.equal(htmlModal.containerElement.innerHTML, htmlModal.content);
 			assert(mockDocument.body.appendChild.calledWith(mockHTMLElement));
 		});
+
+		it('adds "close window" button/link', () => {
+			sinon.spy(htmlModal, 'getCloseWindowButton');
+			htmlModal.render();
+
+			assert(htmlModal.getCloseWindowButton.calledOnce);
+		});
+
+		it('updates the content if already rendered', () => {
+			htmlModal.content = 'foo';
+			htmlModal.render();
+
+			chai.assert.equal(htmlModal.rendered, true);
+			chai.assert.equal(htmlModal.containerElement.innerHTML, 'foo');
+
+			htmlModal.content = 'bar';
+
+			htmlModal.render();
+
+			chai.assert.equal(htmlModal.containerElement.innerHTML, 'bar');
+		});
 	});
 });
