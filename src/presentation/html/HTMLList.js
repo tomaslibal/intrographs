@@ -1,3 +1,5 @@
+import HTMLModalWindow from './HTMLModalWindow';
+
 export default class HTMLList {
 
 	constructor(documentObj=null, parentElement=null) {
@@ -12,6 +14,10 @@ export default class HTMLList {
 		this.parent.appendChild(this.listElement);
 		this.list = [];
 		this.limit = 16;
+	}
+
+	showAllClickHandler() {
+
 	}
 
 	render() {
@@ -33,6 +39,8 @@ export default class HTMLList {
 			let showAllLink = this.document.createElement('a');
 			showAllLink.href = '#';
 			showAllLink.innerHTML = '(show all)';
+			this._boundShowAllClickHandler = this.showAllClickHandler.bind(this);
+			showAllLink.addEventListener('click', this._boundShowAllClickHandler);
 			this.listElement.appendChild(showAllLink);
 		}
 	}

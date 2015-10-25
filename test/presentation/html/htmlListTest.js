@@ -61,14 +61,30 @@ describe('HTMLList', () => {
 			htmlList.limit = 2;
 			htmlList.list.push('a','b','c','d');
 
-			const mockLinkElement = {};
-			htmlList.document.createElement.withArgs('a').returns(mockLinkElement);
+			let mockLink = {
+				'addEventListener': sinon.stub()
+			};
+			htmlList.document.createElement.withArgs('a').returns(mockLink);
 
 			htmlList.render();
 
 			assert(htmlList.document.createElement.calledWith('a'));
-			assert(htmlList.listElement.appendChild.calledWith(mockLinkElement));
-			
+			assert(htmlList.listElement.appendChild.calledWith(mockLink));
+
+		});
+
+		it('show all is added a click listener', () => {
+			htmlList.limit = 2;
+			htmlList.list.push('a','b','c','d');
+
+			let mockLink = {
+				'addEventListener': sinon.stub()
+			};
+			htmlList.document.createElement.withArgs('a').returns(mockLink);
+
+			htmlList.render();
+
+			assert(mockLink.addEventListener.calledWith('click', htmlList._boundShowAllClickHandler));
 		});
 	});
 
