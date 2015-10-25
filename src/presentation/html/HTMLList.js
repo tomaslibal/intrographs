@@ -11,13 +11,29 @@ export default class HTMLList {
 		this.listElement = this.document.createElement('span');
 		this.parent.appendChild(this.listElement);
 		this.list = [];
+		this.limit = 16;
 	}
 
 	render() {
-		let str = this.list.reduce((prev, curr, idx) => {
+		let listOfElements = this.list;
+		let limitExceeded = false;
+
+		if (this.list.length > this.limit) {
+			listOfElements = this.list.slice(0, this.limit);
+			limitExceeded = true;
+		}
+
+		let str = listOfElements.reduce((prev, curr, idx) => {
 			return prev + ', ' + curr;
 		});
 
-		this.listElement.innerHTML = str;
+		this.listElement.innerHTML = `${str}`;
+
+		if (limitExceeded) {
+			let showAllLink = this.document.createElement('a');
+			showAllLink.href = '#';
+			showAllLink.innerHTML = '(show all)';
+			this.listElement.appendChild(showAllLink);
+		}
 	}
 }

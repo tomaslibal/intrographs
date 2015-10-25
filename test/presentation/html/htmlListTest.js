@@ -56,6 +56,20 @@ describe('HTMLList', () => {
 			assert(htmlList.list.reduce.calledWith(sinon.match.func));
 			chai.assert.equal(htmlList.listElement.innerHTML, 'a, b, c, d');
 		});
+
+		it('prints "(show all)" link if there are more than LIMIT elements', () => {
+			htmlList.limit = 2;
+			htmlList.list.push('a','b','c','d');
+
+			const mockLinkElement = {};
+			htmlList.document.createElement.withArgs('a').returns(mockLinkElement);
+
+			htmlList.render();
+
+			assert(htmlList.document.createElement.calledWith('a'));
+			assert(htmlList.listElement.appendChild.calledWith(mockLinkElement));
+			
+		});
 	});
 
 });
