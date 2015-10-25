@@ -27,6 +27,7 @@ export default class HTMLList {
 		});
 
 		this.modal.render();
+		this.modal.show();
 	}
 
 	render() {

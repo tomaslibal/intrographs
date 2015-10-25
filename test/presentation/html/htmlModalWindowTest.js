@@ -43,6 +43,12 @@ describe('HTMLModalWindow', () => {
 			assert(mockDocument.body.appendChild.calledWith(mockHTMLElement));
 		});
 
+		it('sets the CSS styles', () => {
+			sinon.spy(htmlModal, 'setStyles');
+			htmlModal.render();
+			assert(htmlModal.setStyles.calledOnce);
+		});
+
 		it('adds "close window" button/link', () => {
 			sinon.spy(htmlModal, 'getCloseWindowButton');
 			htmlModal.render();

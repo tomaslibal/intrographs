@@ -46,11 +46,33 @@ export default class HTMLModalWindow extends ModalWindow {
 		return button;
 	}
 
+	setStyles() {
+		let styles = {
+			'position': 'absolute',
+			'top': '10px',
+			'left': '100px',
+			'width': '500px',
+			'height': '500px',
+			'overflow-y': 'scroll',
+			'padding': '5px',
+			'background': '#f0f0f0'
+		};
+
+		if (this.containerElement) {
+			Object.keys(styles).forEach(key => {
+				const value = styles[key];
+				console.log(`setting ${key}=${value}`);
+				this.cssUtil.setStyle(this.containerElement, key, value);
+			});
+		}
+	}
+
 	render() {
 		if (this.rendered === false) {
 			this.containerElement = this.containerElement || this.document.createElement('div');
 			this.containerElement.innerHTML = this.content;
 			this.document.body.appendChild(this.containerElement);
+			this.setStyles();
 			this.rendered = true;
 			this.closeButton = this.getCloseWindowButton();
 			this.containerElement.appendChild(this.closeButton);
