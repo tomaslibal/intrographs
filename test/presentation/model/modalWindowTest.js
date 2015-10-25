@@ -68,19 +68,6 @@ describe('ModalWindow', () => {
 			assert(mwin.notify.notCalled);
 		});
 
-		it('changes style.display of the containerElement if it is not null', () => {
-			mwin.render();
-
-			chai.assert.equal(mwin.containerElement.style.display, 'none');
-
-			mwin.show();
-
-			chai.assert.equal(mwin.containerElement.style.display, 'block');
-
-			mwin.hide();
-
-			chai.assert.equal(mwin.containerElement.style.display, 'none');
-		});
 	});
 
 });
