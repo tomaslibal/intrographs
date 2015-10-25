@@ -88,4 +88,16 @@ describe('HTMLList', () => {
 		});
 	});
 
+	describe('showAllLinkClickHandler', () => {
+		it('prevents default action on click', () => {
+			let mockEvent = {
+				'preventDefault': sinon.stub()
+			};
+
+			htmlList.showAllClickHandler(mockEvent);
+
+			assert(mockEvent.preventDefault.calledOnce);
+		});
+	});
+
 });

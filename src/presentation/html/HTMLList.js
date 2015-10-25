@@ -14,10 +14,19 @@ export default class HTMLList {
 		this.parent.appendChild(this.listElement);
 		this.list = [];
 		this.limit = 16;
+		this.modal = null;
 	}
 
-	showAllClickHandler() {
+	showAllClickHandler(event) {
+		event.preventDefault();
 
+		this.modal = this.modal || new HTMLModalWindow(this.document.defaultView);
+		this.modal.display = true;
+		this.modal.content = this.list.length === 0 ? '' : this.list.reduce((prev, curr, idx) => {
+			return prev + ` <p>${curr}</p>`;
+		});
+
+		this.modal.render();
 	}
 
 	render() {
