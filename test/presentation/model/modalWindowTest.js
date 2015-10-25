@@ -83,17 +83,4 @@ describe('ModalWindow', () => {
 		});
 	});
 
-	describe('rendering', () => {
-		it('creates a containerElement if this.containerElement is null', () => {
-			mockDocument.createElement.returns(mockHTMLElement);
-			mwin.innerHTML = 'foo';
-			mwin.render();
-
-			chai.assert.deepEqual(mwin.containerElement, mockHTMLElement);
-			assert(mockDocument.createElement.calledWith('div'));
-			chai.assert.equal(mwin.containerElement.innerHTML, mwin.innerHTML);
-			assert(mockDocument.body.appendChild.calledWith(mockHTMLElement));
-		});
-	});
-
 });
