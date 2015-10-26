@@ -15,7 +15,6 @@ export default class HTMLImageButton extends ObservableRenderable {
 			let button = document.createElement('button');
 			button.innerHTML = this.iconModel.id;
 			this.parentElement.appendChild(button);
-			console.log('rendergin!!!' + this.iconModel.id);
 		}
 
 	}
