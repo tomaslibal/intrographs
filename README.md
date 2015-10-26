@@ -9,7 +9,10 @@ properties like what type of graph it is, whether it is planar and so on.
 
 ## Features
 
-**Graph rendering**: renders a graph with vertices and nodes
+**Graph rendering**: 
+
+- renders a graph with vertices and nodes
+- "free view" by mouse drag and drop
 
 **Properties testing**:
 
