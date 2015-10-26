@@ -61,7 +61,6 @@ export default class HTMLModalWindow extends ModalWindow {
 		if (this.containerElement) {
 			Object.keys(styles).forEach(key => {
 				const value = styles[key];
-				console.log(`setting ${key}=${value}`);
 				this.cssUtil.setStyle(this.containerElement, key, value);
 			});
 		}
