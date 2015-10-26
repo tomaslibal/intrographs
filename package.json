@@ -1,11 +1,13 @@
 {
   "private": true,
+  "jsnext:main": "./src/demo.js",
   "scripts": {
     "server": "python -m SimpleHTTPServer 8080",
     "firefox": "which firefox; if [ $? -eq 0 ]; then firefox http://localhost:8080/; else echo 'Error! Firefox not found'; fi",
     "transpile": "export BABEL_ENV=build; mkdir -p build && node_modules/babel/bin/babel.js src/ -d build",
     "pack": "mkdir -p dist && node_modules/browserify/bin/cmd.js build/demo.js -o dist/out.js",
     "build": "npm run clear && npm run transpile && npm run pack",
+    "build2": "export BABEL_ENV=build; npm run clear && mkdir -p dist && node buildAndConcat.js",
     "clear": "rm -rf build && rm -rf dist",
     "test": "export BABEL_ENV=development; ./node_modules/mocha/bin/mocha --compilers js:babel/register --recursive",
     "sloccount": " node_modules/cloc/lib/cloc docs html src test"
@@ -18,6 +20,8 @@
     "chai": "^3.2.0",
     "cloc": "^1.0.4",
     "mocha": "^2.1.0",
+    "rollup": "^0.20.0",
+    "rollup-plugin-babel": "^1.0.0",
     "sinon": "^1.16.1"
   }
 }
