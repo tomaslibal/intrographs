@@ -18,7 +18,7 @@ rollup({
     const generated = bundle.generate();
     const code = generated.code;
 
-    fs.writeFileSync('dist/out.js', code);
+    fs.writeFileSync('dist/out.raw.js', code);
 
-    console.log('Build done. Output saved @ dist/out.js');
+    console.log('Build done. Output saved @ dist/out.raw.js');
 });
