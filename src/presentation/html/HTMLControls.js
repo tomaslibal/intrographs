@@ -70,7 +70,11 @@ export default class HTMLControls extends ObservableRenderable {
             const vertexFormStyles = {
                 'position': 'absolute',
                 'top': '10px',
-                'right': '10px'
+                'right': '10px',
+                'background': '#f4fbff',
+                'padding': '10px',
+                'box-shadow': '#a0a0a0 1px 1px 5px',
+                'width': '170px'
             };
 
             this.cssStyles.setStyles(this.addVertexForm, vertexFormStyles);
