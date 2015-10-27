@@ -1,6 +1,7 @@
 import { ObservableRenderable } from "../../presentation/ObservableRenderable";
 import CSSStyles from "../../presentation/css/CSSStyles";
 import HTMLElementController from './HTMLElementController';
+import { extendPlainObj } from '../../common/eloquent';
 
 export default class HTMLControls extends ObservableRenderable {
 
@@ -12,6 +13,14 @@ export default class HTMLControls extends ObservableRenderable {
 		this.document = documentObj;
 		this.cssStyles = new CSSStyles(windowObj);
 		this.elementCtrl = new HTMLElementController(documentObj);
+
+        this.commonBoxStyles = {
+            'position': 'absolute',
+            'background': '#fff',
+            'padding': '10px',
+            'box-shadow': 'rgb(210, 210, 210) 1px 1px 5px',
+            'width': '170px'
+        };
 	}
 
 	createElementAppend(elementType, parentElement) {
@@ -67,16 +76,11 @@ export default class HTMLControls extends ObservableRenderable {
 			inputLabel = this.createInputAppend({ id: 'vertexLabel', 'type': 'text' }, this.addVertexForm);
 			buttonAdd = this.createButtonAppend('Add', this.addVertexForm);
 
-            const vertexFormStyles = {
-                'position': 'absolute',
+            const vertexFormStyles = extendPlainObj(this.commonBoxStyles, {
                 'top': '10px',
-                'right': '10px',
-                'background': '#f4fbff',
-                'padding': '10px',
-                'box-shadow': '#a0a0a0 1px 1px 5px',
-                'width': '170px'
-            };
-
+                'right': '10px'
+            });
+            
             this.cssStyles.setStyles(this.addVertexForm, vertexFormStyles);
 		}
 
@@ -106,9 +110,12 @@ export default class HTMLControls extends ObservableRenderable {
 			input2 = this.createInputAppend({ id: 'vertex2', 'type': 'text' }, this.addEdgeForm);
 			buttonAdd = this.createButtonAppend('Add Edge', this.addEdgeForm);
 
-			this.cssStyles.setStyle(this.addEdgeForm, 'position', 'absolute');
-			this.cssStyles.setStyle(this.addEdgeForm, 'top', '100px');
-			this.cssStyles.setStyle(this.addEdgeForm, 'right', '10px');
+            const edgeFormStyles = extendPlainObj(this.commonBoxStyles, {
+                'top': '120px',
+                'right': '10px'
+            });
+
+            this.cssStyles.setStyles(this.addEdgeForm, edgeFormStyles);
 		}
 
 		if (this.appendElementIfNotPresent(this.addEdgeForm, this.document.body)) {

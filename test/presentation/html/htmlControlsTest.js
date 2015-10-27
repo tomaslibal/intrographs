@@ -208,10 +208,10 @@ describe('HTMLControls', () => {
 
 				assert(ctrl.cssStyles.setStyle.calledWith(ctrl.addEdgeForm, 'position', 'absolute'));
 			});
-			it('sets styles top = 100px, right = 10px on the form', () => {
+			it('sets styles top = 120px, right = 10px on the form', () => {
 				ctrl.renderAddEdgeForm();
 
-				assert(ctrl.cssStyles.setStyle.calledWith(ctrl.addEdgeForm, 'top', '100px'));
+				assert(ctrl.cssStyles.setStyle.calledWith(ctrl.addEdgeForm, 'top', '120px'));
 				assert(ctrl.cssStyles.setStyle.calledWith(ctrl.addEdgeForm, 'right', '10px'));
 			});
 		});
