@@ -47,3 +47,14 @@ export function extendObj(parent, child) {
 
     return obj;
 }
+
+export function extendPlainObj(parent, child) {
+    let obj = parent.constructor();
+    Object.keys(parent).forEach(key => {
+        obj[key] = parent[key];
+    });
+    Object.keys(child).forEach(key => {
+        obj[key] = child[key];
+    });
+    return obj;
+}
