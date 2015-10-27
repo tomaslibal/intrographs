@@ -66,4 +66,22 @@ describe('CSSStyles', () => {
 			chai.assert.equal(mockElement.style.border, '2px solid blue');
 		});
 	});
+
+    describe('setStyles', () => {
+        it('iterates over an object with styleName:value pairs and applies each style', () => {
+            let mockStyles = {
+                "foo": 1,
+                "bar": 2,
+                "baz": 3
+            };
+
+            sinon.spy(cssStyles, 'setStyle');
+            
+            cssStyles.setStyles(mockElement, mockStyles);
+
+            chai.assert.equal(mockElement.style.foo, 1);
+            chai.assert.equal(mockElement.style.bar, 2);
+            chai.assert.equal(mockElement.style.baz, 3);
+        });
+    });
 });

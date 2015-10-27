@@ -21,4 +21,11 @@ export default class CSSStyles {
 	setStyle(element, styleName, value) {
 		element.style[styleName] = value;
 	}
+
+    setStyles(element, styles={}) {
+        Object.keys(styles).forEach(styleName => {
+            const val = styles[styleName];
+            this.setStyle(element, styleName, val);
+        });
+    }
 }
