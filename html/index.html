@@ -35,7 +35,12 @@
         document.addEventListener('WebComponentsReady', function() {
             console.log("webcomponents ready");
             importElement('polymer', '/bower_components/polymer/polymer.html');
+            importElement('font-roboto', '/bower_components/font-roboto/roboto.html');
             importElement('vertext-list', '/elements/vertexList.html');
+
+            var style = document.createElement('style');
+            style.innerHTML = '* { font-family: Roboto, sans-serif; }';
+            document.head.appendChild(style);
         });
 
         document.addEventListener('polymer-ready', function() {
