@@ -4,6 +4,8 @@
 	<meta charset="UTF-8">
     <title>IntroGraphs</title>
 
+    <!-- <link rel="import" href="bower_components/polymer/polymer.html"/> -->
+
     <style>
 	* { margin: 0; padding: 0 }
 	canvas { border: 1px solid #c0c0c0; }
@@ -12,6 +14,35 @@
 <body>
     <canvas width="640" height="480" id="canvas"></canvas>
 
+    <vertex-list param="foo"></vertex-list>
+
     <script src="/dist/out.js"></script>
-</body>
+
+    <script>
+        function attachElement(parentElement, element) {
+            parentElement.appendChild(element);
+        }
+        function createImportElement(href) {
+            var element = document.createElement('link');
+            element.rel = 'import';
+            element.href = href;
+            return element;
+        }
+        function importElement(elementName, href) {
+            var element = createImportElement(href);
+            attachElement(document.head, element);
+        }
+        document.addEventListener('WebComponentsReady', function() {
+            console.log("webcomponents ready");
+            importElement('polymer', '/bower_components/polymer/polymer.html');
+            importElement('vertext-list', '/elements/vertexList.html');
+        });
+
+        document.addEventListener('polymer-ready', function() {
+            console.log('polymer ready');
+        });
+    </script>
+    <script type="text/javascript" src="/bower_components/webcomponentsjs/webcomponents.js"></script> 
+
+    </body>
 </html>
