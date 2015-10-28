@@ -1,4 +1,4 @@
-// interim "main" entry point
+// intrographs "main" entry point
 
 import { getGraph } from "./graphs/Graph";
 import HTMLScene from "./presentation/html/HTMLScene";
