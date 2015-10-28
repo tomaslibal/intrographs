@@ -2,13 +2,13 @@ import HTMLModalWindow from './HTMLModalWindow';
 
 export default class HTMLList {
 
-	constructor(documentObj=null, parentElement=null, polymerElement=null, inner=null, polymer={}) {
+	constructor(documentObj=null, parentElement=null, polymerElement=null, inner=null, polymer=null) {
 		if (documentObj === null || parentElement === null) {
 			throw new Error('Constructor must be supplied with the document object and a parent element');
 			return;
 		}
 
-        this.polymer = typeof Polymer !== "undefined" ? Polymer : polymer;
+        this.polymer = polymer;
 
         this.polymerElement = polymerElement;
         this.inner = inner;
@@ -21,6 +21,7 @@ export default class HTMLList {
 
         this.polymerElement.addEventListener('ready', () => {
             this.polymerElementReady = true;
+            this.polymer = typeof Polymer !== "undefined" ? Polymer : this.polymer;
             this.render();
         });
         this.clickRegistered = false;
