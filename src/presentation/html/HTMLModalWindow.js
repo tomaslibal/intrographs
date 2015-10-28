@@ -74,6 +74,7 @@ export default class HTMLModalWindow extends ModalWindow {
 			this.setStyles();
 			this.rendered = true;
 			this.closeButton = this.getCloseWindowButton();
+            this.containerElement.innerHTML = this.content;
 			this.containerElement.appendChild(this.closeButton);
 		} else {
 			this.containerElement.innerHTML = this.content;
