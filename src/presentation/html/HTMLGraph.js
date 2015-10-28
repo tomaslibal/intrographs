@@ -5,11 +5,13 @@ import HTMLList from "./HTMLList";
 
 export default class HTMLGraph extends ObservableRenderable {
 
-	constructor(graph, document) {
+	constructor(graph, document, polymer={}) {
 		const x = 0;
 		const y = 0;
 
 		super({ 'posX': x, 'posY': y });
+
+        this.polymer = typeof Polymer !== "undefined" ? Polymer : polymer;
 
 		this.graph = graph;
 		this.x = x;
@@ -17,20 +19,13 @@ export default class HTMLGraph extends ObservableRenderable {
 		this.document = document;
 
 		let vertexListParentElement = document.createElement('div');
-		vertexListParentElement.style.position = 'absolute';
-		vertexListParentElement.style.left = '10px';
-		vertexListParentElement.style.bottom = '40px';
-		vertexListParentElement.innerHTML = '<span>Vertices: </span>';
-		document.body.appendChild(vertexListParentElement);
-		this.vertexList = new HTMLList(document, vertexListParentElement);
+
+        const el = this.document.querySelector("vertex-list");
+
+		this.vertexList = new HTMLList(document, vertexListParentElement, el, '.vertices', this.polymer);
 
 		let edgeListParentElement = document.createElement('div');
-		edgeListParentElement.style.position = 'absolute';
-		edgeListParentElement.style.left = '10px';
-		edgeListParentElement.style.bottom = '20px';
-		edgeListParentElement.innerHTML = '<span>Edges: </span>';
-		document.body.appendChild(edgeListParentElement);
-		this.edgeList = new HTMLList(document, edgeListParentElement);
+		this.edgeList = new HTMLList(document, edgeListParentElement, el, '.edges', this.polymer);
 
 		let graphRenderer = new GraphRenderer2D();
 		let canvas = this.document.querySelector("#canvas");
@@ -41,16 +36,6 @@ export default class HTMLGraph extends ObservableRenderable {
 		this.canvas = canvas;
 		this.ctx = ctx;
 	}
-
-    polymerRender() {
-        const el = this.document.querySelector("vertex-list");
-        Polymer.dom(el).node.querySelector('.vertices').innerHTML = this.graph.vertices.reduce((prev, curr, idx, arr) => {
-            return (prev.name || prev) + ', ' + curr.name;
-        });
-        Polymer.dom(el).node.querySelector('.edges').innerHTML = this.graph.edges.reduce((prev, curr, idx, arr) => {
-            return (prev.connects || prev) + ', ' + curr.connects;
-        });
-    }
 
 	setUp() {
 		if (this.controls) {
@@ -72,11 +57,6 @@ export default class HTMLGraph extends ObservableRenderable {
 		this.graph.edges.forEach(edge => {
 			this.edgeList.list.push(edge.connects);
 		});
-
-        const el = this.document.querySelector("vertex-list");
-        el.addEventListener('ready', () => {
-            this.polymerRender();
-        });
 	}
 
 	_handleNewVertexEvent({ 'id': id, 'label': label }) {
@@ -85,7 +65,6 @@ export default class HTMLGraph extends ObservableRenderable {
 
 		this.vertexList.list.push(id);
 		this.vertexList.render();
-        this.polymerRender();
 	}
 
 	_handleNewEdgeEvent({ 'vertex1': v1, 'vertex2': v2 }) {
@@ -94,11 +73,9 @@ export default class HTMLGraph extends ObservableRenderable {
 
 		this.edgeList.list.push([v1, v2]);
 		this.edgeList.render();
-        this.polymerRender();
 	}
 
 	render() {
-
 		this.graphRenderer.clearCanvas(this.ctx);
 		this.graphRenderer.render(this.graph);
 

@@ -2,19 +2,28 @@ import HTMLModalWindow from './HTMLModalWindow';
 
 export default class HTMLList {
 
-	constructor(documentObj=null, parentElement=null) {
+	constructor(documentObj=null, parentElement=null, polymerElement=null, inner=null, polymer={}) {
 		if (documentObj === null || parentElement === null) {
 			throw new Error('Constructor must be supplied with the document object and a parent element');
 			return;
 		}
 
+        this.polymer = typeof Polymer !== "undefined" ? Polymer : polymer;
+
+        this.polymerElement = polymerElement;
+        this.inner = inner;
 		this.document = documentObj;
 		this.parent = parentElement;
-		this.listElement = this.document.createElement('span');
-		this.parent.appendChild(this.listElement);
 		this.list = [];
-		this.limit = 16;
+		this.limit = 5;
 		this.modal = null;
+        this.polymerElementReady = false;
+
+        this.polymerElement.addEventListener('ready', () => {
+            this.polymerElementReady = true;
+            this.render();
+        });
+        this.clickRegistered = false;
 	}
 
 	showAllClickHandler(event) {
@@ -31,6 +40,10 @@ export default class HTMLList {
 	}
 
 	render() {
+        if (!this.polymerElementReady) {
+            return;
+        }
+
 		let listOfElements = this.list;
 		let limitExceeded = false;
 
@@ -42,16 +55,27 @@ export default class HTMLList {
 		let str = listOfElements.reduce((prev, curr, idx) => {
 			return prev + ', ' + curr;
 		});
+        
+        const findPolymer = this.polymer.dom(this.polymerElement);
 
-		this.listElement.innerHTML = `${str}`;
+        if (!findPolymer) {
+            return;
+        }
+    
+        findPolymer.node.querySelector(this.inner).innerHTML = str;
 
-		if (limitExceeded) {
-			let showAllLink = this.document.createElement('a');
-			showAllLink.href = '#';
-			showAllLink.innerHTML = '(show all)';
-			this._boundShowAllClickHandler = this.showAllClickHandler.bind(this);
-			showAllLink.addEventListener('click', this._boundShowAllClickHandler);
-			this.listElement.appendChild(showAllLink);
+        let showAllBt = this.polymer.dom(this.polymerElement).node.querySelector(this.inner).parentElement.querySelector('.all');
+
+		if (limitExceeded && !this.clickRegistered) {
+        	this._boundShowAllClickHandler = this.showAllClickHandler.bind(this);
+			showAllBt.addEventListener('click', this._boundShowAllClickHandler);
+            this.clickRegistered = true;
 		}
+        
+        if (limitExceeded) {
+            showAllBt.style.display = 'inline';   
+        } else {
+            showAllBt.style.display = 'none';
+        }
 	}
 }

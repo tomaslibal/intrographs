@@ -10,6 +10,10 @@ let assert = require("assert");
 let chai = require("chai");
 let sinon = require("sinon");
 
+let mockPolymer = {
+    dom: sinon.stub()
+};
+
 describe('HTMLGraph', () => {
 
 	let htmlGraph = null;
@@ -34,6 +38,10 @@ describe('HTMLGraph', () => {
 		}
 	};
 
+    let mockVertexList = {
+
+    };
+
 	let mockGraph = {
 		addVertex: sinon.stub(),
 		addEdge: sinon.stub(),
@@ -44,7 +52,9 @@ describe('HTMLGraph', () => {
 	beforeEach('setup test fixtures', () => {
 		sinon.spy(mockControls, 'addEventListener');
 
-		htmlGraph = new HTMLGraph(mockGraph, mockDocument);
+        //mockDocument.querySelector.withArgs('vertex-list').returns(mockElement);
+
+		htmlGraph = new HTMLGraph(mockGraph, mockDocument, mockPolymer);
 		htmlGraph.controls = mockControls;
 		htmlGraph.setUp();
 		htmlGraph.render = sinon.stub();
