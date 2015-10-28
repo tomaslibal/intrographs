@@ -10,8 +10,20 @@ K3.addEdge(["A", "B"]);
 K3.addEdge(["A", "C"]);
 K3.addEdge(["B", "C"]);
 
-let scene = new HTMLScene(K3, window);
-scene.renderAll();
+function init() {
+    let scene = new HTMLScene(K3, window);
+    scene.renderAll();
+}
+
+init();
+/*
+if (document.readyState === "complete") {
+    init();
+} else {
+    document.addEventListener("DOMContentLoaded", () => {
+        init();
+    });
+}*/
 
 // Extra, Prints the graph as an adjacency matrix to the console
 // import MatrixPrinter from "./presentation/MatrixPrinter";
