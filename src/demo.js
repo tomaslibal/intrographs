@@ -16,17 +16,3 @@ function init() {
 }
 
 init();
-/*
-if (document.readyState === "complete") {
-    init();
-} else {
-    document.addEventListener("DOMContentLoaded", () => {
-        init();
-    });
-}*/
-
-// Extra, Prints the graph as an adjacency matrix to the console
-// import MatrixPrinter from "./presentation/MatrixPrinter";
-// import Matrix from "./common/Matrix";
-// let mat = Matrix.fromGraph(K3.getVerticesList(), K3.edges);
-// console.log(MatrixPrinter.ascii(mat));
