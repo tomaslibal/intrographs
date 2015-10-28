@@ -42,6 +42,16 @@ export default class HTMLGraph extends ObservableRenderable {
 		this.ctx = ctx;
 	}
 
+    polymerRender() {
+        const el = this.document.querySelector("vertex-list");
+        Polymer.dom(el).node.querySelector('.vertices').innerHTML = this.graph.vertices.reduce((prev, curr, idx, arr) => {
+            return (prev.name || prev) + ', ' + curr.name;
+        });
+        Polymer.dom(el).node.querySelector('.edges').innerHTML = this.graph.edges.reduce((prev, curr, idx, arr) => {
+            return (prev.connects || prev) + ', ' + curr.connects;
+        });
+    }
+
 	setUp() {
 		if (this.controls) {
 			this.ctrlObservable = new Observable(this.controls);
@@ -62,6 +72,11 @@ export default class HTMLGraph extends ObservableRenderable {
 		this.graph.edges.forEach(edge => {
 			this.edgeList.list.push(edge.connects);
 		});
+
+        const el = this.document.querySelector("vertex-list");
+        el.addEventListener('ready', () => {
+            this.polymerRender();
+        });
 	}
 
 	_handleNewVertexEvent({ 'id': id, 'label': label }) {
@@ -70,6 +85,7 @@ export default class HTMLGraph extends ObservableRenderable {
 
 		this.vertexList.list.push(id);
 		this.vertexList.render();
+        this.polymerRender();
 	}
 
 	_handleNewEdgeEvent({ 'vertex1': v1, 'vertex2': v2 }) {
@@ -78,6 +94,7 @@ export default class HTMLGraph extends ObservableRenderable {
 
 		this.edgeList.list.push([v1, v2]);
 		this.edgeList.render();
+        this.polymerRender();
 	}
 
 	render() {
