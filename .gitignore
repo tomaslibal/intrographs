@@ -22,3 +22,6 @@ docs/**/*.xml
 docs/**/*.bcf
 docs/**/*.bib
 docs/**/*.bak
+
+# bower components folder
+bower_components
