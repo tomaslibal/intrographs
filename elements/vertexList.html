@@ -22,10 +22,13 @@
         .all.show {
             display: inline;
         }
+        .label {
+            font-weight: bold;
+        }
         </style>
         <div id="container">
-            <div><span>Vertices</span><span class="vertices">{{foo}}</span><span class="bt-all-vertices all">all vertices</span></div>
-            <div><span>Edges</span><span class="edges"></span><span class="bt-all-edges all">all edges</span></div>
+            <div><span class="label">{{labels.vertexSet}}</span> <span class="vertices"></span><span class="bt-all-vertices all">all vertices</span></div>
+            <div><span class="label">{{labels.edgeSet}}</span> <span class="edges"></span><span class="bt-all-edges all">all edges</span></div>
         </div>
     </template>
     <script>
@@ -33,7 +36,10 @@
         is: 'vertex-list',
         name: 'unknown',
         ready: function() {
-            this.foo = 10;
+            this.labels = {
+                'vertexSet': 'Vertices',
+                'edgeSet': 'Edges'
+            };
             console.log('vertext-list ready');
             this.fire('ready', { ready: true });
         }
