@@ -13,10 +13,19 @@
             /* Props */
             background: #33CCFF; 
             color: white; 
-        }</style>
+        }
+        .all {
+            display: none;
+            cursor: pointer;
+            font-style: italic;   
+        }
+        .all.show {
+            display: inline;
+        }
+        </style>
         <div id="container">
-            <div><span>Vertices</span><span class="vertices">{{foo}}</span></div>
-            <div><span>Edges</span><span class="edges"></span></div>
+            <div><span>Vertices</span><span class="vertices">{{foo}}</span><span class="bt-all-vertices all">all vertices</span></div>
+            <div><span>Edges</span><span class="edges"></span><span class="bt-all-edges all">all edges</span></div>
         </div>
     </template>
     <script>
