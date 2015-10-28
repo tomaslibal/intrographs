@@ -31,6 +31,22 @@ export default class HTMLControls extends ObservableRenderable {
 		return this.elementCtrl.appendElementIfNotPresent(element, parent);
 	}
 
+    stylizeForm(inputs=[], spans=[]) {
+        const spanStyles = {
+            'display': 'inline-block',
+            'width': '38%'
+        };
+
+        const inputStyles = {
+            'display': 'inline-block',
+            'width': '50%'
+        };
+
+        inputs.forEach(input => this.cssStyles.setStyles(input, inputStyles));
+
+        spans.forEach(span => this.cssStyles.setStyles(span, spanStyles));
+    }
+
 	_addVertexButtonHandler() {
 		let vertexId = this.addVertexForm.querySelector('#vertexId');
 		let vertexLabel = this.addVertexForm.querySelector('#vertexLabel');
@@ -71,7 +87,7 @@ export default class HTMLControls extends ObservableRenderable {
 
 			label = this.createLabelAppend('Add Vertex', this.addVertexForm);
 			spanId = this.createSpanAppend({ innerHTML: 'ID' }, this.addVertexForm);
-			inputId = this.createInputAppend({ id: 'vertexId', 'type': 'text' }, this.addVertexForm);
+            inputId = this.createInputAppend({ id: 'vertexId', 'type': 'text' }, this.addVertexForm);
 			spanLabel = this.createSpanAppend({ innerHTML: 'Label' }, this.addVertexForm);
 			inputLabel = this.createInputAppend({ id: 'vertexLabel', 'type': 'text' }, this.addVertexForm);
 			buttonAdd = this.createButtonAppend('Add', this.addVertexForm);
@@ -82,6 +98,8 @@ export default class HTMLControls extends ObservableRenderable {
             });
             
             this.cssStyles.setStyles(this.addVertexForm, vertexFormStyles);
+
+            this.stylizeForm([inputId, inputLabel], [spanId, spanLabel]);
 		}
 
 		if (this.appendElementIfNotPresent(this.addVertexForm, this.document.body)) {
@@ -116,6 +134,8 @@ export default class HTMLControls extends ObservableRenderable {
             });
 
             this.cssStyles.setStyles(this.addEdgeForm, edgeFormStyles);
+
+            this.stylizeForm([input1, input2], [spanVertex1, spanVertex2]);
 		}
 
 		if (this.appendElementIfNotPresent(this.addEdgeForm, this.document.body)) {
