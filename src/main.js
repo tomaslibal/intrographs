@@ -1,6 +1,6 @@
 // interim "main" entry point
 
-import { Graph, getGraph } from "./graphs/Graph";
+import { getGraph } from "./graphs/Graph";
 import HTMLScene from "./presentation/html/HTMLScene";
 
 let K3 = getGraph();

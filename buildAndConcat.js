@@ -4,7 +4,7 @@ var babel = require('rollup-plugin-babel');
 var fs = require('fs');
 
 rollup({
-  entry: 'src/demo.js',
+  entry: 'src/main.js',
   format: 'umd',
   plugins: [
     babel({

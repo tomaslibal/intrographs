@@ -1,6 +1,6 @@
 {
   "private": true,
-  "jsnext:main": "./src/demo.js",
+  "jsnext:main": "./src/main.js",
   "scripts": {
     "server": "python -m SimpleHTTPServer 8080",
     "firefox": "which firefox; if [ $? -eq 0 ]; then firefox http://localhost:8080/; else echo 'Error! Firefox not found'; fi",
