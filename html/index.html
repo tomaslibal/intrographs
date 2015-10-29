@@ -16,35 +16,6 @@
 
     <script src="/dist/out.js"></script>
 
-    <script>
-        function attachElement(parentElement, element) {
-            parentElement.appendChild(element);
-        }
-        function createImportElement(href) {
-            var element = document.createElement('link');
-            element.rel = 'import';
-            element.href = href;
-            return element;
-        }
-        function importElement(elementName, href) {
-            var element = createImportElement(href);
-            attachElement(document.head, element);
-        }
-        document.addEventListener('WebComponentsReady', function() {
-            console.log("webcomponents ready");
-            importElement('polymer', '/bower_components/polymer/polymer.html');
-            importElement('font-roboto', '/bower_components/font-roboto/roboto.html');
-            importElement('vertext-list', '/elements/vertexList.html');
-
-            var style = document.createElement('style');
-            style.innerHTML = '* { font-family: Roboto, sans-serif; }';
-            document.head.appendChild(style);
-        });
-
-        document.addEventListener('polymer-ready', function() {
-            console.log('polymer ready');
-        });
-    </script>
     <script type="text/javascript" src="/bower_components/webcomponentsjs/webcomponents.js"></script> 
 
     </body>
