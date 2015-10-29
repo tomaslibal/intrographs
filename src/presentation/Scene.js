@@ -4,6 +4,8 @@
  * This should not know about HTML.
  *
  */
+import EventBus from '../common/EventBus';
+
 export default class Scene {
 
 	constructor(graph=null, background=null, minidisplay=null, controls=null, menubar=null) {
@@ -12,6 +14,7 @@ export default class Scene {
 		this.minidisplay = minidisplay;
 		this.controls = controls;
 		this.menubar = menubar;
+        this.eventBus = new EventBus('Scene_Event_Bus');
 
 		this.clock = 0;
 	    this.playState = 'paused';
