@@ -15,7 +15,7 @@ export default class HTMLList {
 		this.document = documentObj;
 		this.parent = parentElement;
 		this.list = [];
-		this.limit = 5;
+		this.limit = 16;
 		this.modal = null;
         this.polymerElementReady = false;
 
