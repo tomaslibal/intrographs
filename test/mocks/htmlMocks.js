@@ -57,7 +57,8 @@ let mockDocument = {
 	querySelector: sinon.stub(),
 	body: mockDocumentBody,
 	appendChild: sinon.stub(),
-	defaultView: null
+	defaultView: null,
+	addEventListener: sinon.stub()
 };
 
 let mockWindow = {
