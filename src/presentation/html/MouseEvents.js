@@ -1,3 +1,7 @@
+/**
+ * Proxy class MouseEvents delegates adding event listeners to selected
+ * mouse events on a ${target} element.
+ */
 export default class MouseEvents {
 
 	static onClick(target, callback) {

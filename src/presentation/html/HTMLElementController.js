@@ -8,6 +8,12 @@ export default class HTMLElementController {
 		return parentElement.appendChild(this.document.createElement(elementType));
 	}
 
+	/**
+	 * Appends ${element} to ${parent} if parent's child nodes contain no element
+	 * of same className as the ${element}.
+	 * 
+	 * @return bool
+	 */
 	appendElementIfNotPresent(element, parent) {
 		if (parent.querySelector(`.${element.className}`) === null) {
 			parent.appendChild(element);
