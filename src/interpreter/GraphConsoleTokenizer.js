@@ -11,7 +11,7 @@ class GraphConsoleToken {
 export default class GraphConsoleTokenizer {
 	
 	constructor() {
-		this.delimiters = ['.', '(', ')'];
+		this.delimiters = ['.', '(', ')', ','];
 		this.stripChars = ['"'];
 		this.actions = [
 			'add',
