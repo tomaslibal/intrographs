@@ -49,6 +49,7 @@ export default class PolymerBridge {
         this.importElement('polymer', '/bower_components/polymer/polymer.html');
         this.importElement('font-roboto', '/bower_components/font-roboto/roboto.html');
         this.importElement('vertext-list', '/elements/vertexList.html');
+        this.importElement('console', '/elements/console.html');
         
         let style = this.document.createElement('style');
         style.innerHTML = '* { font-family: Roboto, sans-serif; }';

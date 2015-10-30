@@ -1,7 +1,92 @@
-<dom-module id="console">
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
+
+<dom-module id="graph-console">
     <template>
+        <style>
+            .cta {
+                position: absolute;
+                bottom: 0;
+                
+                /* props */
+                background: white;
+                color: #a0a0a0;
+                cursor: pointer;
+                
+                z-index: 401;
+            }
+            
+            .consolePane {
+                /* layout */
+                position: absolute;
+                bottom: -300px;
+                z-index: 400;
+                display: none;
+                
+                /* dims */
+                width: 100%;
+                height: 300px;
+                
+                /* props */
+                transition: transform 0.4s, height 0.4s;
+                background: #ffffdd;
+                border-top: 1px solid #ddd390;
+                
+            }
+            
+            .consolePane.out {
+                transform: translateY(-300px);
+            }
+        </style>
+        
+        <paper-button class="cta" raised="" role="button" tabindex="0">Console</paper-button>
+        
+        <div class="consolePane">
+            <div class="stdout">
+            </div>
+            
+            <div class="stdin">
+            </div>
+        </div>
+        
     </template>
 
     <script>
+        Polymer({
+            is: 'graph-console',
+            paneDisplay: false,
+            showPane: function() {
+                this.paneDisplay = true;
+                var pane = Polymer.dom(this.root).querySelector('.consolePane');
+                pane.style.display = 'block';
+                setTimeout(function() {
+                    pane.classList.add('out');    
+                }, 0);
+            },
+            hidePane: function() {
+                this.paneDisplay = false;
+                var pane = Polymer.dom(this.root).querySelector('.consolePane');
+                pane.classList.remove('out');
+                setTimeout(function() {
+                    pane.style.display = 'none';
+                }, 400);
+            },
+            ctaClickHandler: function() {
+                if (this.paneDisplay) {
+                    this.hidePane();
+                } else {
+                    this.showPane();
+                }
+            },
+            ready: function() {
+                console.log('graph-console is ready');
+                var btWidth = 100;
+                var width = window.innerWidth;
+                var left = (width / 2) - (btWidth / 2);
+                var cta = Polymer.dom(this.root).querySelector('.cta')
+                
+                cta.style.left = left + 'px';
+                cta.addEventListener('click', this.ctaClickHandler.bind(this));
+            }
+        })
     </script>
 </dom-module>
