@@ -32,5 +32,12 @@ export default class PolymerBridge {
             this.document.head.appendChild(style);
         });
     }
-   
+
+    static getPolymerSync() {
+        return typeof Polymer !== "undefined" ? Polymer : undefined;
+    }   
+    
+    static getPolymerPromise() {
+        /** TODO */
+    }
 } 
