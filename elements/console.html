@@ -1,4 +1,5 @@
 <link rel="import" href="/bower_components/paper-button/paper-button.html">
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
 
 <dom-module id="graph-console">
     <template>
@@ -36,15 +37,26 @@
             .consolePane.out {
                 transform: translateY(-300px);
             }
+            
+            .stdout {
+                height: 200px;
+                overflow-y: scroll;
+            }
+            .stdin {
+                height: 30px;
+            }
         </style>
         
         <paper-button class="cta" raised="" role="button" tabindex="0">Console</paper-button>
         
         <div class="consolePane">
-            <div class="stdout">
+            <div id="stdout" class="stdout">
             </div>
             
             <div class="stdin">
+                <paper-input id="stdin" label="">
+                    <div prefix>$ </div>
+                </paper-input>
             </div>
         </div>
         
@@ -58,9 +70,10 @@
                 this.paneDisplay = true;
                 var pane = Polymer.dom(this.root).querySelector('.consolePane');
                 pane.style.display = 'block';
+              
                 setTimeout(function() {
                     pane.classList.add('out');    
-                }, 0);
+                }, 5);
             },
             hidePane: function() {
                 this.paneDisplay = false;
@@ -68,6 +81,7 @@
                 pane.classList.remove('out');
                 setTimeout(function() {
                     pane.style.display = 'none';
+                    
                 }, 400);
             },
             ctaClickHandler: function() {
@@ -75,6 +89,23 @@
                     this.hidePane();
                 } else {
                     this.showPane();
+                }
+            },
+            sendCommand: function(cmd) {
+              console.log('sending command: ', cmd);
+              var stdout = this.$.stdout;
+              var command = document.createElement('div');
+              command.innerHTML = cmd;
+              stdout.appendChild(command);
+              stdout.scrollTop = stdout.clientHeight; 
+            },
+            stdinKeypressHandler: function(event) {
+                var ENTER_CODE = 13;
+                if (event.charCode === ENTER_CODE || event.keyCode === ENTER_CODE || event.which === ENTER_CODE) {
+                    var input = this.$.stdin;
+                    var cmd = input.value;
+                    this.sendCommand(cmd);
+                    input.value = '';
                 }
             },
             ready: function() {
@@ -86,6 +117,9 @@
                 
                 cta.style.left = left + 'px';
                 cta.addEventListener('click', this.ctaClickHandler.bind(this));
+                
+                var stdin = Polymer.dom(this.root).querySelector('paper-input');
+                stdin.addEventListener('keypress', this.stdinKeypressHandler.bind(this));
             }
         })
     </script>
