@@ -32,6 +32,8 @@ export default class HTMLScene extends Scene {
 
 		super(htmlGraph, bg, minidisplay, controls, menuBar);
 
+		this.observables = [];
+		
 		this.window = windowObj;
 		this.document = document;
 		this.htmlWindow = new HTMLWindow(this.window);
@@ -99,6 +101,21 @@ export default class HTMLScene extends Scene {
 		this.lastScreenX = ev.screenX;
 		this.lastScreenY = ev.screenY;
 	}
+	
+	setupObservable(observedElement, subscribedEvent, callback) {
+		const observable = new Observable(observedElement);
+		const boundCallback = callback.bind(this);
+		
+		observable.subscribe(subscribedEvent);
+		observable.forEach(boundCallback);
+		
+		this.observables.push({
+			'observedElement': observedElement,
+			'subscribedEvent': subscribedEvent,
+			'callback': boundCallback,
+			'observable': observable
+		});
+	}
 
 	setupCanvas() {
 		let canvas = this.document.querySelector('#canvas');
@@ -109,20 +126,9 @@ export default class HTMLScene extends Scene {
 		canvas.width = width;
 		canvas.height = height;
 
-		this.canvasObservableMouseDown = new Observable(canvas);
-		this._boundCanvasMouseDownHandler = this.canvasMouseDownHandler.bind(this);
-		this.canvasObservableMouseDown.subscribe('mousedown');
-		this.canvasObservableMouseDown.forEach(this._boundCanvasMouseDownHandler);
-
-		this.canvasObservableMouseUp = new Observable(canvas);
-		this.canvasObservableMouseUp.subscribe('mouseup');
-		this._boundCanvasMouseUpHandler = this.canvasMouseUpHandler.bind(this);
-		this.canvasObservableMouseUp.forEach(this._boundCanvasMouseUpHandler);
-
-		this.canvasObservableMouseMove = new Observable(canvas);
-		this.canvasObservableMouseMove.subscribe('mousemove');
-		this._boundCanvasMouseMoveHandler = this.canvasMouseMoveHandler.bind(this);
-		this.canvasObservableMouseMove.forEach(this._boundCanvasMouseMoveHandler);
+		this.setupObservable(canvas, 'mousedown', this.canvasMouseDownHandler);
+		this.setupObservable(canvas, 'mouseup', this.canvasMouseUpHandler);
+		this.setupObservable(canvas, 'mousemove', this.canvasMouseMoveHandler);
 	}
 
 }

@@ -1,5 +1,5 @@
 // import s.u.t.
-import HTMLScene from "../../../src/presentation/html/HTMLScene";
+import { default as HTMLScene, __RewireAPI__ as HTMLSceneRewire } from "../../../src/presentation/html/HTMLScene";
 
 import HTMLBackground from "../../../src/presentation/html/HTMLBackground";
 import HTMLMinidisplay from "../../../src/presentation/html/HTMLMinidisplay";
@@ -67,6 +67,45 @@ describe('HTMLScene', () => {
 		assert(htmlScene.graph instanceof HTMLGraph);
 		assert(htmlScene.controls instanceof HTMLControls);
 	});
+	
+	describe('setupObservable', () => {
+		it('creates a new Observable instance from the observedElement', () => {
+			const spiedObservable = sinon.spy(Observable);
+			HTMLSceneRewire.__Rewire__('Observable', spiedObservable);
+			
+			const mockFn = sinon.stub();
+			
+			htmlScene.setupObservable(mockElement, 'testEvent', mockFn);
+			assert(spiedObservable.calledWith(mockElement));
+		});
+		
+		it('binds the callback to htmlScene instance', () => {
+			const mockFn = sinon.stub();
+			sinon.spy(mockFn, 'bind');
+			
+			htmlScene.setupObservable(mockElement, 'testEvent', mockFn);
+			
+			assert(mockFn.bind.calledWith(htmlScene));
+		});
+		
+		it('subscribes to the supplied subscribedEvent on the Observable', () => {
+			const mockObservable = {
+				subscribe: sinon.stub(),
+				forEach: sinon.stub()
+			};
+			const stubObservable = sinon.stub().returns(mockObservable);
+			HTMLSceneRewire.__Rewire__('Observable', stubObservable);
+			
+			const mockFn = sinon.stub();
+			const mockBoundFn = sinon.stub();
+			mockFn.bind = sinon.stub().returns(mockBoundFn);
+			
+			htmlScene.setupObservable(mockElement, 'testEvent', mockFn);
+			
+			assert(mockObservable.subscribe.calledWith('testEvent'));
+			assert(mockObservable.forEach.calledWith(mockBoundFn));
+		});
+	});
 
 	describe('setupCanvas()', () => {
 		it('uses HTMLWindow to set full viewport dimensions on the #canvas element', () => {
@@ -91,11 +130,12 @@ describe('HTMLScene', () => {
 		});
 
 		it('creates observables for mousedown, mouseup and mousemove events on the canvas', () => {
+			sinon.spy(htmlScene, 'setupObservable');
 			htmlScene.setupCanvas();
 
-			assert(htmlScene.canvasObservableMouseDown instanceof Observable);
-			assert(htmlScene.canvasObservableMouseUp instanceof Observable);
-			assert(htmlScene.canvasObservableMouseMove instanceof Observable);
+			assert(htmlScene.setupObservable.calledWith(htmlScene.canvas, 'mousedown', htmlScene.canvasMouseDownHandler));
+			assert(htmlScene.setupObservable.calledWith(htmlScene.canvas, 'mouseup', htmlScene.canvasMouseUpHandler));
+			assert(htmlScene.setupObservable.calledWith(htmlScene.canvas, 'mousemove', htmlScene.canvasMouseMoveHandler));
 		});
 	});
 
