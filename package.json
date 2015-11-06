@@ -1,15 +1,18 @@
 {
+  "name": "intrographs",
+  "version": "latest",
   "private": true,
   "jsnext:main": "./src/main.js",
   "scripts": {
     "server": "python -m SimpleHTTPServer 8080",
     "firefox": "which firefox; if [ $? -eq 0 ]; then firefox http://localhost:8080/; else echo 'Error! Firefox not found'; fi",
     "browserify": "node_modules/browserify/bin/cmd.js -e dist/out.raw.js -o dist/out.js",
-    "minify": "", 
+    "minify": "",
     "build": "export BABEL_ENV=build; npm run clear && mkdir -p dist && node buildAndConcat.js && npm run browserify",
     "clear": "rm -rf build && rm -rf dist",
     "test": "export BABEL_ENV=development; ./node_modules/mocha/bin/mocha --compilers js:babel/register --recursive",
-    "sloccount": " node_modules/cloc/lib/cloc docs html src test"
+    "sloccount": " node_modules/cloc/lib/cloc docs html src test",
+    "install": "npm install && bower install"
   },
   "devDependencies": {
     "babel": "^5.8.21",

@@ -58,7 +58,7 @@ This is a JavaScript software tested to run in a browser. Because this is a deve
 
 ### Install dependencies
 
-Use `npm` or install dependencies individually in `node_modules`. Your system should have Node.js installed and have it in the PATH environmental variable (on *NIX systems). Additionally, Python version 2.x is used for running a local HTTP server but it is not necessary.
+Use `npm` or install dependencies individually in `node_modules` and `bower_components`. Your system should have Node.js and Bower installed and have it in the PATH environmental variable (on *NIX systems). Additionally, Python version 2.x is used for running a local HTTP server but it is not necessary.
 
     npm run install
 
