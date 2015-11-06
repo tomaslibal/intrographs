@@ -1,6 +1,6 @@
 {
   "name": "intrographs",
-  "version": "latest",
+  "version": "0.0.0",
   "private": true,
   "jsnext:main": "./src/main.js",
   "scripts": {
