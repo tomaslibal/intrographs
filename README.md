@@ -9,7 +9,7 @@ properties like what type of graph it is, whether it is planar and so on.
 
 ## Features
 
-**Graph rendering**: 
+**Graph rendering**:
 
 - renders a graph with vertices and nodes
 - "free view" by mouse drag and drop
@@ -23,6 +23,10 @@ properties like what type of graph it is, whether it is planar and so on.
 - returns an independent set
 - returns a spanning tree
 - depth first search (DFS)
+
+**Evaluation console**
+
+- interprets text commands
 
 ## Difference between pure mathematical graphs and graphs in computer science
 
