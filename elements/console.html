@@ -6,38 +6,39 @@
         <style>
             .cta {
                 position: absolute;
-                bottom: 0;
-                
+                bottom: 85px;
+                right: 5px;
+
                 /* props */
                 background: white;
                 color: #a0a0a0;
                 cursor: pointer;
-                
+
                 z-index: 401;
             }
-            
+
             .consolePane {
                 /* layout */
                 position: absolute;
                 bottom: -300px;
                 z-index: 400;
                 display: none;
-                
+
                 /* dims */
                 width: 100%;
                 height: 300px;
-                
+
                 /* props */
                 transition: transform 0.4s, height 0.4s;
                 background: #ffffdd;
                 border-top: 1px solid #ddd390;
-                
+
             }
-            
+
             .consolePane.out {
                 transform: translateY(-300px);
             }
-            
+
             .stdout {
                 height: 200px;
                 overflow-y: scroll;
@@ -46,20 +47,20 @@
                 height: 30px;
             }
         </style>
-        
+
         <paper-button class="cta" raised="" role="button" tabindex="0">Console</paper-button>
-        
+
         <div class="consolePane">
             <div id="stdout" class="stdout">
             </div>
-            
+
             <div class="stdin">
                 <paper-input id="stdin" label="">
                     <div prefix>$ </div>
                 </paper-input>
             </div>
         </div>
-        
+
     </template>
 
     <script>
@@ -70,9 +71,9 @@
                 this.paneDisplay = true;
                 var pane = Polymer.dom(this.root).querySelector('.consolePane');
                 pane.style.display = 'block';
-              
+
                 setTimeout(function() {
-                    pane.classList.add('out');    
+                    pane.classList.add('out');
                 }, 5);
             },
             hidePane: function() {
@@ -81,7 +82,7 @@
                 pane.classList.remove('out');
                 setTimeout(function() {
                     pane.style.display = 'none';
-                    
+
                 }, 400);
             },
             ctaClickHandler: function() {
@@ -97,7 +98,7 @@
               var command = document.createElement('div');
               command.innerHTML = cmd;
               stdout.appendChild(command);
-              stdout.scrollTop = stdout.clientHeight; 
+              stdout.scrollTop = stdout.clientHeight;
             },
             stdinKeypressHandler: function(event) {
                 var ENTER_CODE = 13;
@@ -110,14 +111,10 @@
             },
             ready: function() {
                 console.log('graph-console is ready');
-                var btWidth = 100;
-                var width = window.innerWidth;
-                var left = (width / 2) - (btWidth / 2);
                 var cta = Polymer.dom(this.root).querySelector('.cta')
-                
-                cta.style.left = left + 'px';
+
                 cta.addEventListener('click', this.ctaClickHandler.bind(this));
-                
+
                 var stdin = Polymer.dom(this.root).querySelector('paper-input');
                 stdin.addEventListener('keypress', this.stdinKeypressHandler.bind(this));
             }
