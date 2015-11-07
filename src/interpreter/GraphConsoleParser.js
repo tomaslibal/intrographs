@@ -38,7 +38,7 @@ export default class GraphConsoleParser {
 					}
 				}
 				// is token isValue is true, remove leading and trailing quotes/double quotes if present
-				if (tok.isValue) {
+				if (tok.isValue && typeof tok.value === "string") {
 					tok.value = tok.value.trim();
 					const a = tok.value.charAt(0);
 					const b = tok.value.charAt(tok.value.length - 1);

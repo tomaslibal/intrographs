@@ -84,4 +84,14 @@ describe('GraphConsoleParser', () => {
 			chai.assert.deepEqual(stmts, []);
 		});
 	});
+
+	describe('tokens in the same statement', () => {
+		it('are returned as one statement', () => {
+			const stmt = parser.parse([{ isValue: true, value: 1 }, { isValue: true, value: 2 }]);
+
+			// one statement, containing two tokens
+			chai.assert.equal(stmt.length, 1);
+			chai.assert.equal(stmt[0].length, 2);
+		});
+	});
 });
