@@ -64,4 +64,14 @@ describe('GraphConsoleParser', () => {
 			chai.expect(throws).to.throw();
 		});
 	});
+
+	describe('quotes removing for values', () => {
+		it(`token { value: '"A"' } is transformed to have value: 'A' `, () => {
+			const stmt = parser.parse([{ 'isValue': true, 'value': '"A"'}]);
+
+			const token = stmt[0][0];
+
+			chai.assert.equal(token.value, 'A');
+		});
+	});
 });

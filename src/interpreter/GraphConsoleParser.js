@@ -37,6 +37,18 @@ export default class GraphConsoleParser {
 						throw new ParserException('Parse Error: object word must be followed by an action word');
 					}
 				}
+				// is token isValue is true, remove leading and trailing quotes/double quotes if present
+				if (tok.isValue) {
+					tok.value = tok.value.trim();
+					const a = tok.value.charAt(0);
+					const b = tok.value.charAt(tok.value.length - 1);
+					if (a === '"' || a === "'") {
+						tok.value = tok.value.slice(1);
+					}
+					if (b === '"' || b === "'") {
+						tok.value = tok.value.slice(0, -1);
+					}
+				}
 				current.push(tok);
 			}
 		});
