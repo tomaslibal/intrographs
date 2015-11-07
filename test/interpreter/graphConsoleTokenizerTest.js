@@ -36,4 +36,15 @@ describe('GraphConsoleTokenizer', () => {
 			chai.assert.equal(r.length, 6);
 		});
 	});
+
+	describe('invalid input', () => {
+		it('will return an empty array of tokens', () => {
+			const s = 'garbage';
+			const r = tokenizer.tok(s);
+
+			chai.assert.deepEqual(r, []);
+		});
+
+
+	});
 });

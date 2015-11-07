@@ -21,6 +21,8 @@ export default class GraphConsoleTokenizer {
 	}
 
 	tok(input='') {
+		const max = input.length;
+
 		let tokens = [];
 		let token = '';
 
@@ -37,7 +39,7 @@ export default class GraphConsoleTokenizer {
 			}
 
 			// fast forward until delimiter found
-			while (this.delimiters.indexOf(ch) == -1) {
+			while (this.delimiters.indexOf(ch) === -1 && i < max) {
 				token += ch;
 				i++;
 				ch = input[i];
