@@ -74,4 +74,14 @@ describe('GraphConsoleParser', () => {
 			chai.assert.equal(token.value, 'A');
 		});
 	});
+
+	describe('empty tokens list', () => {
+		it('produces empty statements list', () => {
+			const tokens = [];
+
+			const stmts = parser.parse(tokens);
+
+			chai.assert.deepEqual(stmts, []);
+		});
+	});
 });
