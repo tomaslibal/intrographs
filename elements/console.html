@@ -93,12 +93,13 @@
                 }
             },
             sendCommand: function(cmd) {
-              console.log('sending command: ', cmd);
-              var stdout = this.$.stdout;
-              var command = document.createElement('div');
-              command.innerHTML = cmd;
-              stdout.appendChild(command);
-              stdout.scrollTop = stdout.clientHeight;
+                this.fire('out', { "payload": cmd });
+                console.log('sending command: ', cmd);
+                var stdout = this.$.stdout;
+                var command = document.createElement('div');
+                command.innerHTML = cmd;
+                stdout.appendChild(command);
+                stdout.scrollTop = stdout.clientHeight;
             },
             stdinKeypressHandler: function(event) {
                 var ENTER_CODE = 13;
