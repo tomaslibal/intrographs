@@ -6,6 +6,8 @@
  */
 import EventBus from '../common/EventBus';
 
+import GraphConsoleInterpreter from '../interpreter/GraphConsoleInterpreter';
+
 export default class Scene {
 
 	constructor(graph=null, background=null, minidisplay=null, controls=null, menubar=null) {
@@ -15,6 +17,7 @@ export default class Scene {
 		this.controls = controls;
 		this.menubar = menubar;
         this.eventBus = new EventBus('Scene_Event_Bus');
+		this.interpreter = new GraphConsoleInterpreter(this.eventBus);
 
 		this.clock = 0;
 	    this.playState = 'paused';

@@ -41,6 +41,9 @@ export default class GraphConsoleParser {
 			}
 		});
 
+		// if there are no delimiters or the last statement has no delimiter, push it manually
+		statements.push(current);
+
 		return statements;
 	}
 

@@ -32,8 +32,16 @@ export default class HTMLScene extends Scene {
 
 		super(htmlGraph, bg, minidisplay, controls, menuBar);
 
-		this.observables = [];
+		htmlGraph.eventBus = this.eventBus;
 		
+		// setup the interpreter polymer wiring to the eventBus
+		const interpreter = document.querySelector('graph-console');
+		interpreter.addEventListener('out', (ev) => {
+			this.eventBus.dispatch({ "type": "interpreter.input", "payload": ev.detail.payload });
+        });
+
+		this.observables = [];
+
 		this.window = windowObj;
 		this.document = document;
 		this.htmlWindow = new HTMLWindow(this.window);
@@ -101,14 +109,14 @@ export default class HTMLScene extends Scene {
 		this.lastScreenX = ev.screenX;
 		this.lastScreenY = ev.screenY;
 	}
-	
+
 	setupObservable(observedElement, subscribedEvent, callback) {
 		const observable = new Observable(observedElement);
 		const boundCallback = callback.bind(this);
-		
+
 		observable.subscribe(subscribedEvent);
 		observable.forEach(boundCallback);
-		
+
 		this.observables.push({
 			'observedElement': observedElement,
 			'subscribedEvent': subscribedEvent,

@@ -50,6 +50,12 @@ export default class HTMLGraph extends ObservableRenderable {
 			this.ctrlObservableNewEdge.forEach(this._boundHandleNewEdgeEvent);
 		}
 
+		if (this.eventBus) {
+			this.eventBus.on('interpreter.add.vertex', (ev) => {
+				this._handleNewVertexEvent(ev);
+			})
+		}
+
 		this.graph.vertices.forEach(vertex => {
 			this.vertexList.list.push(vertex.name);
 		});
