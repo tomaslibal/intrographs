@@ -28,5 +28,12 @@ describe('GraphConsoleTokenizer', () => {
 
 			chai.assert.equal(r.length, 4);
 		});
+
+		it('a list of arguments g.a.v(A,B,C) is parsed into individual tokens A,B, and C', () => {
+			const s = 'graph.add.vertex("A","B","C")';
+			const r = tokenizer.tok(s);
+
+			chai.assert.equal(r.length, 6);
+		});
 	});
 });
