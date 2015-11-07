@@ -31,6 +31,16 @@ export default class GraphConsoleInterpreter {
 	}
 
 	addNewVertex(parseTree) {
-		this.eventBus.dispatch({ type: 'interpreter.add.vertex', id: parseTree[3].value, 'label': 'n/a'});
+		const addVertexEvent = 'interpreter.add.vertex';
+
+		// one vertex
+		this.eventBus.dispatch({ type: addVertexEvent, id: parseTree[3].value, 'label': 'n/a' });
+		// optional var.args vertices
+		if (parseTree.length === 4) {
+			return;
+		}
+		for(let i = 4; i < parseTree.length; i++) {
+			this.eventBus.dispatch({ type: addVertexEvent, id: parseTree[i].value, 'label': 'n/a' });
+		}
 	}
 }
