@@ -6,7 +6,8 @@ export default class GraphConsoleInterpreter {
 	constructor(eventBus) {
 		this.eventBus = eventBus;
 
-		this.eventBus.on('interpreter.input', this.onInputHandler.bind(this));
+		this._boundOnInputHandler = this.onInputHandler.bind(this);
+		this.eventBus.on('interpreter.input', this._boundOnInputHandler);
 
 		this.tokenizer = new GraphConsoleTokenizer();
 		this.parser = new GraphConsoleParser();
@@ -14,8 +15,6 @@ export default class GraphConsoleInterpreter {
 
 	onInputHandler(ev) {
 		const input = ev.payload;
-		console.log('got input: ' + input);
-
 		const toks = this.tokenizer.tok(input);
 		const statements = this.parser.parse(toks);
 
