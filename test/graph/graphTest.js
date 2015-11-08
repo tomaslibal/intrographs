@@ -168,5 +168,45 @@ describe('Graph', () => {
            chai.assert.deepEqual(g.findLowestDegreeVertex(g.vertices, g.edges), lowest);
         });
     });
+
+    describe('removing a vertex by id', () => {
+        it.only('removes the vertex from the list of vertices', () => {
+            let g = new Graph();
+            g.addVertex({'name':'A'});
+
+            chai.assert.equal(g.vertices.length, 1);
+
+            g.removeVertexById('A');
+
+            chai.assert.equal(g.vertices.length, 0);
+        });
+
+        it('removes all edges incident on the removed vertex', () => {
+            let g = new Graph();
+            g.addVertex({'name':'A'});
+            g.addVertex({'name':'B'});
+            g.addVertex({'name':'C'});
+
+            g.addEdge(['A', 'B']);
+            g.addEdge(['A', 'C']);
+            g.addEdge(['B', 'C']);
+
+            chai.assert.equal(g.edges.length, 3);
+
+            g.removeVertexById('A');
+
+            chai.assert.equal(g.edges.length, 1);
+            chai.assert.deepEqual(g.edges[0].connects, ['B', 'C']);
+        });
+
+        it('throws an error if no id supplied', () => {
+            const throws = () => {
+                let g = new Graph();
+                g.removeVertexById();
+            };
+
+            chai.expect(throws).to.throw("No ID supplied");
+        });
+    });
 });
 

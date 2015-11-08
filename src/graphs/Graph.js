@@ -71,6 +71,72 @@ class Graph {
         return v;
     };
 
+    removeVertexById(id=null) {
+        if (id === null) {
+            throw new Error("No ID supplied");
+            return;
+        }
+
+        const vIdx = this.getVertexIndex(id);
+
+        if (vIdx > -1) {
+            this.vertices.splice(vIdx, 1);
+        }
+
+        this.removeAllEdgesIncidentOnVertex(id);
+    }
+
+    getVertexIndex(id) {
+        let found = -1;
+
+        this.vertices.forEach((vertex, idx) => {
+            if (vertex.name === id) {
+                found = idx;
+            }
+        });
+
+        return found;
+    }
+
+    removeAllEdgesIncidentOnVertex(id) {
+        const filtered = this.edges.filter((edge) => {
+            if (edge.connects.indexOf(id) > -1) {
+                return false;
+            } else {
+                return true;
+            }
+        });
+
+        this.edges = filtered;
+    }
+
+    findAllEdgesIncidentOnVertex(id=null) {
+
+    }
+
+    findEdgeIndexByVertexIdTuple(id1,id2) {
+        let found = -1;
+
+        this.edges.forEach((e, idx) => {
+            if (e.connects.indexOf(id1) > -1 && e.connects.indexOf(id2) > -1) {
+                found = idx;
+            }
+        });
+
+        return found;
+    }
+
+    removeEdgeByVertexIdTuple(id1=null,id2=null) {
+        const idx = this.findEdgeIndexByVertexIdTuple(id1, id2);
+
+        if (idx === -1) {
+            throw new Error(`Edge ${id1} -- ${id2} not found`);
+            return;
+        }
+
+        return this.edges.splice(idx, 1);
+    }
+
     /*
      * Graph.vertices is an array of objects but from the mathematical point of
      * view it is just a collection of distinct nodes. The Matrix module works
@@ -258,7 +324,7 @@ class Graph {
 
         return lowest;
     }
-    
+
     /*
      * Creates an adjacency list for each vertex.
      *
@@ -268,7 +334,7 @@ class Graph {
      */
     getAdjList(v, e) {
         let adj = {};
-    
+
         v.forEach(vertex => {
             adj[vertex] = [];
             e.forEach(edge => {
