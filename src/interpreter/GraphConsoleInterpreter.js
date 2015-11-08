@@ -33,6 +33,13 @@ export default class GraphConsoleInterpreter {
 					this.addNewEdge(stmt);
 				}
 			}
+			// remove vertex or edge
+			if (stmt[0].isObject && stmt[1].isAction && stmt[1].value === 'remove') {
+				// vertex
+				if (stmt[2].value === 'vertex') {
+					this.removeVertex(stmt);
+				}
+			}
 		});
 	}
 
@@ -55,5 +62,9 @@ export default class GraphConsoleInterpreter {
 
 		// one edge
 		this.eventBus.dispatch({ 'type': addEdgeEvent, 'vertex1': parseTree[3].value, 'vertex2': parseTree[4].value });
+	}
+
+	removeVertex(parseTree) {
+		
 	}
 }

@@ -124,4 +124,16 @@ describe('GraphConsoleInterpreter', () => {
 			));
 		});
 	});
+
+	describe('graph.remove production', () => {
+		it('.vertex("A") invokes the removeVertex method', () => {
+			sinon.spy(interpreter, 'removeVertex');
+
+			const s = 'graph.remove.vertex("A")';
+
+			interpreter.onInputHandler({ 'payload': s });
+
+			assert(interpreter.removeVertex.calledOnce);
+		});
+	});
 });
