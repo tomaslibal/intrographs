@@ -58,6 +58,10 @@ export default class HTMLGraph extends ObservableRenderable {
 			this.eventBus.on('interpreter.add.edge', (ev) => {
 				this._handleNewEdgeEvent(ev);
 			});
+
+			this.eventBus.on('interpreter.remove.vertex', (ev) => {
+				this._handleRemoveVertexEvent(ev);
+			});
 		}
 
 		this.graph.vertices.forEach(vertex => {
@@ -83,6 +87,26 @@ export default class HTMLGraph extends ObservableRenderable {
 
 		this.edgeList.list.push([v1, v2]);
 		this.edgeList.render();
+	}
+
+	_handleRemoveVertexEvent({ 'id': id }) {
+		this.graph.removeVertexById(id);
+		this.render();
+
+		const idx = this.vertexList.list.indexOf(id);
+		if (idx > -1) {
+			this.vertexList.list.splice(idx, 1);
+			this.vertexList.render();
+
+			this.edgeList.list = this.edgeList.list.filter((edge) => {
+				if (edge.indexOf(id) > -1) {
+					return false;
+				} else {
+					return true;
+				}
+			});
+			this.edgeList.render();
+		}
 	}
 
 	render() {

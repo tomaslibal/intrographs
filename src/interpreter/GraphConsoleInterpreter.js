@@ -65,6 +65,8 @@ export default class GraphConsoleInterpreter {
 	}
 
 	removeVertex(parseTree) {
-		
+		const removeVertexEvent = 'interpreter.remove.vertex';
+
+		this.eventBus.dispatch({ 'type': removeVertexEvent, 'id': parseTree[3].value });
 	}
 }
