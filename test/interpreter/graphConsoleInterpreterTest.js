@@ -91,5 +91,37 @@ describe('GraphConsoleInterpreter', () => {
 				}
 			));
 		});
+
+		it('.edge("A", "B") invokes the method to add new edge', () => {
+			sinon.spy(interpreter, 'addNewEdge');
+
+			const s = 'graph.add.edge("A", "B")';
+
+			interpreter.onInputHandler({ 'payload': s });
+
+			assert(interpreter.addNewEdge.calledOnce);
+		});
+
+		it('.edge("A","B") dispatches a new edge from A to B addition event', () => {
+				const stmt = [
+				[
+					{ isObject: true, value: 'graph' },
+					{ isAction: true, value: 'add' },
+					{ isValue: true, value: 'edge' },
+					{ isValue: true, value: 'A' },
+					{ isValue: true, value: 'B' }
+				]
+			];
+
+			interpreter.addNewEdge(stmt[0]);
+
+			assert(mockEventBus.dispatch.calledWith(
+				{
+					'type': 'interpreter.add.edge',
+					'vertex1': stmt[0][3].value,
+					'vertex2': stmt[0][4].value
+				}
+			));
+		});
 	});
 });

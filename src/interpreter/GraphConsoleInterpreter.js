@@ -25,6 +25,13 @@ export default class GraphConsoleInterpreter {
 				if (stmt[2].value === 'vertex') {
 					this.addNewVertex(stmt);
 				}
+				// edge
+				if (stmt[2].value === 'edge') {
+					if (stmt.length < 5) {
+						// this will have been probably a parser error in the future
+					}
+					this.addNewEdge(stmt);
+				}
 			}
 		});
 	}
@@ -41,5 +48,12 @@ export default class GraphConsoleInterpreter {
 		for(let i = 4; i < parseTree.length; i++) {
 			this.eventBus.dispatch({ type: addVertexEvent, id: parseTree[i].value, 'label': 'n/a' });
 		}
+	}
+
+	addNewEdge(parseTree) {
+		const addEdgeEvent = 'interpreter.add.edge';
+
+		// one edge
+		this.eventBus.dispatch({ 'type': addEdgeEvent, 'vertex1': parseTree[3].value, 'vertex2': parseTree[4].value });
 	}
 }
