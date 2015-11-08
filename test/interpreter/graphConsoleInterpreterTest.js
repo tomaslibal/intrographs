@@ -35,7 +35,43 @@ describe('GraphConsoleInterpreter', () => {
 			assert(interpreter.tokenizer.tok.calledWith(payload));
 			assert(interpreter.parser.parse.calledWith(mockTokens));
 		});
-
 	});
 
+	describe('graph.add production', () => {
+		it('.vertex("A") invokes the method to add new vertex', () => {
+			sinon.spy(interpreter, 'addNewVertex');
+
+			const s = 'graph.add.vertex("A")';
+
+			interpreter.onInputHandler({ 'payload': s });
+
+			assert(interpreter.addNewVertex.calledOnce);
+		});
+
+		it('.vertex("A") invoking addNewVertex method will dispatch that one vertex A has been added', () => {
+
+			const stmt = [
+				[
+					{ isObject: true, value: 'graph' },
+					{ isAction: true, value: 'add' },
+					{ isValue: true, value: 'vertex' },
+					{ isValue: true, value: 'A' }
+				]
+			];
+
+			interpreter.addNewVertex(stmt[0]);
+
+			assert(mockEventBus.dispatch.calledWith(
+				{
+					'type': 'interpreter.add.vertex',
+					'id': stmt[0][3].value,
+					'label': 'n/a'
+				}
+			));
+		});
+
+		it('.vertex("A","B","C") dispatches 3 new vertex addition events', () => {
+
+		});
+	});
 });
