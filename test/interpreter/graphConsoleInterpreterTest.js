@@ -49,7 +49,6 @@ describe('GraphConsoleInterpreter', () => {
 		});
 
 		it('.vertex("A") invoking addNewVertex method will dispatch that one vertex A has been added', () => {
-
 			const stmt = [
 				[
 					{ isObject: true, value: 'graph' },
@@ -71,7 +70,26 @@ describe('GraphConsoleInterpreter', () => {
 		});
 
 		it('.vertex("A","B","C") dispatches 3 new vertex addition events', () => {
+			const stmt = [
+				[
+					{ isObject: true, value: 'graph' },
+					{ isAction: true, value: 'add' },
+					{ isValue: true, value: 'vertex' },
+					{ isValue: true, value: 'A' },
+					{ isValue: true, value: 'B' },
+					{ isValue: true, value: 'C' }
+				]
+			];
 
+			interpreter.addNewVertex(stmt[0]);
+
+			assert(mockEventBus.dispatch.calledWith(
+				{
+					'type': 'interpreter.add.vertex',
+					'id': stmt[0][3].value,
+					'label': 'n/a'
+				}
+			));
 		});
 	});
 });
