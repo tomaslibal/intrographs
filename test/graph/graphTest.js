@@ -170,7 +170,7 @@ describe('Graph', () => {
     });
 
     describe('removing a vertex by id', () => {
-        it.only('removes the vertex from the list of vertices', () => {
+        it('removes the vertex from the list of vertices', () => {
             let g = new Graph();
             g.addVertex({'name':'A'});
 
