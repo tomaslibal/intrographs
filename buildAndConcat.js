@@ -21,4 +21,7 @@ rollup({
     fs.writeFileSync('dist/out.raw.js', code);
 
     console.log('Build done. Output saved @ dist/out.raw.js');
+}).catch(function(reason) {
+    console.log('Build failed');
+    console.log(reason);
 });
