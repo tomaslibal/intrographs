@@ -8,9 +8,9 @@
     "firefox": "which firefox; if [ $? -eq 0 ]; then firefox http://localhost:8080/; else echo 'Error! Firefox not found'; fi",
     "browserify": "node_modules/browserify/bin/cmd.js -e dist/out.raw.js -o dist/out.js",
     "minify": "",
-    "build": "export BABEL_ENV=build; npm run clear && mkdir -p dist && node dev/buildAndConcat.js && npm run browserify",
+    "build": "npm run clear && mkdir -p dist && BABEL_ENV=build node dev/buildAndConcat.js && npm run browserify",
     "clear": "rm -rf build && rm -rf dist",
-    "test": "export BABEL_ENV=development; ./node_modules/mocha/bin/mocha --compilers js:babel/register --recursive",
+    "test": "BABEL_ENV=development ./node_modules/mocha/bin/mocha --compilers js:babel/register --recursive",
     "sloccount": " node_modules/cloc/lib/cloc docs html src test",
     "install-all": "npm install && bower install"
   },
