@@ -12,7 +12,7 @@
     "clear": "rm -rf build && rm -rf dist",
     "test": "export BABEL_ENV=development; ./node_modules/mocha/bin/mocha --compilers js:babel/register --recursive",
     "sloccount": " node_modules/cloc/lib/cloc docs html src test",
-    "install": "npm install && bower install"
+    "install-all": "npm install && bower install"
   },
   "devDependencies": {
     "babel": "^5.8.21",
