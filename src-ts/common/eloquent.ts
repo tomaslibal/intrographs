@@ -38,7 +38,7 @@ export function shuffleArray(arr) {
     return arr;
 }
 
-export function extendObj(parent, child) {
+export function extendObj(parent: Object, child: Object): Object {
     let obj = Object.create(parent);
 
     for(let key of Object.keys(child)) {
