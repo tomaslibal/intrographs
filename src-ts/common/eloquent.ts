@@ -16,12 +16,12 @@ export function addIfNotFound(array, member) {
     }
 }
 
-export function uniqueValues(array) {
+export function uniqueValues<T>(array: Array<T>): Array<T> {
     let uniques = [];
 
     array.forEach(member => {
         if (member.constructor.name === 'Array') {
-            let mems = uniqueValues(member);
+            let mems = uniqueValues<T>([<T>member]);
             mems.forEach(m => {
                 addIfNotFound(uniques, m);
             });
