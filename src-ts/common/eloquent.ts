@@ -1,5 +1,5 @@
-export function unique(arr) {
-	return arr.filter((val, idx, arr) => {
+export function unique<T>(arr: Array<T>): Array<T> {
+	return arr.filter((val: T, idx: number, arr: Array<T>) => {
            if (idx > 0 && val === arr[idx-1]) {
                return false;
            } else {
