@@ -13,7 +13,7 @@
 import { Vertex, VertexProperties } from './Vertex';
 import { Edge } from './Edge';
 import CONSTS from '../common/constants';
-import MathUtil from '../common/MathUtil';
+import { MathUtil } from '../common/MathUtil';
 import { shuffleArray } from '../common/eloquent';
 
 

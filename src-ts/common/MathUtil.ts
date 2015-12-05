@@ -7,7 +7,7 @@
  */
  import { unique } from "./eloquent";
 
-export default class MathUtil {
+export class MathUtil {
     /*
      * Function returns an integer number from within the given range [min,
      * max].
