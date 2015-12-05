@@ -5,8 +5,6 @@
  * In the future it should be possible to pass a math library to the Graph class
  * so that the class would use funtions from that injected library.
  */
- import { unique } from "./eloquent";
-
 export class MathUtil {
     /*
      * Function returns an integer number from within the given range [min,
