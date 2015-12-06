@@ -14,7 +14,7 @@ export class MathUtil {
      * not seem to include seed function.
      *
      */
-    static getRandomArbitrary(min=0, max=65536) {
+    static getRandomArbitrary(min: number = 0, max: number = 65536): number {
         return Math.ceil((Math.random() * (max - min))) + min;
     }
 
@@ -23,7 +23,7 @@ export class MathUtil {
      *     y = f(x) = ax^2 + bx + c
      *
      */
-    static quadRoots(a=0, b=0, c=0) {
+    static quadRoots(a=0, b=0, c=0): Array<number> {
         const discr = b*b - 4*a*c;
 
         if (discr < 0) {
