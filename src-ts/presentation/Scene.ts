@@ -15,7 +15,7 @@ abstract class Scene {
 
 }
 
-interface HTMLSceneConfig {
+export interface HTMLSceneConfig {
 	canvasId: string;
 	usePolymer: boolean;
 }
