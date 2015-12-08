@@ -1,5 +1,6 @@
 import { Graph } from '../graphs/Graph';
 import { Canvas, CanvasSettings } from './Canvas';
+import { GraphRenderer2D } from './GraphRenderer';
 
 abstract class Scene {
 
@@ -28,6 +29,7 @@ export class HTMLScene extends Scene {
 		height: 640
 	};
 
+	private renderer: GraphRenderer2D;
 	private window: Window;
 
 	constructor(g: Graph, w: Window) {
@@ -35,6 +37,7 @@ export class HTMLScene extends Scene {
 
 		this.window = w;
 		this.setupCanvas();
+		this.setupRenderer();
 	}
 
 	private setupCanvas() {
@@ -46,7 +49,11 @@ export class HTMLScene extends Scene {
 		this.canvas = new Canvas(canvasEl, this.canvasSettings);
 	}
 
-	render() {
+	private setupRenderer() {
+		this.renderer = new GraphRenderer2D(this.canvas.getCanvas());
+	}
 
+	render() {
+		this.renderer.render(this.graph);
 	}
 }
