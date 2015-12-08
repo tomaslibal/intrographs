@@ -29,4 +29,8 @@ export class Canvas {
 		this.canvas.width = this.settings.width;
 		this.canvas.height = this.settings.height;
 	}
+
+	getCanvas(): HTMLCanvasElement {
+		return this.canvas;
+	}
 }
