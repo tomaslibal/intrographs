@@ -33,4 +33,8 @@ export class Canvas {
 	getCanvas(): HTMLCanvasElement {
 		return this.canvas;
 	}
+
+	getContext(): CanvasRenderingContext2D {
+		return this.context;
+	}
 }
