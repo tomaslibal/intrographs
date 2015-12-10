@@ -1,12 +1,14 @@
 import { Graph } from '../graphs/Graph';
 import { Vertex, VertexPosition2D } from '../graphs/Vertex';
+import { Edge } from '../graphs/Edge';
 import { MathUtil } from '../common/MathUtil';
+import { Canvas } from './Canvas';
 
 abstract class AbstractGraphRenderer {
 
-	canvas: HTMLCanvasElement;
+	canvas: Canvas;
 
-	constructor(c: HTMLCanvasElement) {
+	constructor(c: Canvas) {
 		this.canvas = c;
 	}
 
@@ -62,6 +64,64 @@ export class GraphLayoutBasic {
 	}
 
 	static findRandomCoordsAtGivenDistance(originX: number, originY: number, distance: number = 15): Array<number> {
+		const randX = MathUtil.getRandomArbitrary(originX - distance, originX + distance);
+
+		const c = (distance*distance - originX*originX - originY*originY + 2*originX*randX - randX*randX);
+		const b = 2*originY;
+		const a = -1;
+		let solutions: Array<number> = MathUtil.quadRoots(a, b, c);
+
+		// if discrimintant < 0, we would get no solution
+		while( solutions === null) {
+			solutions = GraphLayoutBasic.findRandomCoordsAtGivenDistance(originX, originY, distance);
+		}
+
+		// if discriminant == 0 we only get one solution
+		if ( solutions.length === 1 ) {
+			return [randX, solutions[0]];
+		}
+
+		// else, discriminant > 0 and we have two solutions for the point Y
+        // and we will choose one at random
+		const useFirstOrSecondSolution: number = MathUtil.getRandomArbitrary(0, 1);
+		return [randX, solutions[useFirstOrSecondSolution]];
+
+	}
+}
+
+export abstract class Renderable {
+
+
+
+	abstract render(renderer: AbstractGraphRenderer);
+}
+
+export class VertexRenderable extends Renderable {
+	vertex: Vertex;
+
+	constructor(v: Vertex) {
+		super();
+		this.vertex = v;
+	}
+
+	render(renderer: AbstractGraphRenderer) {
+		const ctx = renderer.canvas.getContext();
+
+
+	}
+}
+
+export class EdgeRenderable extends Renderable {
+
+	edge: Edge;
+
+	constructor(e: Edge, s: Vertex, t: Vertex) {
+		super();
+		this.edge = e;
+	}
+
+	render(renderer: AbstractGraphRenderer) {
+		const ctx = renderer.canvas.getContext();
 
 	}
 }
@@ -69,11 +129,45 @@ export class GraphLayoutBasic {
 
 export class GraphRenderer2D extends AbstractGraphRenderer {
 
-	constructor(c: HTMLCanvasElement) {
+	lastGraph: Graph;
+
+	constructor(c: Canvas) {
 		super(c);
 	}
 
 	render(g: Graph) {
+		this.lastGraph = g;
 
+		this.renderVertices(g);
+		this.renderEdges(g);
+	}
+
+	private renderVertices(g: Graph) {
+		const ctx = this.canvas.getContext();
+		const verticesWithoutDims = g.vertices.filter(ver => {
+			return !!ver.position.x || !!ver.position.y;
+		});
+
+		GraphLayoutBasic.spaceOutVerticesAtFixedDistanceRandom(verticesWithoutDims, 30);
+
+		g.vertices
+			.map(ver => {
+				return new VertexRenderable(ver);
+			})
+			.forEach(renderable => {
+				renderable.render(this);
+			});
+	}
+
+	private renderEdges(g: Graph) {
+		g.edges
+			.map(edge => {
+				const s: Vertex = g.lookupVertex(g.vertices, edge.connects[0]);
+				const t: Vertex = g.lookupVertex(g.vertices, edge.connects[1]);
+				return new EdgeRenderable(edge, s, t);
+			})
+			.forEach(edgeRenderable => {
+				edgeRenderable.render(this);
+			});
 	}
 }
