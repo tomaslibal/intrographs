@@ -149,8 +149,10 @@ export class GraphRenderer2D extends AbstractGraphRenderer {
 
 	private renderVertices(g: Graph) {
 		const ctx = this.canvas.getContext();
-		const verticesWithoutDims = g.vertices.filter(ver => {
-			return !ver.position && (!ver.position.x || !ver.position.y);
+		const verticesWithoutDims = g.vertices.filter(vertex => {
+			if (typeof vertex.position === "undefined") return true;
+
+			return !vertex.position.x || !vertex.position.y;
 		});
 
 		GraphLayoutBasic.spaceOutVerticesAtFixedDistanceRandom(verticesWithoutDims, 30);
