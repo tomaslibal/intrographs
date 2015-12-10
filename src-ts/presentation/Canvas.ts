@@ -38,3 +38,31 @@ export class Canvas {
 		return this.context;
 	}
 }
+
+export interface Point2D {
+	x: number,
+	y: number
+}
+
+export class Draw2D {
+
+	static ellipse() {
+
+	}
+
+	static circle(ctx: CanvasRenderingContext2D, center: Point2D, radius: number) {
+		ctx.beginPath();
+		ctx.arc(center.x, center.y, radius, 0, 2 * Math.PI);
+		ctx.stroke();
+		ctx.closePath();
+	}
+
+	static segment(ctx, start: Point2D, end: Point2D) {
+		ctx.beginPath();
+		ctx.moveTo(start.x, start.y);
+		ctx.lineTo(end.x, end.y);
+		ctx.stroke();
+		ctx.closePath();
+	}
+
+}
