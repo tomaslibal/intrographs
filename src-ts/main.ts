@@ -17,3 +17,5 @@ function init() {
 	let scene = new HTMLScene(K3, window);
 	scene.render();
 }
+
+init();
