@@ -50,7 +50,7 @@ export class HTMLScene extends Scene {
 	}
 
 	private setupRenderer() {
-		this.renderer = new GraphRenderer2D(this.canvas.getCanvas());
+		this.renderer = new GraphRenderer2D(this.canvas);
 	}
 
 	render() {
