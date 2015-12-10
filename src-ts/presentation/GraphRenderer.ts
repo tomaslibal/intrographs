@@ -2,7 +2,7 @@ import { Graph } from '../graphs/Graph';
 import { Vertex, VertexPosition2D } from '../graphs/Vertex';
 import { Edge } from '../graphs/Edge';
 import { MathUtil } from '../common/MathUtil';
-import { Canvas } from './Canvas';
+import { Canvas, Point2D, Draw2D } from './Canvas';
 
 abstract class AbstractGraphRenderer {
 
@@ -91,8 +91,6 @@ export class GraphLayoutBasic {
 
 export abstract class Renderable {
 
-
-
 	abstract render(renderer: AbstractGraphRenderer);
 }
 
@@ -107,22 +105,29 @@ export class VertexRenderable extends Renderable {
 	render(renderer: AbstractGraphRenderer) {
 		const ctx = renderer.canvas.getContext();
 
-
+		Draw2D.circle(ctx, { x: this.vertex.position.x, y: this.vertex.position.y }, 3);
 	}
 }
 
 export class EdgeRenderable extends Renderable {
 
 	edge: Edge;
+	start: Vertex;
+	end: Vertex;
 
 	constructor(e: Edge, s: Vertex, t: Vertex) {
 		super();
 		this.edge = e;
+		this.start = s;
+		this.end = t;
 	}
 
 	render(renderer: AbstractGraphRenderer) {
 		const ctx = renderer.canvas.getContext();
+		const start: Point2D = { x: this.start.position.x, y: this.start.position.y };
+		const end: Point2D = { x: this.end.position.x, y: this.end.position.y };
 
+		Draw2D.segment(ctx, start, end);
 	}
 }
 
@@ -145,7 +150,7 @@ export class GraphRenderer2D extends AbstractGraphRenderer {
 	private renderVertices(g: Graph) {
 		const ctx = this.canvas.getContext();
 		const verticesWithoutDims = g.vertices.filter(ver => {
-			return !!ver.position.x || !!ver.position.y;
+			return !ver.position && (!ver.position.x || !ver.position.y);
 		});
 
 		GraphLayoutBasic.spaceOutVerticesAtFixedDistanceRandom(verticesWithoutDims, 30);
