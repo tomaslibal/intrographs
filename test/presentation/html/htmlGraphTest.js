@@ -177,5 +177,14 @@ describe('HTMLGraph', () => {
 		it('registers a handler for interpreter.add.vertex', () => {
 			assert(htmlGraph.eventBus.on.calledWith('interpreter.add.vertex', sinon.match.func));
 		});
+		it('registers a handler for interpreter.add.edge', () => {
+			assert(htmlGraph.eventBus.on.calledWith('interpreter.add.edge', sinon.match.func));
+		});
+		it('registers a handler for interpreter.remove.edge', () => {
+			assert(htmlGraph.eventBus.on.calledWith('interpreter.remove.edge', sinon.match.func));
+		});
+		it('registers a handler for interpreter.remove.vertex', () => {
+			assert(htmlGraph.eventBus.on.calledWith('interpreter.remove.vertex', sinon.match.func));
+		});
 	});
 });
