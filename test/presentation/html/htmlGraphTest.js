@@ -5,6 +5,7 @@ import HTMLList from '../../../src/presentation/html/HTMLList';
 import Observable from "../../../src/common/Observable";
 
 import { mockHTMLElement as mockElement, mockDocument } from "../../mocks/htmlMocks";
+import eventBusMock from '../../mocks/eventBusMock';
 
 let assert = require("assert");
 let chai = require("chai");
@@ -56,6 +57,7 @@ describe('HTMLGraph', () => {
 
 		htmlGraph = new HTMLGraph(mockGraph, mockDocument, mockPolymer);
 		htmlGraph.controls = mockControls;
+		htmlGraph.eventBus = eventBusMock;
 		htmlGraph.setUp();
 		htmlGraph.render = sinon.stub();
 	});
@@ -168,6 +170,12 @@ describe('HTMLGraph', () => {
 			const v = htmlGraph.getVertexByCoords({'x': 999, 'y': 999});
 
 			chai.assert.deepEqual(v, []);
+		});
+	});
+
+	describe('events from the interpreter', () => {
+		it('registers a handler for interpreter.add.vertex', () => {
+			assert(htmlGraph.eventBus.on.calledWith('interpreter.add.vertex', sinon.match.func));
 		});
 	});
 });
