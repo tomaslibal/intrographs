@@ -39,6 +39,14 @@ export default class GraphConsoleInterpreter {
 				if (stmt[2].value === 'vertex') {
 					this.removeVertex(stmt);
 				}
+				// edge
+				if (stmt[2].value === 'edge') {
+					if (stmt.length < 5) {
+						// this will have been probably a parser error in the future
+					} else {
+						this.removeEdge(stmt);
+					}
+				}
 			}
 		});
 	}
@@ -68,5 +76,11 @@ export default class GraphConsoleInterpreter {
 		const removeVertexEvent = 'interpreter.remove.vertex';
 
 		this.eventBus.dispatch({ 'type': removeVertexEvent, 'id': parseTree[3].value });
+	}
+
+	removeEdge(parseTree) {
+		const removeEdgeEvent = 'interpreter.remove.edge';
+
+		this.eventBus.dispatch({ 'type': removeEdgeEvent, 'vertex1': parseTree[3].value , 'vertex2': parseTree[4].value })
 	}
 }
