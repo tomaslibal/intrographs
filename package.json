@@ -9,6 +9,7 @@
     "browserify": "node_modules/browserify/bin/cmd.js -e dist/out.raw.js -o dist/out.js",
     "minify": "",
     "build": "npm run clear && mkdir -p dist && BABEL_ENV=build node dev/buildAndConcat.js && npm run browserify",
+    "buildts": "npm run clear && mkdir -p dist && mkdir -p build && tsc && BABEL_ENV=build node dev/buildAndConcatTypescript.js && npm run browserify",
     "clear": "rm -rf build && rm -rf dist",
     "test": "BABEL_ENV=development ./node_modules/mocha/bin/mocha --compilers js:babel/register --recursive",
     "sloccount": " node_modules/cloc/lib/cloc docs html src test",
