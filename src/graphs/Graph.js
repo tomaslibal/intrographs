@@ -187,6 +187,19 @@ class Graph {
         }
     };
 
+    removeEdge(edge) {
+        if (this.checkNumNonExistingVertices(edge) > 0) {
+            // error?
+        }
+        this.edges = this.edges.filter(e => {
+            if (e.connects[0] === edge[0] && e.connects[1] === edge[1]) {
+                return false;
+            } else {
+                return true;
+            }
+        });
+    }
+
     /*
      * returns an array of adjacent vertices' names
      *

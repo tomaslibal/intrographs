@@ -94,7 +94,16 @@ export default class HTMLGraph extends ObservableRenderable {
 	}
 
 	_handleRemoveEdgeEvent({ 'vertex1': v1, 'vertex2': v2 }) {
+		// remove the edge from the edge list
+		this.graph.removeEdge([v1, v2]);
 
+		this.edgeList.list = this.edgeList.list.filter(edge => {
+			if ( (edge[0] === v1 || edge[0] === v2) && (edge[1] === v1 || edge[1] === v2) ) {
+				return false;
+			} else {
+				return true;
+			}
+		});
 	}
 
 	_handleRemoveVertexEvent({ 'id': id }) {

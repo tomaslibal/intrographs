@@ -46,6 +46,7 @@ describe('HTMLGraph', () => {
 	let mockGraph = {
 		addVertex: sinon.stub(),
 		addEdge: sinon.stub(),
+		removeEdge: sinon.stub(),
 		vertices: [{name:'x', 'x':100,'y':200}, {name:'y','x':300,'y': 400}],
 		edges: [{connects:['x', 'y']}]
 	};
@@ -173,18 +174,32 @@ describe('HTMLGraph', () => {
 		});
 	});
 
-	describe('events from the interpreter', () => {
-		it('registers a handler for interpreter.add.vertex', () => {
+	describe('events from the interpreter are registered for', () => {
+		it('interpreter.add.vertex', () => {
 			assert(htmlGraph.eventBus.on.calledWith('interpreter.add.vertex', sinon.match.func));
 		});
-		it('registers a handler for interpreter.add.edge', () => {
+		it('interpreter.add.edge', () => {
 			assert(htmlGraph.eventBus.on.calledWith('interpreter.add.edge', sinon.match.func));
 		});
-		it('registers a handler for interpreter.remove.edge', () => {
+		it('interpreter.remove.edge', () => {
 			assert(htmlGraph.eventBus.on.calledWith('interpreter.remove.edge', sinon.match.func));
 		});
-		it('registers a handler for interpreter.remove.vertex', () => {
+		it('interpreter.remove.vertex', () => {
 			assert(htmlGraph.eventBus.on.calledWith('interpreter.remove.vertex', sinon.match.func));
+		});
+	});
+
+	describe('event handlers correctly', () => {
+		it('add a new vertex', () => {
+			htmlGraph._handleNewVertexEvent({ 'id': 'bar', 'label': 'foo' });
+			assert(mockGraph.addVertex.calledWith({ 'name': 'bar', 'label': 'foo' }));
+		});
+
+		it('remove an edge', () => {
+			const z = { 'name': 'z', 'label': 'z vertex' };
+			mockGraph.vertices.push(z);
+			htmlGraph._handleRemoveEdgeEvent({ 'vertex1': 'x', 'vertex2': 'y' });
+			assert(mockGraph.removeEdge.calledWith(['x', 'y']));
 		});
 	});
 });
