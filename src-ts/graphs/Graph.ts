@@ -16,7 +16,7 @@ import CONSTS from '../common/constants';
 import { MathUtil } from '../common/MathUtil';
 import { shuffleArray } from '../common/eloquent';
 
-interface IGraph {
+export interface IGraph {
 
     vertices: Array<Vertex>;
     edges: Array<Edge>;
