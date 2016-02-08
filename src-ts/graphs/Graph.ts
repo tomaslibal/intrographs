@@ -24,6 +24,10 @@ interface IGraph {
     vertexSet(): Array<Vertex>;
     edgeSet():   Array<Edge>;
 
+    // comment out -- the Graph class needs some refactoring to support this
+    //addVertex(v: Vertex): void;
+    //addEdge(e: Edge): void;
+
 }
 
 export class Graph implements IGraph {
