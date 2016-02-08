@@ -8,10 +8,12 @@ interface IEdge {
     source: Vertex;
     target: Vertex;
     weight: number;
+
+    new (source: Vertex, target: Vertex);
 }
 
 interface IDirectedEdge extends IEdge {
-    
+
 }
 
 export class Edge {
