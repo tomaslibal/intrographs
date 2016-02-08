@@ -16,9 +16,17 @@ import CONSTS from '../common/constants';
 import { MathUtil } from '../common/MathUtil';
 import { shuffleArray } from '../common/eloquent';
 
+interface IGraph {
 
+    vertices: Array<Vertex>;
+    edges: Array<Edge>;
 
-export class Graph {
+    vertexSet(): Array<Vertex>;
+    edgeSet():   Array<Edge>;
+
+}
+
+export class Graph implements IGraph {
 
     vertices:   Array<Vertex> = [];
     edges:      Array<Edge>   = [];
@@ -349,6 +357,15 @@ export class Graph {
         return adj;
     }
 
+    vertexSet(): Array<Vertex>
+    {
+        return this.vertices;
+    }
+
+    edgeSet(): Array<Edge>
+    {
+        return this.edges;
+    }
 
 }
 
