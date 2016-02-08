@@ -7,13 +7,20 @@ import { Vertex } from "./Vertex";
 interface IEdge {
     source: Vertex;
     target: Vertex;
-    weight: number;
-
-    new (source: Vertex, target: Vertex);
 }
 
-interface IDirectedEdge extends IEdge {
+interface WeightedEdge extends IEdge {
+    weight: number;
+}
 
+export class DefaultEdge implements IEdge {
+    source: Vertex;
+    target: Vertex;
+
+    constructor(source: Vertex, target: Vertex) {
+        this.source = source;
+        this.target = target;
+    }
 }
 
 export class Edge {
