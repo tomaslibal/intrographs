@@ -9,7 +9,7 @@ interface IEdge {
     target: Vertex;
 }
 
-interface WeightedEdge extends IEdge {
+interface IWeightedEdge extends IEdge {
     weight: number;
 }
 
@@ -21,6 +21,19 @@ export class DefaultEdge implements IEdge {
         this.source = source;
         this.target = target;
     }
+}
+
+export class WeightedEdge implements IWeightedEdge {
+    source: Vertex;
+    target: Vertex;
+    weight: number;
+
+    constructor(source: Vertex, target: Vertex, w: number) {
+        this.source = source;
+        this.target = target;
+        this.weight = w;
+    }
+
 }
 
 export class Edge {
