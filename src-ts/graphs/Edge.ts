@@ -7,6 +7,8 @@ import { Vertex } from "./Vertex";
 interface IEdge {
     source: Vertex;
     target: Vertex;
+
+    isIncidentOn(v: Vertex): boolean;
 }
 
 interface IWeightedEdge extends IEdge {
@@ -21,6 +23,15 @@ export class DefaultEdge implements IEdge {
         this.source = source;
         this.target = target;
     }
+
+    isIncidentOn(v: Vertex): boolean
+    {
+        if (this.source === v || this.target === v) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 export class WeightedEdge implements IWeightedEdge {
@@ -32,6 +43,15 @@ export class WeightedEdge implements IWeightedEdge {
         this.source = source;
         this.target = target;
         this.weight = w;
+    }
+
+    isIncidentOn(v: Vertex): boolean
+    {
+        if (this.source === v || this.target === v) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
