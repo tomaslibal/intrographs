@@ -20,7 +20,7 @@ properties like what type of graph it is, whether it is planar and so on.
 
 **Other algorithms**:
 
-- returns an independent set
+- returns an independent vertex set
 - returns a spanning tree
 - depth first search (DFS)
 
