@@ -2,6 +2,18 @@
  * Edge is a set of two vertices that are connected by the edge.
  *
  */
+import { Vertex } from "./Vertex";
+
+interface IEdge {
+    source: Vertex;
+    target: Vertex;
+    weight: number;
+}
+
+interface IDirectedEdge extends IEdge {
+    
+}
+
 export class Edge {
 
     /**
