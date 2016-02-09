@@ -12,6 +12,7 @@ nohup.out
 *.swp
 
 .vscode
+.idea
 
 # ignore LaTeX output
 docs/**/*.blg
