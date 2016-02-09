@@ -13,6 +13,6 @@ public interface IGraph<VertexType, EdgeType>
 
     void removeVertex(Vertex<VertexType> v);
     void removeEdge(EdgeType e);
-    void removeVertices();
+    void removeVertices(List<Vertex<VertexType>> vertices);
     void removeEdges(List<EdgeType> edges);
 }
