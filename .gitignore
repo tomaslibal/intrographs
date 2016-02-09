@@ -1,5 +1,4 @@
 .DS_Store
-node_modules
 *.*~
 *~
 
@@ -11,7 +10,6 @@ nohup.out
 # swap files
 *.swp
 
-.vscode
 .idea
 
 # ignore LaTeX output
@@ -25,6 +23,3 @@ docs/**/*.xml
 docs/**/*.bcf
 docs/**/*.bib
 docs/**/*.bak
-
-# bower components folder
-bower_components
