@@ -6,9 +6,6 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by tlibal on 2/9/16.
- */
 public class GraphTest {
 
     Graph<Integer, Edge<Integer>> g;

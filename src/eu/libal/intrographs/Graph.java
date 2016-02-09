@@ -4,9 +4,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by tlibal on 2/9/16.
- */
 public class Graph<VertexType, EdgeClass> extends BaseGraph implements IGraph<VertexType, EdgeClass> {
 
     Graph() {

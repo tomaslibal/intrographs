@@ -3,9 +3,6 @@ package eu.libal.intrographs;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by tlibal on 2/9/16.
- */
 public interface IGraph<VertexType, EdgeClass>
 {
 
