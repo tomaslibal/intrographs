@@ -1,7 +1,8 @@
 package eu.libal.intrographs;
 
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by tlibal on 2/9/16.
@@ -9,36 +10,40 @@ import java.util.List;
 public class Graph<VertexType, EdgeClass> extends BaseGraph implements IGraph<VertexType, EdgeClass> {
 
     Graph() {
-        vertices = new LinkedList<>();
-        edges = new LinkedList<>();
+        vertices = Collections.emptySet();
+        edges = Collections.emptySet();
     }
 
-    @Override
     public void addVertex(VertexType v) {
         vertices.add(new Vertex<VertexType>(v));
     }
 
-    @Override
     public void addEdge(EdgeClass e) {
         edges.add(e);
     }
 
     @Override
+    public Set<Vertex<VertexType>> vertexSet() {
+        return vertices;
+    }
+
+    @Override
+    public Set<EdgeClass> edgeSet() {
+        return edges;
+    }
+
     public void removeVertex(Vertex v) {
 
     }
 
-    @Override
     public void removeEdge(EdgeClass e) {
 
     }
 
-    @Override
     public void removeEdges(List edges) {
 
     }
 
-    @Override
     public void removeVertices(List vertices) {
 
     }
