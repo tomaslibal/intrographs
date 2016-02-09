@@ -2,7 +2,7 @@ import { Graph } from '../graphs/Graph';
 import { Canvas, CanvasSettings } from './Canvas';
 import { GraphRenderer2D } from './GraphRenderer';
 
-abstract class Scene {
+export abstract class Scene {
 
 	canvas;
 	graph: Graph;
