@@ -16,4 +16,20 @@ public interface IGraph<VertexType, EdgeClass>
     void removeEdge(EdgeClass e);
     void removeVertices(List<Vertex<VertexType>> vertices);
     void removeEdges(List<EdgeClass> edges);
+
+    /**
+     * Returns the degree of a node (undirected)
+     *
+     * @param v
+     * @return int
+     */
+    int degreeOf(Vertex<VertexType> v);
+
+    /**
+     * Returns the degree of a node (undirected)
+     *
+     * @param vertexId
+     * @return
+     */
+    int degreeOf(String vertexId);
 }

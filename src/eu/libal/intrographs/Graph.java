@@ -32,10 +32,6 @@ public class Graph<VertexType, EdgeClass> extends BaseGraph<VertexType, EdgeClas
         edges.add((EdgeClass) new Edge<VertexType>(source.get(), target.get()));
     }
 
-    private Optional<Vertex<VertexType>> getVertexById(String id) {
-        return vertices.stream().filter(v -> v.getId().equals(id)).findFirst();
-    }
-
     public void addEdge(EdgeClass e) {
         edges.add(e);
     }

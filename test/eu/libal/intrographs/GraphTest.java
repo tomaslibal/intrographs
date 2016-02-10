@@ -70,4 +70,21 @@ public class GraphTest {
         assertThat(g.edgeSet().stream().findFirst().get().getSource().getId(), is("A"));
         assertThat(g.edgeSet().stream().findFirst().get().getTarget().getId(), is("B"));
     }
+
+    @Test
+    public void shouldGetVertexDegree() {
+        g.addVertex(1, "A");
+        g.addVertex(1, "B");
+        g.addVertex(1, "C");
+        g.addVertex(1, "D");
+        g.addVertex(1, "E");
+
+        g.addEdge("A", "B");
+        g.addEdge("A", "C");
+        g.addEdge("A", "D");
+
+        assertThat(g.degreeOf("A"), is(3));
+        assertThat(g.degreeOf("D"), is(1));
+        assertThat(g.degreeOf("E"), is(0));
+    }
 }
