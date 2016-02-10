@@ -6,4 +6,10 @@ package eu.libal.intrographs;
 public interface IVertex<T>
 {
     T getValue();
+
+    /**
+     *
+     * @return String id
+     */
+    String getId();
 }
