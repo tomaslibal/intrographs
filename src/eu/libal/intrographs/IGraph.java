@@ -1,5 +1,7 @@
 package eu.libal.intrographs;
 
+import eu.libal.intrographs.vertex.Vertex;
+
 import java.util.List;
 import java.util.Set;
 

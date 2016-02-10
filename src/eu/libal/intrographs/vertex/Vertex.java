@@ -1,4 +1,4 @@
-package eu.libal.intrographs;
+package eu.libal.intrographs.vertex;
 
 public class Vertex<VertexType> implements IVertex<VertexType> {
 

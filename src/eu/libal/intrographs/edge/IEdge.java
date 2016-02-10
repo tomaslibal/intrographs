@@ -1,4 +1,6 @@
-package eu.libal.intrographs;
+package eu.libal.intrographs.edge;
+
+import eu.libal.intrographs.vertex.IVertex;
 
 /**
  * Created by tlibal on 2/9/16.

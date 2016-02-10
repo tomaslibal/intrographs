@@ -1,5 +1,8 @@
 package eu.libal.intrographs;
 
+import eu.libal.intrographs.edge.Edge;
+import eu.libal.intrographs.vertex.Vertex;
+
 import java.util.*;
 
 public class Graph<VertexType, EdgeClass> extends BaseGraph<VertexType, EdgeClass> {

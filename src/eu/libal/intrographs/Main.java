@@ -1,5 +1,7 @@
 package eu.libal.intrographs;
 
+import eu.libal.intrographs.edge.Edge;
+
 public class Main {
     public static void main(String[] args) {
         System.out.println("INTROGRAPHS2");
