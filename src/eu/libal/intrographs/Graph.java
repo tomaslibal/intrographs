@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class Graph<VertexType, EdgeClass> extends BaseGraph implements IGraph<VertexType, EdgeClass> {
+public class Graph<VertexType, EdgeClass> extends BaseGraph<VertexType, EdgeClass> {
 
     Graph() {
         vertices = Collections.emptySet();
