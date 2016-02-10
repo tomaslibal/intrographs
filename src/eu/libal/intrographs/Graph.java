@@ -1,18 +1,19 @@
 package eu.libal.intrographs;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Graph<VertexType, EdgeClass> extends BaseGraph<VertexType, EdgeClass> {
 
     Graph() {
-        vertices = Collections.emptySet();
-        edges = Collections.emptySet();
+        vertices = new HashSet<>();
+        edges = new HashSet<>();
     }
 
     public void addVertex(VertexType v) {
-        vertices.add(new Vertex<VertexType>(v));
+        addVertex(v, getNewId());
+    }
+    public void addVertex(VertexType v, String id) {
+        vertices.add( new Vertex<VertexType>(v, id) );
     }
 
     public void addEdge(EdgeClass e) {
