@@ -58,4 +58,16 @@ public class GraphTest {
         assertThat(g.edgeSet().size(), is(1));
         assertThat(g.edgeSet().stream().findFirst().get(), is(e1));
     }
+
+    @Test
+    public void shouldAddNewEdgeByVertexId() {
+        g.addVertex(1, "A");
+        g.addVertex(2, "B");
+
+        g.addEdge("A", "B");
+
+        assertThat(g.edgeSet().size(), is(1));
+        assertThat(g.edgeSet().stream().findFirst().get().getSource().getId(), is("A"));
+        assertThat(g.edgeSet().stream().findFirst().get().getTarget().getId(), is("B"));
+    }
 }
