@@ -1,7 +1,8 @@
 package eu.libal.intrographs.vertex;
 
 /**
- * Created by tlibal on 2/9/16.
+ * Vertex represents a node in a graph.
+ *
  */
 public interface IVertex<T>
 {
