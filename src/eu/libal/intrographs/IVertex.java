@@ -5,6 +5,11 @@ package eu.libal.intrographs;
  */
 public interface IVertex<T>
 {
+    /**
+     * This method should return the value member of the vertex
+     *
+     * @return T value
+     */
     T getValue();
 
     /**
