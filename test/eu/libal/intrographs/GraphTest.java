@@ -46,4 +46,16 @@ public class GraphTest {
 
         assertThat(first.get().getId(), is("A"));
     }
+
+    @Test
+    public void shouldAddSuppliedEdgeObject() {
+        Vertex<Integer> v1 = g.addVertex(1);
+        Vertex<Integer> v2 = g.addVertex(2);
+        Edge<Integer> e1 = new Edge<>(v1, v2);
+
+        g.addEdge(e1);
+
+        assertThat(g.edgeSet().size(), is(1));
+        assertThat(g.edgeSet().stream().findFirst().get(), is(e1));
+    }
 }

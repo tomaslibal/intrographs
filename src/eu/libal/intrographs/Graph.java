@@ -9,11 +9,31 @@ public class Graph<VertexType, EdgeClass> extends BaseGraph<VertexType, EdgeClas
         edges = new HashSet<>();
     }
 
-    public void addVertex(VertexType v) {
-        addVertex(v, getNewId());
+    @Override
+    public Vertex<VertexType> addVertex(VertexType v) {
+        return addVertex(v, getNewId());
     }
-    public void addVertex(VertexType v, String id) {
-        vertices.add( new Vertex<VertexType>(v, id) );
+    public Vertex<VertexType> addVertex(VertexType v, String id) {
+        Vertex<VertexType> vertex = (Vertex<VertexType>) new Vertex<>(v, id);
+        vertices.add(vertex);
+
+        return vertex;
+    }
+
+    public void addEdge(String sourceId, String targetId) {
+        Optional<Vertex<VertexType>> source = getVertexById(sourceId);
+        Optional<Vertex<VertexType>> target = getVertexById(targetId);
+
+        if (!source.isPresent()
+            || !target.isPresent()) {
+            return;
+        }
+
+        edges.add((EdgeClass) new Edge<VertexType>(source.get(), target.get()));
+    }
+
+    private Optional<Vertex<VertexType>> getVertexById(String id) {
+        return vertices.stream().filter(v -> v.getId().equals(id)).findFirst();
     }
 
     public void addEdge(EdgeClass e) {

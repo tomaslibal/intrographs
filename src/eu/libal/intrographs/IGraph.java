@@ -6,7 +6,7 @@ import java.util.Set;
 public interface IGraph<VertexType, EdgeClass>
 {
 
-    void addVertex(VertexType v);
+    Vertex<VertexType> addVertex(VertexType v);
     void addEdge(EdgeClass e);
 
     Set<Vertex<VertexType>> vertexSet();
