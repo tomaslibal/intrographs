@@ -1,6 +1,5 @@
 package eu.libal.intrographs;
 
-import eu.libal.intrographs.edge.Edge;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +18,7 @@ public class Main extends Application {
 //        g.addVertex(1);
 //        g.addVertex(2);
 
-        Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("presentation/views/main.fxml"));
 
         primaryStage.setTitle("Intrographs 2");
         primaryStage.setScene(new Scene(root));
