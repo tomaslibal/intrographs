@@ -1,15 +1,16 @@
 package eu.libal.intrographs.presentation.shapes;
 
-import eu.libal.intrographs.Graph;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 /**
  *
  */
-public class VertexShape extends BasicShape {
+public class VertexShape extends BasicRenderableShape {
 
     @Override
-    public void paint() {
-
+    public void paint() throws Exception {
+        if (ctx == null) {
+            throw new Exception("No GraphicsContext");
+        }
     }
 }
