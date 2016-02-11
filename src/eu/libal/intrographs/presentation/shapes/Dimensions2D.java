@@ -6,14 +6,16 @@ import java.util.Vector;
  *
  */
 public class Dimensions2D {
-    private Vector<Integer> dims = new Vector<>(0, 0);
+    private Vector<Integer> dims = new Vector<>(2);
 
     public Dimensions2D() {
-
+        dims.add(0);
+        dims.add(0);
     }
 
     public Dimensions2D(int width, int height) {
-        set(width, height);
+        dims.add(width);
+        dims.add(height);
     }
 
     public void set(int width, int height) {
