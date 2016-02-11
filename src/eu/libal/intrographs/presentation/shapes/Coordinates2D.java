@@ -6,14 +6,16 @@ import java.util.Vector;
  *
  */
 public class Coordinates2D {
-    Vector<Integer> coordsXY = new Vector<>(0, 0);
+    Vector<Integer> coordsXY = new Vector<>(2);
 
     public Coordinates2D() {
-
+        coordsXY.add(0);
+        coordsXY.add(0);
     }
 
     public Coordinates2D(int x, int y) {
-        coordsXY = new Vector<>(x, y);
+        coordsXY.add(x);
+        coordsXY.add(y);
     }
 
     Vector<Integer> getCoords() {
