@@ -1,7 +1,5 @@
 package eu.libal.intrographs.presentation.shapes;
 
-import javafx.scene.paint.Color;
-
 /**
  *
  */
