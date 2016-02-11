@@ -5,7 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 /**
  *
  */
-public abstract class BasicShape implements IRenderableShape {
+public abstract class BasicRenderableShape implements IRenderableShape {
     GraphicsContext ctx;
 
     @Override
