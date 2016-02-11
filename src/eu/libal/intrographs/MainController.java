@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,7 +24,9 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        GraphicsContext context2D = mainCanvas.getGraphicsContext2D();
+        context2D.setFill(Color.WHITE);
+        context2D.fillRect(0, 0, mainCanvas.getWidth(), mainCanvas.getHeight());
     }
 
     @FXML
