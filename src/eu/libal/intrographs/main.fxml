@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.canvas.Canvas?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.libal.intrographs.MainController">
+    <children>
+        <Canvas width="640" height="480" fx:id="mainCanvas" id="mainCanvas"></Canvas>
+        <Button fx:id="clearCanvasBt" onAction="#clearCanvas">Clear Canvas</Button>
+    </children>
+</VBox>
