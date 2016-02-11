@@ -27,4 +27,17 @@ public class Coordinates2D {
     Integer getY() {
         return coordsXY.get(1);
     }
+
+    void setX(int x) {
+        coordsXY.setElementAt(x, 0);
+    }
+
+    void setY(int y) {
+        coordsXY.setElementAt(y, 1);
+    }
+
+    void set(int x, int y) {
+        setX(x);
+        setY(y);
+    }
 }
