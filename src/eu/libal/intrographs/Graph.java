@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Graph<VertexType, EdgeClass> extends BaseGraph<VertexType, EdgeClass> {
 
-    Graph() {
+    public Graph() {
         vertices = new HashSet<>();
         edges = new HashSet<>();
     }
