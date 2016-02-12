@@ -1,6 +1,6 @@
-package eu.libal.intrographs.edge;
+package eu.libal.intrographs.graphs.edge;
 
-import eu.libal.intrographs.vertex.Vertex;
+import eu.libal.intrographs.graphs.vertex.Vertex;
 import org.junit.Before;
 import org.junit.Test;
 

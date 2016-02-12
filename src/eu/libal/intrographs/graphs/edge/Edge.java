@@ -1,6 +1,6 @@
-package eu.libal.intrographs.edge;
+package eu.libal.intrographs.graphs.edge;
 
-import eu.libal.intrographs.vertex.IVertex;
+import eu.libal.intrographs.graphs.vertex.IVertex;
 
 public class Edge<VertexType> implements IEdge {
 

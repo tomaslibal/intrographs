@@ -1,6 +1,6 @@
-package eu.libal.intrographs;
+package eu.libal.intrographs.graphs;
 
-import eu.libal.intrographs.vertex.Vertex;
+import eu.libal.intrographs.graphs.vertex.Vertex;
 
 import java.util.List;
 import java.util.Set;

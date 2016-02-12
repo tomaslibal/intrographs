@@ -1,4 +1,4 @@
-package eu.libal.intrographs.vertex;
+package eu.libal.intrographs.graphs.vertex;
 
 /**
  * Vertex represents a node in a graph.
