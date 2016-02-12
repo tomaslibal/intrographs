@@ -6,7 +6,9 @@ import eu.libal.intrographs.graphs.vertex.Vertex;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Method;
 import java.util.Optional;
+import java.util.concurrent.Callable;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -89,5 +91,31 @@ public class GraphTest {
         assertThat(g.degreeOf("A"), is(3));
         assertThat(g.degreeOf("D"), is(1));
         assertThat(g.degreeOf("E"), is(0));
+    }
+
+    @Test
+    public void shouldDispatchVertexAddEvent_WhenVertexAdded() {
+
+        class Notified {
+            private boolean not = false;
+            public void notifyMe() {
+                not = true;
+            }
+            public boolean hasBeenNotified() {
+                return not;
+            }
+        }
+
+        Notified not = new Notified();
+
+        g.subscribe("graph.vertex.add", message -> {
+            not.notifyMe();
+        });
+
+        assertThat(not.hasBeenNotified(), is(false));
+
+        g.addVertex(1);
+
+        assertThat(not.hasBeenNotified(), is(true));
     }
 }

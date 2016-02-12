@@ -20,6 +20,8 @@ public class Graph<VertexType, EdgeClass> extends BaseGraph<VertexType, EdgeClas
         Vertex<VertexType> vertex = new Vertex<>(v, id);
         vertices.add(vertex);
 
+        dispatch("graph.vertex.add", id);
+
         return vertex;
     }
 
