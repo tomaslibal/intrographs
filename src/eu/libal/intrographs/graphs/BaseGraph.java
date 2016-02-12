@@ -1,14 +1,22 @@
 package eu.libal.intrographs.graphs;
 
+import eu.libal.intrographs.common.IListenable;
+import eu.libal.intrographs.common.INotifiable;
 import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
+import javafx.util.Pair;
 
+import java.lang.reflect.Method;
 import java.time.Instant;
 import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.function.Function;
 
-abstract public class BaseGraph<VertexType, EdgeClass> implements IGraph<VertexType, EdgeClass> {
+abstract public class BaseGraph<VertexType, EdgeClass> implements IGraph<VertexType, EdgeClass>, IListenable {
     protected Set<Vertex<VertexType>> vertices;
     protected Set<EdgeClass> edges;
+
+    protected List<Pair<String, INotifiable>> callbacks = new LinkedList<>();
 
     public int degreeOf(Vertex<VertexType> v) {
         int d = 0;
@@ -31,6 +39,22 @@ abstract public class BaseGraph<VertexType, EdgeClass> implements IGraph<VertexT
         } else {
             return -1;
         }
+    }
+
+    public void subscribe(String eventName, INotifiable callback) {
+        callbacks.add(new Pair<>(eventName, callback));
+    }
+
+    protected void dispatch(String eventName, String message) {
+        callbacks.stream()
+            .filter(pair -> pair.getKey().equals(eventName))
+            .forEach(pair -> {
+                try {
+                    pair.getValue().call(message);
+                } catch (Exception e) {
+                    //e.printStackTrace();
+                }
+            });
     }
 
     /**
