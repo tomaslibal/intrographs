@@ -6,7 +6,14 @@
 <?import javafx.scene.canvas.Canvas?>
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.libal.intrographs.MainController">
     <children>
-        <Canvas width="640" height="480" fx:id="mainCanvas" id="mainCanvas"></Canvas>
-        <Button fx:id="clearCanvasBt" onAction="#clearCanvas">Clear Canvas</Button>
+        <GridPane>
+            <children>
+                <Canvas GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="0"
+                        width="640" height="480" fx:id="mainCanvas" id="mainCanvas"></Canvas>
+
+                <Button GridPane.columnIndex="0" GridPane.rowIndex="1"
+                        fx:id="clearCanvasBt" onAction="#clearCanvas">Clear Canvas</Button>
+            </children>
+        </GridPane>
     </children>
 </VBox>
