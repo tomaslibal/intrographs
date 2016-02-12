@@ -6,11 +6,25 @@
 <?import javafx.scene.canvas.Canvas?>
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.libal.intrographs.MainController">
     <GridPane>
-        <Canvas GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="0"
+        <Canvas GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="0"
                 width="640" height="480" fx:id="mainCanvas" id="mainCanvas"/>
 
-        <Button GridPane.columnIndex="0" GridPane.rowIndex="1"
+        <Button GridPane.columnIndex="3" GridPane.rowIndex="1"
                 fx:id="clearCanvasBt" onAction="#clearCanvas">Clear Canvas
         </Button>
+
+        <Label GridPane.columnIndex="0" GridPane.rowIndex="1"
+            fx:id="cmdLabel">Command</Label>
+        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"
+            fx:id="cmdInput"/>
+        <Button GridPane.columnIndex="2" GridPane.rowIndex="1"
+            fx:id="execBt">Exec</Button>
+
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="80.0" prefWidth="80.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="500.0" minWidth="80.0" prefWidth="360.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="80.0" prefWidth="80.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="80.0" prefWidth="120.0" />
+        </columnConstraints>
     </GridPane>
 </VBox>
