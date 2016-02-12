@@ -25,6 +25,10 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         GraphicsContext context2D = mainCanvas.getGraphicsContext2D();
+        renderBackground(context2D);
+    }
+
+    private void renderBackground(GraphicsContext context2D) {
         context2D.setFill(Color.WHITE);
         context2D.fillRect(0, 0, mainCanvas.getWidth(), mainCanvas.getHeight());
     }
@@ -33,5 +37,6 @@ public class MainController implements Initializable {
     public void clearCanvas(ActionEvent actionEvent) {
         GraphicsContext context2D = mainCanvas.getGraphicsContext2D();
         context2D.clearRect(0, 0, mainCanvas.getWidth(), mainCanvas.getHeight());
+        renderBackground(context2D);
     }
 }
