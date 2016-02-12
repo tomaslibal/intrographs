@@ -6,6 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 
 import java.net.URL;
@@ -21,6 +23,15 @@ public class MainController implements Initializable {
 
     @FXML
     private Button clearCanvasBt;
+
+    @FXML
+    private Label cmdLabel;
+
+    @FXML
+    private TextField cmdInput;
+
+    @FXML
+    private Button execBt;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
