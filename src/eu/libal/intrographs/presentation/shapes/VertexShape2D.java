@@ -7,8 +7,15 @@ import javafx.scene.paint.Color;
  */
 public class VertexShape2D extends BasicShape2D {
 
-    public VertexShape2D(int x, int y) {
+    private String vertexId;
+
+    public VertexShape2D(int x, int y, String vertexId) {
         super(x, y, 10, 10);
+        this.vertexId = vertexId;
+    }
+
+    public String getVertexId() {
+        return vertexId;
     }
 
     @Override

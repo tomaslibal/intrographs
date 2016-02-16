@@ -1,6 +1,7 @@
 package eu.libal.intrographs.presentation;
 
 import eu.libal.intrographs.graphs.Graph;
+import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.IVertex;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import eu.libal.intrographs.presentation.shapes.EdgeShape2D;
@@ -8,6 +9,7 @@ import eu.libal.intrographs.presentation.shapes.VertexShape2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -55,7 +57,22 @@ public class GraphRenderer<VertexType, EdgeClass> {
         Set<EdgeClass> edgeSet = graph.edgeSet();
 
         return edgeSet.stream()
-                .map(EdgeShapeBuilder::buildAndCreate)
+                .map(e -> {
+                    String sourceId = ((Edge<VertexType>) e).getSource().getId();
+                    String targetId = ((Edge<VertexType>) e).getTarget().getId();
+
+                    Optional<VertexShape2D> source = vertexShapes.stream()
+                                                    .filter(shape -> shape.getVertexId().equals(sourceId)).findFirst();
+
+                    Optional<VertexShape2D> target = vertexShapes.stream()
+                            .filter(shape -> shape.getVertexId().equals(targetId)).findFirst();
+
+                    if (source.isPresent() && target.isPresent()) {
+                        return EdgeShapeBuilder.buildAndCreate(source.get(), target.get());
+                    } else {
+                        return EdgeShapeBuilder.buildAndCreate(null, null);
+                    }
+                })
                 .collect(Collectors.toSet());
     }
 
@@ -87,13 +104,13 @@ public class GraphRenderer<VertexType, EdgeClass> {
         }
 
         public static <VertexType> VertexShape2D buildAndCreate(Vertex<VertexType> v) {
-            return new VertexShape2D((int) Math.round(Math.random()*100), (int) Math.round(Math.random()*100));
+            return new VertexShape2D((int) Math.round(Math.random()*100), (int) Math.round(Math.random()*100), v.getId());
         }
     }
 
     private static class EdgeShapeBuilder {
-        public static <EdgeClass> EdgeShape2D buildAndCreate(EdgeClass e) {
-            return new EdgeShape2D();
+        public static EdgeShape2D buildAndCreate(VertexShape2D source, VertexShape2D target) {
+            return new EdgeShape2D(source, target);
         }
     }
 }
