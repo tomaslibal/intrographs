@@ -47,7 +47,7 @@ public class GraphRenderer<VertexType, EdgeClass> {
         Set<Vertex<VertexType>> vertexSet = graph.vertexSet();
 
         return vertexSet.stream()
-                .map(v -> VertexShapeBuilder.buildAndCreate(v))
+                .map(VertexShapeBuilder::buildAndCreate)
                 .collect(Collectors.toSet());
     }
 
@@ -55,7 +55,7 @@ public class GraphRenderer<VertexType, EdgeClass> {
         Set<EdgeClass> edgeSet = graph.edgeSet();
 
         return edgeSet.stream()
-                .map(e -> EdgeShapeBuilder.buildAndCreate(e))
+                .map(EdgeShapeBuilder::buildAndCreate)
                 .collect(Collectors.toSet());
     }
 
