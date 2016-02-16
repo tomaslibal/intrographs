@@ -16,7 +16,8 @@ public interface IGraph<VertexType, EdgeClass>
     Set<Vertex<VertexType>> vertexSet();
     Set<EdgeClass> edgeSet();
 
-    void removeVertex(Vertex<VertexType> v);
+    boolean removeVertex(String vertexId);
+    boolean removeVertex(Vertex<VertexType> v);
     void removeEdge(EdgeClass e);
     void removeVertices(List<Vertex<VertexType>> vertices);
     void removeEdges(List<EdgeClass> edges);

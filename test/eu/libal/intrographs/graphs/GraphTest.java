@@ -118,4 +118,28 @@ public class GraphTest {
 
         assertThat(not.hasBeenNotified(), is(true));
     }
+
+    @Test
+    public void shouldRemoveVertexByStringId() {
+        Vertex<Integer> a = g.addVertex(0, "a");
+        Vertex<Integer> b = g.addVertex(1, "b");
+
+        g.removeVertex("a");
+
+        assertThat(g.vertexSet().size(), is(1));
+        assertThat(g.vertexSet().contains(a), is(false));
+        assertThat(g.vertexSet().contains(b), is(true));
+    }
+
+    @Test
+    public void shouldRemoveVertex() {
+        Vertex<Integer> a = g.addVertex(0, "a");
+        Vertex<Integer> b = g.addVertex(1, "b");
+
+        g.removeVertex(a);
+
+        assertThat(g.vertexSet().size(), is(1));
+        assertThat(g.vertexSet().contains(a), is(false));
+        assertThat(g.vertexSet().contains(b), is(true));
+    }
 }
