@@ -39,7 +39,7 @@ public class Graph<VertexType, EdgeClass> extends BaseGraph<VertexType, EdgeClas
             return null;
         }
 
-        EdgeClass e = (EdgeClass) new Edge<VertexType>(source.get(), target.get());
+        EdgeClass e = (EdgeClass) new Edge<>(source.get(), target.get());
         if (edges.add(e)) {
             return e;
         } else {
@@ -71,11 +71,7 @@ public class Graph<VertexType, EdgeClass> extends BaseGraph<VertexType, EdgeClas
 
         List<Vertex<VertexType>> lookup = vertices.stream().filter(v -> v.getId().equals(vertexId)).collect(Collectors.toList());
 
-        if (lookup.size() != 1) {
-            return false;
-        }
-
-        return removeVertex(lookup.get(0));
+        return lookup.size() == 1 && removeVertex(lookup.get(0));
     }
 
     public boolean removeVertex(Vertex v) {
