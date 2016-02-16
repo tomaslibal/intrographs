@@ -157,4 +157,34 @@ public class GraphTest {
 
         assertThat(g.vertexSet().size(), is(0));
     }
+
+    @Test
+    public void shouldRemoveEdge() {
+        g.addVertex(0, "a");
+        g.addVertex(1, "b");
+        Edge<Integer> e = g.addEdge("a", "b");
+
+        assertThat(g.edgeSet().size(), is(1));
+
+        g.removeEdge(e);
+
+        assertThat(g.edgeSet().size(), is(0));
+    }
+
+    @Test
+    public void shouldRemoveAllEdges() {
+        g.addVertex(0, "a");
+        g.addVertex(1, "b");
+        g.addVertex(2, "c");
+        Edge<Integer> e1 = g.addEdge("a", "b");
+        Edge<Integer> e2 = g.addEdge("a", "c");
+
+        assertThat(g.edgeSet().size(), is(2));
+
+        List<Edge<Integer>> all = Arrays.asList(e1, e2);
+
+        g.removeEdges(all);
+
+        assertThat(g.edgeSet().size(), is(0));
+    }
 }

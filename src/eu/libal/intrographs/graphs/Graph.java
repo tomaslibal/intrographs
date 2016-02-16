@@ -79,11 +79,11 @@ public class Graph<VertexType, EdgeClass> extends BaseGraph<VertexType, EdgeClas
     }
 
     public boolean removeEdge(EdgeClass e) {
-        return true;
+        return edges.remove(e);
     }
 
-    public boolean removeEdges(List edges) {
-        return true;
+    public boolean removeEdges(List e) {
+        return edges.removeAll(e);
     }
 
     public boolean removeVertices(List v) {
