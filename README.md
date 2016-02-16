@@ -49,35 +49,20 @@ have different meanings in that case.
 
 ## How-to's
 
-This is a JavaScript software tested to run in a browser. Because this is a development version, you will have to build the target on your machine.
-
-1. Install dependencies
-2. Build the out.js
-3. Run a local server
-4. Launch in a browser
+This is a Java project with Maven dependencies.
 
 ### Install dependencies
 
-Use `npm` or install dependencies individually in `node_modules` and `bower_components`. Your system should have Node.js and Bower installed and have it in the PATH environmental variable (on *NIX systems). Additionally, Python version 2.x is used for running a local HTTP server but it is not necessary.
-
-    npm run install
+mvn install
 
 ### Build
 
-The build process takes the ES2015 source files and produces ES5.1 equivalent files and then packs them together into one file `dist/out.js`.
-
-    npm run build
-
 ### Run
 
-This launches a Python SimpleHTTPServer on the local machine's http://0.0.0.0:8080. Visit `http://0.0.0.0:8080/html/`
-in a browser to use the browser app.
-
-    npm run server
+Run the Main class which contains main entry point.
 
 ### Tests
 
-    npm run test
 
 ## Bibliography
 
