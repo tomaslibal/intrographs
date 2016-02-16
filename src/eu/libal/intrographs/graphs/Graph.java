@@ -27,7 +27,7 @@ public class Graph<VertexType, EdgeClass> extends BaseGraph<VertexType, EdgeClas
         return vertex;
     }
 
-
+    @Override
     public void addEdge(String sourceId, String targetId) {
         Optional<Vertex<VertexType>> source = getVertexById(sourceId);
         Optional<Vertex<VertexType>> target = getVertexById(targetId);
@@ -40,6 +40,7 @@ public class Graph<VertexType, EdgeClass> extends BaseGraph<VertexType, EdgeClas
         edges.add((EdgeClass) new Edge<VertexType>(source.get(), target.get()));
     }
 
+    @Override
     public void addEdge(EdgeClass e) {
         edges.add(e);
     }

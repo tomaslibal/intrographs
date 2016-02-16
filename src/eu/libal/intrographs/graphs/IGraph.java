@@ -11,6 +11,7 @@ public interface IGraph<VertexType, EdgeClass>
     Vertex<VertexType> addVertex(VertexType v);
     Vertex<VertexType> addVertex(VertexType v, String id);
     void addEdge(EdgeClass e);
+    void addEdge(String sourceId, String targetId);
 
     Set<Vertex<VertexType>> vertexSet();
     Set<EdgeClass> edgeSet();
