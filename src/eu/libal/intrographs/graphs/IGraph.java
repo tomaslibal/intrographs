@@ -10,17 +10,17 @@ public interface IGraph<VertexType, EdgeClass>
 
     Vertex<VertexType> addVertex(VertexType v);
     Vertex<VertexType> addVertex(VertexType v, String id);
-    void addEdge(EdgeClass e);
-    void addEdge(String sourceId, String targetId);
+    EdgeClass addEdge(EdgeClass e);
+    EdgeClass addEdge(String sourceId, String targetId);
 
     Set<Vertex<VertexType>> vertexSet();
     Set<EdgeClass> edgeSet();
 
     boolean removeVertex(String vertexId);
     boolean removeVertex(Vertex<VertexType> v);
-    void removeEdge(EdgeClass e);
+    boolean removeEdge(EdgeClass e);
     boolean removeVertices(List<Vertex<VertexType>> vertices);
-    void removeEdges(List<EdgeClass> edges);
+    boolean removeEdges(List<EdgeClass> edges);
 
     /**
      * Returns the degree of a node (undirected)

@@ -29,21 +29,31 @@ public class Graph<VertexType, EdgeClass> extends BaseGraph<VertexType, EdgeClas
     }
 
     @Override
-    public void addEdge(String sourceId, String targetId) {
+    public EdgeClass addEdge(String sourceId, String targetId) {
         Optional<Vertex<VertexType>> source = getVertexById(sourceId);
         Optional<Vertex<VertexType>> target = getVertexById(targetId);
 
         if (!source.isPresent()
             || !target.isPresent()) {
-            return;
+            // should throw
+            return null;
         }
 
-        edges.add((EdgeClass) new Edge<VertexType>(source.get(), target.get()));
+        EdgeClass e = (EdgeClass) new Edge<VertexType>(source.get(), target.get());
+        if (edges.add(e)) {
+            return e;
+        } else {
+            return null;
+        }
     }
 
     @Override
-    public void addEdge(EdgeClass e) {
-        edges.add(e);
+    public EdgeClass addEdge(EdgeClass e) {
+        if (edges.add(e)) {
+            return e;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -72,12 +82,12 @@ public class Graph<VertexType, EdgeClass> extends BaseGraph<VertexType, EdgeClas
         return vertices.remove(v);
     }
 
-    public void removeEdge(EdgeClass e) {
-
+    public boolean removeEdge(EdgeClass e) {
+        return true;
     }
 
-    public void removeEdges(List edges) {
-
+    public boolean removeEdges(List edges) {
+        return true;
     }
 
     public boolean removeVertices(List v) {
