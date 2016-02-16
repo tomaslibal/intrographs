@@ -19,7 +19,7 @@ public interface IGraph<VertexType, EdgeClass>
     boolean removeVertex(String vertexId);
     boolean removeVertex(Vertex<VertexType> v);
     void removeEdge(EdgeClass e);
-    void removeVertices(List<Vertex<VertexType>> vertices);
+    boolean removeVertices(List<Vertex<VertexType>> vertices);
     void removeEdges(List<EdgeClass> edges);
 
     /**
