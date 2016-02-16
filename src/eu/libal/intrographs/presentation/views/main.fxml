@@ -10,7 +10,7 @@
                 width="640" height="480" fx:id="mainCanvas" id="mainCanvas"/>
 
         <Button GridPane.columnIndex="3" GridPane.rowIndex="1"
-                fx:id="clearCanvasBt" onAction="#clearCanvas">Clear Canvas
+                fx:id="refreshCanvasBt" onAction="#refreshCanvas">Refresh
         </Button>
 
         <Label GridPane.columnIndex="0" GridPane.rowIndex="1"

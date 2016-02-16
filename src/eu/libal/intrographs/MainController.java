@@ -25,7 +25,7 @@ public class MainController implements Initializable {
     private Canvas mainCanvas;
 
     @FXML
-    private Button clearCanvasBt;
+    private Button refreshCanvasBt;
 
     @FXML
     private Label cmdLabel;
@@ -58,10 +58,15 @@ public class MainController implements Initializable {
         context2D.fillRect(0, 0, mainCanvas.getWidth(), mainCanvas.getHeight());
     }
 
-    @FXML
-    public void clearCanvas(ActionEvent actionEvent) {
+    public void clearCanvas() {
         GraphicsContext context2D = mainCanvas.getGraphicsContext2D();
         context2D.clearRect(0, 0, mainCanvas.getWidth(), mainCanvas.getHeight());
         renderBackground(context2D);
+    }
+
+    @FXML
+    public void refreshCanvas(ActionEvent actionEvent) {
+        clearCanvas();
+        graphRenderer.render();
     }
 }
