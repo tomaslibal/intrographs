@@ -31,6 +31,16 @@ public abstract class BasicShape2D extends BasicRenderableShape implements IShap
     }
 
     @Override
+    public void setX(int x) {
+        coords.setX(x);
+    }
+
+    @Override
+    public void setY(int y) {
+        coords.setY(y);
+    }
+
+    @Override
     public Coordinates2D getCoords() {
         return coords;
     }

@@ -7,6 +7,10 @@ import javafx.scene.paint.Color;
  */
 public class VertexShape2D extends BasicShape2D {
 
+    public VertexShape2D(int x, int y) {
+        super(x, y, 10, 10);
+    }
+
     @Override
     public void paint() throws Exception {
         if (ctx == null) {

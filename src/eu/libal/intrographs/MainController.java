@@ -1,5 +1,8 @@
 package eu.libal.intrographs;
 
+import eu.libal.intrographs.graphs.Graph;
+import eu.libal.intrographs.graphs.edge.Edge;
+import eu.libal.intrographs.presentation.GraphRenderer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,10 +36,21 @@ public class MainController implements Initializable {
     @FXML
     private Button execBt;
 
+    private GraphRenderer<Integer, Edge<Integer>> graphRenderer;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         GraphicsContext context2D = mainCanvas.getGraphicsContext2D();
         renderBackground(context2D);
+
+        Graph<Integer, Edge<Integer>> g = new Graph<>();
+        g.addVertex(0, "a");
+        g.addVertex(1, "b");
+        g.addVertex(2, "c");
+        g.addEdge("a", "b");
+
+        graphRenderer = new GraphRenderer<>(g, mainCanvas);
+        graphRenderer.render();
     }
 
     private void renderBackground(GraphicsContext context2D) {
