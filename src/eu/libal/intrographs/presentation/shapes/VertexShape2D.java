@@ -25,7 +25,14 @@ public class VertexShape2D extends BasicShape2D {
         }
 
         ctx.setFill(new Color(0, 0, 0.99, 1));
-        ctx.fillOval(getX(), getY(),  getWidth(), getHeight());
+
+        Integer width = getWidth();
+        Integer height = getHeight();
+
+        /*
+         * center the circle to the (x, y) position
+         */
+        ctx.fillOval(getX() - (width/2), getY() - (height/2), width, height);
     }
 
 }
