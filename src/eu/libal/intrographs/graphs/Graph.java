@@ -80,8 +80,8 @@ public class Graph<VertexType, EdgeClass> extends BaseGraph<VertexType, EdgeClas
 
     }
 
-    public void removeVertices(List vertices) {
-
+    public void removeVertices(List v) {
+        vertices.removeAll(v);
     }
 
 }

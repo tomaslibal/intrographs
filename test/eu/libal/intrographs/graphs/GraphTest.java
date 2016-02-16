@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 
@@ -141,5 +143,18 @@ public class GraphTest {
         assertThat(g.vertexSet().size(), is(1));
         assertThat(g.vertexSet().contains(a), is(false));
         assertThat(g.vertexSet().contains(b), is(true));
+    }
+
+    @Test
+    public void shouldRemoveAllVertices() {
+        Vertex<Integer> a = g.addVertex(0, "a");
+        Vertex<Integer> b = g.addVertex(1, "b");
+        Vertex<Integer> c = g.addVertex(2, "c");
+
+        List<Vertex> all = Arrays.asList(a, b, c);
+
+        g.removeVertices(all);
+
+        assertThat(g.vertexSet().size(), is(0));
     }
 }
