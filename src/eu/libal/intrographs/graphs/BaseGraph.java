@@ -6,13 +6,11 @@ import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import javafx.util.Pair;
 
-import java.lang.reflect.Method;
 import java.time.Instant;
 import java.util.*;
-import java.util.concurrent.Callable;
-import java.util.function.Function;
+import java.util.stream.Collectors;
 
-abstract public class BaseGraph<VertexType, EdgeClass> implements IGraph<VertexType, EdgeClass>, IListenable {
+abstract public class BaseGraph<VertexType, EdgeClass extends Edge> implements IGraph<VertexType, EdgeClass>, IListenable {
     protected Set<Vertex<VertexType>> vertices;
     protected Set<EdgeClass> edges;
 
@@ -67,5 +65,12 @@ abstract public class BaseGraph<VertexType, EdgeClass> implements IGraph<VertexT
 
     protected Optional<Vertex<VertexType>> getVertexById(String id) {
         return vertices.stream().filter(v -> v.getId().equals(id)).findFirst();
+    }
+
+    @Override
+    public Set<EdgeClass> incidentEdges(Vertex<VertexType> v) {
+        return edges.stream()
+                .filter(e -> e.getSource().getId().equals(v.getId()) || e.getTarget().getId().equals(v.getId()))
+                .collect(Collectors.toSet());
     }
 }

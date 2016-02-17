@@ -6,7 +6,7 @@ import eu.libal.intrographs.graphs.vertex.Vertex;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Graph<VertexType, EdgeClass> extends BaseGraph<VertexType, EdgeClass> {
+public class Graph<VertexType, EdgeClass extends Edge> extends BaseGraph<VertexType, EdgeClass> {
 
     public Graph() {
         vertices = new HashSet<>();

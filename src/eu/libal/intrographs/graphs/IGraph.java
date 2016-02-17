@@ -1,26 +1,28 @@
 package eu.libal.intrographs.graphs;
 
+import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 
 import java.util.List;
 import java.util.Set;
 
-public interface IGraph<VertexType, EdgeClass>
+public interface IGraph<T, U extends Edge>
 {
 
-    Vertex<VertexType> addVertex(VertexType v);
-    Vertex<VertexType> addVertex(VertexType v, String id);
-    EdgeClass addEdge(EdgeClass e);
-    EdgeClass addEdge(String sourceId, String targetId);
+    Vertex<T> addVertex(T v);
+    Vertex<T> addVertex(T v, String id);
+    U addEdge(U e);
+    U addEdge(String sourceId, String targetId);
+    Set<U> incidentEdges(Vertex<T> v);
 
-    Set<Vertex<VertexType>> vertexSet();
-    Set<EdgeClass> edgeSet();
+    Set<Vertex<T>> vertexSet();
+    Set<U> edgeSet();
 
     boolean removeVertex(String vertexId);
-    boolean removeVertex(Vertex<VertexType> v);
-    boolean removeEdge(EdgeClass e);
-    boolean removeVertices(List<Vertex<VertexType>> vertices);
-    boolean removeEdges(List<EdgeClass> edges);
+    boolean removeVertex(Vertex<T> v);
+    boolean removeEdge(U e);
+    boolean removeVertices(List<Vertex<T>> vertices);
+    boolean removeEdges(List<U> edges);
 
     /**
      * Returns the degree of a node (undirected)
@@ -28,7 +30,7 @@ public interface IGraph<VertexType, EdgeClass>
      * @param v
      * @return int
      */
-    int degreeOf(Vertex<VertexType> v);
+    int degreeOf(Vertex<T> v);
 
     /**
      * Returns the degree of a node (undirected)
