@@ -13,7 +13,7 @@ public class ConnectedTesterTest {
 
     @Before
     public void setup() {
-        g = new Graph<Integer, Edge<Integer>>();
+        g = new Graph<>();
     }
 
     @Test
