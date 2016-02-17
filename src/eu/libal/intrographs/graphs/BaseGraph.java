@@ -19,8 +19,8 @@ abstract public class BaseGraph<T, U extends Edge> implements IGraph<T, U>, ILis
     public int degreeOf(Vertex<T> v) {
         int d = 0;
 
-        for (Iterator<Edge<T>> it = (Iterator<Edge<T>>) edges.iterator(); it.hasNext(); ) {
-            Edge<T> e = it.next();
+        for (Iterator<U> it = edges.iterator(); it.hasNext(); ) {
+            U e = it.next();
             if (e.getSource().equals(v) || e.getTarget().equals(v)) {
                 d++;
             }
