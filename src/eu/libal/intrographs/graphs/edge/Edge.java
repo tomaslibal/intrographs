@@ -2,12 +2,12 @@ package eu.libal.intrographs.graphs.edge;
 
 import eu.libal.intrographs.graphs.vertex.IVertex;
 
-public class Edge<VertexType> implements IEdge {
+public class Edge<T> implements IEdge<T> {
 
-    private IVertex<VertexType> source;
-    private IVertex<VertexType> target;
+    private IVertex<T> source;
+    private IVertex<T> target;
 
-    public Edge(IVertex<VertexType> source, IVertex<VertexType> target)
+    public Edge(IVertex<T> source, IVertex<T> target)
     {
         this.source = source;
         this.target = target;
