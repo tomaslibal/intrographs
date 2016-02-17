@@ -14,12 +14,12 @@ public class Edge<T> implements IEdge<T> {
     }
 
     @Override
-    public IVertex getTarget() {
+    public IVertex<T> getTarget() {
         return target;
     }
 
     @Override
-    public IVertex getSource() {
+    public IVertex<T> getSource() {
         return source;
     }
 }
