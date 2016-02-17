@@ -27,7 +27,7 @@ public interface IGraph<T, U extends Edge>
     /**
      * Returns the degree of a node (undirected)
      *
-     * @param v
+     * @param v vertex whose degree will be returned
      * @return int
      */
     int degreeOf(Vertex<T> v);
@@ -35,8 +35,8 @@ public interface IGraph<T, U extends Edge>
     /**
      * Returns the degree of a node (undirected)
      *
-     * @param vertexId
-     * @return
+     * @param vertexId string id value of the vertex whose degree will be returned
+     * @return int
      */
     int degreeOf(String vertexId);
 }

@@ -91,11 +91,11 @@ public class Graph<T, U extends Edge> extends BaseGraph<T, U> {
         return edges.remove(e);
     }
 
-    public boolean removeEdges(List e) {
+    public boolean removeEdges(List<U> e) {
         return edges.removeAll(e);
     }
 
-    public boolean removeVertices(List v) {
+    public boolean removeVertices(List<Vertex<T>> v) {
         return vertices.removeAll(v);
     }
 
