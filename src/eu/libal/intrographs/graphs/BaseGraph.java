@@ -10,17 +10,17 @@ import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 
-abstract public class BaseGraph<VertexType, EdgeClass extends Edge> implements IGraph<VertexType, EdgeClass>, IListenable {
-    protected Set<Vertex<VertexType>> vertices;
-    protected Set<EdgeClass> edges;
+abstract public class BaseGraph<T, U extends Edge> implements IGraph<T, U>, IListenable {
+    protected Set<Vertex<T>> vertices;
+    protected Set<U> edges;
 
     protected List<Pair<String, INotifiable>> callbacks = new LinkedList<>();
 
-    public int degreeOf(Vertex<VertexType> v) {
+    public int degreeOf(Vertex<T> v) {
         int d = 0;
 
-        for (Iterator<Edge<VertexType>> it = (Iterator<Edge<VertexType>>) edges.iterator(); it.hasNext(); ) {
-            Edge<VertexType> e = it.next();
+        for (Iterator<Edge<T>> it = (Iterator<Edge<T>>) edges.iterator(); it.hasNext(); ) {
+            Edge<T> e = it.next();
             if (e.getSource().equals(v) || e.getTarget().equals(v)) {
                 d++;
             }
@@ -30,7 +30,7 @@ abstract public class BaseGraph<VertexType, EdgeClass extends Edge> implements I
     }
 
     public int degreeOf(String vertexId) {
-        Optional<Vertex<VertexType>> vertexById = getVertexById(vertexId);
+        Optional<Vertex<T>> vertexById = getVertexById(vertexId);
 
         if (vertexById.isPresent()) {
             return degreeOf(vertexById.get());
@@ -63,12 +63,12 @@ abstract public class BaseGraph<VertexType, EdgeClass extends Edge> implements I
         return Date.from(Instant.now()).toString();
     }
 
-    protected Optional<Vertex<VertexType>> getVertexById(String id) {
+    protected Optional<Vertex<T>> getVertexById(String id) {
         return vertices.stream().filter(v -> v.getId().equals(id)).findFirst();
     }
 
     @Override
-    public Set<EdgeClass> incidentEdges(Vertex<VertexType> v) {
+    public Set<U> incidentEdges(Vertex<T> v) {
         return edges.stream()
                 .filter(e -> e.getSource().getId().equals(v.getId()) || e.getTarget().getId().equals(v.getId()))
                 .collect(Collectors.toSet());

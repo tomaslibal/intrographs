@@ -6,7 +6,7 @@ import eu.libal.intrographs.graphs.vertex.Vertex;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Graph<VertexType, EdgeClass extends Edge> extends BaseGraph<VertexType, EdgeClass> {
+public class Graph<T, U extends Edge> extends BaseGraph<T, U> {
 
     public Graph() {
         vertices = new HashSet<>();
@@ -14,13 +14,13 @@ public class Graph<VertexType, EdgeClass extends Edge> extends BaseGraph<VertexT
     }
 
     @Override
-    public Vertex<VertexType> addVertex(VertexType v) {
+    public Vertex<T> addVertex(T v) {
         return addVertex(v, getNewId());
     }
 
     @Override
-    public Vertex<VertexType> addVertex(VertexType v, String id) {
-        Vertex<VertexType> vertex = new Vertex<>(v, id);
+    public Vertex<T> addVertex(T v, String id) {
+        Vertex<T> vertex = new Vertex<>(v, id);
         vertices.add(vertex);
 
         dispatch("graph.vertex.add", id);
@@ -28,8 +28,8 @@ public class Graph<VertexType, EdgeClass extends Edge> extends BaseGraph<VertexT
         return vertex;
     }
 
-    public Vertex<VertexType> addVertex(String id, double x, double y) {
-        Vertex<VertexType> vertex = new Vertex<>(id);
+    public Vertex<T> addVertex(String id, double x, double y) {
+        Vertex<T> vertex = new Vertex<>(id);
         vertices.add(vertex);
 
         dispatch("graph.vertex.add", id.concat(";x:").concat(String.valueOf(x)).concat(";y:").concat(String.valueOf(y)));
@@ -38,9 +38,9 @@ public class Graph<VertexType, EdgeClass extends Edge> extends BaseGraph<VertexT
     }
 
     @Override
-    public EdgeClass addEdge(String sourceId, String targetId) {
-        Optional<Vertex<VertexType>> source = getVertexById(sourceId);
-        Optional<Vertex<VertexType>> target = getVertexById(targetId);
+    public U addEdge(String sourceId, String targetId) {
+        Optional<Vertex<T>> source = getVertexById(sourceId);
+        Optional<Vertex<T>> target = getVertexById(targetId);
 
         if (!source.isPresent()
             || !target.isPresent()) {
@@ -48,7 +48,7 @@ public class Graph<VertexType, EdgeClass extends Edge> extends BaseGraph<VertexT
             return null;
         }
 
-        EdgeClass e = (EdgeClass) new Edge<>(source.get(), target.get());
+        U e = (U) new Edge<>(source.get(), target.get());
         if (edges.add(e)) {
             return e;
         } else {
@@ -57,7 +57,7 @@ public class Graph<VertexType, EdgeClass extends Edge> extends BaseGraph<VertexT
     }
 
     @Override
-    public EdgeClass addEdge(EdgeClass e) {
+    public U addEdge(U e) {
         if (edges.add(e)) {
             return e;
         } else {
@@ -66,19 +66,19 @@ public class Graph<VertexType, EdgeClass extends Edge> extends BaseGraph<VertexT
     }
 
     @Override
-    public Set<Vertex<VertexType>> vertexSet() {
+    public Set<Vertex<T>> vertexSet() {
         return vertices;
     }
 
     @Override
-    public Set<EdgeClass> edgeSet() {
+    public Set<U> edgeSet() {
         return edges;
     }
 
     @Override
     public boolean removeVertex(String vertexId) {
 
-        List<Vertex<VertexType>> lookup = vertices.stream().filter(v -> v.getId().equals(vertexId)).collect(Collectors.toList());
+        List<Vertex<T>> lookup = vertices.stream().filter(v -> v.getId().equals(vertexId)).collect(Collectors.toList());
 
         return lookup.size() == 1 && removeVertex(lookup.get(0));
     }
@@ -87,7 +87,7 @@ public class Graph<VertexType, EdgeClass extends Edge> extends BaseGraph<VertexT
         return vertices.remove(v);
     }
 
-    public boolean removeEdge(EdgeClass e) {
+    public boolean removeEdge(U e) {
         return edges.remove(e);
     }
 
