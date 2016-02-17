@@ -10,6 +10,10 @@ public class Vertex<VertexType> implements IVertex<VertexType> {
         this.id = id;
     }
 
+    public Vertex(String id) {
+        this.id = id;
+    }
+
     @Override
     public VertexType getValue() {
         return value;

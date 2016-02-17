@@ -11,6 +11,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.atomic.DoubleAccumulator;
 import java.util.stream.Collectors;
 
 /**
@@ -31,6 +32,36 @@ public class GraphRenderer<VertexType, EdgeClass> {
 
         vertexShapes = createVertexShapes();
         edgeShapes = createEdgeShapes();
+
+        graph.subscribe("graph.vertex.add", (String message) -> {
+            String[] parts = message.split(";");
+
+            if (parts.length != 3) {
+                return;
+            }
+
+            String vertexId = parts[0];
+            String xCoord = parts[1].substring(2);
+            String yCoord = parts[2].substring(2);
+
+            Set<Vertex<VertexType>> vertices = graph.vertexSet();
+            Vertex<VertexType> newVertex = vertices.stream()
+                    .filter(v -> v.getId().equals(vertexId))
+                    .findFirst()
+                    .get();
+
+            VertexShape2D vertexShape2D = new VertexShapeBuilder()
+                    .build(newVertex)
+                    .setX((int) Math.round(Double.parseDouble(xCoord)))
+                    .setY((int) Math.round(Double.parseDouble(yCoord)))
+                    .create();
+
+            vertexShapes.add(
+                    vertexShape2D
+            );
+
+            render();
+        });
     }
 
     public void render() {
@@ -99,8 +130,27 @@ public class GraphRenderer<VertexType, EdgeClass> {
     }
 
     private static class VertexShapeBuilder {
+        private int x = 0;
+        private int y = 0;
+        private IVertex v;
+
         public VertexShapeBuilder build(IVertex v) {
+            this.v = v;
             return this;
+        }
+
+        public VertexShapeBuilder setX(int x) {
+            this.x = x;
+            return this;
+        }
+
+        public VertexShapeBuilder setY(int y) {
+            this.y = y;
+            return this;
+        }
+
+        public VertexShape2D create() {
+            return new VertexShape2D(x, y, v.getId());
         }
 
         public static <VertexType> VertexShape2D buildAndCreate(Vertex<VertexType> v) {

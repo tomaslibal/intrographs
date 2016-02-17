@@ -28,6 +28,15 @@ public class Graph<VertexType, EdgeClass extends Edge> extends BaseGraph<VertexT
         return vertex;
     }
 
+    public Vertex<VertexType> addVertex(String id, double x, double y) {
+        Vertex<VertexType> vertex = new Vertex<>(id);
+        vertices.add(vertex);
+
+        dispatch("graph.vertex.add", id.concat(";x:").concat(String.valueOf(x)).concat(";y:").concat(String.valueOf(y)));
+
+        return vertex;
+    }
+
     @Override
     public EdgeClass addEdge(String sourceId, String targetId) {
         Optional<Vertex<VertexType>> source = getVertexById(sourceId);

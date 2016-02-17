@@ -6,19 +6,31 @@
 <?import javafx.scene.canvas.Canvas?>
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.libal.intrographs.MainController">
     <GridPane>
-        <Canvas GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="0"
-                width="640" height="480" fx:id="mainCanvas" id="mainCanvas"/>
+        <Canvas GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="3" GridPane.rowSpan="2"
+                width="640" height="480" fx:id="mainCanvas" id="mainCanvas"
+                onMouseClicked="#handleMouseClick"/>
 
-        <Button GridPane.columnIndex="3" GridPane.rowIndex="1"
+        <Button GridPane.columnIndex="3" GridPane.rowIndex="2"
                 fx:id="refreshCanvasBt" onAction="#refreshCanvas">Refresh
         </Button>
 
-        <Label GridPane.columnIndex="0" GridPane.rowIndex="1"
+        <Label GridPane.columnIndex="0" GridPane.rowIndex="2"
             fx:id="cmdLabel">Command</Label>
-        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"
+        <TextField GridPane.columnIndex="1" GridPane.rowIndex="2"
             fx:id="cmdInput"/>
-        <Button GridPane.columnIndex="2" GridPane.rowIndex="1"
+        <Button GridPane.columnIndex="2" GridPane.rowIndex="2"
             fx:id="execBt">Exec</Button>
+
+        <!-- -->
+
+        <Button fx:id="addVertexBt" onAction="#setCanvasStatusToAddingVertex"
+                GridPane.rowIndex="0" GridPane.columnIndex="4" alignment="TOP_LEFT">Add Vertex</Button>
+
+        <!--<rowConstraints>-->
+            <!--<RowConstraints maxHeight="60"></RowConstraints>-->
+            <!--<RowConstraints maxHeight="640"></RowConstraints>-->
+            <!--<RowConstraints maxHeight="120"></RowConstraints>-->
+        <!--</rowConstraints>-->
 
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="80.0" prefWidth="80.0" />
