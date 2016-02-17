@@ -1,11 +1,11 @@
 package eu.libal.intrographs.graphs.vertex;
 
-public class Vertex<VertexType> implements IVertex<VertexType> {
+public class Vertex<T> implements IVertex<T> {
 
-    VertexType value;
+    T value;
     String id;
 
-    public Vertex(VertexType value, String id) {
+    public Vertex(T value, String id) {
         this.value = value;
         this.id = id;
     }
@@ -15,7 +15,7 @@ public class Vertex<VertexType> implements IVertex<VertexType> {
     }
 
     @Override
-    public VertexType getValue() {
+    public T getValue() {
         return value;
     }
 
