@@ -151,7 +151,7 @@ public class GraphTest {
         Vertex<Integer> b = g.addVertex(1, "b");
         Vertex<Integer> c = g.addVertex(2, "c");
 
-        List<Vertex> all = Arrays.asList(a, b, c);
+        List<Vertex<Integer>> all = Arrays.asList(a, b, c);
 
         g.removeVertices(all);
 
