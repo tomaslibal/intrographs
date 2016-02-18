@@ -40,6 +40,14 @@ public class ConnectedTester {
         return -1;
     }
 
+    /**
+     * Visits adjacent nodes of v.
+     *
+     * @param v node whose adjacent vertices are being visited
+     * @param incidentEdges incident edges on v
+     * @param visited a set of nodes which have been visited
+     * @param g graph
+     */
     private static void visitAdjacentNodes(IVertex v, Set<Edge<Integer>> incidentEdges, Set<String> visited, Graph g) {
         visited.add(v.getId());
 
