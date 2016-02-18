@@ -30,4 +30,24 @@ public class ConnectedTesterTest {
         assertThat(ConnectedTester.isConnected(g), is(true));
     }
 
+    @Test
+    public void shouldReturnTrueIfGraphHasJustOneVertexAndNoEdges() {
+        g.addVertex(0, "a");
+
+        assertThat(ConnectedTester.isConnected(g), is(true));
+    }
+
+    @Test
+    public void shouldReturnFalseIfGraphHasTwoComponents() {
+        g.addVertex(0, "a");
+        g.addVertex(1, "b");
+        g.addVertex(2, "c");
+        g.addVertex(3, "d");
+
+        g.addEdge("a", "b");
+        g.addEdge("a", "c");
+
+        assertThat(ConnectedTester.isConnected(g), is(false));
+    }
+
 }
