@@ -26,6 +26,9 @@
         <Button fx:id="addVertexBt" onAction="#setCanvasStatusToAddingVertex"
                 GridPane.rowIndex="0" GridPane.columnIndex="4" alignment="TOP_LEFT">Add Vertex</Button>
 
+        <Button fx:id="addEdgeBt" onAction="#setCanvasStatusToAddingEdge"
+                GridPane.columnIndex="4" GridPane.rowIndex="1" alignment="TOP_LEFT">Add Edge</Button>
+
         <!--<rowConstraints>-->
             <!--<RowConstraints maxHeight="60"></RowConstraints>-->
             <!--<RowConstraints maxHeight="640"></RowConstraints>-->
