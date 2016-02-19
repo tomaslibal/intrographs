@@ -50,6 +50,8 @@ public class Graph<T, U extends Edge> extends BaseGraph<T, U> {
 
         U e = (U) new Edge<>(source.get(), target.get());
         if (edges.add(e)) {
+            dispatch("graph.edge.add", "source:".concat(sourceId).concat(";target:").concat(targetId));
+
             return e;
         } else {
             return null;

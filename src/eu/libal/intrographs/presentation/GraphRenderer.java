@@ -33,6 +33,21 @@ public class GraphRenderer<VertexType, EdgeClass> {
         vertexShapes = createVertexShapes();
         edgeShapes = createEdgeShapes();
 
+        graph.subscribe("graph.edge.add", (String message) -> {
+            String[] parts = message.split(";");
+
+            if (parts.length != 2) {
+                return;
+            }
+
+            String sourceId = parts[0].substring(7);
+            String targetId = parts[1].substring(7);
+
+            edgeShapes.add(getEdgeShape2D(sourceId, targetId));
+
+            render();
+        });
+
         graph.subscribe("graph.vertex.add", (String message) -> {
             String[] parts = message.split(";");
 
@@ -76,6 +91,10 @@ public class GraphRenderer<VertexType, EdgeClass> {
         return ctx;
     }
 
+    public Set<VertexShape2D> getVertexShapes() {
+        return vertexShapes;
+    }
+
     private Set<VertexShape2D> createVertexShapes() {
         Set<Vertex<VertexType>> vertexSet = graph.vertexSet();
 
@@ -92,19 +111,23 @@ public class GraphRenderer<VertexType, EdgeClass> {
                     String sourceId = ((Edge<VertexType>) e).getSource().getId();
                     String targetId = ((Edge<VertexType>) e).getTarget().getId();
 
-                    Optional<VertexShape2D> source = vertexShapes.stream()
-                                                    .filter(shape -> shape.getVertexId().equals(sourceId)).findFirst();
-
-                    Optional<VertexShape2D> target = vertexShapes.stream()
-                            .filter(shape -> shape.getVertexId().equals(targetId)).findFirst();
-
-                    if (source.isPresent() && target.isPresent()) {
-                        return EdgeShapeBuilder.buildAndCreate(source.get(), target.get());
-                    } else {
-                        return EdgeShapeBuilder.buildAndCreate(null, null);
-                    }
+                    return getEdgeShape2D(sourceId, targetId);
                 })
                 .collect(Collectors.toSet());
+    }
+
+    private EdgeShape2D getEdgeShape2D(String sourceId, String targetId) {
+        Optional<VertexShape2D> source = vertexShapes.stream()
+                                        .filter(shape -> shape.getVertexId().equals(sourceId)).findFirst();
+
+        Optional<VertexShape2D> target = vertexShapes.stream()
+                .filter(shape -> shape.getVertexId().equals(targetId)).findFirst();
+
+        if (source.isPresent() && target.isPresent()) {
+            return EdgeShapeBuilder.buildAndCreate(source.get(), target.get());
+        } else {
+            return EdgeShapeBuilder.buildAndCreate(null, null);
+        }
     }
 
     private void renderVertices() {

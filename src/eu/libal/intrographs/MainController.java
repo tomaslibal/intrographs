@@ -2,7 +2,6 @@ package eu.libal.intrographs;
 
 import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
-import eu.libal.intrographs.graphs.vertex.IVertex;
 import eu.libal.intrographs.presentation.CanvasStates;
 import eu.libal.intrographs.presentation.GraphRenderer;
 import eu.libal.intrographs.presentation.shapes.VertexShape2D;
@@ -54,6 +53,13 @@ public class MainController implements Initializable {
 
     private Graph<Integer, Edge<Integer>> g;
 
+    /*
+     * when adding a new edge these hold reference to the vertices incident on the new edge.
+     */
+    private VertexShape2D sel1;
+    private VertexShape2D sel2;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         GraphicsContext context2D = mainCanvas.getGraphicsContext2D();
@@ -97,8 +103,19 @@ public class MainController implements Initializable {
 
         Optional<VertexShape2D> selectedVertex = getVertexAtMouseClick(event);
 
-        if (selectedVertex.isPresent()) {
-            System.out.println("found vertex " + selectedVertex.get().getVertexId());
+        if (canvasState == CanvasStates.ADDING_EDGE && selectedVertex.isPresent()) {
+
+            if (sel1 == null) {
+                sel1 = selectedVertex.get();
+            } else {
+                sel2 = selectedVertex.get();
+                g.addEdge(sel1.getVertexId(), sel2.getVertexId());
+
+                sel1 = null;
+                sel2 = null;
+                canvasState = CanvasStates.PANNING;
+                addEdgeBt.setText("Add Edge");
+            }
         }
     }
 
