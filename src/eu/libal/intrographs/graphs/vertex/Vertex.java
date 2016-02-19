@@ -38,4 +38,9 @@ public class Vertex<T> implements IVertex<T> {
     public void addAdjacentVertex(IVertex<T> v) {
         adjacent.add(v);
     }
+
+    @Override
+    public int compareTo(IVertex<T> v) {
+        return id.compareTo(v.getId());
+    }
 }
