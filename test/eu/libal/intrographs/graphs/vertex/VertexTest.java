@@ -20,4 +20,11 @@ public class VertexTest {
 
         assertThat(v1.getId(), is("foo"));
     }
+
+    @Test
+    public void shouldCreateVertexWithNoAdjacentNodes() throws Exception {
+        Vertex<Integer> v = new Vertex<>(42, "bar");
+
+        assertThat(v.getAdjacentVertices().size(), is(0));
+    }
 }
