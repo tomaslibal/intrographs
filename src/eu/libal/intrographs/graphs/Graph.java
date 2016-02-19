@@ -48,7 +48,7 @@ public class Graph<T, U extends Edge<T>> extends BaseGraph<T, U> {
             return null;
         }
 
-        U e = (U) new Edge(source.get(), target.get());
+        U e = (U) new Edge<>(source.get(), target.get());
         return addEdge(e);
     }
 
