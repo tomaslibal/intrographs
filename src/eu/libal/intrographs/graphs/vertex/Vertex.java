@@ -33,4 +33,9 @@ public class Vertex<T> implements IVertex<T> {
     public Set<IVertex<T>> getAdjacentVertices() {
         return adjacent;
     }
+
+    @Override
+    public void addAdjacentVertex(IVertex<T> v) {
+        adjacent.add(v);
+    }
 }

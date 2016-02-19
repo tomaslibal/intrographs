@@ -26,4 +26,10 @@ public interface IVertex<T>
      * @return a set of vertices that are incident on the same edges as this vertex
      */
     Set<IVertex<T>> getAdjacentVertices();
+
+    /**
+     *
+     * @param v adjacent vertex to be added to the set of adjacent vertices of {this}
+     */
+    void addAdjacentVertex(IVertex<T> v);
 }

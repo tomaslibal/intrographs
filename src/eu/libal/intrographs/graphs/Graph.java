@@ -61,6 +61,13 @@ public class Graph<T, U extends Edge> extends BaseGraph<T, U> {
     @Override
     public U addEdge(U e) {
         if (edges.add(e)) {
+
+            /*
+             * each vertex keeps a set of adjacent nodes
+             */
+            e.getSource().addAdjacentVertex(e.getTarget());
+            e.getTarget().addAdjacentVertex(e.getSource());
+
             return e;
         } else {
             return null;
