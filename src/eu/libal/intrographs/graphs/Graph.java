@@ -6,7 +6,7 @@ import eu.libal.intrographs.graphs.vertex.Vertex;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Graph<T, U extends Edge> extends BaseGraph<T, U> {
+public class Graph<T, U extends Edge<T>> extends BaseGraph<T, U> {
 
     public Graph() {
         vertices = new HashSet<>();
@@ -48,7 +48,7 @@ public class Graph<T, U extends Edge> extends BaseGraph<T, U> {
             return null;
         }
 
-        U e = (U) new Edge<>(source.get(), target.get());
+        U e = (U) new Edge(source.get(), target.get());
         return addEdge(e);
     }
 
@@ -57,8 +57,9 @@ public class Graph<T, U extends Edge> extends BaseGraph<T, U> {
         if (edges.add(e)) {
 
             dispatch("graph.edge.add", "source:".concat(e.getSource().getId()).concat(";target:").concat(e.getTarget().getId()));
+
             /*
-             * each vertex keeps a set of adjacent nodes
+             * Each vertex keeps a set of adjacent nodes. Here we reciprocally add the adjacent vertices.
              */
             e.getSource().addAdjacentVertex(e.getTarget());
             e.getTarget().addAdjacentVertex(e.getSource());

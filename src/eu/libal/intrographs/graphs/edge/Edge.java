@@ -1,25 +1,25 @@
 package eu.libal.intrographs.graphs.edge;
 
-import eu.libal.intrographs.graphs.vertex.IVertex;
+import eu.libal.intrographs.graphs.vertex.Vertex;
 
 public class Edge<T> implements IEdge<T> {
 
-    private IVertex<T> source;
-    private IVertex<T> target;
+    private Vertex<T> source;
+    private Vertex<T> target;
 
-    public Edge(IVertex<T> source, IVertex<T> target)
+    public Edge(Vertex<T> source, Vertex<T> target)
     {
         this.source = source;
         this.target = target;
     }
 
     @Override
-    public IVertex<T> getTarget() {
+    public Vertex<T> getTarget() {
         return target;
     }
 
     @Override
-    public IVertex<T> getSource() {
+    public Vertex<T> getSource() {
         return source;
     }
 }

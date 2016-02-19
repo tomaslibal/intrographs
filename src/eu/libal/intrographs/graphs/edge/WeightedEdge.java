@@ -1,19 +1,19 @@
 package eu.libal.intrographs.graphs.edge;
 
-import eu.libal.intrographs.graphs.vertex.IVertex;
+import eu.libal.intrographs.graphs.vertex.Vertex;
 
 /**
  *
  */
-public class WeightedEdge<VertexType> extends Edge<VertexType> {
+public class WeightedEdge<T> extends Edge<T> {
 
     Double weight = 1.0;
 
-    WeightedEdge(IVertex<VertexType> source, IVertex<VertexType> target) {
+    WeightedEdge(Vertex<T> source, Vertex<T> target) {
         super(source, target);
     }
 
-    WeightedEdge(IVertex<VertexType> source, IVertex<VertexType> target, Double weight) {
+    WeightedEdge(Vertex<T> source, Vertex<T> target, Double weight) {
         super(source, target);
         this.weight = weight;
     }

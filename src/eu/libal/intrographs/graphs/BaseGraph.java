@@ -10,7 +10,7 @@ import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 
-abstract public class BaseGraph<T, U extends Edge> implements IGraph<T, U>, IListenable {
+abstract public class BaseGraph<T, U extends Edge<T>> implements IGraph<T, U>, IListenable {
     protected Set<Vertex<T>> vertices;
     protected Set<U> edges;
 

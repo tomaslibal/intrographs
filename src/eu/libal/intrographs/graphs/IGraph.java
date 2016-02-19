@@ -6,7 +6,7 @@ import eu.libal.intrographs.graphs.vertex.Vertex;
 import java.util.List;
 import java.util.Set;
 
-public interface IGraph<T, U extends Edge>
+public interface IGraph<T, U extends Edge<T>>
 {
 
     Vertex<T> addVertex(T v);
