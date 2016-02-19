@@ -5,6 +5,7 @@ import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.internal.util.collections.Sets;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -186,5 +187,16 @@ public class GraphTest {
         g.removeEdges(all);
 
         assertThat(g.edgeSet().size(), is(0));
+    }
+
+    @Test
+    public void shouldAddEdgeVerticesAsAdjacentVerticesToTheVerticesIncidentOnThatEdge() {
+        Vertex<Integer> v = g.addVertex(0, "v");
+        Vertex<Integer> w = g.addVertex(1, "w");
+
+        Edge<Integer> e1 = g.addEdge("v", "w");
+
+        assertThat(v.getAdjacentVertices(), is(Sets.newSet(w)));
+        assertThat(w.getAdjacentVertices(), is(Sets.newSet(v)));
     }
 }

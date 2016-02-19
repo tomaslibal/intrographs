@@ -49,19 +49,14 @@ public class Graph<T, U extends Edge> extends BaseGraph<T, U> {
         }
 
         U e = (U) new Edge<>(source.get(), target.get());
-        if (edges.add(e)) {
-            dispatch("graph.edge.add", "source:".concat(sourceId).concat(";target:").concat(targetId));
-
-            return e;
-        } else {
-            return null;
-        }
+        return addEdge(e);
     }
 
     @Override
     public U addEdge(U e) {
         if (edges.add(e)) {
 
+            dispatch("graph.edge.add", "source:".concat(e.getSource().getId()).concat(";target:").concat(e.getTarget().getId()));
             /*
              * each vertex keeps a set of adjacent nodes
              */
