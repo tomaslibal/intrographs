@@ -25,7 +25,7 @@ public class DepthFirstSearch<T> implements IGraphTraversingSearch<T> {
 
 
     @Override
-    public void search(Graph<T, ?> graph, Function<Vertex<T>, ?> execForEachNode) {
+    public Set<Vertex<T>> search(Graph<T, ?> graph, Function<Vertex<T>, ?> execForEachNode) {
         vertices = new HashSet<>();
         stack = new ArrayDeque<>();
 
@@ -39,6 +39,8 @@ public class DepthFirstSearch<T> implements IGraphTraversingSearch<T> {
             Vertex<T> v = stack.pop();
             visitVertex(execForEachNode, v);
         }
+
+        return null;
     }
 
     private void visitVertex(Function<Vertex<T>, ?> execForEachNode, Vertex<T> v) {
