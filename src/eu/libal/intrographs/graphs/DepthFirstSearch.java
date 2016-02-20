@@ -72,18 +72,16 @@ public class DepthFirstSearch<T> implements IGraphTraversinSearch<T> {
     }
 
     private Optional<TraversableVertex<T>> lookupVertex(Vertex<T> v) {
-        Optional<TraversableVertex<T>> foundVertex = vertices.stream()
+        return vertices.stream()
                 .filter(traversableVertex -> traversableVertex.compareTo(v) == 0)
                 .findFirst();
-
-        return foundVertex;
     }
 
-    private class TraversableVertex<T> extends Vertex<T> {
+    private class TraversableVertex<U> extends Vertex<U> {
 
         private boolean visited = false;
 
-        public TraversableVertex(Vertex<T> v) {
+        public TraversableVertex(Vertex<U> v) {
             super(v.getValue(), v.getId());
 
             // replace with a copy for speed gain
