@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -70,5 +71,29 @@ public class DepthFirstSearchTest {
 
         assertThat(numVisitsCounter.getCounter(), is(graph.vertexSet().size()));
         assertThat(visitedVertexIds, containsInAnyOrder("a", "b", "c", "d", "e", "f"));
+    }
+
+    @Test
+    public void shouldFindAndReturnVertexThatIsInTheGraph() {
+        graph.addVertex(1, "a");
+        graph.addVertex(2, "b");
+        Vertex<Integer> c = graph.addVertex(3, "c");
+
+        Set<Vertex<Integer>> found = this.search.search(graph, c, (Vertex<Integer> v) -> null);
+
+        assertThat(found.contains(c), is(true));
+    }
+
+    @Test
+    public void shouldReturnEmptySetIfVertexNotFound() {
+        graph.addVertex(1, "a");
+        graph.addVertex(2, "b");
+        graph.addVertex(3, "c");
+
+        Vertex<Integer> na = new Vertex<Integer>(42, "foo");
+
+        Set<Vertex<Integer>> found = this.search.search(graph, na, (Vertex<Integer> v) -> null);
+
+        assertThat(found, is(Collections.emptySet()));
     }
 }

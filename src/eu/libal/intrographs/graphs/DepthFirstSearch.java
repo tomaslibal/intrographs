@@ -22,6 +22,7 @@ public class DepthFirstSearch<T> implements IGraphTraversingSearch<T> {
      * A stack of all graph's nodes. When the stack is empty all nodes would have been visited.
      */
     private ArrayDeque<Vertex<T>> stack;
+    private Vertex<T> found;
 
 
     @Override
@@ -37,7 +38,7 @@ public class DepthFirstSearch<T> implements IGraphTraversingSearch<T> {
 
         while (stack.size() > 0) {
             Vertex<T> v = stack.pop();
-            visitVertex(execForEachNode, v);
+            visitVertex(execForEachNode, v, null);
         }
 
         return null;
@@ -45,10 +46,34 @@ public class DepthFirstSearch<T> implements IGraphTraversingSearch<T> {
 
     @Override
     public Set<Vertex<T>> search(Graph<T, ?> graph, Vertex<T> v, Function<Vertex<T>, ?> execForEachNode) {
-        return null;
+        vertices = new HashSet<>();
+        stack = new ArrayDeque<>();
+
+        found = null;
+
+        graph.vertexSet()
+                .forEach(vv -> {
+                    vertices.add(new TraversableVertex<>(vv));
+                    stack.push(vv);
+                });
+
+        while (stack.size() > 0 && found == null) {
+            Vertex<T> vv = stack.pop();
+            if (vv.compareTo(v) == 0) {
+                found = v;
+                break;
+            }
+            visitVertex(execForEachNode, vv, v);
+        }
+
+        if (found != null) {
+            return Collections.singleton(found);
+        } else {
+            return Collections.emptySet();
+        }
     }
 
-    private void visitVertex(Function<Vertex<T>, ?> execForEachNode, Vertex<T> v) {
+    private void visitVertex(Function<Vertex<T>, ?> execForEachNode, Vertex<T> v, Vertex<T> sought) {
         Optional<TraversableVertex<T>> vertexOptional = lookupVertex(v);
 
         if (!vertexOptional.isPresent()) {
@@ -72,7 +97,13 @@ public class DepthFirstSearch<T> implements IGraphTraversingSearch<T> {
             if (traversableOptional.isPresent()) {
                 TraversableVertex<T> traversable = traversableOptional.get();
                 if (!traversable.visited()) {
-                    visitVertex(execForEachNode, traversable);
+                    if (sought != null) {
+                        if (sought.compareTo(adj) == 0) {
+                            found = (Vertex<T>) adj;
+                            return;
+                        }
+                    }
+                    visitVertex(execForEachNode, traversable, sought);
                 }
             }
         }
