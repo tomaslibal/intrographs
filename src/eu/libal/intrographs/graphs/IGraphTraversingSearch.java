@@ -7,7 +7,7 @@ import java.util.function.Function;
 /**
  *
  */
-public interface IGraphTraversinSearch<T> {
+public interface IGraphTraversingSearch<T> {
 
     void search(Graph<T, ?> graph, Function<Vertex<T>, ?> execForEachNode);
 }
