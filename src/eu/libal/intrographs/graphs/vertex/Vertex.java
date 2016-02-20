@@ -17,6 +17,7 @@ public class Vertex<T> implements IVertex<T> {
 
     public Vertex(String id) {
         this.id = id;
+        this.adjacent = new HashSet<>();
     }
 
     @Override
