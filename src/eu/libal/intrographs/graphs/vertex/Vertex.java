@@ -9,13 +9,12 @@ public class Vertex<T> implements IVertex<T> {
     private Set<IVertex<T>> adjacent;
     private String id;
 
-    public Vertex(T value, String id) {
-        this.value = value;
-        this.id = id;
-        this.adjacent = new HashSet<>();
+    public Vertex(String id) {
+        this(null, id);
     }
 
-    public Vertex(String id) {
+    public Vertex(T value, String id) {
+        this.value = value;
         this.id = id;
         this.adjacent = new HashSet<>();
     }
