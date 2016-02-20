@@ -17,14 +17,24 @@ public class SpanningTreeSearch<T> implements IGraphTraversingSearch<T> {
 
     @Override
     public Set<Vertex<T>> search(Graph<T, ?> graph, Function<Vertex<T>, ?> execForEachNode) {
+        /**
+         * find random starting vertex
+         */
+        graph.vertexSet().stream().findAny().ifPresent(v -> {
+            search(graph, v, execForEachNode);
+        });
+
+        return tree;
+    }
+
+    @Override
+    public Set<Vertex<T>> search(Graph<T, ?> graph, Vertex<T> v, Function<Vertex<T>, ?> execForEachNode) {
         visitedVertices = new HashSet<>();
         tree = new HashSet<>();
 
-        graph.vertexSet().stream().findAny().ifPresent(v -> {
-            visitedVertices.add(v.getId());
-            tree.add(v);
-            branchFromVertex(graph, v);
-        });
+        visitedVertices.add(v.getId());
+        tree.add(v);
+        branchFromVertex(graph, v);
 
         return tree;
     }

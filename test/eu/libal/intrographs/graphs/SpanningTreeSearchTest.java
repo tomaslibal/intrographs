@@ -73,4 +73,29 @@ public class SpanningTreeSearchTest {
         assertTrue(spanTree.size() == 6 || spanTree.size() == 2);
     }
 
+    @Test
+    public void shouldFindSpanTreeForGivenStartingVertex() {
+        graph.addVertex(1, "a");
+        graph.addVertex(2, "b");
+        graph.addVertex(3, "c");
+        graph.addVertex(4, "d");
+        graph.addVertex(5, "e");
+        graph.addVertex(5, "f");
+
+        Vertex<Integer> start = graph.addVertex(101, "aa");
+        graph.addVertex(102, "bb");
+
+        graph.addEdge("a", "b");
+        graph.addEdge("a", "c");
+        graph.addEdge("b", "d");
+        graph.addEdge("b", "e");
+        graph.addEdge("e", "f");
+
+        graph.addEdge("aa", "bb");
+
+        Set<Vertex<Integer>> spanTree = this.search.search(graph, start, (Vertex<Integer> v) -> null);
+
+        assertTrue(spanTree.size() == 2);
+    }
+
 }

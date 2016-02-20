@@ -43,6 +43,11 @@ public class DepthFirstSearch<T> implements IGraphTraversingSearch<T> {
         return null;
     }
 
+    @Override
+    public Set<Vertex<T>> search(Graph<T, ?> graph, Vertex<T> v, Function<Vertex<T>, ?> execForEachNode) {
+        return null;
+    }
+
     private void visitVertex(Function<Vertex<T>, ?> execForEachNode, Vertex<T> v) {
         Optional<TraversableVertex<T>> vertexOptional = lookupVertex(v);
 
