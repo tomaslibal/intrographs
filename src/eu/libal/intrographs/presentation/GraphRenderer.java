@@ -11,22 +11,21 @@ import javafx.scene.canvas.GraphicsContext;
 
 import java.util.Optional;
 import java.util.Set;
-import java.util.concurrent.atomic.DoubleAccumulator;
 import java.util.stream.Collectors;
 
 /**
  *
  */
-public class GraphRenderer<VertexType, EdgeClass> {
+public class GraphRenderer<T, U extends Edge<T>> {
 
-    private Graph graph;
+    private Graph<T, U> graph;
     private Canvas canvas;
     private GraphicsContext ctx;
 
     private Set<VertexShape2D> vertexShapes;
     private Set<EdgeShape2D> edgeShapes;
 
-    public GraphRenderer(Graph graph, Canvas canvas) {
+    public GraphRenderer(Graph<T, U> graph, Canvas canvas) {
         this.graph = graph;
         this.canvas = canvas;
 
@@ -59,8 +58,8 @@ public class GraphRenderer<VertexType, EdgeClass> {
             String xCoord = parts[1].substring(2);
             String yCoord = parts[2].substring(2);
 
-            Set<Vertex<VertexType>> vertices = graph.vertexSet();
-            Vertex<VertexType> newVertex = vertices.stream()
+            Set<Vertex<T>> vertices = graph.vertexSet();
+            Vertex<T> newVertex = vertices.stream()
                     .filter(v -> v.getId().equals(vertexId))
                     .findFirst()
                     .get();
@@ -96,7 +95,7 @@ public class GraphRenderer<VertexType, EdgeClass> {
     }
 
     private Set<VertexShape2D> createVertexShapes() {
-        Set<Vertex<VertexType>> vertexSet = graph.vertexSet();
+        Set<Vertex<T>> vertexSet = graph.vertexSet();
 
         return vertexSet.stream()
                 .map(VertexShapeBuilder::buildAndCreate)
@@ -104,12 +103,12 @@ public class GraphRenderer<VertexType, EdgeClass> {
     }
 
     private Set<EdgeShape2D> createEdgeShapes() {
-        Set<EdgeClass> edgeSet = graph.edgeSet();
+        Set<U> edgeSet = graph.edgeSet();
 
         return edgeSet.stream()
                 .map(e -> {
-                    String sourceId = ((Edge<VertexType>) e).getSource().getId();
-                    String targetId = ((Edge<VertexType>) e).getTarget().getId();
+                    String sourceId = e.getSource().getId();
+                    String targetId = e.getTarget().getId();
 
                     return getEdgeShape2D(sourceId, targetId);
                 })
