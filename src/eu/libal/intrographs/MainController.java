@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
 import java.net.URL;
@@ -31,6 +32,9 @@ public class MainController implements Initializable {
 
     @FXML
     public Button addEdgeBt;
+
+    @FXML
+    public GridPane mainGrid;
 
     @FXML
     private Canvas mainCanvas;
@@ -72,6 +76,26 @@ public class MainController implements Initializable {
 
         graphRenderer = new GraphRenderer<>(g, mainCanvas);
         graphRenderer.render();
+
+        mainCanvas.widthProperty().addListener(observable -> {
+            clearCanvas();
+            graphRenderer.render();
+        });
+        mainCanvas.heightProperty().addListener(observable -> {
+            clearCanvas();
+            graphRenderer.render();
+        });
+
+        mainGrid.widthProperty().addListener((observable, oldGridWidth, newGridWidth) -> {
+            /*
+             * This condition is a guard against the first width change which goes from 0 to whatever the initial
+             * width is. Without this the canvas would get its width added together with the grid's width on init.
+             */
+            if (oldGridWidth.intValue() > 640) {
+                double originalCanvasWidth = mainCanvas.getWidth();
+                mainCanvas.setWidth(originalCanvasWidth + (newGridWidth.doubleValue() - oldGridWidth.doubleValue()));
+            }
+        });
     }
 
     private void renderBackground(GraphicsContext context2D) {
