@@ -54,10 +54,9 @@ public class MainController implements Initializable {
     private Graph<Integer, Edge<Integer>> g;
 
     /*
-     * when adding a new edge these hold reference to the vertices incident on the new edge.
+     * When adding a new edge this auxiliary variable holds the reference to the source vertex of a new edge.
      */
     private VertexShape2D sel1;
-    private VertexShape2D sel2;
 
 
     @Override
@@ -108,11 +107,10 @@ public class MainController implements Initializable {
             if (sel1 == null) {
                 sel1 = selectedVertex.get();
             } else {
-                sel2 = selectedVertex.get();
+                VertexShape2D sel2 = selectedVertex.get();
                 g.addEdge(sel1.getVertexId(), sel2.getVertexId());
 
                 sel1 = null;
-                sel2 = null;
                 canvasState = CanvasStates.PANNING;
                 addEdgeBt.setText("Add Edge");
             }
@@ -139,7 +137,7 @@ public class MainController implements Initializable {
         int leniency = 5;
         int radius = 5;
 
-        Optional<VertexShape2D> vertexAtClickPos = graphRenderer.getVertexShapes().stream()
+        return graphRenderer.getVertexShapes().stream()
                 .filter(shape -> {
                     int dx = Math.abs(shape.getX() - x);
                     int dy = Math.abs(shape.getY() - y);
@@ -147,7 +145,5 @@ public class MainController implements Initializable {
                     return dx < (leniency + radius) && dy < (leniency + radius);
                 })
                 .findFirst();
-
-        return vertexAtClickPos;
     }
 }
