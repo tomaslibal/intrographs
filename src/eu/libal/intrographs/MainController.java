@@ -127,7 +127,7 @@ public class MainController implements Initializable {
 
     @FXML
     public void setCanvasStatusToAddingEdge(ActionEvent actionEvent) {
-        addEdgeBt.setText("Click on edge");
+        addEdgeBt.setText("Choose vertices");
         canvasState = CanvasStates.ADDING_EDGE;
     }
 
