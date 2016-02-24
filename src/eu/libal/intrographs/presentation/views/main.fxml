@@ -23,11 +23,14 @@
 
         <!-- -->
 
-        <Button fx:id="addVertexBt" onAction="#setCanvasStatusToAddingVertex"
-                GridPane.rowIndex="0" GridPane.columnIndex="4" alignment="TOP_LEFT">Add Vertex</Button>
+        <GridPane GridPane.columnIndex="4" GridPane.rowIndex="0">
+            <Button fx:id="addVertexBt" onAction="#setCanvasStatusToAddingVertex"
+                    GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="TOP_LEFT">Add Vertex</Button>
 
-        <Button fx:id="addEdgeBt" onAction="#setCanvasStatusToAddingEdge"
-                GridPane.columnIndex="4" GridPane.rowIndex="1" alignment="TOP_LEFT">Add Edge</Button>
+            <Button fx:id="addEdgeBt" onAction="#setCanvasStatusToAddingEdge"
+                    GridPane.columnIndex="1" GridPane.rowIndex="1" alignment="TOP_LEFT">Add Edge</Button>
+        </GridPane>
+
 
         <!--<rowConstraints>-->
             <!--<RowConstraints maxHeight="60"></RowConstraints>-->
