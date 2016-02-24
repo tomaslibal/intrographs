@@ -8,6 +8,7 @@ import eu.libal.intrographs.presentation.shapes.EdgeShape2D;
 import eu.libal.intrographs.presentation.shapes.VertexShape2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 import java.util.Optional;
 import java.util.Set;
@@ -79,8 +80,18 @@ public class GraphRenderer<T, U extends Edge<T>> {
     }
 
     public void render() {
+        clearCanvas();
         renderVertices();
         renderEdges();
+    }
+
+    public void clearCanvas() {
+        if (ctx == null) {
+            ctx = getContext2D();
+        }
+
+        ctx.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        renderBackground();
     }
 
     public GraphicsContext getContext2D() {
@@ -92,6 +103,15 @@ public class GraphRenderer<T, U extends Edge<T>> {
 
     public Set<VertexShape2D> getVertexShapes() {
         return vertexShapes;
+    }
+
+    private void renderBackground() {
+        if (ctx == null) {
+            ctx = getContext2D();
+        }
+
+        ctx.setFill(Color.WHITE);
+        ctx.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
     private Set<VertexShape2D> createVertexShapes() {
