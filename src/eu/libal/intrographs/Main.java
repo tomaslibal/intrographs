@@ -14,10 +14,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        Graph<Integer, Edge<Integer>> g = new Graph<>();
-//        g.addVertex(1);
-//        g.addVertex(2);
-
         Parent root = FXMLLoader.load(getClass().getResource("presentation/views/main.fxml"));
 
         primaryStage.setTitle("Intrographs 2");
