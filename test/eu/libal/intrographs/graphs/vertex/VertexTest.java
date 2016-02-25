@@ -38,4 +38,16 @@ public class VertexTest {
 
         assertThat(v.getAdjacentVertices(), is(newSet(w)));
     }
+
+    @Test
+    public void shouldReturnDegreeOfTheVertex() {
+        Vertex<Integer> v = new Vertex<>("v");
+        Vertex<Integer> w = new Vertex<>("w");
+        Vertex<Integer> x = new Vertex<>("x");
+
+        v.addAdjacentVertex(w);
+        v.addAdjacentVertex(x);
+
+        assertThat(v.degreeOf(), is(2));
+    }
 }

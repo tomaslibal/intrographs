@@ -40,4 +40,11 @@ public interface IVertex<T> extends Comparable<IVertex<T>>
      * @return (String) {this}.id.compareTo((String) v.getId()), so 0 if string IDs identical
      */
     int compareTo(IVertex<T> v);
+
+    /**
+     * Returns the (undirected) degree of the vertex
+     *
+     * @return int Degree of the vertex
+     */
+    int degreeOf();
 }

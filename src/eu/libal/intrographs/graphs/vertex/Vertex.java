@@ -43,4 +43,9 @@ public class Vertex<T> implements IVertex<T> {
     public int compareTo(IVertex<T> v) {
         return id.compareTo(v.getId());
     }
+
+    @Override
+    public int degreeOf() {
+        return adjacent.size();
+    }
 }
