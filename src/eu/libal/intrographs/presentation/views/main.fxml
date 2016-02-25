@@ -28,7 +28,11 @@
                     GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="TOP_LEFT">Add Vertex</Button>
 
             <Button fx:id="addEdgeBt" onAction="#setCanvasStatusToAddingEdge"
-                    GridPane.columnIndex="1" GridPane.rowIndex="1" alignment="TOP_LEFT">Add Edge</Button>
+                    GridPane.rowIndex="1" GridPane.columnIndex="1" alignment="TOP_LEFT">Add Edge</Button>
+
+            <CheckBox GridPane.rowIndex="2" GridPane.columnIndex="1"
+                      fx:id="labelsCheckbox" onMouseClicked="#handleLabelsToggle"
+            >Show labels</CheckBox>
         </GridPane>
 
 

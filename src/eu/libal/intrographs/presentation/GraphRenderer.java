@@ -5,14 +5,19 @@ import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.IVertex;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import eu.libal.intrographs.presentation.shapes.EdgeShape2D;
+import eu.libal.intrographs.presentation.shapes.TextShape2D;
 import eu.libal.intrographs.presentation.shapes.VertexShape2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.util.Pair;
 
+import java.util.Collection;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  *
@@ -23,14 +28,16 @@ public class GraphRenderer<T, U extends Edge<T>> {
     private Canvas canvas;
     private GraphicsContext ctx;
 
-    private Set<VertexShape2D> vertexShapes;
     private Set<EdgeShape2D> edgeShapes;
+    private Map<VertexShape2D, TextShape2D> verticesWithLabels;
+
+    private boolean displayLabels = false;
 
     public GraphRenderer(Graph<T, U> graph, Canvas canvas) {
         this.graph = graph;
         this.canvas = canvas;
 
-        vertexShapes = createVertexShapes();
+        verticesWithLabels = createVerticesWithLabels();
         edgeShapes = createEdgeShapes();
 
         graph.subscribe("graph.edge.add", (String message) -> {
@@ -71,9 +78,11 @@ public class GraphRenderer<T, U extends Edge<T>> {
                     .setY((int) Math.round(Double.parseDouble(yCoord)))
                     .create();
 
-            vertexShapes.add(
-                    vertexShape2D
-            );
+            TextShape2D label = new TextShape2D();
+            label.setText(vertexShape2D.getVertexId());
+            label.setX(vertexShape2D.getX() - 5);
+            label.setY(vertexShape2D.getY() + 20);
+            verticesWithLabels.put(vertexShape2D, label);
 
             render();
         });
@@ -102,7 +111,11 @@ public class GraphRenderer<T, U extends Edge<T>> {
     }
 
     public Set<VertexShape2D> getVertexShapes() {
-        return vertexShapes;
+        return verticesWithLabels.keySet();
+    }
+
+    public Collection<TextShape2D> getLabelShapes() {
+        return verticesWithLabels.values();
     }
 
     private void renderBackground() {
@@ -114,12 +127,23 @@ public class GraphRenderer<T, U extends Edge<T>> {
         ctx.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
-    private Set<VertexShape2D> createVertexShapes() {
+    private Map<VertexShape2D, TextShape2D> createVerticesWithLabels() {
         Set<Vertex<T>> vertexSet = graph.vertexSet();
 
-        return vertexSet.stream()
-                .map(VertexShapeBuilder::buildAndCreate)
-                .collect(Collectors.toSet());
+        Stream<Pair<VertexShape2D, TextShape2D>> pairStream = vertexSet.stream()
+                .map(v -> {
+                    VertexShape2D vertexShape2D = VertexShapeBuilder.buildAndCreate(v);
+
+                    TextShape2D label = new TextShape2D();
+                    label.setContext(ctx);
+                    label.setX(vertexShape2D.getX() - 5);
+                    label.setY(vertexShape2D.getY() + 20);
+                    label.setText(vertexShape2D.getVertexId());
+
+                    return new Pair<>(vertexShape2D, label);
+                });
+
+        return pairStream.collect(Collectors.toMap(Pair::getKey, Pair::getValue));
     }
 
     private Set<EdgeShape2D> createEdgeShapes() {
@@ -136,10 +160,10 @@ public class GraphRenderer<T, U extends Edge<T>> {
     }
 
     private EdgeShape2D getEdgeShape2D(String sourceId, String targetId) {
-        Optional<VertexShape2D> source = vertexShapes.stream()
+        Optional<VertexShape2D> source = getVertexShapes().stream()
                                         .filter(shape -> shape.getVertexId().equals(sourceId)).findFirst();
 
-        Optional<VertexShape2D> target = vertexShapes.stream()
+        Optional<VertexShape2D> target = getVertexShapes().stream()
                 .filter(shape -> shape.getVertexId().equals(targetId)).findFirst();
 
         if (source.isPresent() && target.isPresent()) {
@@ -150,12 +174,21 @@ public class GraphRenderer<T, U extends Edge<T>> {
     }
 
     private void renderVertices() {
-        vertexShapes.forEach(shape -> {
+        verticesWithLabels.forEach((vertex, label) -> {
             try {
-                shape.setContext(getContext2D());
-                shape.paint();
+                vertex.setContext(ctx);
+                vertex.paint();
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+
+            if (displayLabels) {
+                try {
+                    label.setContext(ctx);
+                    label.paint();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -169,6 +202,16 @@ public class GraphRenderer<T, U extends Edge<T>> {
                 e.printStackTrace();
             }
         });
+    }
+
+    public void displayLabels() {
+        displayLabels = true;
+        render();
+    }
+
+    public void hideLabels() {
+        displayLabels = false;
+        render();
     }
 
     private static class VertexShapeBuilder {

@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -33,6 +34,9 @@ public class MainController implements Initializable {
 
     @FXML
     public GridPane mainGrid;
+
+    @FXML
+    public CheckBox labelsCheckbox;
 
     @FXML
     private Canvas mainCanvas;
@@ -150,5 +154,14 @@ public class MainController implements Initializable {
                     return dx < (leniency + radius) && dy < (leniency + radius);
                 })
                 .findFirst();
+    }
+
+    @FXML
+    public void handleLabelsToggle(MouseEvent event) {
+        if (labelsCheckbox.isSelected()) {
+            graphRenderer.displayLabels();
+        } else {
+            graphRenderer.hideLabels();
+        }
     }
 }
