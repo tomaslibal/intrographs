@@ -9,24 +9,44 @@ properties like what type of graph it is, whether it is planar and so on.
 
 ## Features
 
-**Graph rendering**:
+Build graphs and visualise them graphically.
 
-- renders a graph with vertices and nodes
-- "free view" by mouse drag and drop
+### Graphlang
 
-**Properties testing**:
+A command-line like tool for programmatic execution of instructions (to modify the graph). As there is always only one
+graph to work with, this graph has a symbol called *graph* or *g* for short.
 
-- connectedness tester
+Each command consists of one or more tokens. The starting symbol is a graph, vertex, or an edge, followed by a chain
+of zero or more tokens. If the only token is the symbol, program will print information about it if the symbol exists.
 
-**Other algorithms**:
+Each command must end with a semicolon.
 
-- returns an independent vertex set
-- returns a spanning tree
-- depth first search (DFS)
+#### Basic vertex operations
 
-**Evaluation console**
+Add an integer vertex with id:"a-forty-two-vertex" and value of 42.
 
-- interprets text commands
+```
+graph.vertex.add(42, "a-forty-two-vertex");
+```
+
+Print information about the vertex.
+
+```
+"a-forty-two-vertex";
+```
+
+Add new edge. The edge is directed or un-directed which depends on the graph type.
+
+```
+graph.edge.add("a-forty-two-vertex", "some-other-vertex");
+```
+
+Is the graph directed?
+
+```
+graph.isDirected
+```
+
 
 ## Difference between pure mathematical graphs and graphs in computer science
 
