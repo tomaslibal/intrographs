@@ -56,8 +56,8 @@ public class IndependentSetRandomSearch<T, U extends Edge<T>> implements IGraphT
                     });
 
             // if the vertex was of degree 0, delete it
-            if (vertices.contains(lowestDegreeVertex)) {
-                vertices.remove(lowestDegreeVertex);
+            if (vertices.contains(lowestDegreeVertex.get())) {
+                vertices.remove(lowestDegreeVertex.get());
             }
         }
 
