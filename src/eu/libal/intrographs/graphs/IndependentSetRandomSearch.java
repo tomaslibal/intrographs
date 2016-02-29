@@ -3,6 +3,7 @@ package eu.libal.intrographs.graphs;
 import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -19,7 +20,7 @@ public class IndependentSetRandomSearch<T, U extends Edge<T>> implements IGraphT
         if (randomVertex.isPresent()) {
             return search(graph, randomVertex.get(), execForEachNode);
         } else {
-            return null;
+            return Collections.emptySet();
         }
     }
 
