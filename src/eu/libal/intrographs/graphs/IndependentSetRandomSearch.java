@@ -30,6 +30,9 @@ public class IndependentSetRandomSearch<T, U extends Edge<T>> implements IGraphT
         Set<Vertex<T>> independentSet = new HashSet<>();
         Set<Vertex<T>> vertices = graph.vertexSet();
 
+        independentSet.add(v);
+        removeAdjacentVertices(graph, vertices, v);
+
         while(vertices.size() > 0) {
             Optional<Vertex<T>> lowestDegreeVertex = getLowestDegreeVertex(graph);
 
@@ -38,31 +41,34 @@ public class IndependentSetRandomSearch<T, U extends Edge<T>> implements IGraphT
             }
 
             independentSet.add(lowestDegreeVertex.get());
+            removeAdjacentVertices(graph, vertices, lowestDegreeVertex.get());
 
-            // get all adjacent vertices to the lowest degree vertex
-            Set<U> incidentEdges = (Set<U>) graph.incidentEdges(lowestDegreeVertex.get());
-
-            incidentEdges.stream()
-                    .forEach(edge -> {
-                        Vertex<T> source = edge.getSource();
-                        Vertex<T> target = edge.getTarget();
-
-                        if (vertices.contains(source)) {
-                           vertices.remove(source);
-                        }
-
-                        if (vertices.contains(target)) {
-                            vertices.remove(target);
-                        }
-                    });
-
-            // if the vertex was of degree 0, delete it
+            // if the vertex was of degree 0, delete it here as the previous call would not remove it
             if (vertices.contains(lowestDegreeVertex.get())) {
                 vertices.remove(lowestDegreeVertex.get());
             }
         }
 
         return independentSet;
+    }
+
+    private void removeAdjacentVertices(Graph<T, ?> graph, Set<Vertex<T>> vertices, Vertex<T> origin) {
+        // get all adjacent vertices to the lowest degree vertex
+        Set<U> incidentEdges = (Set<U>) graph.incidentEdges(origin);
+
+        incidentEdges.stream()
+                .forEach(edge -> {
+                    Vertex<T> source = edge.getSource();
+                    Vertex<T> target = edge.getTarget();
+
+                    if (vertices.contains(source)) {
+                       vertices.remove(source);
+                    }
+
+                    if (vertices.contains(target)) {
+                        vertices.remove(target);
+                    }
+                });
     }
 
     private Optional<Vertex<T>> getLowestDegreeVertex(Graph<T, ?> graph) {
