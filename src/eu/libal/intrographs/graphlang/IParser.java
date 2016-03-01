@@ -4,7 +4,7 @@ import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
 
 /**
- *
+ * @todo add Tree data structure and use it instead of Graph as Graph does not have a root.
  */
 public interface IParser {
 
