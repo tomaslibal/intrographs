@@ -14,7 +14,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("presentation/views/main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("presentation/views/main.fxml"));
+        Parent root = loader.load();
+        MainController controller = loader.getController();
+        controller.setStage(primaryStage);
 
         primaryStage.setTitle("Intrographs 2");
         primaryStage.setScene(new Scene(root));

@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.time.Instant;
@@ -59,10 +60,31 @@ public class MainController implements Initializable {
 
     private Graph<Integer, Edge<Integer>> g;
 
+    /**
+     * x coordinate of a mouse click
+     */
+    private double cx;
+    /**
+     * y coordinate of a mouse click
+     */
+    private double cy;
+
+    /**
+     * x coordinate of the origin
+     */
+    private double ox = 0;
+    /**
+     * y coordinate of the origin
+     */
+    private double oy = 0;
+
     /*
      * When adding a new edge this auxiliary variable holds the reference to the source vertex of a new edge.
      */
     private VertexShape2D sel1;
+    private Stage stage;
+    private double dx = 0;
+    private double dy = 0;
 
 
     @Override
@@ -163,5 +185,39 @@ public class MainController implements Initializable {
         } else {
             graphRenderer.hideLabels();
         }
+    }
+
+    public void handleDrag(MouseEvent event) {
+
+        double prevDx = dx;
+        double prevDy = dy;
+
+        dx = event.getX() - cx;
+        dy = event.getY() - cy;
+
+        double tx = dx - prevDx;
+        double ty = dy - prevDy;
+
+        ox += tx;
+        oy += ty;
+
+        graphRenderer.render(ox, oy);
+    }
+
+    @FXML
+    public void handleMousePress(MouseEvent event) {
+        cx = event.getX();
+        cy = event.getY();
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void handleMouseRelease(MouseEvent event) {
+        System.out.println("mouse released");
+        dx = 0;
+        dy = 0;
+
     }
 }

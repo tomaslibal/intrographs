@@ -8,6 +8,9 @@
     <GridPane fx:id="mainGrid">
         <Canvas GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="3" GridPane.rowSpan="2"
                 width="640" height="480" fx:id="mainCanvas" id="mainCanvas"
+                onMousePressed="#handleMousePress"
+                onMouseDragged="#handleDrag"
+                onMouseReleased="#handleMouseRelease"
                 onMouseClicked="#handleMouseClick"/>
 
         <Button GridPane.columnIndex="3" GridPane.rowIndex="2"

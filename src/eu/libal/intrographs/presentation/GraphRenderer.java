@@ -32,6 +32,8 @@ public class GraphRenderer<T, U extends Edge<T>> {
     private Map<VertexShape2D, TextShape2D> verticesWithLabels;
 
     private boolean displayLabels = false;
+    private double oy;
+    private double ox;
 
     public GraphRenderer(Graph<T, U> graph, Canvas canvas) {
         this.graph = graph;
@@ -90,8 +92,23 @@ public class GraphRenderer<T, U extends Edge<T>> {
 
     public void render() {
         clearCanvas();
+        ctx.save();
+        ctx.translate(ox, oy);
         renderVertices();
         renderEdges();
+        ctx.restore();
+    }
+
+
+    public void render(double x, double y) {
+        clearCanvas();
+        ctx.save();
+        ox = x;
+        oy = y;
+        ctx.translate(x, y);
+        renderVertices();
+        renderEdges();
+        ctx.restore();
     }
 
     public void clearCanvas() {
@@ -196,7 +213,7 @@ public class GraphRenderer<T, U extends Edge<T>> {
     private void renderEdges() {
         edgeShapes.forEach(shape -> {
             try {
-                shape.setContext(getContext2D());
+                shape.setContext(ctx);
                 shape.paint();
             } catch (Exception e) {
                 e.printStackTrace();
