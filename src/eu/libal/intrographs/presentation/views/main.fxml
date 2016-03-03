@@ -4,7 +4,16 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.canvas.Canvas?>
+
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.libal.intrographs.MainController">
+    <MenuBar>
+        <Menu text="File">
+            <MenuItem onAction="#handleMenuExitAction" text="Exit"/>
+        </Menu>
+    </MenuBar>
+
+
+
     <GridPane fx:id="mainGrid">
         <Canvas GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="3" GridPane.rowSpan="2"
                 width="640" height="480" fx:id="mainCanvas" id="mainCanvas"

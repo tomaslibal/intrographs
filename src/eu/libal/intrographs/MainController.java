@@ -9,10 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -219,5 +216,10 @@ public class MainController implements Initializable {
         dx = 0;
         dy = 0;
 
+    }
+
+    @FXML
+    public void handleMenuExitAction(ActionEvent actionEvent) {
+        System.exit(0);
     }
 }
