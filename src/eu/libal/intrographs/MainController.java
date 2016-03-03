@@ -126,7 +126,7 @@ public class MainController implements Initializable {
     public void handleMouseClick(MouseEvent event) {
         if (canvasState == CanvasStates.ADDING_VERTEX) {
             String id = String.valueOf(Instant.now().getEpochSecond());
-            g.addVertex(id, event.getX(), event.getY());
+            g.addVertex(id, event.getX() - ox, event.getY() - oy);
             canvasState = CanvasStates.PANNING;
             addVertexBt.setText("Add vertex");
         }
