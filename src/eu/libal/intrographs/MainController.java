@@ -162,8 +162,8 @@ public class MainController implements Initializable {
 
     private Optional<VertexShape2D> getVertexAtMouseClick(MouseEvent click) {
 
-        int x = (int) Math.round(click.getX());
-        int y = (int) Math.round(click.getY());
+        int x = (int) Math.round(click.getX() - ox);
+        int y = (int) Math.round(click.getY() - oy);
 
         int leniency = 5;
         int radius = 5;
