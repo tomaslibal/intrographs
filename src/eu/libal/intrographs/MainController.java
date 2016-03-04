@@ -200,9 +200,9 @@ public class MainController implements Initializable {
         double tx = dx - prevDx;
         double ty = dy - prevDy;
 
-        if (canvasState == CanvasStates.TRANSLATING_VERTEX) {
+        if (canvasState == CanvasStates.TRANSLATING_VERTEX && translateVertex != null) {
             Integer x = translateVertex.getX();
-            Integer y = translateVertex.getY();allo
+            Integer y = translateVertex.getY();
             translateVertex.setX(x + Double.valueOf( tx ).intValue());
             translateVertex.setY(y + Double.valueOf( ty ).intValue());
             graphRenderer.render();
@@ -221,11 +221,13 @@ public class MainController implements Initializable {
 
         Optional<VertexShape2D> selectedVertex = getVertexAtMouseClick(event);
 
-        if (selectedVertex.isPresent()) {
+        if (selectedVertex.isPresent() && canvasState == CanvasStates.PANNING) {
             stage.getScene().setCursor(Cursor.CLOSED_HAND);
             canvasState = CanvasStates.TRANSLATING_VERTEX;
             translateVertex = selectedVertex.get();
-        } else {
+        }
+
+        if (!selectedVertex.isPresent() && canvasState == CanvasStates.TRANSLATING_VERTEX) {
             canvasState = CanvasStates.PANNING;
         }
     }
@@ -247,6 +249,9 @@ public class MainController implements Initializable {
             stage.getScene().setCursor(Cursor.DEFAULT);
         }
 
+        if (canvasState == CanvasStates.TRANSLATING_VERTEX) {
+            canvasState = CanvasStates.PANNING;
+        }
         translateVertex = null;
     }
 
