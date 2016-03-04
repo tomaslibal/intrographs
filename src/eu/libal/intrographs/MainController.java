@@ -6,14 +6,17 @@ import eu.libal.intrographs.presentation.CanvasStates;
 import eu.libal.intrographs.presentation.GraphRenderer;
 import eu.libal.intrographs.presentation.shapes.VertexShape2D;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.math.BigInteger;
 import java.net.URL;
 import java.time.Instant;
 import java.util.Optional;
@@ -82,6 +85,8 @@ public class MainController implements Initializable {
     private Stage stage;
     private double dx = 0;
     private double dy = 0;
+
+    private VertexShape2D translateVertex;
 
 
     @Override
@@ -195,16 +200,34 @@ public class MainController implements Initializable {
         double tx = dx - prevDx;
         double ty = dy - prevDy;
 
-        ox += tx;
-        oy += ty;
+        if (canvasState == CanvasStates.TRANSLATING_VERTEX) {
+            Integer x = translateVertex.getX();
+            Integer y = translateVertex.getY();allo
+            translateVertex.setX(x + Double.valueOf( tx ).intValue());
+            translateVertex.setY(y + Double.valueOf( ty ).intValue());
+            graphRenderer.render();
+        } else {
+            ox += tx;
+            oy += ty;
 
-        graphRenderer.render(ox, oy);
+            graphRenderer.render(ox, oy);
+        }
     }
 
     @FXML
     public void handleMousePress(MouseEvent event) {
         cx = event.getX();
         cy = event.getY();
+
+        Optional<VertexShape2D> selectedVertex = getVertexAtMouseClick(event);
+
+        if (selectedVertex.isPresent()) {
+            stage.getScene().setCursor(Cursor.CLOSED_HAND);
+            canvasState = CanvasStates.TRANSLATING_VERTEX;
+            translateVertex = selectedVertex.get();
+        } else {
+            canvasState = CanvasStates.PANNING;
+        }
     }
 
     public void setStage(Stage stage) {
@@ -216,10 +239,30 @@ public class MainController implements Initializable {
         dx = 0;
         dy = 0;
 
+        Optional<VertexShape2D> selectedVertex = getVertexAtMouseClick(event);
+
+        if (selectedVertex.isPresent()) {
+            stage.getScene().setCursor(Cursor.HAND);
+        } else {
+            stage.getScene().setCursor(Cursor.DEFAULT);
+        }
+
+        translateVertex = null;
     }
 
     @FXML
     public void handleMenuExitAction(ActionEvent actionEvent) {
         System.exit(0);
+    }
+
+    @FXML
+    public void handleMouseMoved(MouseEvent event) {
+        Optional<VertexShape2D> selectedVertex = getVertexAtMouseClick(event);
+
+        if (selectedVertex.isPresent()) {
+            stage.getScene().setCursor(Cursor.HAND);
+        } else {
+            stage.getScene().setCursor(Cursor.DEFAULT);
+        }
     }
 }

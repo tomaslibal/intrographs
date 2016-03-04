@@ -7,6 +7,7 @@ package eu.libal.intrographs.presentation;
  */
 public enum CanvasStates {
     PANNING("Panning"),
+    TRANSLATING_VERTEX("Translating Vertex"),
     ADDING_VERTEX("Adding Vertex"),
     ADDING_EDGE("Adding Edge");
 

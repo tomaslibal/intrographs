@@ -20,7 +20,8 @@
                 onMousePressed="#handleMousePress"
                 onMouseDragged="#handleDrag"
                 onMouseReleased="#handleMouseRelease"
-                onMouseClicked="#handleMouseClick"/>
+                onMouseClicked="#handleMouseClick"
+                onMouseMoved="#handleMouseMoved"/>
 
         <Button GridPane.columnIndex="3" GridPane.rowIndex="2"
                 fx:id="refreshCanvasBt" onAction="#refreshCanvas">Refresh
