@@ -37,6 +37,8 @@
         <!-- -->
 
         <GridPane GridPane.columnIndex="4" GridPane.rowIndex="0">
+            <vgap>10</vgap>
+
             <Button fx:id="addVertexBt" onAction="#setCanvasStatusToAddingVertex"
                     GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="TOP_LEFT">Add Vertex</Button>
 

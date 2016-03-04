@@ -1,7 +1,9 @@
 package eu.libal.intrographs;
 
+import eu.libal.intrographs.graphs.DepthFirstSearch;
 import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
+import eu.libal.intrographs.graphs.vertex.Vertex;
 import eu.libal.intrographs.presentation.CanvasStates;
 import eu.libal.intrographs.presentation.GraphRenderer;
 import eu.libal.intrographs.presentation.shapes.VertexShape2D;
@@ -9,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -88,6 +91,7 @@ public class MainController implements Initializable {
     private double dy = 0;
 
     private VertexShape2D translateVertex;
+    private Stage infoWindowStage;
 
 
     @Override
@@ -226,6 +230,15 @@ public class MainController implements Initializable {
             stage.getScene().setCursor(Cursor.CLOSED_HAND);
             canvasState = CanvasStates.TRANSLATING_VERTEX;
             translateVertex = selectedVertex.get();
+
+            TextField idNode = (TextField) infoWindowStage.getScene().lookup("#vIDInput");
+            TextField valueNode = (TextField) infoWindowStage.getScene().lookup("#vValInput");
+            String vertexId = selectedVertex.get().getVertexId();
+
+            Vertex<Integer> vertex = g.vertexSet().stream().filter(v -> v.getId().equals(vertexId)).findFirst().get();
+
+            idNode.setText(vertex.getId());
+            valueNode.setText(vertex.getValue().toString());
         }
 
         if (!selectedVertex.isPresent() && canvasState == CanvasStates.TRANSLATING_VERTEX) {
@@ -270,5 +283,9 @@ public class MainController implements Initializable {
         } else {
             stage.getScene().setCursor(Cursor.DEFAULT);
         }
+    }
+
+    public void setInfoWindowState(Stage infoWindow) {
+        infoWindowStage = infoWindow;
     }
 }

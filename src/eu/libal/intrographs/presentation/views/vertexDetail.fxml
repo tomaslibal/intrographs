@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.libal.intrographs.VertexDetailController">
+    <GridPane fx:id="mainGrid">
+        <hgap>10</hgap>
+        <vgap>10</vgap>
+
+        <Text>Vertex Details</Text>
+
+        <Label GridPane.columnIndex="0" GridPane.rowIndex="1">
+            Vertex ID</Label>
+        <TextField GridPane.columnIndex="0" GridPane.rowIndex="2" fx:id="vIDInput"/>
+
+        <Label GridPane.columnIndex="0" GridPane.rowIndex="3">Vertex Value</Label>
+        <TextField GridPane.columnIndex="0" GridPane.rowIndex="4" editable="false" fx:id="vValInput"/>
+
+        <rowConstraints>
+            <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0"/>
+        </rowConstraints>
+
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" />
+        </columnConstraints>
+    </GridPane>
+</VBox>
