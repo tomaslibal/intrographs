@@ -18,6 +18,14 @@
             <!--<MenuItem text="New"/>-->
             <!--<MenuItem text="From Transition Matrix"/>-->
         <!--</Menu>-->
+        <!--<Menu text="Layout">-->
+            <!--<MenuItem text="Random"/>-->
+        <!--</Menu>-->
+        <!--<Menu text="Properties">-->
+            <!--<MenuItem text="Spanning tree"/>-->
+            <!--<MenuItem text="Random independent set"/>-->
+            <!--<MenuItem text="Maximum independent set"/>-->
+        <!--</Menu>-->
         <Menu text="Help">
             <MenuItem onAction="#handleAboutAction" text="About"/>
         </Menu>

@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * Message bus lets external objects to subscribe to events (by {@type String} eventName) and it also lets external objects
+ * emit events with a {@type String} value. Each listeners is notified when a new message is emitted.
  */
 public class MessageBus implements IListenable {
 

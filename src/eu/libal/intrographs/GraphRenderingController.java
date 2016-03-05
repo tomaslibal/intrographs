@@ -204,10 +204,8 @@ public class GraphRenderingController implements Initializable {
 
         if (selectedVertex.isPresent()) {
             messageBus.emit("Cursor.cursor.change", Cursor.HAND.toString());
-//            stage.getScene().setCursor(Cursor.HAND);
         } else {
             messageBus.emit("Cursor.cursor.change", Cursor.DEFAULT.toString());
-//            stage.getScene().setCursor(Cursor.DEFAULT);
         }
 
         if (canvasState == CanvasStates.TRANSLATING_VERTEX) {
