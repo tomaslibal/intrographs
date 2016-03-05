@@ -1,36 +1,29 @@
 package eu.libal.intrographs;
 
 import eu.libal.intrographs.common.MessageBus;
-import eu.libal.intrographs.graphs.DepthFirstSearch;
 import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
-import eu.libal.intrographs.graphs.vertex.Vertex;
 import eu.libal.intrographs.presentation.CanvasStates;
 import eu.libal.intrographs.presentation.GraphRenderer;
-import eu.libal.intrographs.presentation.shapes.VertexShape2D;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBoxBuilder;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.Instant;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -95,21 +88,10 @@ public class MainController implements Initializable {
         graphRenderingController.setup();
         graphRenderingController.update();
 
-//        g = new Graph<>();
-//        g.addVertex(0, "a");
-//        g.addVertex(1, "b");
-//        g.addVertex(2, "c");
-//        g.addEdge("a", "b");
-//
-//        graphRenderer = new GraphRenderer<>(g, mainCanvas);
-//        graphRenderer.render();
-
         mainCanvas.widthProperty().addListener(observable -> {
-//            graphRenderer.render();
             graphRenderingController.update();
         });
         mainCanvas.heightProperty().addListener(observable -> {
-//            graphRenderer.render();
             graphRenderingController.update();
         });
 
