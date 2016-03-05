@@ -9,19 +9,25 @@ import eu.libal.intrographs.presentation.CanvasStates;
 import eu.libal.intrographs.presentation.GraphRenderer;
 import eu.libal.intrographs.presentation.shapes.VertexShape2D;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBoxBuilder;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
 import java.util.Optional;
@@ -191,5 +197,28 @@ public class MainController implements Initializable {
 
     public void setInfoWindowState(Stage infoWindow) {
         infoWindowStage = infoWindow;
+    }
+
+    @FXML
+    public void handleAboutAction(ActionEvent actionEvent) {
+
+        Stage dialog = new Stage();
+        dialog.initModality(Modality.WINDOW_MODAL);
+        dialog.setTitle("About");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("presentation/views/aboutDialog.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        AboutDialogController controller = loader.getController();
+        controller.setStage(dialog);
+
+        dialog.setScene(new Scene(root));
+        dialog.initOwner(stage);
+        dialog.show();
+
     }
 }

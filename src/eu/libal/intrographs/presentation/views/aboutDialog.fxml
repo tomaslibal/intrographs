@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.libal.intrographs.AboutDialogController">
+    <GridPane fx:id="mainGrid">
+        <hgap>10</hgap>
+        <vgap>10</vgap>
+
+        <Text GridPane.rowIndex="0">Intrograps</Text>
+
+        <Text GridPane.rowIndex="1">https://github.com/tomaslibal/intrographs</Text>
+
+        <Button GridPane.rowIndex="2" fx:id="okBt" onAction="#handleOKBtAction">Okay</Button>
+    </GridPane>
+</VBox>
