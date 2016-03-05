@@ -1,6 +1,7 @@
 package eu.libal.intrographs.common;
 
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,11 +18,20 @@ public class MessageBus implements IListenable {
 
     @Override
     public void subscribe(String eventName, INotifiable callback) {
-        listeners.get(eventName).add(callback);
+        List<INotifiable> iNotifiables = listeners.get(eventName);
+        if (iNotifiables == null) {
+            iNotifiables = new LinkedList<>();
+        }
+        iNotifiables.add(callback);
+
+        listeners.put(eventName, iNotifiables);
     }
 
     public void emit(String eventName, String value) {
-        listeners.get(eventName)
-                .forEach(callback -> callback.call(value));
+        List<INotifiable> iNotifiables = listeners.get(eventName);
+        if (iNotifiables != null) {
+            iNotifiables
+                    .forEach(callback -> callback.call(value));
+        }
     }
 }
