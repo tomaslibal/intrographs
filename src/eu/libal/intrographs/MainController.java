@@ -1,5 +1,6 @@
 package eu.libal.intrographs;
 
+import eu.libal.intrographs.common.MessageBus;
 import eu.libal.intrographs.graphs.DepthFirstSearch;
 import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
@@ -64,52 +65,46 @@ public class MainController implements Initializable {
 
     private Graph<Integer, Edge<Integer>> g;
 
-    /**
-     * x coordinate of a mouse click
-     */
-    private double cx;
-    /**
-     * y coordinate of a mouse click
-     */
-    private double cy;
 
     /**
-     * x coordinate of the origin
+     * Points to the stage of the main window
      */
-    private double ox = 0;
-    /**
-     * y coordinate of the origin
-     */
-    private double oy = 0;
-
-    /*
-     * When adding a new edge this auxiliary variable holds the reference to the source vertex of a new edge.
-     */
-    private VertexShape2D sel1;
     private Stage stage;
-    private double dx = 0;
-    private double dy = 0;
 
-    private VertexShape2D translateVertex;
+    /**
+     * A reference to the info window stage so that this window/controller can access nodes in that window.
+     */
     private Stage infoWindowStage;
+    private GraphRenderingController graphRenderingController;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        g = new Graph<>();
-        g.addVertex(0, "a");
-        g.addVertex(1, "b");
-        g.addVertex(2, "c");
-        g.addEdge("a", "b");
 
-        graphRenderer = new GraphRenderer<>(g, mainCanvas);
-        graphRenderer.render();
+        MessageBus messageBus = new MessageBus();
+
+        graphRenderingController = new GraphRenderingController();
+        graphRenderingController.setCanvas(mainCanvas);
+        graphRenderingController.setMessageBus(messageBus);
+        graphRenderingController.setup();
+        graphRenderingController.update();
+
+//        g = new Graph<>();
+//        g.addVertex(0, "a");
+//        g.addVertex(1, "b");
+//        g.addVertex(2, "c");
+//        g.addEdge("a", "b");
+//
+//        graphRenderer = new GraphRenderer<>(g, mainCanvas);
+//        graphRenderer.render();
 
         mainCanvas.widthProperty().addListener(observable -> {
-            graphRenderer.render();
+//            graphRenderer.render();
+            graphRenderingController.update();
         });
         mainCanvas.heightProperty().addListener(observable -> {
-            graphRenderer.render();
+//            graphRenderer.render();
+            graphRenderingController.update();
         });
 
         mainGrid.widthProperty().addListener((observable, oldGridWidth, newGridWidth) -> {
@@ -122,128 +117,58 @@ public class MainController implements Initializable {
                 mainCanvas.setWidth(originalCanvasWidth + (newGridWidth.doubleValue() - oldGridWidth.doubleValue()));
             }
         });
+
+        messageBus.subscribe("#addVertexBt.text.change", newLabel -> addVertexBt.setText(newLabel));
+        messageBus.subscribe("#addEdgeBt.text.change", newLabel -> addEdgeBt.setText(newLabel));
+        messageBus.subscribe("#vIDInput.text.change", newText -> {
+            TextField idNode = (TextField) infoWindowStage.getScene().lookup("#vIDInput");
+            idNode.setText(newText);
+        });
+        messageBus.subscribe("#vValInput.text.change", newText -> {
+            TextField node = (TextField) infoWindowStage.getScene().lookup("#vValInput");
+            node.setText(newText);
+        });
+        messageBus.subscribe("Cursor.cursor.change", newCursorId -> stage.getScene().setCursor(Cursor.cursor(newCursorId)));
     }
 
     @FXML
     public void refreshCanvas(ActionEvent actionEvent) {
-        graphRenderer.render();
+        graphRenderingController.update();
     }
 
     @FXML
     public void handleMouseClick(MouseEvent event) {
-        if (canvasState == CanvasStates.ADDING_VERTEX) {
-            String id = String.valueOf(Instant.now().getEpochSecond());
-            g.addVertex(id, event.getX() - ox, event.getY() - oy);
-            canvasState = CanvasStates.PANNING;
-            addVertexBt.setText("Add vertex");
-        }
-
-        Optional<VertexShape2D> selectedVertex = getVertexAtMouseClick(event);
-
-        if (canvasState == CanvasStates.ADDING_EDGE && selectedVertex.isPresent()) {
-
-            if (sel1 == null) {
-                sel1 = selectedVertex.get();
-            } else {
-                VertexShape2D sel2 = selectedVertex.get();
-                g.addEdge(sel1.getVertexId(), sel2.getVertexId());
-
-                sel1 = null;
-                canvasState = CanvasStates.PANNING;
-                addEdgeBt.setText("Add Edge");
-            }
-        }
+        graphRenderingController.handleMouseClick(event);
     }
 
     @FXML
     public void setCanvasStatusToAddingVertex(ActionEvent actionEvent) {
         addVertexBt.setText("Click on canvas");
-        canvasState = CanvasStates.ADDING_VERTEX;
+        graphRenderingController.setCanvasState(CanvasStates.ADDING_VERTEX);
     }
 
     @FXML
     public void setCanvasStatusToAddingEdge(ActionEvent actionEvent) {
         addEdgeBt.setText("Choose vertices");
-        canvasState = CanvasStates.ADDING_EDGE;
-    }
-
-    private Optional<VertexShape2D> getVertexAtMouseClick(MouseEvent click) {
-
-        int x = (int) Math.round(click.getX() - ox);
-        int y = (int) Math.round(click.getY() - oy);
-
-        int leniency = 5;
-        int radius = 5;
-
-        return graphRenderer.getVertexShapes().stream()
-                .filter(shape -> {
-                    int dx = Math.abs(shape.getX() - x);
-                    int dy = Math.abs(shape.getY() - y);
-
-                    return dx < (leniency + radius) && dy < (leniency + radius);
-                })
-                .findFirst();
+        graphRenderingController.setCanvasState(CanvasStates.ADDING_EDGE);
     }
 
     @FXML
     public void handleLabelsToggle(MouseEvent event) {
         if (labelsCheckbox.isSelected()) {
-            graphRenderer.displayLabels();
+            graphRenderingController.displayLabels();
         } else {
-            graphRenderer.hideLabels();
+            graphRenderingController.hideLabels();
         }
     }
 
     public void handleDrag(MouseEvent event) {
-
-        double prevDx = dx;
-        double prevDy = dy;
-
-        dx = event.getX() - cx;
-        dy = event.getY() - cy;
-
-        double tx = dx - prevDx;
-        double ty = dy - prevDy;
-
-        if (canvasState == CanvasStates.TRANSLATING_VERTEX && translateVertex != null) {
-            Integer x = translateVertex.getX();
-            Integer y = translateVertex.getY();
-            translateVertex.setX(x + Double.valueOf( tx ).intValue());
-            translateVertex.setY(y + Double.valueOf( ty ).intValue());
-            graphRenderer.render();
-        } else {
-            ox += tx;
-            oy += ty;
-
-            graphRenderer.render(ox, oy);
-        }
+        graphRenderingController.handleMouseDrag(event);
     }
 
     @FXML
     public void handleMousePress(MouseEvent event) {
-        cx = event.getX();
-        cy = event.getY();
-
-        Optional<VertexShape2D> selectedVertex = getVertexAtMouseClick(event);
-
-        if (selectedVertex.isPresent() && canvasState == CanvasStates.PANNING) {
-            stage.getScene().setCursor(Cursor.CLOSED_HAND);
-            canvasState = CanvasStates.TRANSLATING_VERTEX;
-            translateVertex = selectedVertex.get();
-
-            TextField idNode = (TextField) infoWindowStage.getScene().lookup("#vIDInput");
-            TextField valueNode = (TextField) infoWindowStage.getScene().lookup("#vValInput");
-            String vertexId = selectedVertex.get().getVertexId();
-
-            Vertex<Integer> vertex = g.vertexSet().stream().filter(v -> v.getId().equals(vertexId)).findFirst().get();
-
-            idNode.setText(vertex.getId());
-            valueNode.setText(vertex.getValue().toString());
-        }
-
-        if (!selectedVertex.isPresent() && canvasState == CanvasStates.TRANSLATING_VERTEX) {
-            canvasState = CanvasStates.PANNING;
-        }
+        graphRenderingController.handleMousePress(event);
     }
 
     public void setStage(Stage stage) {
@@ -251,22 +176,7 @@ public class MainController implements Initializable {
     }
 
     public void handleMouseRelease(MouseEvent event) {
-        System.out.println("mouse released");
-        dx = 0;
-        dy = 0;
-
-        Optional<VertexShape2D> selectedVertex = getVertexAtMouseClick(event);
-
-        if (selectedVertex.isPresent()) {
-            stage.getScene().setCursor(Cursor.HAND);
-        } else {
-            stage.getScene().setCursor(Cursor.DEFAULT);
-        }
-
-        if (canvasState == CanvasStates.TRANSLATING_VERTEX) {
-            canvasState = CanvasStates.PANNING;
-        }
-        translateVertex = null;
+        graphRenderingController.handleMouseRelease(event);
     }
 
     @FXML
@@ -276,13 +186,7 @@ public class MainController implements Initializable {
 
     @FXML
     public void handleMouseMoved(MouseEvent event) {
-        Optional<VertexShape2D> selectedVertex = getVertexAtMouseClick(event);
-
-        if (selectedVertex.isPresent()) {
-            stage.getScene().setCursor(Cursor.HAND);
-        } else {
-            stage.getScene().setCursor(Cursor.DEFAULT);
-        }
+        graphRenderingController.handleMouseMoved(event);
     }
 
     public void setInfoWindowState(Stage infoWindow) {
