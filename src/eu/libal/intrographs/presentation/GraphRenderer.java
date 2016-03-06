@@ -155,6 +155,10 @@ public class GraphRenderer<T, U extends Edge<T>> {
         return verticesWithLabels.keySet();
     }
 
+    public TextShape2D getTextLabel(VertexShape2D v) {
+        return verticesWithLabels.get(v);
+    }
+
     public Collection<TextShape2D> getLabelShapes() {
         return verticesWithLabels.values();
     }

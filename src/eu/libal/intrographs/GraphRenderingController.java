@@ -6,6 +6,7 @@ import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import eu.libal.intrographs.presentation.CanvasStates;
 import eu.libal.intrographs.presentation.GraphRenderer;
+import eu.libal.intrographs.presentation.shapes.TextShape2D;
 import eu.libal.intrographs.presentation.shapes.VertexShape2D;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
@@ -14,10 +15,7 @@ import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.time.Instant;
-import java.util.LinkedList;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
 /**
  *
@@ -175,6 +173,9 @@ public class GraphRenderingController implements Initializable {
             Integer y = translateVertex.getY();
             translateVertex.setX(x + Double.valueOf( tx ).intValue());
             translateVertex.setY(y + Double.valueOf( ty ).intValue());
+            TextShape2D textLabel = graphRenderer.getTextLabel(translateVertex);
+            textLabel.setX(textLabel.getX() + Double.valueOf( tx ).intValue());
+            textLabel.setY(textLabel.getY() + Double.valueOf( ty ).intValue());
             graphRenderer.render();
         } else {
             ox += tx;
