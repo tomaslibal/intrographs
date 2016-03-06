@@ -155,7 +155,7 @@ public class GraphRenderingController implements Initializable {
 
                 sel1 = null;
                 canvasState = CanvasStates.PANNING;
-                messageBus.emit("#addEdgeBt.text.change", "Add vertex");
+                messageBus.emit("#addEdgeBt.text.change", "Add edge");
             }
         }
     }
