@@ -1,0 +1,30 @@
+.button {
+}
+
+#addVertexBt {
+    -fx-background-image: url('/eu/libal/intrographs/presentation/images/intrographs_icon_add_vertex.png');
+    -fx-background-position: center;
+    -fx-background-repeat: stretch;
+    -fx-background-size: 32px 32px;
+}
+
+#addEdgeBt {
+    -fx-background-image: url('/eu/libal/intrographs/presentation/images/intrographs_icon_add_edge.png');
+    -fx-background-position: center center;
+    -fx-background-repeat: stretch;
+    -fx-background-size: 32px 32px
+}
+
+#removeVertexBt {
+    -fx-background-image: url('/eu/libal/intrographs/presentation/images/intrographs_icon_remove_vertex.png');
+    -fx-background-position: center center;
+    -fx-background-repeat: stretch;
+    -fx-background-size: 32px 32px;
+}
+
+#removeEdgeBt {
+    -fx-background-image: url('/eu/libal/intrographs/presentation/images/intrographs_icon_remove_edge.png');
+    -fx-background-position: center center;
+    -fx-background-repeat: stretch;
+    -fx-background-size: 32px 32px;
+}

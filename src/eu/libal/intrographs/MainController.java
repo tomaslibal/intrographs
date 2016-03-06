@@ -13,11 +13,11 @@ import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -57,6 +57,9 @@ public class MainController implements Initializable {
 
     @FXML
     private Button execBt;
+
+    @FXML
+    private final Tooltip AddVertexBtTooltip = new Tooltip("Add Vertex");
 
     private GraphRenderer<Integer, Edge<Integer>> graphRenderer;
 
@@ -117,6 +120,7 @@ public class MainController implements Initializable {
             node.setText(newText);
         });
         messageBus.subscribe("Cursor.cursor.change", newCursorId -> stage.getScene().setCursor(Cursor.cursor(newCursorId)));
+
     }
 
     @FXML
@@ -161,6 +165,8 @@ public class MainController implements Initializable {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+        String buttonCss = this.getClass().getResource("presentation/styles/button.css").toExternalForm();
+        this.stage.getScene().getStylesheets().add(buttonCss);
     }
 
     public void handleMouseRelease(MouseEvent event) {

@@ -21,12 +21,14 @@ public class Main extends Application {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("presentation/views/main.fxml"));
         Parent root = loader.load();
+        Scene primaryStageScene = new Scene(root);
+        primaryStage.setScene(primaryStageScene);
         MainController controller = loader.getController();
         controller.setStage(primaryStage);
         controller.setInfoWindowState(infoWindow);
 
         primaryStage.setTitle("Intrographs 2");
-        primaryStage.setScene(new Scene(root));
+
         primaryStage.show();
 
         Parent infoWindowRoot = FXMLLoader.load(getClass().getResource("presentation/views/vertexDetail.fxml"));

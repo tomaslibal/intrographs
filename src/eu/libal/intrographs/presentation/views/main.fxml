@@ -57,22 +57,50 @@
 
         <GridPane GridPane.columnIndex="4" GridPane.rowIndex="0">
             <vgap>10</vgap>
+            <hgap>10</hgap>
 
             <Button fx:id="addVertexBt" onAction="#setCanvasStatusToAddingVertex"
-                    GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="TOP_LEFT">Add Vertex</Button>
+                    minHeight="32" minWidth="32" maxHeight="32" maxWidth="32"
+                    GridPane.rowIndex="0" GridPane.columnIndex="0" alignment="TOP_LEFT">
+                <tooltip>
+                    <Tooltip text="Add Vertex" />
+                </tooltip>
+            </Button>
 
             <Button fx:id="addEdgeBt" onAction="#setCanvasStatusToAddingEdge"
-                    GridPane.rowIndex="1" GridPane.columnIndex="1" alignment="TOP_LEFT">Add Edge</Button>
+
+                    minHeight="32" minWidth="32" maxHeight="32" maxWidth="32"
+                    GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="TOP_LEFT">
+                <tooltip>
+                    <Tooltip text="Add Edge" />
+                </tooltip>
+            </Button>
 
             <Button fx:id="removeVertexBt" onAction="#setCanvasStatusToRemovingVertex"
-                    GridPane.rowIndex="2" GridPane.columnIndex="1" alignment="TOP_LEFT">Remove Vertex</Button>
+                    minHeight="32" minWidth="32" maxHeight="32" maxWidth="32"
+                    GridPane.rowIndex="1" GridPane.columnIndex="0" alignment="TOP_LEFT">
+                <tooltip>
+                    <Tooltip text="Remove Vertex" />
+                </tooltip>
+            </Button>
 
             <Button fx:id="removeEdgeBt" onAction="#setCanvasStatusToRemovingEdge"
-                    GridPane.rowIndex="3" GridPane.columnIndex="1" alignment="TOP_LEFT">Remove Edge</Button>
+                    minHeight="32" minWidth="32" maxHeight="32" maxWidth="32"
+                    GridPane.rowIndex="1" GridPane.columnIndex="1" alignment="TOP_LEFT">
+                <tooltip>
+                    <Tooltip text="Remove Edge" />
+                </tooltip>
+            </Button>
 
-            <CheckBox GridPane.rowIndex="4" GridPane.columnIndex="1"
+            <CheckBox GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="3"
                       fx:id="labelsCheckbox" onMouseClicked="#handleLabelsToggle"
             >Show labels</CheckBox>
+
+            <columnConstraints>
+                <ColumnConstraints maxWidth="48.0" prefWidth="48.0"/>
+                <ColumnConstraints maxWidth="48.0" prefWidth="48.0"/>
+                <ColumnConstraints maxWidth="48.0" prefWidth="48.0"/>
+            </columnConstraints>
         </GridPane>
 
 
