@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.time.Instant;
+import java.util.LinkedList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -118,6 +119,8 @@ public class GraphRenderingController implements Initializable {
     }
 
     public void handleMouseClick(MouseEvent event) {
+        Optional<VertexShape2D> selectedVertex = getVertexAtMouseClick(event);
+
         if (canvasState == CanvasStates.ADDING_VERTEX) {
             String id = String.valueOf(Instant.now().getEpochSecond());
             g.addVertex(id, event.getX() - ox, event.getY() - oy);
@@ -125,7 +128,22 @@ public class GraphRenderingController implements Initializable {
             messageBus.emit("#addVertexBt.text.change", "Add vertex");
         }
 
-        Optional<VertexShape2D> selectedVertex = getVertexAtMouseClick(event);
+        if (canvasState == CanvasStates.REMOVING_VERTEX && selectedVertex.isPresent()) {
+            String vertexId = selectedVertex.get().getVertexId();
+            Optional<Vertex<Integer>> v = g.lookupVertex(vertexId);
+
+            if (v.isPresent()) {
+                // remove edges incident on the vertex
+                LinkedList<Edge<Integer>> edgesList = new LinkedList<>();
+                edgesList.addAll(g.incidentEdges(v.get()));
+                g.removeEdges(edgesList);
+
+                // remove vertex
+                g.removeVertex(v.get());
+            }
+
+            canvasState = CanvasStates.PANNING;
+        }
 
         if (canvasState == CanvasStates.ADDING_EDGE && selectedVertex.isPresent()) {
 

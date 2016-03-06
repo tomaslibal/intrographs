@@ -64,7 +64,13 @@
             <Button fx:id="addEdgeBt" onAction="#setCanvasStatusToAddingEdge"
                     GridPane.rowIndex="1" GridPane.columnIndex="1" alignment="TOP_LEFT">Add Edge</Button>
 
-            <CheckBox GridPane.rowIndex="2" GridPane.columnIndex="1"
+            <Button fx:id="removeVertexBt" onAction="#setCanvasStatusToRemovingVertex"
+                    GridPane.rowIndex="2" GridPane.columnIndex="1" alignment="TOP_LEFT">Remove Vertex</Button>
+
+            <Button fx:id="removeEdgeBt" onAction="#setCanvasStatusToRemovingEdge"
+                    GridPane.rowIndex="3" GridPane.columnIndex="1" alignment="TOP_LEFT">Remove Edge</Button>
+
+            <CheckBox GridPane.rowIndex="4" GridPane.columnIndex="1"
                       fx:id="labelsCheckbox" onMouseClicked="#handleLabelsToggle"
             >Show labels</CheckBox>
         </GridPane>

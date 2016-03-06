@@ -40,4 +40,12 @@ public class EdgeShape2D extends BasicShape2D {
         ctx.stroke();
         ctx.closePath();
     }
+
+    public VertexShape2D getSourceId() {
+        return sourceId;
+    }
+
+    public VertexShape2D getTargetId() {
+        return targetId;
+    }
 }

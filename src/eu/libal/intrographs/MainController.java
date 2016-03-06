@@ -225,4 +225,12 @@ public class MainController implements Initializable {
         dialog.initOwner(stage);
         dialog.show();
     }
+
+    public void setCanvasStatusToRemovingVertex(ActionEvent actionEvent) {
+        graphRenderingController.setCanvasState(CanvasStates.REMOVING_VERTEX);
+    }
+
+    public void setCanvasStatusToRemovingEdge(ActionEvent actionEvent) {
+        graphRenderingController.setCanvasState(CanvasStates.REMOVING_EDGE);
+    }
 }

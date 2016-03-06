@@ -4,6 +4,7 @@ import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public interface IGraph<T, U extends Edge<T>>
@@ -11,6 +12,7 @@ public interface IGraph<T, U extends Edge<T>>
 
     Vertex<T> addVertex(T v);
     Vertex<T> addVertex(T v, String id);
+    Optional<Vertex<T>> lookupVertex(String id);
     U addEdge(U e);
     U addEdge(String sourceId, String targetId);
     Set<U> incidentEdges(Vertex<T> v);

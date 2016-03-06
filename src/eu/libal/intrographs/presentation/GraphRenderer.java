@@ -88,6 +88,30 @@ public class GraphRenderer<T, U extends Edge<T>> {
 
             render();
         });
+
+        graph.subscribe("graph.vertex.remove", (String message) -> {
+            String vertexId = message;
+
+            Optional<VertexShape2D> vertexToDelete = verticesWithLabels.keySet().stream()
+                    .filter(vertexShape2D -> vertexShape2D.getVertexId().equals(vertexId))
+                    .findFirst();
+
+            if (vertexToDelete.isPresent()) {
+                // remove incident edges
+                edgeShapes = edgeShapes.stream()
+                        .filter(edgeShape2D -> !edgeShape2D.getSourceId().getVertexId().equals(vertexId)
+                                 && !edgeShape2D.getTargetId().getVertexId().equals(vertexId))
+                        .collect(Collectors.toSet());
+
+                Optional<Vertex<T>> vertexObj = graph.lookupVertex(vertexId);
+                graph.incidentEdges(vertexObj.get());
+
+                // remove the vertex
+                verticesWithLabels.remove(vertexToDelete.get());
+            }
+
+            render();
+        });
     }
 
     public void render() {

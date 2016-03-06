@@ -9,7 +9,9 @@ public enum CanvasStates {
     PANNING("Panning"),
     TRANSLATING_VERTEX("Translating Vertex"),
     ADDING_VERTEX("Adding Vertex"),
-    ADDING_EDGE("Adding Edge");
+    ADDING_EDGE("Adding Edge"),
+    REMOVING_VERTEX("Removing Vertex"),
+    REMOVING_EDGE("Removing Edge");
 
     String value;
 

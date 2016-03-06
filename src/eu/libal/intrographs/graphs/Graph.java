@@ -28,6 +28,11 @@ public class Graph<T, U extends Edge<T>> extends BaseGraph<T, U> {
         return vertex;
     }
 
+    @Override
+    public Optional<Vertex<T>> lookupVertex(String id) {
+        return getVertexById(id);
+    }
+
     public Vertex<T> addVertex(String id, double x, double y) {
         Vertex<T> vertex = new Vertex<>(id);
         vertices.add(vertex);
@@ -89,6 +94,7 @@ public class Graph<T, U extends Edge<T>> extends BaseGraph<T, U> {
     }
 
     public boolean removeVertex(Vertex v) {
+        dispatch("graph.vertex.remove", v.getId());
         return vertices.remove(v);
     }
 
