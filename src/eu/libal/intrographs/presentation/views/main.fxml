@@ -10,10 +10,10 @@
         <Menu text="File">
             <MenuItem onAction="#handleMenuExitAction" text="Exit"/>
         </Menu>
-        <!--<Menu text="View">-->
-            <!--<MenuItem text="Vertices"/>-->
+        <Menu text="View">
+            <MenuItem onAction="#handleViewVerticesAction" text="Vertices"/>
             <!--<MenuItem text="Edges"/>-->
-        <!--</Menu>-->
+        </Menu>
         <!--<Menu text="Graph">-->
             <!--<MenuItem text="New"/>-->
             <!--<MenuItem text="From Transition Matrix"/>-->

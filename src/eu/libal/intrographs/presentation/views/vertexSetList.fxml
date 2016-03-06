@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.libal.intrographs.VertexSetListController">
+    <GridPane fx:id="mainGrid">
+        <hgap>10</hgap>
+        <vgap>10</vgap>
+
+        <TableView fx:id="vertexSet">
+            <TableColumn text="ID"></TableColumn>
+            <TableColumn text="Value"></TableColumn>
+        </TableView>
+    </GridPane>
+</VBox>

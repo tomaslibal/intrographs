@@ -203,4 +203,26 @@ public class MainController implements Initializable {
         dialog.show();
 
     }
+
+    @FXML
+    public void handleViewVerticesAction(ActionEvent actionEvent) {
+        Stage dialog = new Stage();
+        dialog.initModality(Modality.WINDOW_MODAL);
+        dialog.setTitle("Vertex Set");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("presentation/views/vertexSetList.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        VertexSetListController controller = loader.getController();
+        //controller.setStage(dialog);
+        controller.setData(graphRenderingController.getVertexSet());
+
+        dialog.setScene(new Scene(root));
+        dialog.initOwner(stage);
+        dialog.show();
+    }
 }

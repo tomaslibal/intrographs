@@ -10,13 +10,13 @@ import eu.libal.intrographs.presentation.shapes.VertexShape2D;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.time.Instant;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 /**
  *
@@ -183,7 +183,7 @@ public class GraphRenderingController implements Initializable {
 
             Optional<Vertex<Integer>> vertex = g.vertexSet().stream().filter(v -> v.getId().equals(vertexId)).findFirst();
 
-            if (vertex.isPresent()) {;
+            if (vertex.isPresent()) {
                 messageBus.emit("#vIDInput.text.change", vertex.get().getId());
                 messageBus.emit("#vValInput.text.change", vertex.get().getValue().toString());
             }
@@ -240,5 +240,9 @@ public class GraphRenderingController implements Initializable {
                     return dx < (leniency + radius) && dy < (leniency + radius);
                 })
                 .findFirst();
+    }
+
+    public Set<Vertex<Integer>> getVertexSet() {
+        return g.vertexSet();
     }
 }
