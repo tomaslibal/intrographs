@@ -5,7 +5,10 @@
 
 <?import javafx.scene.canvas.Canvas?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.libal.intrographs.MainController">
+
     <MenuBar>
         <Menu text="File">
             <MenuItem onAction="#handleMenuExitAction" text="Exit"/>
@@ -34,6 +37,8 @@
 
 
     <GridPane fx:id="mainGrid">
+        <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+
         <Canvas GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="3" GridPane.rowSpan="2"
                 width="640" height="480" fx:id="mainCanvas" id="mainCanvas"
                 onMousePressed="#handleMousePress"
@@ -42,26 +47,41 @@
                 onMouseClicked="#handleMouseClick"
                 onMouseMoved="#handleMouseMoved"/>
 
-        <Button GridPane.columnIndex="3" GridPane.rowIndex="2"
-                fx:id="refreshCanvasBt" onAction="#refreshCanvas">Refresh
-        </Button>
+        <GridPane GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <padding><Insets top="15" right="15" bottom="15" left="0"/></padding>
+            <hgap>10</hgap>
 
-        <Label GridPane.columnIndex="0" GridPane.rowIndex="2"
-            fx:id="cmdLabel">Command</Label>
-        <TextField GridPane.columnIndex="1" GridPane.rowIndex="2"
-            fx:id="cmdInput"/>
-        <Button GridPane.columnIndex="2" GridPane.rowIndex="2"
-            fx:id="execBt">Exec</Button>
+            <Label GridPane.columnIndex="0" GridPane.rowIndex="0"
+                   minWidth="80" prefWidth="80"
+                fx:id="cmdLabel">Command</Label>
+            <TextField GridPane.columnIndex="1" GridPane.rowIndex="0"
+                       minWidth="360" prefWidth="360"
+                fx:id="cmdInput"/>
+            <Button GridPane.columnIndex="2" GridPane.rowIndex="0"
+                    minWidth="80" prefWidth="80"
+                fx:id="execBt">Exec</Button>
 
+            <Button GridPane.columnIndex="3" GridPane.rowIndex="0"
+                    minWidth="80" prefWidth="80"
+                    fx:id="refreshCanvasBt" onAction="#refreshCanvas">Refresh
+            </Button>
+
+
+
+        </GridPane>
         <!-- -->
 
         <GridPane GridPane.columnIndex="4" GridPane.rowIndex="0">
+            <padding><Insets top="0" right="25" bottom="25" left="25"/></padding>
+
             <vgap>10</vgap>
             <hgap>10</hgap>
 
+            <Text GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="3">Toolbar</Text>
+
             <Button fx:id="addVertexBt" onAction="#setCanvasStatusToAddingVertex"
                     minHeight="32" minWidth="32" maxHeight="32" maxWidth="32"
-                    GridPane.rowIndex="0" GridPane.columnIndex="0" alignment="TOP_LEFT">
+                    GridPane.rowIndex="1" GridPane.columnIndex="0" alignment="TOP_LEFT">
                 <tooltip>
                     <Tooltip text="Add Vertex" />
                 </tooltip>
@@ -70,7 +90,7 @@
             <Button fx:id="addEdgeBt" onAction="#setCanvasStatusToAddingEdge"
 
                     minHeight="32" minWidth="32" maxHeight="32" maxWidth="32"
-                    GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="TOP_LEFT">
+                    GridPane.rowIndex="1" GridPane.columnIndex="1" alignment="TOP_LEFT">
                 <tooltip>
                     <Tooltip text="Add Edge" />
                 </tooltip>
@@ -78,7 +98,7 @@
 
             <Button fx:id="removeVertexBt" onAction="#setCanvasStatusToRemovingVertex"
                     minHeight="32" minWidth="32" maxHeight="32" maxWidth="32"
-                    GridPane.rowIndex="1" GridPane.columnIndex="0" alignment="TOP_LEFT">
+                    GridPane.rowIndex="2" GridPane.columnIndex="0" alignment="TOP_LEFT">
                 <tooltip>
                     <Tooltip text="Remove Vertex" />
                 </tooltip>
@@ -86,20 +106,20 @@
 
             <Button fx:id="removeEdgeBt" onAction="#setCanvasStatusToRemovingEdge"
                     minHeight="32" minWidth="32" maxHeight="32" maxWidth="32"
-                    GridPane.rowIndex="1" GridPane.columnIndex="1" alignment="TOP_LEFT">
+                    GridPane.rowIndex="2" GridPane.columnIndex="1" alignment="TOP_LEFT">
                 <tooltip>
                     <Tooltip text="Remove Edge" />
                 </tooltip>
             </Button>
 
-            <CheckBox GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="3"
+            <CheckBox GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="3"
                       fx:id="labelsCheckbox" onMouseClicked="#handleLabelsToggle"
             >Show labels</CheckBox>
 
             <columnConstraints>
-                <ColumnConstraints maxWidth="48.0" prefWidth="48.0"/>
-                <ColumnConstraints maxWidth="48.0" prefWidth="48.0"/>
-                <ColumnConstraints maxWidth="48.0" prefWidth="48.0"/>
+                <ColumnConstraints maxWidth="42.0" prefWidth="42.0"/>
+                <ColumnConstraints maxWidth="42.0" prefWidth="42.0"/>
+                <ColumnConstraints maxWidth="42.0" prefWidth="42.0"/>
             </columnConstraints>
         </GridPane>
 
