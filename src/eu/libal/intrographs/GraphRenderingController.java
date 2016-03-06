@@ -204,7 +204,13 @@ public class GraphRenderingController implements Initializable {
 
             if (vertex.isPresent()) {
                 messageBus.emit("#vIDInput.text.change", vertex.get().getId());
-                messageBus.emit("#vValInput.text.change", vertex.get().getValue().toString());
+
+                try {
+                    messageBus.emit("#vValInput.text.change", vertex.get().getValue().toString());
+                } catch (NullPointerException e) {
+                    // vertex has no value
+                    messageBus.emit("#vValInput.text.change", "");
+                }
             }
 
         }
