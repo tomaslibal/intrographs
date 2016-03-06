@@ -217,7 +217,7 @@ public class MainController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        VertexSetListController controller = loader.getController();
+        VertexSetListController<Integer> controller = loader.getController();
         //controller.setStage(dialog);
         controller.setData(graphRenderingController.getVertexSet());
 

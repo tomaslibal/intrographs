@@ -18,25 +18,25 @@ import java.util.Set;
 /**
  *
  */
-public class VertexSetListController implements Initializable {
+public class VertexSetListController<T> implements Initializable {
 
     @FXML
     public GridPane mainGrid;
 
     @FXML
-    public TableView<Vertex<?>> vertexSet;
+    public TableView<Vertex<T>> vertexSet;
 
-    private ObservableList<Vertex<?>> data = FXCollections.observableArrayList();
+    private ObservableList<Vertex<T>> data = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         mainGrid.setPadding(new Insets(10, 10, 10, 10));
 
-        TableColumn idCol = new TableColumn("Id");
-        TableColumn valueCol = new TableColumn("Value");
+        TableColumn<Vertex<T>, String> idCol = new TableColumn<>("Id");
+        TableColumn<Vertex<T>, T> valueCol = new TableColumn<>("Value");
 
-        idCol.setCellValueFactory(new PropertyValueFactory<Vertex<?>, Integer>("id"));
-        valueCol.setCellValueFactory(new PropertyValueFactory<Vertex<?>, String>("value"));
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        valueCol.setCellValueFactory(new PropertyValueFactory<>("value"));
 
         vertexSet.getColumns().addAll(idCol, valueCol);
 
@@ -44,7 +44,7 @@ public class VertexSetListController implements Initializable {
     }
 
 
-    public void setData(Set<Vertex<Integer>> data) {
+    public void setData(Set<Vertex<T>> data) {
         this.data = FXCollections.observableArrayList();
         this.data.addAll(data);
         vertexSet.setItems(this.data);
