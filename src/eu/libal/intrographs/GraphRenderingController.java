@@ -221,7 +221,6 @@ public class GraphRenderingController implements Initializable {
     }
 
     public void handleMouseRelease(MouseEvent event) {
-        System.out.println("mouse released");
         dx = 0;
         dy = 0;
 
