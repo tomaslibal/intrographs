@@ -246,4 +246,9 @@ public class MainController implements Initializable {
     public void setCanvasStatusToRemovingEdge(ActionEvent actionEvent) {
         graphRenderingController.setCanvasState(CanvasStates.REMOVING_EDGE);
     }
+
+    @FXML
+    public void handleNewGraphAction(ActionEvent actionEvent) {
+
+    }
 }

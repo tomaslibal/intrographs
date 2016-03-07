@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<?import javafx.scene.canvas.Canvas?>
-
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.libal.intrographs.MainController">
 
     <MenuBar>
         <Menu text="File">
-            <MenuItem onAction="#handleMenuExitAction" text="Exit"/>
+            <MenuItem onAction="#handleNewGraphAction" text="New Graph..."/>
+            <!--<MenuItem text="Save"/>-->
+            <!--<MenuItem text="Save as..."/>-->
+            <SeparatorMenuItem/>
+            <MenuItem onAction="#handleMenuExitAction" text="Exit">
+                <accelerator>
+                    <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                </accelerator>
+            </MenuItem>
         </Menu>
         <Menu text="View">
             <MenuItem onAction="#handleViewVerticesAction" text="Vertices"/>
