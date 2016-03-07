@@ -15,9 +15,6 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -109,18 +106,29 @@ public class MainController implements Initializable {
             }
         });
 
-        messageBus.subscribe("#addVertexBt.text.change", newLabel -> addVertexBt.setText(newLabel));
-        messageBus.subscribe("#addEdgeBt.text.change", newLabel -> addEdgeBt.setText(newLabel));
+        subscribeToGraphRenderingCtrlEvents(messageBus);
+    }
+
+    private void setButtonText(Button button, String text) {
+        button.setText(text);
+    }
+
+    private void subscribeToGraphRenderingCtrlEvents(MessageBus messageBus) {
+        messageBus.subscribe("#addVertexBt.text.change", newLabel -> setButtonText(addVertexBt, newLabel));
+
+        messageBus.subscribe("#addEdgeBt.text.change", newLabel -> setButtonText(addEdgeBt, newLabel));
+
         messageBus.subscribe("#vIDInput.text.change", newText -> {
             TextField idNode = (TextField) infoWindowStage.getScene().lookup("#vIDInput");
             idNode.setText(newText);
         });
+
         messageBus.subscribe("#vValInput.text.change", newText -> {
             TextField node = (TextField) infoWindowStage.getScene().lookup("#vValInput");
             node.setText(newText);
         });
-        messageBus.subscribe("Cursor.cursor.change", newCursorId -> stage.getScene().setCursor(Cursor.cursor(newCursorId)));
 
+        messageBus.subscribe("Cursor.cursor.change", newCursorId -> stage.getScene().setCursor(Cursor.cursor(newCursorId)));
     }
 
     @FXML
