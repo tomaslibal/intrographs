@@ -41,6 +41,7 @@ public class Main extends Application {
         infoWindow.setX(100);
         infoWindow.setTitle("Vertex Details");
         infoWindow.setScene(secondScene);
+        infoWindow.initOwner(primaryStage);
         infoWindow.show();
     }
 }

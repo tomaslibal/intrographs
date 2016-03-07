@@ -232,7 +232,6 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
         VertexSetListController<Integer> controller = loader.getController();
-        //controller.setStage(dialog);
         controller.setData(graphRenderingController.getVertexSet());
 
         dialog.setScene(new Scene(root));
