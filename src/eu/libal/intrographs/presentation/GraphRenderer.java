@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.Semaphore;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -34,6 +35,8 @@ public class GraphRenderer<T, U extends Edge<T>> {
     private boolean displayLabels = false;
     private double oy;
     private double ox;
+
+    private final Semaphore sem_render;
 
     public GraphRenderer(Graph<T, U> graph, Canvas canvas) {
         this.graph = graph;
@@ -112,19 +115,39 @@ public class GraphRenderer<T, U extends Edge<T>> {
 
             render();
         });
+
+        sem_render = new Semaphore(1);
     }
 
     public void render() {
-        clearCanvas();
-        ctx.save();
-        ctx.translate(ox, oy);
-        renderVertices();
-        renderEdges();
-        ctx.restore();
+        render(ox, oy);
     }
 
 
     public void render(double x, double y) {
+
+//        Thread bgThreadRender = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                clearCanvas();
+//                ctx.save();
+//                ox = x;
+//                oy = y;
+//                ctx.translate(x, y);
+//                renderVertices();
+//                renderEdges();
+//                ctx.restore();
+//                sem_render.release();
+//            }
+//        });
+//
+//        try {
+//            sem_render.acquire();
+//            bgThreadRender.start();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
         clearCanvas();
         ctx.save();
         ox = x;
