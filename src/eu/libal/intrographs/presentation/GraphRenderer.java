@@ -4,9 +4,7 @@ import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.IVertex;
 import eu.libal.intrographs.graphs.vertex.Vertex;
-import eu.libal.intrographs.presentation.shapes.EdgeShape2D;
-import eu.libal.intrographs.presentation.shapes.TextShape2D;
-import eu.libal.intrographs.presentation.shapes.VertexShape2D;
+import eu.libal.intrographs.presentation.shapes.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -31,6 +29,8 @@ public class GraphRenderer<T, U extends Edge<T>> {
 
     private Set<EdgeShape2D> edgeShapes;
     private Map<VertexShape2D, TextShape2D> verticesWithLabels;
+
+    private VertexShape2D highlightedVertex = null;
 
     private boolean displayLabels = false;
     private double oy;
@@ -153,9 +153,34 @@ public class GraphRenderer<T, U extends Edge<T>> {
         ox = x;
         oy = y;
         ctx.translate(x, y);
+        renderVertexHighlighter();
         renderVertices();
         renderEdges();
         ctx.restore();
+    }
+
+    private void renderVertexHighlighter() {
+        if (ctx == null) {
+            ctx = getContext2D();
+        }
+
+        if (highlightedVertex != null) {
+            Coordinates2D coords = highlightedVertex.getCoords();
+            Dimensions2D dims = highlightedVertex.getDims();
+
+            VertexHighlighterShape2D highlighter = new VertexHighlighterShape2D();
+            highlighter.setX( coords.getX() - Math.round( dims.getWidth() ) );
+            highlighter.setY( coords.getY() - Math.round( dims.getHeight() ) );
+            highlighter.setWidth( dims.getWidth() + Math.round( dims.getWidth() ) );
+            highlighter.setHeight( dims.getHeight() + Math.round( dims.getHeight() ) );
+            highlighter.setContext(ctx);
+
+            try {
+                highlighter.paint();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void clearCanvas() {
@@ -280,6 +305,14 @@ public class GraphRenderer<T, U extends Edge<T>> {
     public void hideLabels() {
         displayLabels = false;
         render();
+    }
+
+    public void setHighlightedVertex(VertexShape2D highlightedVertex) {
+        this.highlightedVertex = highlightedVertex;
+    }
+
+    public VertexShape2D getHighlightedVertex() {
+        return highlightedVertex;
     }
 
     private static class VertexShapeBuilder {

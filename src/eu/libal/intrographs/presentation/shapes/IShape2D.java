@@ -12,5 +12,7 @@ public interface IShape2D {
 
     Integer getWidth();
     Integer getHeight();
+    void setWidth(int w);
+    void setHeight(int h);
     Dimensions2D getDims();
 }

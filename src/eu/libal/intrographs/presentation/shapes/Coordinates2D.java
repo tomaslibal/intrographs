@@ -18,27 +18,27 @@ public class Coordinates2D {
         coordsXY.add(y);
     }
 
-    Vector<Integer> getCoords() {
+    public Vector<Integer> getCoords() {
         return coordsXY;
     }
 
-    Integer getX() {
+    public Integer getX() {
         return coordsXY.get(0);
     }
 
-    Integer getY() {
+    public Integer getY() {
         return coordsXY.get(1);
     }
 
-    void setX(int x) {
+    public void setX(int x) {
         coordsXY.setElementAt(x, 0);
     }
 
-    void setY(int y) {
+    public void setY(int y) {
         coordsXY.setElementAt(y, 1);
     }
 
-    void set(int x, int y) {
+    public void set(int x, int y) {
         setX(x);
         setY(y);
     }

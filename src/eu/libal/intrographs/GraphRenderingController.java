@@ -196,6 +196,7 @@ public class GraphRenderingController implements Initializable {
 
             canvasState = CanvasStates.TRANSLATING_VERTEX;
             translateVertex = selectedVertex.get();
+            graphRenderer.setHighlightedVertex(translateVertex);
 
             String vertexId = selectedVertex.get().getVertexId();
 
@@ -228,8 +229,12 @@ public class GraphRenderingController implements Initializable {
 
         if (selectedVertex.isPresent()) {
             messageBus.emit("Cursor.cursor.change", Cursor.HAND.toString());
+            graphRenderer.setHighlightedVertex(selectedVertex.get());
+            graphRenderer.render();
         } else {
             messageBus.emit("Cursor.cursor.change", Cursor.DEFAULT.toString());
+            graphRenderer.setHighlightedVertex(null);
+            graphRenderer.render();
         }
 
         if (canvasState == CanvasStates.TRANSLATING_VERTEX) {
@@ -246,6 +251,9 @@ public class GraphRenderingController implements Initializable {
         } else {
             messageBus.emit("Cursor.cursor.change", Cursor.DEFAULT.toString());
         }
+
+        graphRenderer.setHighlightedVertex(selectedVertex.orElse(null));
+        graphRenderer.render();
     }
 
     public Optional<VertexShape2D> getVertexAtMouseClick(MouseEvent click) {

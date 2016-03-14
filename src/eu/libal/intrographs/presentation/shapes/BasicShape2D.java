@@ -56,6 +56,16 @@ public abstract class BasicShape2D extends BasicRenderableShape implements IShap
     }
 
     @Override
+    public void setWidth(int w) {
+        dims.setWidth(w);
+    }
+
+    @Override
+    public void setHeight(int h) {
+        dims.setHeight(h);
+    }
+
+    @Override
     public Dimensions2D getDims() {
         return dims;
     }
