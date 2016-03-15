@@ -18,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.net.URL;
@@ -198,24 +199,11 @@ public class MainController implements Initializable {
     @FXML
     public void handleAboutAction(ActionEvent actionEvent) {
 
-        Stage dialog = new Stage();
-        dialog.initModality(Modality.WINDOW_MODAL);
-        dialog.setTitle("About");
+        Pair<AboutDialogController, Stage> about = createNewModalDialog("About", getClass().getResource("presentation/views/aboutDialog.fxml"));
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("presentation/views/aboutDialog.fxml"));
-        Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        AboutDialogController controller = loader.getController();
-        controller.setStage(dialog);
+        about.getKey().setStage(about.getValue());
 
-        dialog.setScene(new Scene(root));
-        dialog.initOwner(stage);
-        dialog.show();
-
+        about.getValue().show();
     }
 
     @FXML
@@ -249,6 +237,32 @@ public class MainController implements Initializable {
 
     @FXML
     public void handleNewGraphAction(ActionEvent actionEvent) {
+        Pair<NewGraphDialogController, Stage> newModalDialog = createNewModalDialog(
+                "Choose new graph",
+                getClass().getResource("presentation/views/NewGraphDialog.fxml")
+        );
 
+        newModalDialog.getValue().show();
+    }
+
+    private <T extends Initializable> Pair<T, Stage> createNewModalDialog(String title, URL fxmlResource) {
+        Stage dialog = new Stage();
+        dialog.initModality(Modality.WINDOW_MODAL);
+        dialog.setTitle(title);
+
+        FXMLLoader loader = new FXMLLoader(fxmlResource);
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        T controller = loader.getController();
+
+        dialog.setScene(new Scene(root));
+        dialog.initOwner(stage);
+
+        return new Pair<>(controller, dialog);
     }
 }

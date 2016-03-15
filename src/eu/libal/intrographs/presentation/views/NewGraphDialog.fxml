@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.libal.intrographs.NewGraphDialogController">
+    <GridPane fx:id="mainGrid">
+        <hgap>10</hgap>
+        <vgap>10</vgap>
+
+        <Text GridPane.rowIndex="0">Choose a graph</Text>
+
+        <Button>From Transition Matrix</Button>
+
+        <Button>From Adjacency Matrix</Button>
+
+        <Button>Empty</Button>
+
+    </GridPane>
+</VBox>
