@@ -192,7 +192,7 @@ public class MainController implements Initializable {
         graphRenderingController.handleMouseMoved(event);
     }
 
-    public void setInfoWindowState(Stage infoWindow) {
+    public void setInfoWindowStage(Stage infoWindow) {
         infoWindowStage = infoWindow;
     }
 

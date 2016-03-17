@@ -1,6 +1,5 @@
 package eu.libal.intrographs;
 
-import com.sun.scenario.effect.impl.prism.PrMergePeer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -52,7 +51,7 @@ public class PrimaryStageInitializer implements IStageInitializer {
     public void initController() {
         controller = loader.getController();
         controller.setStage(stage);
-        controller.setInfoWindowState(infoStage);
+        controller.setInfoWindowStage(infoStage);
     }
 
     @Override
