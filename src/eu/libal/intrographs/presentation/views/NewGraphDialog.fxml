@@ -5,6 +5,7 @@
 
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.shape.Line?>
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.libal.intrographs.NewGraphDialogController">
     <GridPane fx:id="mainGrid">
         <hgap>10</hgap>
@@ -12,11 +13,15 @@
 
         <Text GridPane.rowIndex="0">Choose a graph</Text>
 
-        <Button>From Transition Matrix</Button>
+        <Button GridPane.rowIndex="1">From Transition Matrix</Button>
 
-        <Button>From Adjacency Matrix</Button>
+        <Button GridPane.rowIndex="2">From Adjacency Matrix</Button>
 
-        <Button>Empty</Button>
+        <Button GridPane.rowIndex="3">Empty</Button>
+
+        <Line GridPane.rowIndex="4" startX="0" startY="-30" endX="100" endY="-30"/>
+
+        <Button GridPane.rowIndex="4">Go back</Button>
 
     </GridPane>
 </VBox>
