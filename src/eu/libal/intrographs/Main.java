@@ -1,5 +1,6 @@
 package eu.libal.intrographs;
 
+import eu.libal.intrographs.presentation.StageLayoutFormatter;
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -17,31 +18,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Stage infoWindow = new Stage();
+        StageLayoutFormatter stageFormatter = new StageLayoutFormatter();
+        Stage infoStage = new Stage();
+        PrimaryStageInitializer primaryStageInitializer = new PrimaryStageInitializer(primaryStage, infoStage);
+        InfoStageInitializer infoStageInitializer = new InfoStageInitializer(primaryStage, infoStage);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("presentation/views/main.fxml"));
-        Parent root = loader.load();
-        Scene primaryStageScene = new Scene(root);
-        primaryStage.setScene(primaryStageScene);
-        MainController controller = loader.getController();
-        controller.setStage(primaryStage);
-        controller.setInfoWindowState(infoWindow);
+        primaryStageInitializer.initAll();
+        infoStageInitializer.initAll();
 
-        primaryStage.setTitle("Intrographs 2");
+        stageFormatter.setPrimary(primaryStage);
+        stageFormatter.setInfo(infoStage);
+        stageFormatter.format();
 
         primaryStage.show();
-
-        Parent infoWindowRoot = FXMLLoader.load(getClass().getResource("presentation/views/vertexDetail.fxml"));
-
-        infoWindow.addEventHandler(EventType.ROOT, event -> {
-        });
-
-        Scene secondScene = new Scene(infoWindowRoot);
-        infoWindow.setY(100);
-        infoWindow.setX(100);
-        infoWindow.setTitle("Vertex Details");
-        infoWindow.setScene(secondScene);
-        infoWindow.initOwner(primaryStage);
-        infoWindow.show();
+        infoStage.show();
     }
 }
