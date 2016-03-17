@@ -10,7 +10,7 @@
         <hgap>10</hgap>
         <vgap>10</vgap>
 
-        <Text GridPane.rowIndex="0">Intrograps</Text>
+        <Text GridPane.rowIndex="0">Intrographs</Text>
 
         <Text GridPane.rowIndex="1">https://github.com/tomaslibal/intrographs</Text>
 
