@@ -123,6 +123,14 @@ public class GraphRenderingController implements Initializable {
 
     public void setMessageBus(MessageBus messageBus) {
         this.messageBus = messageBus;
+        subscribeToVertexDialogEvents(this.messageBus);
+    }
+
+    private void subscribeToVertexDialogEvents(MessageBus messageBus) {
+        messageBus.subscribe("vertex.remove", vId -> {
+            g.removeVertex(vId);
+            graphRenderer.render();
+        });
     }
 
     public void handleMouseClick(MouseEvent event) {

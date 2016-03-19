@@ -19,6 +19,9 @@
         <Label GridPane.columnIndex="0" GridPane.rowIndex="3">Vertex Value</Label>
         <TextField GridPane.columnIndex="0" GridPane.rowIndex="4" editable="false" fx:id="vValInput"/>
 
+        <Button GridPane.columnIndex="0" GridPane.rowIndex="5" onAction="#handleUpdateBtAction">Update</Button>
+        <Button GridPane.columnIndex="0" GridPane.rowIndex="6" onAction="#handleRemoveBtAction">Remove</Button>
+
         <rowConstraints>
             <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0"/>
         </rowConstraints>
