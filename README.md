@@ -9,12 +9,12 @@ properties like what type of graph it is, whether it is planar and so on.
 
 ## Features
 
-Build graphs and visualise them graphically.
+Build graphs and render their embedding on a plane.
 
 ### Graphlang
 
-A command-line like tool for programmatic execution of instructions (to modify the graph). As there is always only one
-graph to work with, this graph has a symbol called *graph* or *g* for short.
+A command-line like tool for programmatic execution of instructions (to modify the graph) is included in the program. 
+As there is always only one graph to work with, this graph has a symbol called *graph* or *g* for short.
 
 Each command consists of one or more tokens. The starting symbol is a graph, vertex, or an edge, followed by a chain
 of zero or more tokens. If the only token is the symbol, program will print information about it if the symbol exists.
