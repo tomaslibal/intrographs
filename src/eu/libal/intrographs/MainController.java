@@ -73,16 +73,14 @@ public class MainController implements Initializable {
      */
     private Stage infoWindowStage;
     private GraphRenderingController graphRenderingController;
+    private MessageBus messageBus;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        MessageBus messageBus = new MessageBus();
-
         graphRenderingController = new GraphRenderingController();
         graphRenderingController.setCanvas(mainCanvas);
-        graphRenderingController.setMessageBus(messageBus);
         graphRenderingController.setup();
         graphRenderingController.update();
 
@@ -103,8 +101,6 @@ public class MainController implements Initializable {
                 mainCanvas.setWidth(originalCanvasWidth + (newGridWidth.doubleValue() - oldGridWidth.doubleValue()));
             }
         });
-
-        subscribeToGraphRenderingCtrlEvents(messageBus);
     }
 
     private void setButtonText(Button button, String text) {
@@ -119,6 +115,7 @@ public class MainController implements Initializable {
         messageBus.subscribe("#vIDInput.text.change", newText -> {
             TextField idNode = (TextField) infoWindowStage.getScene().lookup("#vIDInput");
             idNode.setText(newText);
+            messageBus.emit("vertex.selected", newText);
         });
 
         messageBus.subscribe("#vValInput.text.change", newText -> {
@@ -261,5 +258,11 @@ public class MainController implements Initializable {
         dialog.initOwner(stage);
 
         return new Pair<>(controller, dialog);
+    }
+
+    public void setMessageBus(MessageBus messageBus) {
+        this.messageBus = messageBus;
+        graphRenderingController.setMessageBus(this.messageBus);
+        subscribeToGraphRenderingCtrlEvents(this.messageBus);
     }
 }
