@@ -48,4 +48,10 @@ public class Vertex<T> implements IVertex<T> {
     public int degreeOf() {
         return adjacent.size();
     }
+
+    @Override
+    public boolean equals(IVertex<T> v) {
+        return v.getId().equals(id);
+
+    }
 }

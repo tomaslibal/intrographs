@@ -47,4 +47,11 @@ public interface IVertex<T> extends Comparable<IVertex<T>>
      * @return int Degree of the vertex
      */
     int degreeOf();
+
+    /**
+     * Returns true if vertex v is same as this. Otherwise, returns false.
+     * @param v
+     * @return
+     */
+    boolean equals(IVertex<T> v);
 }

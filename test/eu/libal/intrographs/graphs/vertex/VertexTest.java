@@ -50,4 +50,15 @@ public class VertexTest {
 
         assertThat(v.degreeOf(), is(2));
     }
+
+    @Test
+    public void shouldEqualWithAnotherVertexIfIDsMatch() {
+        Vertex<Integer> v = new Vertex<>("foo");
+        Vertex<Integer> w = new Vertex<>("foo");
+        Vertex<Integer> x = new Vertex<>("bar");
+
+        assertThat(v.equals(w), is(true));
+        assertThat(w.equals(v), is(true));
+        assertThat(x.equals(v), is(false));
+    }
 }
