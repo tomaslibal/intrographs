@@ -8,14 +8,21 @@ import eu.libal.intrographs.presentation.CanvasStates;
 import eu.libal.intrographs.presentation.GraphRenderer;
 import eu.libal.intrographs.presentation.shapes.TextShape2D;
 import eu.libal.intrographs.presentation.shapes.VertexShape2D;
+import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.time.Instant;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Optional;
+import java.util.ResourceBundle;
+import java.util.Set;
 
 /**
  *
@@ -29,6 +36,11 @@ public class GraphRenderingController implements Initializable {
     private CanvasStates canvasState;
 
     private MessageBus messageBus;
+
+    private ContextMenu contextMenu = new ContextMenu();
+    private final MenuItem menuItemSpanningTree = new MenuItem("Show spanning tree");
+    private final MenuItem menuItemRemoveVertex = new MenuItem("Remove vertex");
+    private final MenuItem menuItemAddVertex = new MenuItem("Add vertex");
 
     /**
      * x coordinate of a mouse click
@@ -57,9 +69,6 @@ public class GraphRenderingController implements Initializable {
      * y coordinate of the origin
      */
     private double oy = 0;
-
-
-
 
     /*
      * When adding a new edge this auxiliary variable holds the reference to the source vertex of a new edge.
@@ -118,6 +127,23 @@ public class GraphRenderingController implements Initializable {
 
     public void handleMouseClick(MouseEvent event) {
         Optional<VertexShape2D> selectedVertex = getVertexAtMouseClick(event);
+        MouseButton clickedButton = event.getButton();
+
+        if (clickedButton.equals(MouseButton.SECONDARY)) {
+            ObservableList<MenuItem> items = contextMenu.getItems();
+
+            if (items != null) {
+                if (items.size() > 0) { items.removeAll(items); }
+
+                if (selectedVertex.isPresent()) {
+                    items.addAll(menuItemRemoveVertex, menuItemSpanningTree);
+                } else {
+                    items.addAll(menuItemAddVertex);
+                }
+            }
+
+            contextMenu.show(canvas, event.getScreenX(), event.getScreenY());
+        }
 
         if (canvasState == CanvasStates.ADDING_VERTEX) {
             String id = String.valueOf(Instant.now().getEpochSecond());
@@ -190,6 +216,12 @@ public class GraphRenderingController implements Initializable {
         cy = event.getY();
 
         Optional<VertexShape2D> selectedVertex = getVertexAtMouseClick(event);
+
+        MouseButton pressedButton = event.getButton();
+
+        if (pressedButton.equals(MouseButton.PRIMARY)) {
+            contextMenu.hide();
+        }
 
         if (selectedVertex.isPresent() && canvasState == CanvasStates.PANNING) {
             messageBus.emit("Cursor.cursor.change", Cursor.CLOSED_HAND.toString());
@@ -276,5 +308,13 @@ public class GraphRenderingController implements Initializable {
 
     public Set<Vertex<Integer>> getVertexSet() {
         return g.vertexSet();
+    }
+
+    public void setContextMenu(ContextMenu cm) {
+        contextMenu = cm;
+    }
+
+    public void setGraphRenderer(GraphRenderer<Integer, Edge<Integer>> graphRenderer) {
+        this.graphRenderer = graphRenderer;
     }
 }
