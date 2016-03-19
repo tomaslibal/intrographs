@@ -1,6 +1,5 @@
 package eu.libal.intrographs;
 
-import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.presentation.GraphRenderer;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
@@ -28,19 +27,16 @@ public class GraphRenderingControllerTest {
     @Mock
     private ContextMenu mockContextMenu;
 
-
-    private Canvas canvas;
-
     private GraphicsContext ctx;
 
     @Mock
-    private GraphRenderer<Integer, Edge<Integer>> mockGraphRenderer;
+    private GraphRenderer mockGraphRenderer;
 
     @Before
     public void setup() {
         mockContextMenu = Mockito.mock(ContextMenu.class);
 
-        canvas = new Canvas();
+        Canvas canvas = new Canvas();
         mockGraphRenderer = Mockito.mock(GraphRenderer.class);
 
         controller = new GraphRenderingController();
@@ -48,7 +44,6 @@ public class GraphRenderingControllerTest {
         controller.setGraphRenderer(mockGraphRenderer);
         controller.setContextMenu(mockContextMenu);
         controller.setup();
-
     }
 
     @Test
