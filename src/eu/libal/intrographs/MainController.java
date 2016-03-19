@@ -56,9 +56,6 @@ public class MainController implements Initializable {
     @FXML
     private Button execBt;
 
-    @FXML
-    private final Tooltip AddVertexBtTooltip = new Tooltip("Add Vertex");
-
     private GraphRenderer<Integer, Edge<Integer>> graphRenderer;
 
     private CanvasStates canvasState = CanvasStates.PANNING;
