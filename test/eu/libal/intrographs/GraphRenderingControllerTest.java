@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
@@ -54,7 +55,7 @@ public class GraphRenderingControllerTest {
     public void shouldShowContextMenuWhenSecondaryMouseClickOccurs() {
         MouseEvent mockEvent = new MouseEvent(MouseEvent.MOUSE_CLICKED, 0, 0, 0, 0, MouseButton.SECONDARY, 1, true, true, true, true, true, true, true, true, true, true, null);
         controller.handleMouseClick(mockEvent);
-        verify(mockContextMenu).show(any(Node.class), any(Double.class), any(Double.class));
+        verify(mockContextMenu).show(any(Node.class), Matchers.eq(0.0), Matchers.eq(0.0));
     }
 
     @Test
