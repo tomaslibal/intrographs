@@ -1,5 +1,6 @@
 package eu.libal.intrographs;
 
+import eu.libal.intrographs.common.MessageBus;
 import eu.libal.intrographs.presentation.StageLayoutFormatter;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -12,10 +13,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        MessageBus messageBus = new MessageBus();
         StageLayoutFormatter stageFormatter = new StageLayoutFormatter();
         Stage infoStage = new Stage();
-        PrimaryStageInitializer primaryStageInitializer = new PrimaryStageInitializer(primaryStage, infoStage);
-        InfoStageInitializer infoStageInitializer = new InfoStageInitializer(primaryStage, infoStage);
+        PrimaryStageInitializer primaryStageInitializer = new PrimaryStageInitializer(primaryStage, infoStage, messageBus);
+        InfoStageInitializer infoStageInitializer = new InfoStageInitializer(primaryStage, infoStage, messageBus);
 
         primaryStageInitializer.initAll();
         infoStageInitializer.initAll();
