@@ -1,5 +1,6 @@
 package eu.libal.intrographs;
 
+import eu.libal.intrographs.common.MessageBus;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,17 +12,24 @@ public class InfoStageInitializer implements IStageInitializer {
 
     private FXMLLoader loader;
     private Stage stage;
+    private MessageBus messageBus;
     private Parent root;
     private Scene scene;
     private Stage primary;
+    private VertexDetailController controller;
 
     public InfoStageInitializer(Stage primary) {
-        this.primary = primary;
+        this(primary, null);
     }
 
     public InfoStageInitializer(Stage primary, Stage stage) {
+        this(primary, stage, new MessageBus());
+    }
+
+    public InfoStageInitializer(Stage primary, Stage stage, MessageBus messageBus) {
         this.primary = primary;
         this.stage = stage;
+        this.messageBus = messageBus;
     }
 
     @Override
@@ -48,7 +56,8 @@ public class InfoStageInitializer implements IStageInitializer {
 
     @Override
     public void initController() {
-
+        controller = loader.getController();
+        controller.setMessageBus(messageBus);
     }
 
     @Override
