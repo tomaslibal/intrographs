@@ -28,6 +28,7 @@ public class AdjacencyList<T> {
 
     boolean add(Vertex<T> m, Vertex<T> n) {
         add(m);
+        add(n);
 
         return adjList.get(m).add(n);
     }
@@ -50,7 +51,9 @@ public class AdjacencyList<T> {
      * @param m Vertex to be removed
      * @return true or false depending on whether m was removed or not.
      */
-    boolean remove(Vertex<T> m) { return false; }
+    List<Vertex<T>> remove(Vertex<T> m) {
+        return adjList.remove(m);
+    }
 
     /**
      * Removes n from the adjancency list of m, keeping m in the map of nodes
