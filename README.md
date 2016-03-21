@@ -9,6 +9,8 @@ to modify them and explore their properties.
 
 Brief overview of the features
 
+![Intrographs Main Screen](http://libal.eu/imghost/intrographs/intrographs1.png)
+
 ### Graphlang
 
 A command-line like tool for programmatic execution of instructions (to modify the graph) is included in the program. 
