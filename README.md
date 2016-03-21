@@ -1,15 +1,13 @@
 # Graphs
 
-Inspired by the graph theory, this software is a graphical tool that models
-graphs.
+Inspired by the graph theory, this software is a graphical tool that renders graph embeddings on a plane.
 
-The goal is to create a program that prints various graphs, lets the user
-to modify them, and it should also be able to give information on some graph
-properties like what type of graph it is, whether it is planar and so on.
+The goal is to create a program that can model various graphs, lets the user
+to modify them and explore their properties.
 
 ## Features
 
-Build graphs and render their embedding on a plane.
+Brief overview of the features
 
 ### Graphlang
 
