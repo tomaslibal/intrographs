@@ -101,7 +101,21 @@ public class GraphRenderingController implements Initializable {
         g.addVertex(0, "a");
         g.addVertex(1, "b");
         g.addVertex(2, "c");
-        g.addEdge("a", "b");
+        g.addVertex(3, "m");
+        g.addVertex(4, "n");
+        g.addVertex(5, "o");
+
+        g.addEdge("a", "m");
+        g.addEdge("a", "n");
+        g.addEdge("a", "o");
+
+        g.addEdge("b", "m");
+        g.addEdge("b", "n");
+        g.addEdge("b", "o");
+
+        g.addEdge("c", "m");
+        g.addEdge("c", "n");
+        g.addEdge("c", "o");
 
         graphRenderer = new GraphRenderer<>(g, canvas);
         graphRenderer.render();
