@@ -1,7 +1,7 @@
 package eu.libal.intrographs;
 
 import eu.libal.intrographs.common.MessageBus;
-import eu.libal.intrographs.presentation.StageLayoutFormatter;
+import eu.libal.intrographs.presentation.controllers.MainController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

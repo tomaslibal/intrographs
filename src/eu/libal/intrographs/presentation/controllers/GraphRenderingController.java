@@ -1,4 +1,4 @@
-package eu.libal.intrographs;
+package eu.libal.intrographs.presentation.controllers;
 
 import eu.libal.intrographs.common.MessageBus;
 import eu.libal.intrographs.graphs.Graph;

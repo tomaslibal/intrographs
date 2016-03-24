@@ -1,4 +1,4 @@
-package eu.libal.intrographs;
+package eu.libal.intrographs.presentation.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

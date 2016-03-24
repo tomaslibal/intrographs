@@ -1,4 +1,4 @@
-package eu.libal.intrographs;
+package eu.libal.intrographs.presentation.controllers;
 
 import eu.libal.intrographs.common.MessageBus;
 import eu.libal.intrographs.graphs.Graph;
@@ -168,7 +168,7 @@ public class MainController implements Initializable {
 
     public void setStage(Stage stage) {
         this.stage = stage;
-        String buttonCss = this.getClass().getResource("presentation/styles/button.css").toExternalForm();
+        String buttonCss = this.getClass().getResource("../styles/button.css").toExternalForm();
         this.stage.getScene().getStylesheets().add(buttonCss);
     }
 
@@ -193,7 +193,7 @@ public class MainController implements Initializable {
     @FXML
     public void handleAboutAction(ActionEvent actionEvent) {
 
-        Pair<AboutDialogController, Stage> about = createNewModalDialog("About", getClass().getResource("presentation/views/aboutDialog.fxml"));
+        Pair<AboutDialogController, Stage> about = createNewModalDialog("About", getClass().getResource("../views/aboutDialog.fxml"));
 
         about.getKey().setStage(about.getValue());
 
@@ -206,7 +206,7 @@ public class MainController implements Initializable {
         dialog.initModality(Modality.WINDOW_MODAL);
         dialog.setTitle("Vertex Set");
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("presentation/views/vertexSetList.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/vertexSetList.fxml"));
         Parent root = null;
         try {
             root = loader.load();
@@ -233,7 +233,7 @@ public class MainController implements Initializable {
     public void handleNewGraphAction(ActionEvent actionEvent) {
         Pair<NewGraphDialogController, Stage> newModalDialog = createNewModalDialog(
                 "Choose new graph",
-                getClass().getResource("presentation/views/NewGraphDialog.fxml")
+                getClass().getResource("../views/NewGraphDialog.fxml")
         );
 
         newModalDialog.getValue().show();

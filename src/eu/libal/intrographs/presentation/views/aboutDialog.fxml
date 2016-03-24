@@ -5,7 +5,7 @@
 
 <?import javafx.scene.text.Text?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.libal.intrographs.AboutDialogController">
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.libal.intrographs.presentation.controllers.AboutDialogController">
     <GridPane fx:id="mainGrid">
         <hgap>10</hgap>
         <vgap>10</vgap>

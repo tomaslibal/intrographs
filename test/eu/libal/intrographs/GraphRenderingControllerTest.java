@@ -2,6 +2,7 @@ package eu.libal.intrographs;
 
 import eu.libal.intrographs.common.MessageBus;
 import eu.libal.intrographs.presentation.GraphRenderer;
+import eu.libal.intrographs.presentation.controllers.GraphRenderingController;
 import eu.libal.intrographs.presentation.shapes.VertexShape2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -18,7 +19,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static org.mockito.Matchers.any;
