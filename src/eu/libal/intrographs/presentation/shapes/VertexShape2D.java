@@ -42,17 +42,17 @@ public class VertexShape2D extends BasicShape2D {
         private int y = 0;
         private IVertex v;
 
-        public VertexShapeBuilder build(IVertex v) {
+        public VertexShapeBuilder withVertex(IVertex v) {
             this.v = v;
             return this;
         }
 
-        public VertexShapeBuilder setX(int x) {
+        public VertexShapeBuilder withXCoordinate(int x) {
             this.x = x;
             return this;
         }
 
-        public VertexShapeBuilder setY(int y) {
+        public VertexShapeBuilder withYCoordinate(int y) {
             this.y = y;
             return this;
         }
@@ -61,8 +61,8 @@ public class VertexShape2D extends BasicShape2D {
             return new VertexShape2D(x, y, v.getId());
         }
 
-        public static <VertexType> VertexShape2D buildAndCreate(Vertex<VertexType> v) {
-            return new VertexShape2D((int) Math.round(Math.random()*100), (int) Math.round(Math.random()*100), v.getId());
+        public static <VertexType> VertexShape2D buildAndCreate(Vertex<VertexType> v, int x, int y) {
+            return new VertexShape2D(x, y, v.getId());
         }
     }
 }

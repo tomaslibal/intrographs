@@ -77,9 +77,9 @@ public class GraphRenderer<T, U extends Edge<T>> {
                     .get();
 
             VertexShape2D vertexShape2D = new VertexShape2D.VertexShapeBuilder()
-                    .build(newVertex)
-                    .setX((int) Math.round(Double.parseDouble(xCoord)))
-                    .setY((int) Math.round(Double.parseDouble(yCoord)))
+                    .withVertex(newVertex)
+                    .withXCoordinate((int) Math.round(Double.parseDouble(xCoord)))
+                    .withYCoordinate((int) Math.round(Double.parseDouble(yCoord)))
                     .create();
 
             TextShape2D label = new TextShape2D();
@@ -91,21 +91,20 @@ public class GraphRenderer<T, U extends Edge<T>> {
             render();
         });
 
-        graph.subscribe("graph.vertex.remove", (String message) -> {
-            String vertexId = message;
+        graph.subscribe("graph.vertex.remove", (String removedVertexId) -> {
 
             Optional<VertexShape2D> vertexToDelete = verticesWithLabels.keySet().stream()
-                    .filter(vertexShape2D -> vertexShape2D.getVertexId().equals(vertexId))
+                    .filter(vertexShape2D -> vertexShape2D.getVertexId().equals(removedVertexId))
                     .findFirst();
 
             if (vertexToDelete.isPresent()) {
                 // remove incident edges
                 edgeShapes = edgeShapes.stream()
-                        .filter(edgeShape2D -> !edgeShape2D.getSourceId().getVertexId().equals(vertexId)
-                                 && !edgeShape2D.getTargetId().getVertexId().equals(vertexId))
+                        .filter(edgeShape2D -> !edgeShape2D.getSourceId().getVertexId().equals(removedVertexId)
+                                 && !edgeShape2D.getTargetId().getVertexId().equals(removedVertexId))
                         .collect(Collectors.toSet());
 
-                Optional<Vertex<T>> vertexObj = graph.lookupVertex(vertexId);
+                Optional<Vertex<T>> vertexObj = graph.lookupVertex(removedVertexId);
                 graph.incidentEdges(vertexObj.get());
 
                 // remove the vertex
@@ -224,7 +223,7 @@ public class GraphRenderer<T, U extends Edge<T>> {
 
         Stream<Pair<VertexShape2D, TextShape2D>> pairStream = vertexSet.stream()
                 .map(v -> {
-                    VertexShape2D vertexShape2D = VertexShape2D.VertexShapeBuilder.buildAndCreate(v);
+                    VertexShape2D vertexShape2D = VertexShape2D.VertexShapeBuilder.buildAndCreate(v, (int) Math.round(Math.random()*100), (int) Math.round(Math.random()*100));
 
                     TextShape2D label = new TextShape2D();
                     label.setContext(ctx);
