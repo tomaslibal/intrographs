@@ -2,7 +2,6 @@ package eu.libal.intrographs.presentation;
 
 import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
-import eu.libal.intrographs.graphs.vertex.IVertex;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import eu.libal.intrographs.presentation.shapes.*;
 import javafx.scene.canvas.Canvas;
@@ -77,7 +76,7 @@ public class GraphRenderer<T, U extends Edge<T>> {
                     .findFirst()
                     .get();
 
-            VertexShape2D vertexShape2D = new VertexShapeBuilder()
+            VertexShape2D vertexShape2D = new VertexShape2D.VertexShapeBuilder()
                     .build(newVertex)
                     .setX((int) Math.round(Double.parseDouble(xCoord)))
                     .setY((int) Math.round(Double.parseDouble(yCoord)))
@@ -225,7 +224,7 @@ public class GraphRenderer<T, U extends Edge<T>> {
 
         Stream<Pair<VertexShape2D, TextShape2D>> pairStream = vertexSet.stream()
                 .map(v -> {
-                    VertexShape2D vertexShape2D = VertexShapeBuilder.buildAndCreate(v);
+                    VertexShape2D vertexShape2D = VertexShape2D.VertexShapeBuilder.buildAndCreate(v);
 
                     TextShape2D label = new TextShape2D();
                     label.setContext(ctx);
@@ -313,35 +312,6 @@ public class GraphRenderer<T, U extends Edge<T>> {
 
     public VertexShape2D getHighlightedVertex() {
         return highlightedVertex;
-    }
-
-    private static class VertexShapeBuilder {
-        private int x = 0;
-        private int y = 0;
-        private IVertex v;
-
-        public VertexShapeBuilder build(IVertex v) {
-            this.v = v;
-            return this;
-        }
-
-        public VertexShapeBuilder setX(int x) {
-            this.x = x;
-            return this;
-        }
-
-        public VertexShapeBuilder setY(int y) {
-            this.y = y;
-            return this;
-        }
-
-        public VertexShape2D create() {
-            return new VertexShape2D(x, y, v.getId());
-        }
-
-        public static <VertexType> VertexShape2D buildAndCreate(Vertex<VertexType> v) {
-            return new VertexShape2D((int) Math.round(Math.random()*100), (int) Math.round(Math.random()*100), v.getId());
-        }
     }
 
     private static class EdgeShapeBuilder {

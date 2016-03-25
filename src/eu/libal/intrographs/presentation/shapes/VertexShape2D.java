@@ -1,5 +1,7 @@
 package eu.libal.intrographs.presentation.shapes;
 
+import eu.libal.intrographs.graphs.vertex.IVertex;
+import eu.libal.intrographs.graphs.vertex.Vertex;
 import javafx.scene.paint.Color;
 
 /**
@@ -35,4 +37,32 @@ public class VertexShape2D extends BasicShape2D {
         ctx.fillOval(getX() - (width/2), getY() - (height/2), width, height);
     }
 
+    public static class VertexShapeBuilder {
+        private int x = 0;
+        private int y = 0;
+        private IVertex v;
+
+        public VertexShapeBuilder build(IVertex v) {
+            this.v = v;
+            return this;
+        }
+
+        public VertexShapeBuilder setX(int x) {
+            this.x = x;
+            return this;
+        }
+
+        public VertexShapeBuilder setY(int y) {
+            this.y = y;
+            return this;
+        }
+
+        public VertexShape2D create() {
+            return new VertexShape2D(x, y, v.getId());
+        }
+
+        public static <VertexType> VertexShape2D buildAndCreate(Vertex<VertexType> v) {
+            return new VertexShape2D((int) Math.round(Math.random()*100), (int) Math.round(Math.random()*100), v.getId());
+        }
+    }
 }
