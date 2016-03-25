@@ -1,5 +1,7 @@
 package eu.libal.intrographs.graphs.edge;
 
+import eu.libal.intrographs.common.INotifiable;
+import eu.libal.intrographs.common.ListenableField;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 
 /**
@@ -7,18 +9,27 @@ import eu.libal.intrographs.graphs.vertex.Vertex;
  */
 public class WeightedEdge<T> extends Edge<T> {
 
-    Double weight = 1.0;
+    private final ListenableField<Double> weight;
 
     WeightedEdge(Vertex<T> source, Vertex<T> target) {
-        super(source, target);
+        this(source, target, 1.0);
     }
 
     WeightedEdge(Vertex<T> source, Vertex<T> target, Double weight) {
         super(source, target);
-        this.weight = weight;
+        this.weight = new ListenableField<>();
+        this.weight.setValue(weight);
+    }
+
+    public void subscribe(INotifiable callback) {
+        weight.subscribe("update", callback);
     }
 
     public Double getWeight() {
-        return weight;
+        return weight.getValue();
+    }
+
+    public void setWeight(Double weight) {
+        this.weight.setValue(weight);
     }
 }
