@@ -40,7 +40,7 @@ public class PrimaryStageInitializer implements IStageInitializer {
 
     @Override
     public void initFXML() {
-        loader = new FXMLLoader(getClass().getResource("presentation/views/main.fxml"));
+        loader = new FXMLLoader(getClass().getResource("/views/main.fxml"));
 
         try {
             root = loader.load();

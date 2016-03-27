@@ -40,7 +40,7 @@ public class InfoStageInitializer implements IStageInitializer {
 
     @Override
     public void initFXML() {
-        loader = new FXMLLoader(getClass().getResource("presentation/views/vertexDetail.fxml"));
+        loader = new FXMLLoader(getClass().getResource("/views/vertexDetail.fxml"));
 
         try {
             root = loader.load();
