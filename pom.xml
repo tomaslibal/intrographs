@@ -5,6 +5,13 @@
     <version>2.0.0</version>
 
     <build>
+        <sourceDirectory>src</sourceDirectory>
+        <testSourceDirectory>test</testSourceDirectory>
+        <resources>
+            <resource>
+                <directory>resources</directory>
+            </resource>
+        </resources>
         <finalName>intrographs</finalName>
         <plugins>
             <plugin>
@@ -14,7 +21,7 @@
                     <source>8</source>
                     <target>8</target>
                 </configuration>
-                <version>2.5.1</version>
+                <version>3.5.1</version>
             </plugin>
 
             <plugin>
