@@ -11,42 +11,29 @@ Brief overview of the features
 
 ![Intrographs Main Screen](http://libal.eu/imghost/intrographs/intrographs1.png)
 
-### Graphlang
+### Graphs
 
-A command-line like tool for programmatic execution of instructions (to modify the graph) is included in the program. 
-As there is always only one graph to work with, this graph has a symbol called *graph* or *g* for short.
+- add/remove vertex
+- add/remove edge
+- show labels
+- translate vertices
 
-Each command consists of one or more tokens. The starting symbol is a graph, vertex, or an edge, followed by a chain
-of zero or more tokens. If the only token is the symbol, program will print information about it if the symbol exists.
+### Running the project
 
-Each command must end with a semicolon.
-
-#### Basic vertex operations
-
-Add an integer vertex with id:"a-forty-two-vertex" and value of 42.
+You will need `maven` and `jdk1.8.0_xx` to compile and package the project. To create a jar file with dependencies, execute
+the maven package command in the root directory of the project
 
 ```
-graph.vertex.add(42, "a-forty-two-vertex");
+mvn package
 ```
 
-Print information about the vertex.
+This should place a file `intrographs-jar-with-dependencies.jar` which you can invoke from the command line and run the project
 
 ```
-"a-forty-two-vertex";
+java -jar target/intrographs-jar-with-dependencies.jar
 ```
 
-Add new edge. The edge is directed or un-directed which depends on the graph type.
-
-```
-graph.edge.add("a-forty-two-vertex", "some-other-vertex");
-```
-
-Is the graph directed?
-
-```
-graph.isDirected
-```
-
+Alternatively, using IntelliJ IDE, execute the eu.libal.intrographs.Main class.
 
 ## Difference between pure mathematical graphs and graphs in computer science
 
