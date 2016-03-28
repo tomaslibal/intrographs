@@ -54,6 +54,13 @@ public class GraphTest {
     }
 
     @Test
+    public void shouldAddVertexWithSuppliedValue() {
+        Vertex<Integer> v = g.addVertex(42);
+
+        assertThat(v.getValue(), is(42));
+    }
+
+    @Test
     public void shouldAddSuppliedEdgeObject() {
         Vertex<Integer> v1 = g.addVertex(1);
         Vertex<Integer> v2 = g.addVertex(2);
@@ -198,10 +205,4 @@ public class GraphTest {
         assertThat(w.getAdjacentVertices(), is(Sets.newSet(v)));
     }
 
-    @Test
-    public void shouldAssignAnIdStartingWithId() {
-        Vertex<Integer> v = g.addVertex(42);
-
-        assertThat(v.getId().startsWith("id"), is(true));
-    }
 }
