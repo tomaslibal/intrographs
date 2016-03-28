@@ -126,6 +126,16 @@ public class GraphRenderingController implements Initializable {
             addVertexAtCoords(lastSecondaryClickCoords.getX(), lastSecondaryClickCoords.getY());
         });
 
+        menuItemRemoveVertex.setOnAction(action -> {
+            getVertexAtCoordinates(
+                lastSecondaryClickCoords.getX(),
+                lastSecondaryClickCoords.getY()
+            )
+            .ifPresent(vertexShape2D -> {
+                g.removeVertex(vertexShape2D.getVertexId());
+            });
+        });
+
         canvasState = CanvasStates.PANNING;
     }
 
@@ -326,10 +336,14 @@ public class GraphRenderingController implements Initializable {
         graphRenderer.render();
     }
 
-    public Optional<VertexShape2D> getVertexAtMouseClick(MouseEvent click) {
+    private Optional<VertexShape2D> getVertexAtMouseClick(MouseEvent click) {
+        return getVertexAtCoordinates(click.getX(), click.getY());
+    }
 
-        int x = (int) Math.round(click.getX() - ox);
-        int y = (int) Math.round(click.getY() - oy);
+    private Optional<VertexShape2D> getVertexAtCoordinates(double dblX, double dblY) {
+
+        int x = (int) Math.round(dblX - ox);
+        int y = (int) Math.round(dblY - oy);
 
         int leniency = 5;
         int radius = 5;
@@ -346,6 +360,10 @@ public class GraphRenderingController implements Initializable {
 
     public Set<Vertex<Integer>> getVertexSet() {
         return g.vertexSet();
+    }
+
+    public ContextMenu getContextMenu() {
+        return contextMenu;
     }
 
     public void setContextMenu(ContextMenu cm) {
