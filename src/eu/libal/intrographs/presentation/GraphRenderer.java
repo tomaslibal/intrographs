@@ -305,6 +305,10 @@ public class GraphRenderer<T, U extends Edge<T>> {
         render();
     }
 
+    public void setCanvas(Canvas canvas) {
+        this.canvas = canvas;
+    }
+
     public void setHighlightedVertex(VertexShape2D highlightedVertex) {
         this.highlightedVertex = highlightedVertex;
     }
