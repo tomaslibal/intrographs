@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  */
 public class Dimensions2DTest {
 
-    Dimensions2D dims;
+    private Dimensions2D dims;
 
     @Before
     public void setUp() throws Exception {
