@@ -1,17 +1,14 @@
 package eu.libal.intrographs.graphs;
 
-import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.internal.util.collections.Sets;
 
-import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.Callable;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -198,5 +195,12 @@ public class GraphTest {
 
         assertThat(v.getAdjacentVertices(), is(Sets.newSet(w)));
         assertThat(w.getAdjacentVertices(), is(Sets.newSet(v)));
+    }
+
+    @Test
+    public void shouldAssignAnIdStartingWithId() {
+        Vertex<Integer> v = g.addVertex(42);
+
+        assertThat(v.getId().startsWith("id"), is(true));
     }
 }

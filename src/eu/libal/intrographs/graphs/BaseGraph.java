@@ -60,7 +60,7 @@ abstract public class BaseGraph<T, U extends Edge<T>> implements IGraph<T, U>, I
      * @return new generated String id
      */
     protected String getNewId() {
-        return Date.from(Instant.now()).toString();
+        return "id" + Date.from(Instant.now()).toString();
     }
 
     protected Optional<Vertex<T>> getVertexById(String id) {
