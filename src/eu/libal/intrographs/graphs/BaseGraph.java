@@ -11,8 +11,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 abstract public class BaseGraph<T, U extends Edge<T>> implements IGraph<T, U>, IListenable {
-    protected Set<Vertex<T>> vertices;
-    protected Set<U> edges;
+
+    protected final Set<Vertex<T>> vertices = new HashSet<>();
+    protected final Set<U> edges = new HashSet<>();
 
     protected List<Pair<String, INotifiable>> callbacks = new LinkedList<>();
 

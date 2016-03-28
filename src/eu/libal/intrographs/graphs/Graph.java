@@ -6,11 +6,18 @@ import eu.libal.intrographs.graphs.vertex.Vertex;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * This type represents a graph. It is an undirected graph, which does not have to be simple (edges having the same
+ * vertex as the source and the target are allowed). This is not a multigraph, so two edges cannot be incident on the
+ * same vertex tuple. Because the Edge class is a parameter on this generic class, it is possible to use weighted or
+ * unweighted edges as needed.
+ *
+ * @param <T> The type of the value which each Vertex stores
+ * @param <U> The type of the Edge
+ */
 public class Graph<T, U extends Edge<T>> extends BaseGraph<T, U> {
 
     public Graph() {
-        vertices = new HashSet<>();
-        edges = new HashSet<>();
     }
 
     @Override
@@ -81,6 +88,15 @@ public class Graph<T, U extends Edge<T>> extends BaseGraph<T, U> {
     }
 
     @Override
+    /**
+     *
+     * A graph keeps vertices in a set and each vertex keeps a list of adjacent vertices. Thus, the edges are embedded in
+     * this adjacency list. However, the graph also keeps a separate set of Edges, which is a set representing the same
+     * state captured by the adjacency list. This is so that the edge set does not have to be computed every time it
+     * is requested.
+     *
+     * @return Set&lt;U&gt;
+     */
     public Set<U> edgeSet() {
         return edges;
     }
