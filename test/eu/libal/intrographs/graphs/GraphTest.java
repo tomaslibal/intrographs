@@ -61,6 +61,18 @@ public class GraphTest {
     }
 
     @Test
+    public void shouldAddBothVerticesToTheirRespectiveAdjacencyLists() {
+        Vertex<Integer> s = g.addVertex(1);
+        Vertex<Integer> t = g.addVertex(2);
+
+        Edge<Integer> e = new Edge<>(s, t);
+        g.addEdge(e);
+
+        assertThat(s.getAdjacentVertices(), Matchers.contains(t));
+        assertThat(t.getAdjacentVertices(), Matchers.contains(s));
+    }
+
+    @Test
     public void shouldAddSuppliedEdgeObject() {
         Vertex<Integer> v1 = g.addVertex(1);
         Vertex<Integer> v2 = g.addVertex(2);

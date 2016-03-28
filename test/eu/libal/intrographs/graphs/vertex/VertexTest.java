@@ -9,14 +9,14 @@ import static org.mockito.internal.util.collections.Sets.newSet;
 public class VertexTest {
 
     @Test
-    public void shouldReturnTheStoredValue_WhenGetValueInvoked() {
+    public void shouldReturnTheStoredValueWhenGetValueInvoked() {
         Vertex<Integer> v1 = new Vertex<>(42, "foo");
 
         assertThat(v1.getValue(), is(42));
     }
 
     @Test
-    public void shouldReturnTheID_WhenGetIdInvoked() {
+    public void shouldReturnTheIDWhenGetIdInvoked() {
         Vertex<Integer> v1 = new Vertex<>(42, "foo");
 
         assertThat(v1.getId(), is("foo"));
