@@ -35,6 +35,14 @@ java -jar target/intrographs-jar-with-dependencies.jar
 
 Alternatively, using IntelliJ IDE, execute the eu.libal.intrographs.Main class.
 
+#### Tests
+
+Run the tests using Maven
+
+```
+mvn test
+```
+
 ## Difference between pure mathematical graphs and graphs in computer science
 
 In pure mathematics a graph is an object that consists of the two sets:
