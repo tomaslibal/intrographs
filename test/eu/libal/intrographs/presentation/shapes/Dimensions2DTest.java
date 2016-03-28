@@ -19,16 +19,26 @@ public class Dimensions2DTest {
     }
 
     @Test
-    public void shouldInit_With_Zero_Zero_Dimensions() {
+    public void shouldInitWithZeroZeroDimensions() {
         assertThat(dims.getWidth(), is(0));
         assertThat(dims.getHeight(), is(0));
     }
 
     @Test
-    public void shouldInit_With_GivenDimensions() {
+    public void shouldInitWithGivenDimensions() {
         Dimensions2D d = new Dimensions2D(42, 43);
 
         assertThat(d.getWidth(), is(42));
         assertThat(d.getHeight(), is(43));
+    }
+
+    @Test
+    public void shouldUpdateDimensionsWithGivenValues() {
+        Dimensions2D d = new Dimensions2D(42, 43);
+
+        d.set(101, 102);
+
+        assertThat(d.getWidth(), is(101));
+        assertThat(d.getHeight(), is(102));
     }
 }
