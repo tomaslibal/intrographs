@@ -2,6 +2,7 @@ package eu.libal.intrographs.graphs;
 
 import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.internal.util.collections.Sets;
@@ -40,7 +41,7 @@ public class GraphTest {
 
         Optional<Vertex<Integer>> first = g.vertexSet().stream().findFirst();
 
-        assertThat(first.get().getId().length() > 0, is(true));
+        assertThat(first.get().getId(), Matchers.startsWith("id"));
     }
 
     @Test
