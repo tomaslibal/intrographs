@@ -73,4 +73,23 @@ abstract public class BaseGraph<T, U extends Edge<T>> implements IGraph<T, U>, I
                 .filter(e -> e.getSource().getId().equals(v.getId()) || e.getTarget().getId().equals(v.getId()))
                 .collect(Collectors.toSet());
     }
+
+    @Override
+    /**
+     *
+     * A graph keeps vertices in a set and each vertex keeps a list of adjacent vertices. Thus, the edges are embedded in
+     * this adjacency list. However, the graph also keeps a separate set of Edges, which is a set representing the same
+     * state captured by the adjacency list. This is so that the edge set does not have to be computed every time it
+     * is requested.
+     *
+     * @return Set&lt;U&gt;
+     */
+    public Set<U> edgeSet() {
+        return edges;
+    }
+
+    @Override
+    public Set<Vertex<T>> vertexSet() {
+        return vertices;
+    }
 }

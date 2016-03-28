@@ -83,25 +83,6 @@ public class Graph<T, U extends Edge<T>> extends BaseGraph<T, U> {
     }
 
     @Override
-    public Set<Vertex<T>> vertexSet() {
-        return vertices;
-    }
-
-    @Override
-    /**
-     *
-     * A graph keeps vertices in a set and each vertex keeps a list of adjacent vertices. Thus, the edges are embedded in
-     * this adjacency list. However, the graph also keeps a separate set of Edges, which is a set representing the same
-     * state captured by the adjacency list. This is so that the edge set does not have to be computed every time it
-     * is requested.
-     *
-     * @return Set&lt;U&gt;
-     */
-    public Set<U> edgeSet() {
-        return edges;
-    }
-
-    @Override
     public boolean removeVertex(String vertexId) {
 
         List<Vertex<T>> lookup = vertices.stream().filter(v -> v.getId().equals(vertexId)).collect(Collectors.toList());
