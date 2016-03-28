@@ -45,8 +45,6 @@ public class Graph<T, U extends Edge<T>> extends BaseGraph<T, U> {
         Vertex<T> vertex = new Vertex<>(id);
         vertices.add(vertex);
 
-        dispatch("graph.vertex.add", id.concat(";x:").concat(String.valueOf(x)).concat(";y:").concat(String.valueOf(y)));
-
         return vertex;
     }
 

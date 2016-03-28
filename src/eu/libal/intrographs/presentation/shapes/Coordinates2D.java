@@ -18,6 +18,11 @@ public class Coordinates2D {
         coordsXY.add(y);
     }
 
+    public Coordinates2D(double x, double y) {
+        coordsXY.add((int) Math.round(x));
+        coordsXY.add((int) Math.round(y));
+    }
+
     public Vector<Integer> getCoords() {
         return coordsXY;
     }

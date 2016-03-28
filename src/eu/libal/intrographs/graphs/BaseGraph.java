@@ -43,7 +43,7 @@ abstract public class BaseGraph<T, U extends Edge<T>> implements IGraph<T, U>, I
         callbacks.add(new Pair<>(eventName, callback));
     }
 
-    protected void dispatch(String eventName, String message) {
+    public void dispatch(String eventName, String message) {
         callbacks.stream()
             .filter(pair -> pair.getKey().equals(eventName))
             .forEach(pair -> {

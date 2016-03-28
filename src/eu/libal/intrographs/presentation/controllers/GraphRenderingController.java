@@ -6,6 +6,7 @@ import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import eu.libal.intrographs.presentation.CanvasStates;
 import eu.libal.intrographs.presentation.GraphRenderer;
+import eu.libal.intrographs.presentation.shapes.Coordinates2D;
 import eu.libal.intrographs.presentation.shapes.TextShape2D;
 import eu.libal.intrographs.presentation.shapes.VertexShape2D;
 import javafx.collections.ObservableList;
@@ -81,6 +82,7 @@ public class GraphRenderingController implements Initializable {
      * vertex is being manipulated ambiguous.
      */
     private VertexShape2D translateVertex;
+    private Coordinates2D lastSecondaryClickCoords;
 
 
     @Override
@@ -120,6 +122,10 @@ public class GraphRenderingController implements Initializable {
         graphRenderer = new GraphRenderer<>(g, canvas);
         graphRenderer.render();
 
+        menuItemAddVertex.setOnAction(action -> {
+            addVertexAtCoords(lastSecondaryClickCoords.getX(), lastSecondaryClickCoords.getY());
+        });
+
         canvasState = CanvasStates.PANNING;
     }
 
@@ -133,6 +139,10 @@ public class GraphRenderingController implements Initializable {
 
     public void setCanvasState(CanvasStates canvasState) {
         this.canvasState = canvasState;
+    }
+
+    public CanvasStates getCanvasState() {
+        return canvasState;
     }
 
     public void setMessageBus(MessageBus messageBus) {
@@ -152,6 +162,7 @@ public class GraphRenderingController implements Initializable {
         MouseButton clickedButton = event.getButton();
 
         if (clickedButton.equals(MouseButton.SECONDARY)) {
+            lastSecondaryClickCoords = new Coordinates2D(event.getX(), event.getY());
             ObservableList<MenuItem> items = contextMenu.getItems();
 
             if (items != null) {
@@ -168,10 +179,7 @@ public class GraphRenderingController implements Initializable {
         }
 
         if (canvasState == CanvasStates.ADDING_VERTEX) {
-            String id = String.valueOf(Instant.now().getEpochSecond());
-            g.addVertex(id, event.getX() - ox, event.getY() - oy);
-            canvasState = CanvasStates.PANNING;
-            messageBus.emit("#addVertexBt.text.change", "Add vertex");
+            addVertexAtCoords(event.getX(), event.getY());
         }
 
         if (canvasState == CanvasStates.REMOVING_VERTEX && selectedVertex.isPresent()) {
@@ -204,6 +212,14 @@ public class GraphRenderingController implements Initializable {
                 messageBus.emit("#addEdgeBt.text.change", "Add edge");
             }
         }
+    }
+
+    public void addVertexAtCoords(double x, double y) {
+        String id = String.valueOf(Instant.now().getEpochSecond());
+        g.addVertex(id, x - ox, y - oy);
+        g.dispatch("graph.vertex.add", id.concat(";x:").concat(String.valueOf(x)).concat(";y:").concat(String.valueOf(y)));
+        canvasState = CanvasStates.PANNING;
+        messageBus.emit("#addVertexBt.text.change", "Add vertex");
     }
 
     public void handleMouseDrag(MouseEvent event) {
@@ -338,5 +354,9 @@ public class GraphRenderingController implements Initializable {
 
     public void setGraphRenderer(GraphRenderer<Integer, Edge<Integer>> graphRenderer) {
         this.graphRenderer = graphRenderer;
+    }
+
+    public Graph<Integer, Edge<Integer>> getGraph() {
+        return g;
     }
 }

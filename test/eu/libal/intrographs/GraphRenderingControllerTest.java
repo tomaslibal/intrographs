@@ -1,6 +1,10 @@
 package eu.libal.intrographs;
 
+import eu.libal.intrographs.common.INotifiable;
 import eu.libal.intrographs.common.MessageBus;
+import eu.libal.intrographs.graphs.Graph;
+import eu.libal.intrographs.graphs.edge.Edge;
+import eu.libal.intrographs.presentation.CanvasStates;
 import eu.libal.intrographs.presentation.GraphRenderer;
 import eu.libal.intrographs.presentation.controllers.GraphRenderingController;
 import eu.libal.intrographs.presentation.shapes.VertexShape2D;
@@ -21,8 +25,9 @@ import org.mockito.Mockito;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -63,14 +68,18 @@ public class GraphRenderingControllerTest {
     @Test
     public void shouldShowContextMenuWhenSecondaryMouseClickOccurs() {
         MouseEvent mockEvent = new MouseEvent(MouseEvent.MOUSE_CLICKED, 0, 0, 0, 0, MouseButton.SECONDARY, 1, true, true, true, true, true, true, true, true, true, true, null);
+
         controller.handleMouseClick(mockEvent);
+
         verify(mockContextMenu).show(any(Node.class), Matchers.eq(0.0), Matchers.eq(0.0));
     }
 
     @Test
     public void shouldHideContextMenuWhenPrimaryMouseKeyPressed() {
         MouseEvent mockEvent = new MouseEvent(MouseEvent.MOUSE_PRESSED, 0, 0, 0, 0, MouseButton.PRIMARY, 1, true, true, true, true, true, true, true, true, true, true, null);
+
         controller.handleMousePress(mockEvent);
+
         verify(mockContextMenu).hide();
     }
 
@@ -86,14 +95,36 @@ public class GraphRenderingControllerTest {
     @Test
     public void shouldChangeMouseCursorToHandWhenHoverOverVertex() {
         MouseEvent mockEvent = new MouseEvent(MouseEvent.MOUSE_MOVED, 150, 150, 0, 0, MouseButton.NONE, 1, true, true, true, true, true, true, true, true, true, true, null);
-
         VertexShape2D v1 = new VertexShape2D(150, 150, "foo");
         Set<VertexShape2D> vertexShape2DSet = new HashSet<>();
+
         vertexShape2DSet.add(v1);
+
         when(mockGraphRenderer.getVertexShapes()).thenReturn(vertexShape2DSet);
 
         controller.handleMouseMoved(mockEvent);
 
         verify(mockMessageBus).emit(Matchers.eq("Cursor.cursor.change"), Matchers.eq(Cursor.HAND.toString()));
+    }
+
+    @Test
+    public void shouldAddVertexToGraphAndDispatchTheEventWhenAddingVertexAtCoords() {
+        Graph<Integer, Edge<Integer>> graph = controller.getGraph();
+        INotifiable vertexAddEmittedCheck = Mockito.mock(INotifiable.class);
+
+        graph.subscribe("graph.vertex.add", vertexAddEmittedCheck);
+
+        controller.addVertexAtCoords(10, 11);
+
+        verify(vertexAddEmittedCheck).call(Matchers.endsWith(";x:10.0;y:11.0"));
+    }
+
+    @Test
+    public void shouldSetCanvasStateToPanningAfterVertexHasBeenAdded() {
+        controller.setCanvasState(CanvasStates.ADDING_VERTEX);
+
+        controller.addVertexAtCoords(42, 43);
+
+        assertThat(controller.getCanvasState(), is(CanvasStates.PANNING));
     }
 }
