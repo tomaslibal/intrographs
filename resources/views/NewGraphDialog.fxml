@@ -13,15 +13,15 @@
 
         <Text GridPane.rowIndex="0">Choose a graph</Text>
 
-        <Button GridPane.rowIndex="1">From Transition Matrix</Button>
+        <!--<Button GridPane.rowIndex="1">From Transition Matrix</Button>-->
 
-        <Button GridPane.rowIndex="2">From Adjacency Matrix</Button>
+        <!--<Button GridPane.rowIndex="2">From Adjacency Matrix</Button>-->
 
-        <Button GridPane.rowIndex="3">Empty</Button>
+        <Button GridPane.rowIndex="3" onAction="#newEmptyGraph">Empty</Button>
 
-        <Line GridPane.rowIndex="4" startX="0" startY="-30" endX="100" endY="-30"/>
+        <!--<Line GridPane.rowIndex="4" startX="0" startY="-30" endX="100" endY="-30"/>-->
 
-        <Button GridPane.rowIndex="4">Go back</Button>
+        <Button GridPane.rowIndex="4" onAction="#cancelNewGraph">Cancel</Button>
 
     </GridPane>
 </VBox>

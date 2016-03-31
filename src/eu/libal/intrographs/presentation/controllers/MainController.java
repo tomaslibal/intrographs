@@ -236,7 +236,13 @@ public class MainController implements Initializable {
                 getClass().getResource("/views/NewGraphDialog.fxml")
         );
 
-        newModalDialog.getValue().show();
+        Stage stage = newModalDialog.getValue();
+        NewGraphDialogController controller = newModalDialog.getKey();
+
+        controller.setGraphRenderingController(graphRenderingController);
+        controller.setStage(stage);
+
+        stage.show();
     }
 
     private <T extends Initializable> Pair<T, Stage> createNewModalDialog(String title, URL fxmlResource) {

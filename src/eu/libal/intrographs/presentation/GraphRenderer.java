@@ -41,6 +41,12 @@ public class GraphRenderer<T, U extends Edge<T>> {
         this.graph = graph;
         this.canvas = canvas;
 
+        setup();
+
+        sem_render = new Semaphore(1);
+    }
+
+    private void setup() {
         verticesWithLabels = createVerticesWithLabels();
         edgeShapes = createEdgeShapes();
 
@@ -101,7 +107,7 @@ public class GraphRenderer<T, U extends Edge<T>> {
                 // remove incident edges
                 edgeShapes = edgeShapes.stream()
                         .filter(edgeShape2D -> !edgeShape2D.getSourceId().getVertexId().equals(removedVertexId)
-                                 && !edgeShape2D.getTargetId().getVertexId().equals(removedVertexId))
+                                && !edgeShape2D.getTargetId().getVertexId().equals(removedVertexId))
                         .collect(Collectors.toSet());
 
                 Optional<Vertex<T>> vertexObj = graph.lookupVertex(removedVertexId);
@@ -113,8 +119,6 @@ public class GraphRenderer<T, U extends Edge<T>> {
 
             render();
         });
-
-        sem_render = new Semaphore(1);
     }
 
     public void render() {
@@ -123,29 +127,6 @@ public class GraphRenderer<T, U extends Edge<T>> {
 
 
     public void render(double x, double y) {
-
-//        Thread bgThreadRender = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                clearCanvas();
-//                ctx.save();
-//                ox = x;
-//                oy = y;
-//                ctx.translate(x, y);
-//                renderVertices();
-//                renderEdges();
-//                ctx.restore();
-//                sem_render.release();
-//            }
-//        });
-//
-//        try {
-//            sem_render.acquire();
-//            bgThreadRender.start();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-
         clearCanvas();
         ctx.save();
         ox = x;
@@ -181,7 +162,7 @@ public class GraphRenderer<T, U extends Edge<T>> {
         }
     }
 
-    public void clearCanvas() {
+    void clearCanvas() {
         if (ctx == null) {
             ctx = getContext2D();
         }
@@ -190,10 +171,11 @@ public class GraphRenderer<T, U extends Edge<T>> {
         renderBackground();
     }
 
-    public GraphicsContext getContext2D() {
+    private GraphicsContext getContext2D() {
         if (ctx == null) {
             ctx = canvas.getGraphicsContext2D();
         }
+
         return ctx;
     }
 
@@ -323,6 +305,11 @@ public class GraphRenderer<T, U extends Edge<T>> {
 
     public VertexShape2D getHighlightedVertex() {
         return highlightedVertex;
+    }
+
+    public void setGraph(Graph<T, U> graph) {
+        this.graph = graph;
+        setup();
     }
 
 }

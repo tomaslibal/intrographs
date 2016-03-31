@@ -30,8 +30,6 @@ import java.util.Set;
  */
 public class GraphRenderingController implements Initializable {
 
-    private Graph<Integer, Edge<Integer>> g;
-
     private GraphRenderer<Integer, Edge<Integer>> graphRenderer;
     private Canvas canvas;
     private CanvasStates canvasState;
@@ -83,6 +81,7 @@ public class GraphRenderingController implements Initializable {
      */
     private VertexShape2D translateVertex;
     private Coordinates2D lastSecondaryClickCoords;
+    private Graph<Integer, Edge<Integer>> graph;
 
 
     @Override
@@ -99,27 +98,27 @@ public class GraphRenderingController implements Initializable {
     }
 
     public void setup() {
-        g = new Graph<>();
-        g.addVertex(0, "a");
-        g.addVertex(1, "b");
-        g.addVertex(2, "c");
-        g.addVertex(3, "m");
-        g.addVertex(4, "n");
-        g.addVertex(5, "o");
+        graph = new Graph<>();
+        graph.addVertex(0, "a");
+        graph.addVertex(1, "b");
+        graph.addVertex(2, "c");
+        graph.addVertex(3, "m");
+        graph.addVertex(4, "n");
+        graph.addVertex(5, "o");
 
-        g.addEdge("a", "m");
-        g.addEdge("a", "n");
-        g.addEdge("a", "o");
+        graph.addEdge("a", "m");
+        graph.addEdge("a", "n");
+        graph.addEdge("a", "o");
 
-        g.addEdge("b", "m");
-        g.addEdge("b", "n");
-        g.addEdge("b", "o");
+        graph.addEdge("b", "m");
+        graph.addEdge("b", "n");
+        graph.addEdge("b", "o");
 
-        g.addEdge("c", "m");
-        g.addEdge("c", "n");
-        g.addEdge("c", "o");
+        graph.addEdge("c", "m");
+        graph.addEdge("c", "n");
+        graph.addEdge("c", "o");
 
-        graphRenderer = new GraphRenderer<>(g, canvas);
+        graphRenderer = new GraphRenderer<>(graph, canvas);
         graphRenderer.render();
 
         menuItemAddVertex.setOnAction(action -> {
@@ -132,7 +131,7 @@ public class GraphRenderingController implements Initializable {
                 lastSecondaryClickCoords.getY()
             )
             .ifPresent(vertexShape2D -> {
-                g.removeVertex(vertexShape2D.getVertexId());
+                graph.removeVertex(vertexShape2D.getVertexId());
             });
         });
 
@@ -162,7 +161,7 @@ public class GraphRenderingController implements Initializable {
 
     private void subscribeToVertexDialogEvents(MessageBus messageBus) {
         messageBus.subscribe("vertex.remove", vId -> {
-            g.removeVertex(vId);
+            graph.removeVertex(vId);
             graphRenderer.render();
         });
     }
@@ -194,16 +193,16 @@ public class GraphRenderingController implements Initializable {
 
         if (canvasState == CanvasStates.REMOVING_VERTEX && selectedVertex.isPresent()) {
             String vertexId = selectedVertex.get().getVertexId();
-            Optional<Vertex<Integer>> v = g.lookupVertex(vertexId);
+            Optional<Vertex<Integer>> v = graph.lookupVertex(vertexId);
 
             if (v.isPresent()) {
                 // remove edges incident on the vertex
                 LinkedList<Edge<Integer>> edgesList = new LinkedList<>();
-                edgesList.addAll(g.incidentEdges(v.get()));
-                g.removeEdges(edgesList);
+                edgesList.addAll(graph.incidentEdges(v.get()));
+                graph.removeEdges(edgesList);
 
                 // remove vertex
-                g.removeVertex(v.get());
+                graph.removeVertex(v.get());
             }
 
             canvasState = CanvasStates.PANNING;
@@ -215,7 +214,7 @@ public class GraphRenderingController implements Initializable {
                 sel1 = selectedVertex.get();
             } else {
                 VertexShape2D sel2 = selectedVertex.get();
-                g.addEdge(sel1.getVertexId(), sel2.getVertexId());
+                graph.addEdge(sel1.getVertexId(), sel2.getVertexId());
 
                 sel1 = null;
                 canvasState = CanvasStates.PANNING;
@@ -226,8 +225,8 @@ public class GraphRenderingController implements Initializable {
 
     public void addVertexAtCoords(double x, double y) {
         String id = String.valueOf(Instant.now().getEpochSecond());
-        g.addVertex(id, x - ox, y - oy);
-        g.dispatch("graph.vertex.add", id.concat(";x:").concat(String.valueOf(x)).concat(";y:").concat(String.valueOf(y)));
+        graph.addVertex(id, x - ox, y - oy);
+        graph.dispatch("graph.vertex.add", id.concat(";x:").concat(String.valueOf(x)).concat(";y:").concat(String.valueOf(y)));
         canvasState = CanvasStates.PANNING;
         messageBus.emit("#addVertexBt.text.change", "Add vertex");
     }
@@ -281,7 +280,7 @@ public class GraphRenderingController implements Initializable {
             String vertexId = selectedVertex.get().getVertexId();
 
 
-            Optional<Vertex<Integer>> vertex = g.vertexSet().stream().filter(v -> v.getId().equals(vertexId)).findFirst();
+            Optional<Vertex<Integer>> vertex = graph.vertexSet().stream().filter(v -> v.getId().equals(vertexId)).findFirst();
 
             if (vertex.isPresent()) {
                 messageBus.emit("#vIDInput.text.change", vertex.get().getId());
@@ -359,7 +358,7 @@ public class GraphRenderingController implements Initializable {
     }
 
     public Set<Vertex<Integer>> getVertexSet() {
-        return g.vertexSet();
+        return graph.vertexSet();
     }
 
     public ContextMenu getContextMenu() {
@@ -374,7 +373,17 @@ public class GraphRenderingController implements Initializable {
         this.graphRenderer = graphRenderer;
     }
 
+    public GraphRenderer<Integer, Edge<Integer>> getGraphRenderer() {
+        return this.graphRenderer;
+    }
+
     public Graph<Integer, Edge<Integer>> getGraph() {
-        return g;
+        return graph;
+    }
+
+    public void setGraph(Graph<Integer, Edge<Integer>> graph) {
+        this.graph = graph;
+        graphRenderer.setGraph(graph);
+        graphRenderer.render();
     }
 }
