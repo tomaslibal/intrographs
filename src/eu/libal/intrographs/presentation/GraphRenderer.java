@@ -266,9 +266,9 @@ public class GraphRenderer<T, U extends Edge<T>> {
                 .filter(shape -> shape.getVertexId().equals(targetId)).findFirst();
 
         if (source.isPresent() && target.isPresent()) {
-            return EdgeShapeBuilder.buildAndCreate(source.get(), target.get());
+            return EdgeShape2D.EdgeShapeBuilder.buildAndCreate(source.get(), target.get());
         } else {
-            return EdgeShapeBuilder.buildAndCreate(null, null);
+            return EdgeShape2D.EdgeShapeBuilder.buildAndCreate(null, null);
         }
     }
 
@@ -325,9 +325,4 @@ public class GraphRenderer<T, U extends Edge<T>> {
         return highlightedVertex;
     }
 
-    private static class EdgeShapeBuilder {
-        public static EdgeShape2D buildAndCreate(VertexShape2D source, VertexShape2D target) {
-            return new EdgeShape2D(source, target);
-        }
-    }
 }

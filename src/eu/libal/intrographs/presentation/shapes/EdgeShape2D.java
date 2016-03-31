@@ -48,4 +48,10 @@ public class EdgeShape2D extends BasicShape2D {
     public VertexShape2D getTargetId() {
         return targetId;
     }
+
+    public static class EdgeShapeBuilder {
+        public static EdgeShape2D buildAndCreate(VertexShape2D source, VertexShape2D target) {
+            return new EdgeShape2D(source, target);
+        }
+    }
 }
