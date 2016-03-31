@@ -202,22 +202,15 @@ public class MainController implements Initializable {
 
     @FXML
     public void handleViewVerticesAction(ActionEvent actionEvent) {
-        Stage dialog = new Stage();
-        dialog.initModality(Modality.WINDOW_MODAL);
-        dialog.setTitle("Vertex Set");
+        Pair<VertexSetListController<Integer>, Stage> newVertexSetDialog = createNewModalDialog(
+                "Vertex Set",
+                getClass().getResource("/views/vertexSetList.fxml")
+        );
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/vertexSetList.fxml"));
-        Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        VertexSetListController<Integer> controller = loader.getController();
-        controller.setData(graphRenderingController.getVertexSet());
+        VertexSetListController<Integer> controller = newVertexSetDialog.getKey();
+        controller.setData(graphRenderingController.getGraph().vertexSet());
 
-        dialog.setScene(new Scene(root));
-        dialog.initOwner(stage);
+        Stage dialog = newVertexSetDialog.getValue();
         dialog.show();
     }
 
