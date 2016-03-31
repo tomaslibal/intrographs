@@ -22,6 +22,7 @@
         </Menu>
         <Menu text="View">
             <MenuItem onAction="#handleViewVerticesAction" text="Vertices"/>
+            <MenuItem onAction="#handleViewEdgesAction" text="Edges"/>
             <SeparatorMenuItem/>
             <MenuItem onAction="#refreshCanvas" text="Refresh canvas"/>
             <!--<MenuItem text="Edges"/>-->

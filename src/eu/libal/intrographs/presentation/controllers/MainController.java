@@ -271,4 +271,17 @@ public class MainController implements Initializable {
         graphRenderingController.setMessageBus(this.messageBus);
         subscribeToGraphRenderingCtrlEvents(this.messageBus);
     }
+
+    public void handleViewEdgesAction(ActionEvent actionEvent) {
+        Pair<EdgeSetListController, Stage> newEdgeSetDialog = createNewModalDialog(
+                "Edge Set",
+                getClass().getResource("/views/edgeSetList.fxml")
+        );
+
+        EdgeSetListController controller = newEdgeSetDialog.getKey();
+        controller.setData(graphRenderingController.getGraph().edgeSet());
+
+        Stage dialog = newEdgeSetDialog.getValue();
+        dialog.show();
+    }
 }
