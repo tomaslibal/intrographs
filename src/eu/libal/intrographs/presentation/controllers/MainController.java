@@ -3,6 +3,7 @@ package eu.libal.intrographs.presentation.controllers;
 import eu.libal.intrographs.common.MessageBus;
 import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
+import eu.libal.intrographs.graphs.vertex.Vertex;
 import eu.libal.intrographs.presentation.CanvasStates;
 import eu.libal.intrographs.presentation.GraphRenderer;
 import javafx.event.ActionEvent;
@@ -22,7 +23,9 @@ import javafx.util.Pair;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 /**
  *
@@ -263,6 +266,38 @@ public class MainController implements Initializable {
         this.messageBus = messageBus;
         graphRenderingController.setMessageBus(this.messageBus);
         subscribeToGraphRenderingCtrlEvents(this.messageBus);
+        subscribeToVertexUpdateEvents(this.messageBus);
+    }
+
+    private void subscribeToVertexUpdateEvents(MessageBus messageBus) {
+        messageBus.subscribe("vertex.update", msg -> {
+            String[] parts = msg.split(";");
+            if (parts.length == 3) {
+                String oldId = parts[0].substring(6);
+                String newId = parts[1].substring(6);
+                String newVal = parts[2].substring(7);
+
+                Optional<Vertex<Integer>> lookupVertex = graphRenderingController.getGraph().lookupVertex(oldId);
+
+                lookupVertex.flatMap(vertex -> {
+                    vertex.setId(newId);
+                    vertex.setValue(Integer.valueOf(newVal));
+
+                    Set<Edge<Integer>> edges = graphRenderingController.getGraph().edgeSet();
+
+                    edges.forEach(edge -> {
+                        // check that the edge target/source is not the oldId, if so, update the id to newId
+                        if (edge.getSource().getId().equals(oldId)) {
+                            edge.setSource(vertex);
+                        } else if(edge.getTarget().getId().equals(oldId)) {
+                            edge.setTarget(vertex);
+                        }
+                    });
+
+                    return Optional.of(vertex);
+                });
+            }
+        });
     }
 
     public void handleViewEdgesAction(ActionEvent actionEvent) {

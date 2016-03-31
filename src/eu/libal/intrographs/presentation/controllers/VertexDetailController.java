@@ -36,7 +36,7 @@ public class VertexDetailController implements Initializable {
 
     @FXML
     public void handleUpdateBtAction(ActionEvent actionEvent) {
-        messageBus.emit("vertex.update", "");
+        messageBus.emit("vertex.update", "oldId:" + selectedVertexId + ";newId:" + vIDInput.getText() + ";newVal:" + vValInput.getText());
     }
 
 

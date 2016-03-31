@@ -22,4 +22,14 @@ public class Edge<T> implements IEdge<T> {
     public Vertex<T> getSource() {
         return source;
     }
+
+    @Override
+    public void setSource(Vertex<T> source) {
+        this.source = source;
+    }
+
+    @Override
+    public void setTarget(Vertex<T> target) {
+        this.target = target;
+    }
 }

@@ -54,4 +54,8 @@ public interface IVertex<T> extends Comparable<IVertex<T>>
      * @return
      */
     boolean equals(IVertex<T> v);
+
+    void setId(String id);
+
+    void setValue(T value);
 }
