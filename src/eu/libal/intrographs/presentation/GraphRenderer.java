@@ -223,7 +223,11 @@ public class GraphRenderer<T, U extends Edge<T>> {
 
         Stream<Pair<VertexShape2D, TextShape2D>> pairStream = vertexSet.stream()
                 .map(v -> {
-                    VertexShape2D vertexShape2D = VertexShape2D.VertexShapeBuilder.buildAndCreate(v, (int) Math.round(Math.random()*100), (int) Math.round(Math.random()*100));
+                    VertexShape2D vertexShape2D = VertexShape2D.VertexShapeBuilder.buildAndCreate(
+                            v,
+                            (int) Math.round((canvas.getWidth() / 2) + (getRandomSign())*(Math.random()*100)),
+                            (int) Math.round((canvas.getHeight() / 2) + (getRandomSign())*(Math.random()*100))
+                    );
 
                     TextShape2D label = new TextShape2D();
                     label.setContext(ctx);
@@ -235,6 +239,10 @@ public class GraphRenderer<T, U extends Edge<T>> {
                 });
 
         return pairStream.collect(Collectors.toMap(Pair::getKey, Pair::getValue));
+    }
+
+    private int getRandomSign() {
+        return Math.random() > 0.5 ? -1 : 1;
     }
 
     private Set<EdgeShape2D> createEdgeShapes() {
