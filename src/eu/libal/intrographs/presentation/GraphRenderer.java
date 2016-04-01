@@ -1,5 +1,6 @@
 package eu.libal.intrographs.presentation;
 
+import eu.libal.intrographs.common.MessageBus;
 import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
@@ -13,7 +14,6 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.concurrent.Semaphore;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -24,6 +24,7 @@ public class GraphRenderer<T, U extends Edge<T>> {
 
     private Graph<T, U> graph;
     private Canvas canvas;
+    private final MessageBus messageBus;
     private GraphicsContext ctx;
 
     private Set<EdgeShape2D> edgeShapes;
@@ -35,15 +36,12 @@ public class GraphRenderer<T, U extends Edge<T>> {
     private double oy;
     private double ox;
 
-    private final Semaphore sem_render;
-
-    public GraphRenderer(Graph<T, U> graph, Canvas canvas) {
+    public GraphRenderer(Graph<T, U> graph, Canvas canvas, MessageBus messageBus) {
         this.graph = graph;
         this.canvas = canvas;
+        this.messageBus = messageBus;
 
         setup();
-
-        sem_render = new Semaphore(1);
     }
 
     private void setup() {
@@ -62,7 +60,7 @@ public class GraphRenderer<T, U extends Edge<T>> {
 
             edgeShapes.add(getEdgeShape2D(sourceId, targetId));
 
-            render();
+            messageBus.emit("renderer.update", "render");
         });
 
         graph.subscribe("graph.vertex.add", (String message) -> {
@@ -94,7 +92,7 @@ public class GraphRenderer<T, U extends Edge<T>> {
             label.setY(vertexShape2D.getY() + 20);
             verticesWithLabels.put(vertexShape2D, label);
 
-            render();
+            messageBus.emit("renderer.update", "render");
         });
 
         graph.subscribe("graph.vertex.remove", (String removedVertexId) -> {
@@ -106,8 +104,8 @@ public class GraphRenderer<T, U extends Edge<T>> {
             if (vertexToDelete.isPresent()) {
                 // remove incident edges
                 edgeShapes = edgeShapes.stream()
-                        .filter(edgeShape2D -> !edgeShape2D.getSourceId().getVertexId().equals(removedVertexId)
-                                && !edgeShape2D.getTargetId().getVertexId().equals(removedVertexId))
+                        .filter(edgeShape2D -> !edgeShape2D.getSourceVertexShape2D().getVertexId().equals(removedVertexId)
+                                && !edgeShape2D.getTargetVertexShape2D().getVertexId().equals(removedVertexId))
                         .collect(Collectors.toSet());
 
                 Optional<Vertex<T>> vertexObj = graph.lookupVertex(removedVertexId);
@@ -181,6 +179,10 @@ public class GraphRenderer<T, U extends Edge<T>> {
 
     public Set<VertexShape2D> getVertexShapes() {
         return verticesWithLabels.keySet();
+    }
+
+    public Set<EdgeShape2D> getEdgeShapes() {
+        return edgeShapes;
     }
 
     public TextShape2D getTextLabel(VertexShape2D v) {
@@ -312,4 +314,7 @@ public class GraphRenderer<T, U extends Edge<T>> {
         setup();
     }
 
+    public Canvas getCanvas() {
+        return canvas;
+    }
 }

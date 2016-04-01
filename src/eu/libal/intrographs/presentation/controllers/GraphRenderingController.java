@@ -5,7 +5,9 @@ import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import eu.libal.intrographs.presentation.CanvasStates;
+import eu.libal.intrographs.presentation.GraphRedrawTimer;
 import eu.libal.intrographs.presentation.GraphRenderer;
+import eu.libal.intrographs.presentation.layout.ForceDirectedLayout;
 import eu.libal.intrographs.presentation.shapes.Coordinates2D;
 import eu.libal.intrographs.presentation.shapes.TextShape2D;
 import eu.libal.intrographs.presentation.shapes.VertexShape2D;
@@ -82,6 +84,8 @@ public class GraphRenderingController implements Initializable {
     private VertexShape2D translateVertex;
     private Coordinates2D lastSecondaryClickCoords;
     private Graph<Integer, Edge<Integer>> graph;
+    private ForceDirectedLayout layout;
+    private Thread layoutThread;
 
 
     @Override
@@ -118,7 +122,7 @@ public class GraphRenderingController implements Initializable {
         graph.addEdge("c", "n");
         graph.addEdge("c", "o");
 
-        graphRenderer = new GraphRenderer<>(graph, canvas);
+        graphRenderer = new GraphRenderer<>(graph, canvas, messageBus);
         graphRenderer.render();
 
         menuItemAddVertex.setOnAction(action -> {
@@ -139,7 +143,7 @@ public class GraphRenderingController implements Initializable {
     }
 
     public void update() {
-        graphRenderer.render();
+
     }
 
     public void setCanvas(Canvas canvas) {
@@ -157,12 +161,18 @@ public class GraphRenderingController implements Initializable {
     public void setMessageBus(MessageBus messageBus) {
         this.messageBus = messageBus;
         subscribeToVertexDialogEvents(this.messageBus);
+        GraphRedrawTimer timer = new GraphRedrawTimer(graphRenderer, messageBus);
+
+//        layout = new ForceDirectedLayout(graphRenderer, messageBus);
+//        layoutThread = new Thread(layout);
+//        layoutThread.setPriority(Thread.MIN_PRIORITY);
+//        layoutThread.start();
     }
 
     private void subscribeToVertexDialogEvents(MessageBus messageBus) {
         messageBus.subscribe("vertex.remove", vId -> {
             graph.removeVertex(vId);
-            graphRenderer.render();
+            messageBus.emit("renderer.update", "render");
         });
     }
 
@@ -249,7 +259,7 @@ public class GraphRenderingController implements Initializable {
             TextShape2D textLabel = graphRenderer.getTextLabel(translateVertex);
             textLabel.setX(textLabel.getX() + Double.valueOf( tx ).intValue());
             textLabel.setY(textLabel.getY() + Double.valueOf( ty ).intValue());
-            graphRenderer.render();
+            messageBus.emit("renderer.update", "render");
         } else {
             ox += tx;
             oy += ty;
@@ -309,11 +319,11 @@ public class GraphRenderingController implements Initializable {
         if (selectedVertex.isPresent()) {
             messageBus.emit("Cursor.cursor.change", Cursor.HAND.toString());
             graphRenderer.setHighlightedVertex(selectedVertex.get());
-            graphRenderer.render();
+            messageBus.emit("renderer.update", "render");
         } else {
             messageBus.emit("Cursor.cursor.change", Cursor.DEFAULT.toString());
             graphRenderer.setHighlightedVertex(null);
-            graphRenderer.render();
+            messageBus.emit("renderer.update", "render");
         }
 
         if (canvasState == CanvasStates.TRANSLATING_VERTEX) {
@@ -332,7 +342,7 @@ public class GraphRenderingController implements Initializable {
         }
 
         graphRenderer.setHighlightedVertex(selectedVertex.orElse(null));
-        graphRenderer.render();
+        messageBus.emit("renderer.update", "render");
     }
 
     private Optional<VertexShape2D> getVertexAtMouseClick(MouseEvent click) {
@@ -384,6 +394,6 @@ public class GraphRenderingController implements Initializable {
     public void setGraph(Graph<Integer, Edge<Integer>> graph) {
         this.graph = graph;
         graphRenderer.setGraph(graph);
-        graphRenderer.render();
+        messageBus.emit("renderer.update", "render");
     }
 }

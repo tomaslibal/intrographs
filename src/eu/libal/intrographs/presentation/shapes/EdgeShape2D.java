@@ -7,8 +7,8 @@ import javafx.scene.paint.Color;
  */
 public class EdgeShape2D extends BasicShape2D {
 
-    private VertexShape2D sourceId;
-    private VertexShape2D targetId;
+    private VertexShape2D sourceVertexShape2D;
+    private VertexShape2D targetVertexShape2D;
 
     public EdgeShape2D(VertexShape2D source, VertexShape2D target) {
         // x, y - unused, position of the edge segment is determined by coordinates of the source and target vertices
@@ -16,8 +16,8 @@ public class EdgeShape2D extends BasicShape2D {
         // height - unused
         super(0, 0, 2, 0);
 
-        sourceId = source;
-        targetId = target;
+        sourceVertexShape2D = source;
+        targetVertexShape2D = target;
     }
 
     @Override
@@ -26,24 +26,24 @@ public class EdgeShape2D extends BasicShape2D {
             throw new Exception("No GraphicsContext");
         }
 
-        if (sourceId == null || targetId == null) {
+        if (sourceVertexShape2D == null || targetVertexShape2D == null) {
             return;
         }
 
         ctx.beginPath();
         ctx.setStroke(new Color(0, 0, 0, 1));
-        ctx.moveTo(sourceId.getX(), sourceId.getY());
-        ctx.lineTo(targetId.getX(), targetId.getY());
+        ctx.moveTo(sourceVertexShape2D.getX(), sourceVertexShape2D.getY());
+        ctx.lineTo(targetVertexShape2D.getX(), targetVertexShape2D.getY());
         ctx.stroke();
         ctx.closePath();
     }
 
-    public VertexShape2D getSourceId() {
-        return sourceId;
+    public VertexShape2D getSourceVertexShape2D() {
+        return sourceVertexShape2D;
     }
 
-    public VertexShape2D getTargetId() {
-        return targetId;
+    public VertexShape2D getTargetVertexShape2D() {
+        return targetVertexShape2D;
     }
 
     public static class EdgeShapeBuilder {

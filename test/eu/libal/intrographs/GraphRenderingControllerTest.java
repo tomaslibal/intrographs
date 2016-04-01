@@ -4,6 +4,7 @@ import eu.libal.intrographs.common.INotifiable;
 import eu.libal.intrographs.common.MessageBus;
 import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
+import eu.libal.intrographs.graphs.vertex.Vertex;
 import eu.libal.intrographs.presentation.CanvasStates;
 import eu.libal.intrographs.presentation.GraphRenderer;
 import eu.libal.intrographs.presentation.controllers.GraphRenderingController;
@@ -95,7 +96,8 @@ public class GraphRenderingControllerTest {
     @Test
     public void shouldChangeMouseCursorToHandWhenHoverOverVertex() {
         MouseEvent mockEvent = new MouseEvent(MouseEvent.MOUSE_MOVED, 150, 150, 0, 0, MouseButton.NONE, 1, true, true, true, true, true, true, true, true, true, true, null);
-        VertexShape2D v1 = new VertexShape2D(150, 150, "foo");
+        Vertex<Integer> v = new Vertex<>("foo");
+        VertexShape2D v1 = new VertexShape2D(150, 150, v);
         Set<VertexShape2D> vertexShape2DSet = new HashSet<>();
 
         vertexShape2DSet.add(v1);

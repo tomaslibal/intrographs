@@ -1,12 +1,14 @@
 package eu.libal.intrographs.presentation;
 
 import eu.libal.intrographs.JavaFXThreadingRule;
+import eu.libal.intrographs.common.MessageBus;
 import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
 import javafx.scene.canvas.Canvas;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import static org.mockito.Matchers.any;
@@ -22,11 +24,14 @@ public class GraphRendererTest {
     private Graph<Integer, Edge<Integer>> g;
     private Canvas canvas;
 
+    @Mock
+    MessageBus messageBus;
+
     @Before
     public void setup() {
         canvas = Mockito.mock(Canvas.class);
         g = Mockito.mock(Graph.class);
-        graphRenderer = new GraphRenderer<>(g, canvas);
+        graphRenderer = new GraphRenderer<>(g, canvas, messageBus);
     }
 
     @Test
