@@ -5,7 +5,7 @@ package eu.libal.intrographs.presentation.shapes;
  */
 public abstract class BasicShape2D extends BasicRenderableShape implements IShape2D {
 
-    protected Coordinates2D coords = new Coordinates2D();
+    protected final Coordinates2D coords = new Coordinates2D();
     private Dimensions2D dims = new Dimensions2D();
 
     public BasicShape2D() {
