@@ -30,13 +30,10 @@ public class EdgeShape2D extends BasicShape2D {
             return;
         }
 
-        Coordinates2D source = sourceId.getCoords();
-        Coordinates2D target = targetId.getCoords();
-
         ctx.beginPath();
         ctx.setStroke(new Color(0, 0, 0, 1));
-        ctx.moveTo(source.getX(), source.getY());
-        ctx.lineTo(target.getX(), target.getY());
+        ctx.moveTo(sourceId.getX(), sourceId.getY());
+        ctx.lineTo(targetId.getX(), targetId.getY());
         ctx.stroke();
         ctx.closePath();
     }
