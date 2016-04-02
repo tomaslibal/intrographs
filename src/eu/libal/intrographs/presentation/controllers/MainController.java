@@ -312,4 +312,13 @@ public class MainController implements Initializable {
         Stage dialog = newEdgeSetDialog.getValue();
         dialog.show();
     }
+
+    @FXML
+    public void handleForceDirectedLayoutAction(ActionEvent actionEvent) {
+        graphRenderingController.updateLayoutForceDirected();
+    }
+
+    public void handleRandomLayoutAction(ActionEvent actionEvent) {
+        graphRenderingController.updateLayoutRandom();
+    }
 }

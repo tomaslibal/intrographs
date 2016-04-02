@@ -8,6 +8,7 @@ import eu.libal.intrographs.presentation.CanvasStates;
 import eu.libal.intrographs.presentation.GraphRedrawTimer;
 import eu.libal.intrographs.presentation.GraphRenderer;
 import eu.libal.intrographs.presentation.layout.ForceDirectedLayout;
+import eu.libal.intrographs.presentation.layout.RandomGraphLayout;
 import eu.libal.intrographs.presentation.shapes.Coordinates2D;
 import eu.libal.intrographs.presentation.shapes.TextShape2D;
 import eu.libal.intrographs.presentation.shapes.VertexShape2D;
@@ -26,6 +27,7 @@ import java.util.LinkedList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.concurrent.Semaphore;
 
 /**
  *
@@ -84,8 +86,8 @@ public class GraphRenderingController implements Initializable {
     private VertexShape2D translateVertex;
     private Coordinates2D lastSecondaryClickCoords;
     private Graph<Integer, Edge<Integer>> graph;
-    private ForceDirectedLayout layout;
-    private Thread layoutThread;
+
+    private final Semaphore canUpdateLayout = new Semaphore(1);
 
 
     @Override
@@ -162,11 +164,6 @@ public class GraphRenderingController implements Initializable {
         this.messageBus = messageBus;
         subscribeToVertexDialogEvents(this.messageBus);
         GraphRedrawTimer timer = new GraphRedrawTimer(graphRenderer, messageBus);
-
-//        layout = new ForceDirectedLayout(graphRenderer, messageBus);
-//        layoutThread = new Thread(layout);
-//        layoutThread.setPriority(Thread.MIN_PRIORITY);
-//        layoutThread.start();
     }
 
     private void subscribeToVertexDialogEvents(MessageBus messageBus) {
@@ -395,5 +392,23 @@ public class GraphRenderingController implements Initializable {
         this.graph = graph;
         graphRenderer.setGraph(graph);
         messageBus.emit("renderer.update", "render");
+    }
+
+    public void updateLayoutForceDirected() {
+        if (canUpdateLayout.tryAcquire()) {
+            ForceDirectedLayout forceDirectedLayout = new ForceDirectedLayout(graphRenderer, messageBus, canUpdateLayout);
+            Thread layoutThread = new Thread(forceDirectedLayout);
+            layoutThread.setPriority(Thread.MIN_PRIORITY);
+            layoutThread.start();
+        }
+    }
+
+    public void updateLayoutRandom() {
+        if (canUpdateLayout.tryAcquire()) {
+            RandomGraphLayout randomGraphLayout = new RandomGraphLayout(graphRenderer, messageBus, canUpdateLayout);
+            Thread layoutThread = new Thread(randomGraphLayout);
+            layoutThread.setPriority(Thread.MIN_PRIORITY);
+            layoutThread.start();
+        }
     }
 }

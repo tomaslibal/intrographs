@@ -31,9 +31,10 @@
             <!--<MenuItem text="New"/>-->
             <!--<MenuItem text="From Transition Matrix"/>-->
         <!--</Menu>-->
-        <!--<Menu text="Layout">-->
-            <!--<MenuItem text="Random"/>-->
-        <!--</Menu>-->
+        <Menu text="Layout">
+            <MenuItem onAction="#handleRandomLayoutAction" text="Random"/>
+            <MenuItem onAction="#handleForceDirectedLayoutAction" text="Force-directed"/>
+        </Menu>
         <!--<Menu text="Properties">-->
             <!--<MenuItem text="Spanning tree"/>-->
             <!--<MenuItem text="Random independent set"/>-->
