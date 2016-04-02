@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  */
 public class Coordinates2DTest {
 
-    Coordinates2D coords;
+    private Coordinates2D coords;
 
     @Before
     public void setUp() throws Exception {
@@ -19,16 +19,34 @@ public class Coordinates2DTest {
     }
 
     @Test
-    public void shouldInit_WithVector_Zero_Zero_WhenNoArgumentsPassedToConstructor() {
+    public void shouldInitWithVectorZeroZeroWhenNoArgumentsPassedToConstructor() {
         assertThat(coords.getX(), is(0));
         assertThat(coords.getY(), is(0));
     }
 
     @Test
-    public void shouldInit_WithGivenCoords() {
+    public void shouldInitWithGivenCoords() {
         Coordinates2D xy = new Coordinates2D(42, 43);
 
         assertThat(xy.getX(), is(42));
         assertThat(xy.getY(), is(43));
+    }
+
+    @Test
+    public void shouldSetCoordinatesToTheGivenValue() {
+        Coordinates2D xy = new Coordinates2D(42, 43);
+
+        xy.set(100, 101);
+
+        assertThat(xy.getX(), is(100));
+        assertThat(xy.getY(), is(101));
+    }
+
+    @Test
+    public void shouldInitCoordinatesFromDouble() {
+        Coordinates2D xy = new Coordinates2D(1.0, 2.0);
+
+        assertThat(xy.getX(), is(1));
+        assertThat(xy.getY(), is(2));
     }
 }
