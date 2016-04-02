@@ -6,7 +6,7 @@ import java.util.Vector;
  *
  */
 public class Coordinates2D {
-    Vector<Integer> coordsXY = new Vector<>(2);
+    private Vector<Integer> coordsXY = new Vector<>(2);
 
     public Coordinates2D() {
         coordsXY.add(0);
