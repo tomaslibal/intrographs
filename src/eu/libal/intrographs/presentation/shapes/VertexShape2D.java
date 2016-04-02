@@ -9,18 +9,16 @@ import javafx.scene.paint.Color;
  */
 public class VertexShape2D extends BasicShape2D {
 
-    private String vertexId;
     private final IVertex<Integer> vertex;
     private final Coordinates2D displacement = new Coordinates2D();
 
     public VertexShape2D(int x, int y, IVertex<Integer> vertex) {
         super(x, y, 10, 10);
-        this.vertexId = vertex.getId();
         this.vertex = vertex;
     }
 
     public String getVertexId() {
-        return vertexId;
+        return vertex.getId();
     }
 
     public IVertex<Integer> getVertex() {

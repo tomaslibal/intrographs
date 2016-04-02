@@ -16,7 +16,7 @@ import static org.junit.Assert.assertThat;
 
 public class GraphTest {
 
-    Graph<Integer, Edge<Integer>> g;
+    private Graph<Integer, Edge<Integer>> g;
 
     @Before
     public void setup() {

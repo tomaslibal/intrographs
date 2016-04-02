@@ -284,8 +284,7 @@ public class GraphRenderingController implements Initializable {
             translateVertex = selectedVertex.get();
             graphRenderer.setHighlightedVertex(translateVertex);
 
-            String vertexId = selectedVertex.get().getVertexId();
-
+            String vertexId = selectedVertex.get().getVertex().getId();
 
             Optional<Vertex<Integer>> vertex = graph.vertexSet().stream().filter(v -> v.getId().equals(vertexId)).findFirst();
 
