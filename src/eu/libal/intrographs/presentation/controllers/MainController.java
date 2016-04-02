@@ -59,20 +59,15 @@ public class MainController implements Initializable {
     @FXML
     private Button execBt;
 
-    private GraphRenderer<Integer, Edge<Integer>> graphRenderer;
-
     private CanvasStates canvasState = CanvasStates.PANNING;
 
-    private Graph<Integer, Edge<Integer>> g;
-
-
     /**
-     * Points to the stage of the main window
+     * Reference to the stage of the main window
      */
     private Stage stage;
 
     /**
-     * A reference to the info window stage so that this window/controller can access nodes in that window.
+     * Reference to the info window stage so that this window/controller can access nodes in that window.
      */
     private Stage infoWindowStage;
     private GraphRenderingController graphRenderingController;
