@@ -108,14 +108,11 @@ public class GraphRenderer<T, U extends Edge<T>> {
                                 && !edgeShape2D.getTargetVertexShape2D().getVertexId().equals(removedVertexId))
                         .collect(Collectors.toSet());
 
-                Optional<Vertex<T>> vertexObj = graph.lookupVertex(removedVertexId);
-                graph.incidentEdges(vertexObj.get());
-
-                // remove the vertex
+                // remove the vertexShape
                 verticesWithLabels.remove(vertexToDelete.get());
             }
 
-            render();
+            messageBus.emit("renderer.update", "render");
         });
     }
 
