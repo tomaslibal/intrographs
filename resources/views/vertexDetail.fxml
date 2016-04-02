@@ -2,29 +2,20 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<?import javafx.scene.text.Text?>
-
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.libal.intrographs.presentation.controllers.VertexDetailController">
     <GridPane fx:id="mainGrid">
         <hgap>10</hgap>
         <vgap>10</vgap>
 
-        <Text>Vertex Details</Text>
-
-        <Label GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <Label GridPane.columnIndex="0" GridPane.rowIndex="0">
             Vertex ID</Label>
-        <TextField GridPane.columnIndex="0" GridPane.rowIndex="2" fx:id="vIDInput"/>
+        <TextField GridPane.columnIndex="0" GridPane.rowIndex="1" fx:id="vIDInput"/>
 
-        <Label GridPane.columnIndex="0" GridPane.rowIndex="3">Vertex Value</Label>
-        <TextField GridPane.columnIndex="0" GridPane.rowIndex="4" editable="true" fx:id="vValInput"/>
+        <Label GridPane.columnIndex="0" GridPane.rowIndex="2">Vertex Value</Label>
+        <TextField GridPane.columnIndex="0" GridPane.rowIndex="3" editable="true" fx:id="vValInput"/>
 
-        <Button GridPane.columnIndex="0" GridPane.rowIndex="5" onAction="#handleUpdateBtAction">Update</Button>
-        <Button GridPane.columnIndex="0" GridPane.rowIndex="6" onAction="#handleRemoveBtAction">Remove</Button>
-
-        <rowConstraints>
-            <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0"/>
-        </rowConstraints>
+        <Button GridPane.columnIndex="0" GridPane.rowIndex="4" onAction="#handleUpdateBtAction">Update</Button>
+        <Button GridPane.columnIndex="0" GridPane.rowIndex="5" onAction="#handleRemoveBtAction">Remove</Button>
 
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" />
