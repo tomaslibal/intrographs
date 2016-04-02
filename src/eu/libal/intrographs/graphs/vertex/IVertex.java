@@ -34,6 +34,12 @@ public interface IVertex<T> extends Comparable<IVertex<T>>
     void addAdjacentVertex(IVertex<T> v);
 
     /**
+     *
+     * @param v adjacent vertex to be removed the from the set of adj. vertices
+     */
+    void removeAdjacentVertex(IVertex<T> v);
+
+    /**
      * See Comparable<T> for more info.
      *
      * @param v vertex being compared to {this} vertex

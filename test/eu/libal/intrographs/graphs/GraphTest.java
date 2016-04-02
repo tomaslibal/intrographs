@@ -217,4 +217,15 @@ public class GraphTest {
         assertThat(w.getAdjacentVertices(), is(Sets.newSet(v)));
     }
 
+    @Test
+    public void shouldRemoveVertexFromAdjacencyLists() {
+        Vertex<Integer> u = g.addVertex(0);
+        Vertex<Integer> v = g.addVertex(1);
+
+        v.addAdjacentVertex(u);
+
+        g.removeVertex(u);
+
+        assertThat(v.getAdjacentVertices(), is(Matchers.empty()));
+    }
 }

@@ -40,6 +40,11 @@ public class Vertex<T> implements IVertex<T> {
     }
 
     @Override
+    public void removeAdjacentVertex(IVertex<T> v) {
+        adjacent.remove(v);
+    }
+
+    @Override
     public int compareTo(IVertex<T> v) {
         return id.compareTo(v.getId());
     }

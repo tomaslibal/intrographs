@@ -89,7 +89,14 @@ public class Graph<T, U extends Edge<T>> extends BaseGraph<T, U> {
         return lookup.size() == 1 && removeVertex(lookup.get(0));
     }
 
-    public boolean removeVertex(Vertex v) {
+    @Override
+    public boolean removeVertex(Vertex<T> v) {
+        /*
+        remove the vertex from other vertices' adjacency lists
+         */
+        vertices.stream()
+                .forEach(vertex -> vertex.removeAdjacentVertex(v));
+
         dispatch("graph.vertex.remove", v.getId());
         return vertices.remove(v);
     }
