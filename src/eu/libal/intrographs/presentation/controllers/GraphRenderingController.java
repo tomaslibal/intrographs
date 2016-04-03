@@ -34,7 +34,6 @@ import java.util.concurrent.Semaphore;
  */
 public class GraphRenderingController implements Initializable {
 
-    private GraphRenderer<Integer, Edge<Integer>> graphRenderer;
     private Canvas canvas;
     private CanvasStates canvasState;
 
@@ -85,7 +84,9 @@ public class GraphRenderingController implements Initializable {
      */
     private VertexShape2D translateVertex;
     private Coordinates2D lastSecondaryClickCoords;
+
     private Graph<Integer, Edge<Integer>> graph;
+    private GraphRenderer<Integer, Edge<Integer>> graphRenderer;
 
     private final Semaphore canUpdateLayout = new Semaphore(1);
 
@@ -104,27 +105,27 @@ public class GraphRenderingController implements Initializable {
     }
 
     public void setup() {
-        graph = new Graph<>();
-        graph.addVertex(0, "a");
-        graph.addVertex(1, "b");
-        graph.addVertex(2, "c");
-        graph.addVertex(3, "m");
-        graph.addVertex(4, "n");
-        graph.addVertex(5, "o");
+        this.graph = Graph.getNewGraph(Integer.class);
+        this.graph.addVertex(0, "a");
+        this.graph.addVertex(1, "b");
+        this.graph.addVertex(2, "c");
+        this.graph.addVertex(3, "m");
+        this.graph.addVertex(4, "n");
+        this.graph.addVertex(5, "o");
 
-        graph.addEdge("a", "m");
-        graph.addEdge("a", "n");
-        graph.addEdge("a", "o");
+        this.graph.addEdge("a", "m");
+        this.graph.addEdge("a", "n");
+        this.graph.addEdge("a", "o");
 
-        graph.addEdge("b", "m");
-        graph.addEdge("b", "n");
-        graph.addEdge("b", "o");
+        this.graph.addEdge("b", "m");
+        this.graph.addEdge("b", "n");
+        this.graph.addEdge("b", "o");
 
-        graph.addEdge("c", "m");
-        graph.addEdge("c", "n");
-        graph.addEdge("c", "o");
+        this.graph.addEdge("c", "m");
+        this.graph.addEdge("c", "n");
+        this.graph.addEdge("c", "o");
 
-        graphRenderer = new GraphRenderer<>(graph, canvas, messageBus);
+        graphRenderer = new GraphRenderer<>(this.graph, canvas, messageBus);
         graphRenderer.render();
 
         menuItemAddVertex.setOnAction(action -> {
@@ -137,7 +138,7 @@ public class GraphRenderingController implements Initializable {
                 lastSecondaryClickCoords.getY()
             )
             .ifPresent(vertexShape2D -> {
-                graph.removeVertex(vertexShape2D.getVertexId());
+                this.graph.removeVertex(vertexShape2D.getVertexId());
             });
         });
 

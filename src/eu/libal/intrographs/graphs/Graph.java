@@ -101,16 +101,44 @@ public class Graph<T, U extends Edge<T>> extends BaseGraph<T, U> {
         return vertices.remove(v);
     }
 
+    /**
+     * Removes the given edge from the graph, if it existed.
+     *
+     * @param e Reference to the edge that should be removed
+     * @return bool
+     */
     public boolean removeEdge(U e) {
         return edges.remove(e);
     }
 
+    /**
+     * Removes all given edges, should they exist in the graph.
+     *
+     * @param e list of edges to be removed
+     * @return bool
+     */
     public boolean removeEdges(List<U> e) {
         return edges.removeAll(e);
     }
 
+    /**
+     * Removes all given vertices, should they exist in the graph.
+     *
+     * @param v list of vertices to be removed
+     * @return bool
+     */
     public boolean removeVertices(List<Vertex<T>> v) {
         return vertices.removeAll(v);
     }
 
+    /**
+     * Creates a new instance of a Graph class, parameterized by V.
+     *
+     * @param cls Class type of the Vertex and Edge.
+     * @param <V> Type that will be used by the vertices and edges in the graph.
+     * @return Graph
+     */
+    public static <V> Graph<V, Edge<V>> getNewGraph(Class<V> cls) {
+        return new Graph<>();
+    }
 }
