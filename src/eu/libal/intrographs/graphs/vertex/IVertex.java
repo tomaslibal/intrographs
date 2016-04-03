@@ -6,8 +6,7 @@ import java.util.Set;
  * Vertex represents a node in a graph.
  *
  */
-public interface IVertex<T> extends Comparable<IVertex<T>>
-{
+public interface IVertex<T> extends Comparable<IVertex<T>> {
     /**
      * This method should return the value member of the vertex
      *
