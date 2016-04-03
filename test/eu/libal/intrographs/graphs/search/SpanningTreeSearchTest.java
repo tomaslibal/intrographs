@@ -1,6 +1,8 @@
-package eu.libal.intrographs.graphs;
+package eu.libal.intrographs.graphs.search;
 
+import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
+import eu.libal.intrographs.graphs.search.SpanningTreeSearch;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,5 +1,7 @@
-package eu.libal.intrographs.graphs;
+package eu.libal.intrographs.graphs.search;
 
+import eu.libal.intrographs.graphs.Graph;
+import eu.libal.intrographs.graphs.search.IGraphTraversingSearch;
 import eu.libal.intrographs.graphs.vertex.IVertex;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 
