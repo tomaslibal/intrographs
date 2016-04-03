@@ -1,5 +1,6 @@
 package eu.libal.intrographs.graphs.vertex;
 
+import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
@@ -60,5 +61,29 @@ public class VertexTest {
         assertThat(v.equals(w), is(true));
         assertThat(w.equals(v), is(true));
         assertThat(x.equals(v), is(false));
+    }
+
+    @Test
+    public void shouldReturn0WhenIdsAreComparable() {
+        Vertex<Integer> v = new Vertex<>("foo");
+        Vertex<Integer> w = new Vertex<>("foo");
+
+        assertThat(v.compareTo(w), is(0));
+    }
+
+    @Test
+    public void shouldReturnNumberGreaterThanZeroWhenFirstIdComesAfterTheSecondId() {
+        Vertex<Integer> v = new Vertex<>("b");
+        Vertex<Integer> w = new Vertex<>("a");
+
+        assertThat(v.compareTo(w), is(Matchers.greaterThan(0)));
+    }
+
+    @Test
+    public void shouldReturnNumberLessThanZeroWhenFirstIdComesBeforeTheSecondId() {
+        Vertex<Integer> v = new Vertex<>("x");
+        Vertex<Integer> w = new Vertex<>("y");
+
+        assertThat(v.compareTo(w), is(Matchers.lessThan(0)));
     }
 }
