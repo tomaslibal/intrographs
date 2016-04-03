@@ -2,7 +2,6 @@ package eu.libal.intrographs.graphs.search;
 
 import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
-import eu.libal.intrographs.graphs.search.IndependentSetRandomSearch;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +10,7 @@ import java.util.Set;
 
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class IndependentSetRandomSearchTest {
 
