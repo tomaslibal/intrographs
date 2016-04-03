@@ -7,12 +7,12 @@ import javafx.scene.paint.Color;
 /**
  *
  */
-public class VertexShape2D extends BasicShape2D {
+public class VertexShape2D<T> extends BasicShape2D {
 
-    private final IVertex<Integer> vertex;
+    private final IVertex<T> vertex;
     private final Coordinates2D displacement = new Coordinates2D();
 
-    public VertexShape2D(int x, int y, IVertex<Integer> vertex) {
+    public VertexShape2D(int x, int y, IVertex<T> vertex) {
         super(x, y, 10, 10);
         this.vertex = vertex;
     }
@@ -21,7 +21,7 @@ public class VertexShape2D extends BasicShape2D {
         return vertex.getId();
     }
 
-    public IVertex<Integer> getVertex() {
+    public IVertex<T> getVertex() {
         return vertex;
     }
 
@@ -64,12 +64,12 @@ public class VertexShape2D extends BasicShape2D {
         displacement.setY(y);
     }
 
-    public static class VertexShapeBuilder {
+    public static class VertexShapeBuilder<T> {
         private int x = 0;
         private int y = 0;
-        private IVertex v;
+        private Vertex<T> v;
 
-        public VertexShapeBuilder withVertex(IVertex v) {
+        public VertexShapeBuilder withVertex(Vertex<T> v) {
             this.v = v;
             return this;
         }
@@ -84,12 +84,12 @@ public class VertexShape2D extends BasicShape2D {
             return this;
         }
 
-        public VertexShape2D create() {
-            return new VertexShape2D(x, y, v);
+        public VertexShape2D<T> create() {
+            return new VertexShape2D<>(x, y, v);
         }
 
-        public static <VertexType> VertexShape2D buildAndCreate(IVertex<VertexType> v, int x, int y) {
-            return new VertexShape2D(x, y, (IVertex<Integer>) v);
+        public static <T> VertexShape2D<T> buildAndCreate(Vertex<T> v, int x, int y) {
+            return new VertexShape2D<>(x, y, v);
         }
     }
 }

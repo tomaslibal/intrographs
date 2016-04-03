@@ -28,9 +28,9 @@ public class GraphRenderer<T, U extends Edge<T>> {
     private GraphicsContext ctx;
 
     private Set<EdgeShape2D> edgeShapes;
-    private Map<VertexShape2D, TextShape2D> verticesWithLabels;
+    private Map<VertexShape2D<T>, TextShape2D> verticesWithLabels;
 
-    private VertexShape2D highlightedVertex = null;
+    private VertexShape2D<T> highlightedVertex = null;
 
     private boolean displayLabels = false;
     private double oy;
@@ -80,7 +80,7 @@ public class GraphRenderer<T, U extends Edge<T>> {
                     .findFirst()
                     .get();
 
-            VertexShape2D vertexShape2D = new VertexShape2D.VertexShapeBuilder()
+            VertexShape2D<T> vertexShape2D = new VertexShape2D.VertexShapeBuilder<T>()
                     .withVertex(newVertex)
                     .withXCoordinate((int) Math.round(Double.parseDouble(xCoord)))
                     .withYCoordinate((int) Math.round(Double.parseDouble(yCoord)))
@@ -97,7 +97,7 @@ public class GraphRenderer<T, U extends Edge<T>> {
 
         graph.subscribe("graph.vertex.remove", (String removedVertexId) -> {
 
-            Optional<VertexShape2D> vertexToDelete = verticesWithLabels.keySet().stream()
+            Optional<VertexShape2D<T>> vertexToDelete = verticesWithLabels.keySet().stream()
                     .filter(vertexShape2D -> vertexShape2D.getVertexId().equals(removedVertexId))
                     .findFirst();
 
@@ -174,7 +174,7 @@ public class GraphRenderer<T, U extends Edge<T>> {
         return ctx;
     }
 
-    public Set<VertexShape2D> getVertexShapes() {
+    public Set<VertexShape2D<T>> getVertexShapes() {
         return verticesWithLabels.keySet();
     }
 
@@ -199,12 +199,12 @@ public class GraphRenderer<T, U extends Edge<T>> {
         ctx.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
-    private Map<VertexShape2D, TextShape2D> createVerticesWithLabels() {
+    private Map<VertexShape2D<T>, TextShape2D> createVerticesWithLabels() {
         Set<Vertex<T>> vertexSet = graph.vertexSet();
 
-        Stream<Pair<VertexShape2D, TextShape2D>> pairStream = vertexSet.stream()
+        Stream<Pair<VertexShape2D<T>, TextShape2D>> pairStream = vertexSet.stream()
                 .map(v -> {
-                    VertexShape2D vertexShape2D = VertexShape2D.VertexShapeBuilder.buildAndCreate(
+                    VertexShape2D<T> vertexShape2D = VertexShape2D.VertexShapeBuilder.buildAndCreate(
                             v,
                             (int) Math.round((canvas.getWidth() / 2) + (getRandomSign())*(Math.random()*100)),
                             (int) Math.round((canvas.getHeight() / 2) + (getRandomSign())*(Math.random()*100))
@@ -240,10 +240,10 @@ public class GraphRenderer<T, U extends Edge<T>> {
     }
 
     private EdgeShape2D getEdgeShape2D(String sourceId, String targetId) {
-        Optional<VertexShape2D> source = getVertexShapes().stream()
+        Optional<VertexShape2D<T>> source = getVertexShapes().stream()
                                         .filter(shape -> shape.getVertexId().equals(sourceId)).findFirst();
 
-        Optional<VertexShape2D> target = getVertexShapes().stream()
+        Optional<VertexShape2D<T>> target = getVertexShapes().stream()
                 .filter(shape -> shape.getVertexId().equals(targetId)).findFirst();
 
         if (source.isPresent() && target.isPresent()) {

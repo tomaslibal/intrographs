@@ -73,7 +73,7 @@ public class ForceDirectedLayout implements Runnable {
         int i = 0;
         int t = 100;
         while(i < 50) {
-            Set<VertexShape2D> vertexShapes = graphRenderer.getVertexShapes();
+            Set<VertexShape2D<Integer>> vertexShapes = graphRenderer.getVertexShapes();
 
             vertexShapes.forEach(vertexShape2D -> {
                 // get adjacent shapes and update their x,y coords

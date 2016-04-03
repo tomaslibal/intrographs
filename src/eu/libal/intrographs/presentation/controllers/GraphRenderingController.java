@@ -174,7 +174,7 @@ public class GraphRenderingController implements Initializable {
     }
 
     public void handleMouseClick(MouseEvent event) {
-        Optional<VertexShape2D> selectedVertex = getVertexAtMouseClick(event);
+        Optional<VertexShape2D<Integer>> selectedVertex = getVertexAtMouseClick(event);
         MouseButton clickedButton = event.getButton();
 
         if (clickedButton.equals(MouseButton.SECONDARY)) {
@@ -269,7 +269,7 @@ public class GraphRenderingController implements Initializable {
         cx = event.getX();
         cy = event.getY();
 
-        Optional<VertexShape2D> selectedVertex = getVertexAtMouseClick(event);
+        Optional<VertexShape2D<Integer>> selectedVertex = getVertexAtMouseClick(event);
 
         MouseButton pressedButton = event.getButton();
 
@@ -310,7 +310,7 @@ public class GraphRenderingController implements Initializable {
         dx = 0;
         dy = 0;
 
-        Optional<VertexShape2D> selectedVertex = getVertexAtMouseClick(event);
+        Optional<VertexShape2D<Integer>> selectedVertex = getVertexAtMouseClick(event);
 
         if (selectedVertex.isPresent()) {
             messageBus.emit("Cursor.cursor.change", Cursor.HAND.toString());
@@ -329,7 +329,7 @@ public class GraphRenderingController implements Initializable {
     }
 
     public void handleMouseMoved(MouseEvent event) {
-        Optional<VertexShape2D> selectedVertex = getVertexAtMouseClick(event);
+        Optional<VertexShape2D<Integer>> selectedVertex = getVertexAtMouseClick(event);
 
         if (selectedVertex.isPresent()) {
             messageBus.emit("Cursor.cursor.change", Cursor.HAND.toString());
@@ -341,11 +341,11 @@ public class GraphRenderingController implements Initializable {
         messageBus.emit("renderer.update", "render");
     }
 
-    private Optional<VertexShape2D> getVertexAtMouseClick(MouseEvent click) {
+    private Optional<VertexShape2D<Integer>> getVertexAtMouseClick(MouseEvent click) {
         return getVertexAtCoordinates(click.getX(), click.getY());
     }
 
-    private Optional<VertexShape2D> getVertexAtCoordinates(double dblX, double dblY) {
+    private Optional<VertexShape2D<Integer>> getVertexAtCoordinates(double dblX, double dblY) {
 
         int x = (int) Math.round(dblX - ox);
         int y = (int) Math.round(dblY - oy);

@@ -53,7 +53,7 @@ public class RandomGraphLayoutTest {
 
     @Test
     public void shouldUpdateRandomlyXYCoordinatesOfEachVertex() throws Exception {
-        Set<VertexShape2D> vertices = new HashSet<VertexShape2D>();
+        Set<VertexShape2D<Integer>> vertices = new HashSet<>();
         Set<EdgeShape2D> edges = new HashSet<EdgeShape2D>();
 
         VertexShape2D a = mock(VertexShape2D.class);

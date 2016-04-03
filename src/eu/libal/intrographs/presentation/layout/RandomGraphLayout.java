@@ -4,13 +4,11 @@ import eu.libal.intrographs.common.MessageBus;
 import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.presentation.GraphRenderer;
 import eu.libal.intrographs.presentation.shapes.Coordinates2D;
-import eu.libal.intrographs.presentation.shapes.EdgeShape2D;
 import eu.libal.intrographs.presentation.shapes.VertexShape2D;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -30,7 +28,7 @@ public class RandomGraphLayout implements Runnable {
 
     @Override
     public void run() {
-        Set<VertexShape2D> vertexShapes = graphRenderer.getVertexShapes();
+        Set<VertexShape2D<Integer>> vertexShapes = graphRenderer.getVertexShapes();
         Double canvasWidth = graphRenderer.getCanvas().getWidth();
         Double canvasHeight = graphRenderer.getCanvas().getHeight();
         Map<VertexShape2D, Coordinates2D> finalCoordinates = new HashMap<>();
