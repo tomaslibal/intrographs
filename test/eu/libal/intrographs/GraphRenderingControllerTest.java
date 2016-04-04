@@ -97,7 +97,7 @@ public class GraphRenderingControllerTest {
     public void shouldChangeMouseCursorToHandWhenHoverOverVertex() {
         MouseEvent mockEvent = new MouseEvent(MouseEvent.MOUSE_MOVED, 150, 150, 0, 0, MouseButton.NONE, 1, true, true, true, true, true, true, true, true, true, true, null);
         Vertex<Integer> v = new Vertex<>("foo");
-        VertexShape2D v1 = new VertexShape2D(150, 150, v);
+        VertexShape2D<Integer> v1 = new VertexShape2D<>(150, 150, v);
         Set<VertexShape2D> vertexShape2DSet = new HashSet<>();
 
         vertexShape2DSet.add(v1);
