@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class InfoStageInitializer implements IStageInitializer {
+public class InfoStageInitializer implements StageInitializer {
 
     private FXMLLoader loader;
     private Stage stage;

@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class PrimaryStageInitializer implements IStageInitializer {
+public class PrimaryStageInitializer implements StageInitializer {
 
     private Stage stage;
     private Stage infoStage;

@@ -2,7 +2,7 @@ package eu.libal.intrographs;
 
 import javafx.stage.Stage;
 
-public interface IStageInitializer {
+public interface StageInitializer {
     void setStage(Stage s);
 
     void initFXML();
