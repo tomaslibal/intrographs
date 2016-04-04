@@ -10,7 +10,7 @@ import java.util.function.Function;
 /**
  *
  */
-public class SpanningTreeSearch<T> implements IGraphTraversingSearch<T> {
+public class SpanningTreeSearch<T> implements GraphTraversingSearch<T> {
 
     private Set<String> visitedVertices;
     private Set<Vertex<T>> tree;

@@ -9,7 +9,7 @@ import java.util.function.Function;
 /**
  *
  */
-public interface IGraphTraversingSearch<T> {
+public interface GraphTraversingSearch<T> {
 
     Set<Vertex<T>> search(Graph<T, ?> graph, Function<Vertex<T>, ?> execForEachNode);
 

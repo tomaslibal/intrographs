@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
-public class IndependentSetRandomSearch<T, U extends Edge<T>> implements IGraphTraversingSearch<T> {
+public class IndependentSetRandomSearch<T, U extends Edge<T>> implements GraphTraversingSearch<T> {
 
     @Override
     public Set<Vertex<T>> search(Graph<T, ?> graph, Function<Vertex<T>, ?> execForEachNode) {

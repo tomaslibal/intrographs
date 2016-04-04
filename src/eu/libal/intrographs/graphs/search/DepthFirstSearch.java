@@ -9,7 +9,7 @@ import java.util.function.Function;
 /**
  *
  */
-public class DepthFirstSearch<T> implements IGraphTraversingSearch<T> {
+public class DepthFirstSearch<T> implements GraphTraversingSearch<T> {
 
     /**
      * One to one mapping between graph's Vertex vertices and TraversableVertex vertices used by DFS algorithm. DFS
