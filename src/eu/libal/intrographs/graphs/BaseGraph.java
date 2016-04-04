@@ -142,11 +142,15 @@ abstract public class BaseGraph<T, U extends Edge> implements Listenable {
     @Deprecated
     public Vertex<T> addVertex(T v, String id) {
         Vertex<T> vertex = new Vertex<>(v, id);
-        vertices.add(vertex);
-
-        dispatch("graph.vertex.add", id);
+        addVertex(vertex);
 
         return vertex;
+    }
+
+    public void addVertex(Vertex<T> v) {
+        vertices.add(v);
+
+        dispatch("graph.vertex.add", v.getId());
     }
 
     /**

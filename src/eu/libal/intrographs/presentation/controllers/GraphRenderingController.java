@@ -233,7 +233,7 @@ public class GraphRenderingController implements Initializable {
 
     public void addVertexAtCoords(double x, double y) {
         String id = String.valueOf(Instant.now().getEpochSecond());
-        graph.addVertex(0, id);
+        graph.addVertex(new Vertex<>(id));
         graph.dispatch("graph.vertex.add", id.concat(";x:").concat(String.valueOf(x)).concat(";y:").concat(String.valueOf(y)));
         canvasState = CanvasStates.PANNING;
         messageBus.emit("#addVertexBt.text.change", "Add vertex");
