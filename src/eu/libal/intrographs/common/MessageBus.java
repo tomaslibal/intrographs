@@ -6,12 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Message bus lets external objects to subscribe to events (by {@type String} eventName) and it also lets external objects
- * emit events with a {@type String} value. Each listeners is notified when a new message is emitted.
+ * Message bus lets external objects to subscribe to events (by eventName) and it also lets external objects
+ * emit events with a value. Each listeners is notified when a new message is emitted.
+ *
+ * @version 1.0.0
  */
-public class MessageBus implements IListenable {
+public class MessageBus implements Listenable {
 
-    Map<String, List<Notifiable>> listeners;
+    private final Map<String, List<Notifiable>> listeners;
 
     public MessageBus() {
         listeners = new LinkedHashMap<>();
@@ -20,9 +22,11 @@ public class MessageBus implements IListenable {
     @Override
     public void subscribe(String eventName, Notifiable callback) {
         List<Notifiable> notifiables = listeners.get(eventName);
+
         if (notifiables == null) {
             notifiables = new LinkedList<>();
         }
+
         notifiables.add(callback);
 
         listeners.put(eventName, notifiables);
@@ -30,9 +34,9 @@ public class MessageBus implements IListenable {
 
     public void emit(String eventName, String value) {
         List<Notifiable> notifiables = listeners.get(eventName);
+
         if (notifiables != null) {
-            notifiables
-                    .forEach(callback -> callback.call(value));
+            notifiables.forEach(callback -> callback.call(value));
         }
     }
 }

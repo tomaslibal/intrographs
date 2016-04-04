@@ -1,6 +1,6 @@
 package eu.libal.intrographs.graphs;
 
-import eu.libal.intrographs.common.IListenable;
+import eu.libal.intrographs.common.Listenable;
 import eu.libal.intrographs.common.Notifiable;
 import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
@@ -10,7 +10,7 @@ import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 
-abstract public class BaseGraph<T, U extends Edge<T>> implements IGraph<T, U>, IListenable {
+abstract public class BaseGraph<T, U extends Edge<T>> implements IGraph<T, U>, Listenable {
 
     protected final Set<Vertex<T>> vertices = new HashSet<>();
     protected final Set<U> edges = new HashSet<>();

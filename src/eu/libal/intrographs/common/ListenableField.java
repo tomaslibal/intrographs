@@ -2,7 +2,7 @@ package eu.libal.intrographs.common;
 
 import java.util.*;
 
-public class ListenableField<T> implements IListenable {
+public class ListenableField<T> implements Listenable {
 
     private T value = null;
     private final Map<String, List<Notifiable>> callbacks;
