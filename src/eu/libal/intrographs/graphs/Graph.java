@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  * @param <T> The type of the value which each Vertex stores
  * @param <U> The type of the Edge
  */
-public class Graph<T, U extends Edge<T>> extends BaseGraph<T, U> {
+public class Graph<T, U extends Edge> extends BaseGraph<T, U> {
 
     public Graph() {
     }

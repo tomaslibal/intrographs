@@ -7,7 +7,7 @@ import java.util.Set;
  * Vertex represents a node in a graph.
  *
  */
-public class Vertex<T> implements Comparable<Vertex<T>> {
+public class Vertex<T> implements Comparable<Vertex<?>> {
 
     private T value;
     private String id;
@@ -75,7 +75,7 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
      * @param v vertex being compared to {this} vertex
      * @return (String) {this}.id.compareTo((String) v.getId()), so 0 if string IDs identical
      */
-    public int compareTo(Vertex<T> v) {
+    public int compareTo(Vertex<?> v) {
         return id.compareTo(v.getId());
     }
 

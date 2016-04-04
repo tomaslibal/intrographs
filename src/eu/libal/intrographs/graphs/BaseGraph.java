@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  * @param <T> Type which each vertex uses for storing the vertex's value
  * @param <U> Type of the Edge (e.g. weighted edge or non-weighted edge, ...)
  */
-abstract public class BaseGraph<T, U extends Edge<T>> implements Listenable {
+abstract public class BaseGraph<T, U extends Edge> implements Listenable {
 
     protected final Set<Vertex<T>> vertices = new HashSet<>();
     protected final Set<U> edges = new HashSet<>();
@@ -33,7 +33,10 @@ abstract public class BaseGraph<T, U extends Edge<T>> implements Listenable {
         int d = 0;
 
         for (U e : edges) {
-            if (e.getSource().equals(v) || e.getTarget().equals(v)) {
+            Vertex<?> source = e.getSource();
+            Vertex<?> target = e.getTarget();
+
+            if (source.equals(v) || target.equals(v)) {
                 d++;
             }
         }
@@ -174,8 +177,8 @@ abstract public class BaseGraph<T, U extends Edge<T>> implements Listenable {
             return null;
         }
 
-        U e = (U) new Edge<>(source.get(), target.get());
-        return addEdge(e);
+        Edge<T> e = new Edge<>(source.get(), target.get());
+        return addEdge((U) e);
     }
 
     /**

@@ -12,8 +12,7 @@ public class Edge<T> {
     private Vertex<T> source;
     private Vertex<T> target;
 
-    public Edge(Vertex<T> source, Vertex<T> target)
-    {
+    public Edge(Vertex<T> source, Vertex<T> target) {
         this.source = source;
         this.target = target;
     }
