@@ -12,12 +12,12 @@ import java.io.IOException;
 public class PrimaryStageInitializer implements StageInitializer {
 
     private Stage stage;
-    private Stage infoStage;
+    private final Stage infoStage;
     private FXMLLoader loader;
     private Parent root;
     private Scene scene;
     private MainController controller;
-    private MessageBus messageBus;
+    private final MessageBus messageBus;
 
     public PrimaryStageInitializer(Stage primary) {
         this(primary, null);
