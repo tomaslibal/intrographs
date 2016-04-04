@@ -21,16 +21,16 @@ public class EdgeSetListController implements Initializable {
     public GridPane mainGrid;
 
     @FXML
-    public TableView<Edge<Integer>> edgeSet;
+    public TableView<Edge> edgeSet;
 
-    private ObservableList<Edge<Integer>> data = FXCollections.observableArrayList();
+    private ObservableList<Edge> data = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         mainGrid.setPadding(new Insets(10, 10, 10, 10));
 
-        TableColumn<Edge<Integer>, String> sourceCol = new TableColumn<>("Source");
-        TableColumn<Edge<Integer>, String> targetCol = new TableColumn<>("Target");
+        TableColumn<Edge, String> sourceCol = new TableColumn<>("Source");
+        TableColumn<Edge, String> targetCol = new TableColumn<>("Target");
         //TableColumn<Double, Double> weightCol = new TableColumn<>("Weight");
 
         sourceCol.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getSource().getId()));
@@ -41,7 +41,7 @@ public class EdgeSetListController implements Initializable {
         edgeSet.setItems(data);
     }
 
-    public void setData(Set<Edge<Integer>> data) {
+    public void setData(Set<Edge> data) {
         this.data = FXCollections.observableArrayList();
         this.data.addAll(data);
         edgeSet.setItems(this.data);

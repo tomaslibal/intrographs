@@ -28,7 +28,7 @@ public class Graph<T, U extends Edge> extends BaseGraph<T, U> {
      * @param <V> Type that will be used by the vertices and edges in the graph.
      * @return Graph
      */
-    public static <V> Graph<V, Edge<V>> getNewGraph(Class<V> cls) {
+    public static <V> Graph<V, Edge> getNewGraph(Class<V> cls) {
         return new Graph<>();
     }
 }

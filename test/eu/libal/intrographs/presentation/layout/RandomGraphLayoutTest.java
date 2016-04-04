@@ -29,7 +29,7 @@ public class RandomGraphLayoutTest {
     private RandomGraphLayout randomLayout;
 
     @Mock
-    GraphRenderer<Integer, Edge<Integer>> mockGraphRenderer;
+    GraphRenderer<Integer, Edge> mockGraphRenderer;
 
     @Mock
     MessageBus mockMessageBus;

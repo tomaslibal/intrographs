@@ -15,12 +15,12 @@ import java.util.concurrent.Semaphore;
  *
  */
 public class RandomGraphLayout implements Runnable {
-    private final GraphRenderer<Integer, Edge<Integer>> graphRenderer;
+    private final GraphRenderer<Integer, Edge> graphRenderer;
     private final MessageBus messageBus;
     private final Semaphore canUpdateLayout;
     public final static int NUM_STEPS = 25;
 
-    public RandomGraphLayout(GraphRenderer<Integer, Edge<Integer>> graphRenderer, MessageBus messageBus, Semaphore canUpdateLayout) {
+    public RandomGraphLayout(GraphRenderer<Integer, Edge> graphRenderer, MessageBus messageBus, Semaphore canUpdateLayout) {
         this.graphRenderer = graphRenderer;
         this.messageBus = messageBus;
         this.canUpdateLayout = canUpdateLayout;

@@ -111,7 +111,7 @@ public class GraphRenderingControllerTest {
 
     @Test
     public void shouldAddVertexToGraphAndDispatchTheEventWhenAddingVertexAtCoords() {
-        Graph<Integer, Edge<Integer>> graph = controller.getGraph();
+        Graph<Integer, Edge> graph = controller.getGraph();
         Notifiable vertexAddEmittedCheck = Mockito.mock(Notifiable.class);
 
         graph.subscribe("graph.vertex.add", vertexAddEmittedCheck);

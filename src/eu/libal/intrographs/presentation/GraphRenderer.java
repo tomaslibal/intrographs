@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 /**
  *
  */
-public class GraphRenderer<T, U extends Edge<T>> {
+public class GraphRenderer<T, U extends Edge> {
 
     private Graph<T, U> graph;
     private Canvas canvas;

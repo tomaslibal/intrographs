@@ -10,12 +10,12 @@ import java.util.concurrent.atomic.AtomicReference;
 public class GraphRedrawTimer extends AnimationTimer {
 
     private final AtomicReference<Boolean> needsRedraw = new AtomicReference<>(false);
-    private final GraphRenderer<Integer, Edge<Integer>> graphRenderer;
+    private final GraphRenderer<Integer, Edge> graphRenderer;
     private final MessageBus messageBus;
 
     private final Semaphore redrawLock = new Semaphore(1);
 
-    public GraphRedrawTimer(GraphRenderer<Integer, Edge<Integer>> graphRenderer, MessageBus messageBus) {
+    public GraphRedrawTimer(GraphRenderer<Integer, Edge> graphRenderer, MessageBus messageBus) {
         this.graphRenderer = graphRenderer;
         this.messageBus = messageBus;
 

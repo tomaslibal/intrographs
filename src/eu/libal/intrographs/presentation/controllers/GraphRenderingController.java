@@ -85,8 +85,8 @@ public class GraphRenderingController implements Initializable {
     private VertexShape2D translateVertex;
     private Coordinates2D lastSecondaryClickCoords;
 
-    private Graph<Integer, Edge<Integer>> graph;
-    private GraphRenderer<Integer, Edge<Integer>> graphRenderer;
+    private Graph<Integer, Edge> graph;
+    private GraphRenderer<Integer, Edge> graphRenderer;
 
     private final Semaphore canUpdateLayout = new Semaphore(1);
 
@@ -205,7 +205,7 @@ public class GraphRenderingController implements Initializable {
 
             if (v.isPresent()) {
                 // remove edges incident on the vertex
-                LinkedList<Edge<Integer>> edgesList = new LinkedList<>();
+                LinkedList<Edge> edgesList = new LinkedList<>();
                 edgesList.addAll(graph.incidentEdges(v.get()));
                 graph.removeEdges(edgesList);
 
@@ -377,19 +377,19 @@ public class GraphRenderingController implements Initializable {
         contextMenu = cm;
     }
 
-    public void setGraphRenderer(GraphRenderer<Integer, Edge<Integer>> graphRenderer) {
+    public void setGraphRenderer(GraphRenderer<Integer, Edge> graphRenderer) {
         this.graphRenderer = graphRenderer;
     }
 
-    public GraphRenderer<Integer, Edge<Integer>> getGraphRenderer() {
+    public GraphRenderer<Integer, Edge> getGraphRenderer() {
         return this.graphRenderer;
     }
 
-    public Graph<Integer, Edge<Integer>> getGraph() {
+    public Graph<Integer, Edge> getGraph() {
         return graph;
     }
 
-    public void setGraph(Graph<Integer, Edge<Integer>> graph) {
+    public void setGraph(Graph<Integer, Edge> graph) {
         this.graph = graph;
         graphRenderer.setGraph(graph);
         messageBus.emit("renderer.update", "render");

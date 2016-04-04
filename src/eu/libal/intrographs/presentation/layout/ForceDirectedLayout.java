@@ -11,15 +11,15 @@ import java.util.concurrent.Semaphore;
 
 public class ForceDirectedLayout implements Runnable {
 
-    private final GraphRenderer<Integer, Edge<Integer>> graphRenderer;
+    private final GraphRenderer<Integer, Edge> graphRenderer;
     private final MessageBus messageBus;
     private final Semaphore canUpdateLayout;
     private final Double K_CONSTANT;
-    private final Double MAX_INC = 10d;
-    private final Double MAX_FORCE = 5000d;
+    private static final Double MAX_INC = 10d;
+    private static final Double MAX_FORCE = 5000d;
     private int temperature = 100;
 
-    public ForceDirectedLayout(GraphRenderer<Integer, Edge<Integer>> graphRenderer, MessageBus messageBus, Semaphore canUpdateLayout) {
+    public ForceDirectedLayout(GraphRenderer<Integer, Edge> graphRenderer, MessageBus messageBus, Semaphore canUpdateLayout) {
         this.graphRenderer = graphRenderer;
         this.messageBus = messageBus;
         this.canUpdateLayout = canUpdateLayout;

@@ -278,7 +278,7 @@ public class MainController implements Initializable {
                     vertex.setId(newId);
                     vertex.setValue(Integer.valueOf(newVal));
 
-                    Set<Edge<Integer>> edges = graphRenderingController.getGraph().edgeSet();
+                    Set<Edge> edges = graphRenderingController.getGraph().edgeSet();
 
                     edges.forEach(edge -> {
                         // check that the edge target/source is not the oldId, if so, update the id to newId

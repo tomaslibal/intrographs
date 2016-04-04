@@ -21,7 +21,7 @@ public class NewGraphDialogController implements Initializable {
 
     public void newEmptyGraph(ActionEvent actionEvent) {
         if (graphRenderingController != null) {
-            graphRenderingController.setGraph(new Graph<Integer, Edge<Integer>>());
+            graphRenderingController.setGraph(new Graph<>());
         }
         if (stage != null) {
             stage.close();
