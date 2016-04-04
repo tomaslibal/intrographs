@@ -32,7 +32,7 @@ public class ListenableFieldTest {
 
     @Test
     public void shouldEmitUpdateEventEveryTimeValueIsUpdated() {
-        INotifiable notifiable = Mockito.mock(INotifiable.class);
+        Notifiable notifiable = Mockito.mock(Notifiable.class);
         listenableField.subscribe("update", notifiable);
 
         listenableField.setValue("bar");

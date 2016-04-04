@@ -1,6 +1,6 @@
 package eu.libal.intrographs.graphs.edge;
 
-import eu.libal.intrographs.common.INotifiable;
+import eu.libal.intrographs.common.Notifiable;
 import eu.libal.intrographs.common.ListenableField;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 
@@ -21,7 +21,7 @@ public class WeightedEdge<T> extends Edge<T> {
         this.weight.setValue(weight);
     }
 
-    public void subscribe(INotifiable callback) {
+    public void subscribe(Notifiable callback) {
         weight.subscribe("update", callback);
     }
 

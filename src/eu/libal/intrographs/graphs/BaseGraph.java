@@ -1,7 +1,7 @@
 package eu.libal.intrographs.graphs;
 
 import eu.libal.intrographs.common.IListenable;
-import eu.libal.intrographs.common.INotifiable;
+import eu.libal.intrographs.common.Notifiable;
 import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import javafx.util.Pair;
@@ -15,7 +15,7 @@ abstract public class BaseGraph<T, U extends Edge<T>> implements IGraph<T, U>, I
     protected final Set<Vertex<T>> vertices = new HashSet<>();
     protected final Set<U> edges = new HashSet<>();
 
-    protected List<Pair<String, INotifiable>> callbacks = new LinkedList<>();
+    protected List<Pair<String, Notifiable>> callbacks = new LinkedList<>();
 
     public int degreeOf(Vertex<T> v) {
         int d = 0;
@@ -39,7 +39,7 @@ abstract public class BaseGraph<T, U extends Edge<T>> implements IGraph<T, U>, I
         }
     }
 
-    public void subscribe(String eventName, INotifiable callback) {
+    public void subscribe(String eventName, Notifiable callback) {
         callbacks.add(new Pair<>(eventName, callback));
     }
 

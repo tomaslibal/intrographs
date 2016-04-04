@@ -1,6 +1,6 @@
 package eu.libal.intrographs;
 
-import eu.libal.intrographs.common.INotifiable;
+import eu.libal.intrographs.common.Notifiable;
 import eu.libal.intrographs.common.MessageBus;
 import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
@@ -112,7 +112,7 @@ public class GraphRenderingControllerTest {
     @Test
     public void shouldAddVertexToGraphAndDispatchTheEventWhenAddingVertexAtCoords() {
         Graph<Integer, Edge<Integer>> graph = controller.getGraph();
-        INotifiable vertexAddEmittedCheck = Mockito.mock(INotifiable.class);
+        Notifiable vertexAddEmittedCheck = Mockito.mock(Notifiable.class);
 
         graph.subscribe("graph.vertex.add", vertexAddEmittedCheck);
 

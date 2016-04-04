@@ -11,27 +11,27 @@ import java.util.Map;
  */
 public class MessageBus implements IListenable {
 
-    Map<String, List<INotifiable>> listeners;
+    Map<String, List<Notifiable>> listeners;
 
     public MessageBus() {
         listeners = new LinkedHashMap<>();
     }
 
     @Override
-    public void subscribe(String eventName, INotifiable callback) {
-        List<INotifiable> iNotifiables = listeners.get(eventName);
-        if (iNotifiables == null) {
-            iNotifiables = new LinkedList<>();
+    public void subscribe(String eventName, Notifiable callback) {
+        List<Notifiable> notifiables = listeners.get(eventName);
+        if (notifiables == null) {
+            notifiables = new LinkedList<>();
         }
-        iNotifiables.add(callback);
+        notifiables.add(callback);
 
-        listeners.put(eventName, iNotifiables);
+        listeners.put(eventName, notifiables);
     }
 
     public void emit(String eventName, String value) {
-        List<INotifiable> iNotifiables = listeners.get(eventName);
-        if (iNotifiables != null) {
-            iNotifiables
+        List<Notifiable> notifiables = listeners.get(eventName);
+        if (notifiables != null) {
+            notifiables
                     .forEach(callback -> callback.call(value));
         }
     }

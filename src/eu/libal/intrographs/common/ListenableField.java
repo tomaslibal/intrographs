@@ -5,7 +5,7 @@ import java.util.*;
 public class ListenableField<T> implements IListenable {
 
     private T value = null;
-    private final Map<String, List<INotifiable>> callbacks;
+    private final Map<String, List<Notifiable>> callbacks;
 
     public ListenableField(T value) {
         this();
@@ -18,7 +18,7 @@ public class ListenableField<T> implements IListenable {
     }
 
     @Override
-    public void subscribe(String eventName, INotifiable callback) {
+    public void subscribe(String eventName, Notifiable callback) {
         if (eventName.equals("update")) {
             callbacks.get("update").add(callback);
         }

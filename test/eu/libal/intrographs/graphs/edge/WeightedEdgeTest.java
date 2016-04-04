@@ -1,6 +1,6 @@
 package eu.libal.intrographs.graphs.edge;
 
-import eu.libal.intrographs.common.INotifiable;
+import eu.libal.intrographs.common.Notifiable;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +30,7 @@ public class WeightedEdgeTest {
 
     @Test
     public void shouldEmitUpdateEventWhenWeightUpdated() {
-        INotifiable notifiable = Mockito.mock(INotifiable.class);
+        Notifiable notifiable = Mockito.mock(Notifiable.class);
 
         wEdge.subscribe(notifiable);
 
