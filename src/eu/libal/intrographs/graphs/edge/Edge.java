@@ -2,7 +2,12 @@ package eu.libal.intrographs.graphs.edge;
 
 import eu.libal.intrographs.graphs.vertex.Vertex;
 
-public class Edge<T> implements IEdge<T> {
+/**
+ * Represents and edge in a graph, on which two vertices are incident.
+ *
+ * @param <T> Type of the value in Vertex
+ */
+public class Edge<T> {
 
     private Vertex<T> source;
     private Vertex<T> target;
@@ -13,22 +18,18 @@ public class Edge<T> implements IEdge<T> {
         this.target = target;
     }
 
-    @Override
     public Vertex<T> getTarget() {
         return target;
     }
 
-    @Override
     public Vertex<T> getSource() {
         return source;
     }
 
-    @Override
     public void setSource(Vertex<T> source) {
         this.source = source;
     }
 
-    @Override
     public void setTarget(Vertex<T> target) {
         this.target = target;
     }
