@@ -237,6 +237,7 @@ public class GraphRenderingController implements Initializable {
         graph.dispatch("graph.vertex.add", id.concat(";x:").concat(String.valueOf(x)).concat(";y:").concat(String.valueOf(y)));
         canvasState = CanvasStates.PANNING;
         messageBus.emit("#addVertexBt.text.change", "Add vertex");
+        messageBus.emit("renderer.update", "render");
     }
 
     public void handleMouseDrag(MouseEvent event) {
