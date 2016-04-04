@@ -1,7 +1,6 @@
 package eu.libal.intrographs.graphs.search;
 
 import eu.libal.intrographs.graphs.Graph;
-import eu.libal.intrographs.graphs.vertex.IVertex;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 
 import java.util.*;
@@ -13,7 +12,7 @@ import java.util.function.Function;
 public class DepthFirstSearch<T> implements IGraphTraversingSearch<T> {
 
     /**
-     * One to one mapping between graph's IVertex vertices and TraversableVertex vertices used by DFS algorithm. DFS
+     * One to one mapping between graph's Vertex vertices and TraversableVertex vertices used by DFS algorithm. DFS
      * needs to know if it has visited a vertex. This could be refactored using a set of String IDs of visited vertices
      * without the need for a special class.
      */
@@ -91,16 +90,16 @@ public class DepthFirstSearch<T> implements IGraphTraversingSearch<T> {
 
         execForEachNode.apply(v);
 
-        Set<IVertex<T>> adjacentVertices = v.getAdjacentVertices();
+        Set<Vertex<T>> adjacentVertices = v.getAdjacentVertices();
 
-        for (IVertex<T> adj : adjacentVertices) {
-            Optional<TraversableVertex<T>> traversableOptional = lookupVertex((Vertex<T>) adj);
+        for (Vertex<T> adj : adjacentVertices) {
+            Optional<TraversableVertex<T>> traversableOptional = lookupVertex(adj);
             if (traversableOptional.isPresent()) {
                 TraversableVertex<T> traversable = traversableOptional.get();
                 if (!traversable.visited()) {
                     if (sought != null) {
                         if (sought.compareTo(adj) == 0) {
-                            found = (Vertex<T>) adj;
+                            found = adj;
                             return;
                         }
                     }

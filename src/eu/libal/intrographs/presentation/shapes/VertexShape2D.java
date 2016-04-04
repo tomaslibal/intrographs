@@ -1,6 +1,5 @@
 package eu.libal.intrographs.presentation.shapes;
 
-import eu.libal.intrographs.graphs.vertex.IVertex;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import javafx.scene.paint.Color;
 
@@ -9,10 +8,10 @@ import javafx.scene.paint.Color;
  */
 public class VertexShape2D<T> extends BasicShape2D {
 
-    private final IVertex<T> vertex;
+    private final Vertex<T> vertex;
     private final Coordinates2D displacement = new Coordinates2D();
 
-    public VertexShape2D(int x, int y, IVertex<T> vertex) {
+    public VertexShape2D(int x, int y, Vertex<T> vertex) {
         super(x, y, 10, 10);
         this.vertex = vertex;
     }
@@ -21,7 +20,7 @@ public class VertexShape2D<T> extends BasicShape2D {
         return vertex.getId();
     }
 
-    public IVertex<T> getVertex() {
+    public Vertex<T> getVertex() {
         return vertex;
     }
 

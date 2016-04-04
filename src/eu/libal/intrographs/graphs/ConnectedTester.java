@@ -1,7 +1,6 @@
 package eu.libal.intrographs.graphs;
 
 import eu.libal.intrographs.graphs.edge.Edge;
-import eu.libal.intrographs.graphs.vertex.IVertex;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 
 import java.util.LinkedHashSet;
@@ -48,7 +47,7 @@ public class ConnectedTester {
      * @param visited a set of nodes which have been visited
      * @param g graph
      */
-    private static void visitAdjacentNodes(IVertex v, Set<Edge<Integer>> incidentEdges, Set<String> visited, Graph g) {
+    private static void visitAdjacentNodes(Vertex v, Set<Edge<Integer>> incidentEdges, Set<String> visited, Graph g) {
         visited.add(v.getId());
 
         for (Edge<Integer> e: incidentEdges) {
