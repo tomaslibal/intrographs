@@ -43,12 +43,12 @@ public class VertexShape2D<T> extends BasicShape2D {
 
     @Override
     public Integer getX() {
-        return coords.getX() + displacement.getX();
+        return coords.getX();
     }
 
     @Override
     public Integer getY() {
-        return coords.getY() + displacement.getY();
+        return coords.getY();
     }
 
     public Coordinates2D getDisplacement() {
