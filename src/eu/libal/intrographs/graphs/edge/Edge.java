@@ -7,7 +7,7 @@ import eu.libal.intrographs.graphs.vertex.Vertex;
  *
  * @param <T> Type of the value in Vertex
  */
-public class Edge<T> {
+public class Edge<T> implements Comparable<Edge<T>> {
 
     private Vertex<T> source;
     private Vertex<T> target;
@@ -31,5 +31,16 @@ public class Edge<T> {
 
     public void setTarget(Vertex<T> target) {
         this.target = target;
+    }
+
+    @Override
+    public int compareTo(Edge<T> o) {
+        if (!source.equals(o.getSource())) {
+            return -1;
+        }
+        if (!target.equals(o.getTarget())) {
+            return 1;
+        }
+        return 0;
     }
 }
