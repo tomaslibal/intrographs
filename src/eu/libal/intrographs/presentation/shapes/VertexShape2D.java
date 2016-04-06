@@ -11,9 +11,19 @@ public class VertexShape2D<T> extends BasicShape2D {
     private final Vertex<T> vertex;
     private final Coordinates2D displacement = new Coordinates2D();
 
+    private boolean isHighlighted = false;
+
     public VertexShape2D(int x, int y, Vertex<T> vertex) {
         super(x, y, 10, 10);
         this.vertex = vertex;
+    }
+
+    public boolean isHighlighted() {
+        return isHighlighted;
+    }
+
+    public void setHighlighted(boolean highlighted) {
+        isHighlighted = highlighted;
     }
 
     public String getVertexId() {
@@ -38,16 +48,29 @@ public class VertexShape2D<T> extends BasicShape2D {
         /*
          * center the circle to the (x, y) position
          */
+        ctx.beginPath();
         ctx.fillOval(getX() - (width/2), getY() - (height/2), width, height);
+        ctx.closePath();
+
+        /*
+         * the highlight effect
+         */
+        if (isHighlighted) {
+            ctx.setStroke(new Color(0.15, 0.15, 0.15, 1));
+            ctx.beginPath();
+            ctx.rect(getX() - width, getY() - height, width*2, height*2);
+            ctx.stroke();
+            ctx.closePath();
+        }
     }
 
     @Override
-    public Integer getX() {
+    public Double getX() {
         return coords.getX();
     }
 
     @Override
-    public Integer getY() {
+    public Double getY() {
         return coords.getY();
     }
 
@@ -57,6 +80,14 @@ public class VertexShape2D<T> extends BasicShape2D {
 
     public void setDisplacementX(int x) {
         displacement.setX(x);
+    }
+
+    public void addDisplacementX(int x) {
+        displacement.setX(displacement.getX() + x);
+    }
+
+    public void addDisplacementY(int y) {
+        displacement.setY(displacement.getY() + y);
     }
 
     public void setDisplacementY(int y) {
