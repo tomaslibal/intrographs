@@ -82,12 +82,20 @@ public class VertexShape2D<T> extends BasicShape2D {
         displacement.setX(x);
     }
 
-    public void addDisplacementX(int x) {
+    public void addDisplacementX(double x) {
         displacement.setX(displacement.getX() + x);
     }
 
-    public void addDisplacementY(int y) {
+    public void addDisplacementY(double y) {
         displacement.setY(displacement.getY() + y);
+    }
+
+    public void multDisplacementX(double x) {
+        displacement.setX(displacement.getX() * x);
+    }
+
+    public void multDisplacementY(double y) {
+        displacement.setY(displacement.getY() * y);
     }
 
     public void setDisplacementY(int y) {

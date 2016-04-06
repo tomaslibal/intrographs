@@ -139,7 +139,26 @@ public class GraphRenderingController implements Initializable {
             )
             .ifPresent(vertexShape2D -> {
                 this.graph.removeVertex(vertexShape2D.getVertexId());
+                messageBus.emit("graph.vertex.remove", vertexShape2D.getVertexId());
             });
+        });
+
+        menuItemSpanningTree.setOnAction(action -> {
+//            getVertexAtCoordinates(
+//                lastSecondaryClickCoords.getX(),
+//                lastSecondaryClickCoords.getY()
+//            )
+//            .ifPresent(vertexShape2D -> {
+//                SpanningTreeSearch<Integer> findSpanningTree = new SpanningTreeSearch<>();
+//                Set<Vertex<Integer>> spanningTree = findSpanningTree.search(graph, vertexShape2D.getVertex(), a -> null);
+//
+//                if (canUpdateLayout.tryAcquire()) {
+//                    SearchHighlighter<Integer> highlighter = new SearchHighlighter<>(graphRenderer, messageBus, canUpdateLayout, spanningTree);
+//                    Thread layoutThread = new Thread(highlighter);
+//                    layoutThread.setPriority(Thread.MIN_PRIORITY);
+//                    layoutThread.start();
+//                }
+//            });
         });
 
         canvasState = CanvasStates.PANNING;
@@ -251,8 +270,8 @@ public class GraphRenderingController implements Initializable {
         double ty = dy - prevDy;
 
         if (canvasState == CanvasStates.TRANSLATING_VERTEX && translateVertex != null) {
-            Integer x = translateVertex.getX();
-            Integer y = translateVertex.getY();
+            Integer x = (int) Math.round(translateVertex.getX());
+            Integer y = (int) Math.round(translateVertex.getY());
             translateVertex.setX(x + Double.valueOf( tx ).intValue());
             translateVertex.setY(y + Double.valueOf( ty ).intValue());
             TextShape2D textLabel = graphRenderer.getTextLabel(translateVertex);
@@ -357,8 +376,8 @@ public class GraphRenderingController implements Initializable {
 
         return graphRenderer.getVertexShapes().stream()
                 .filter(shape -> {
-                    int dx = Math.abs(shape.getX() - x);
-                    int dy = Math.abs(shape.getY() - y);
+                    int dx = (int) Math.round(Math.abs(shape.getX() - x));
+                    int dy = (int) Math.round(Math.abs(shape.getY() - y));
 
                     return dx < (leniency + radius) && dy < (leniency + radius);
                 })
