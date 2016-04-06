@@ -10,6 +10,8 @@ public class EdgeShape2D extends BasicShape2D {
     private VertexShape2D sourceVertexShape2D;
     private VertexShape2D targetVertexShape2D;
 
+    private boolean isHighlighted = false;
+
     public EdgeShape2D(VertexShape2D source, VertexShape2D target) {
         // x, y - unused, position of the edge segment is determined by coordinates of the source and target vertices
         // width - width of the line
@@ -18,6 +20,14 @@ public class EdgeShape2D extends BasicShape2D {
 
         sourceVertexShape2D = source;
         targetVertexShape2D = target;
+    }
+
+    public boolean isHighlighted() {
+        return isHighlighted;
+    }
+
+    public void setHighlighted(boolean highlighted) {
+        isHighlighted = highlighted;
     }
 
     @Override
@@ -32,10 +42,21 @@ public class EdgeShape2D extends BasicShape2D {
 
         ctx.beginPath();
         ctx.setStroke(new Color(0, 0, 0, 1));
+        ctx.setLineWidth(1);
         ctx.moveTo(sourceVertexShape2D.getX(), sourceVertexShape2D.getY());
         ctx.lineTo(targetVertexShape2D.getX(), targetVertexShape2D.getY());
         ctx.stroke();
         ctx.closePath();
+
+        if (isHighlighted) {
+            ctx.beginPath();
+            ctx.setStroke(new Color(0.9, 0, 0, 0.5));
+            ctx.setLineWidth(3);
+            ctx.moveTo(sourceVertexShape2D.getX(), sourceVertexShape2D.getY());
+            ctx.lineTo(targetVertexShape2D.getX(), targetVertexShape2D.getY());
+            ctx.stroke();
+            ctx.closePath();
+        }
     }
 
     public VertexShape2D getSourceVertexShape2D() {
