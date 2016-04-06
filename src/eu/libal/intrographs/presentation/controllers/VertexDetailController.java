@@ -20,6 +20,9 @@ public class VertexDetailController implements Initializable {
     public GridPane mainGrid;
 
     @FXML
+    public GridPane auxGrid;
+
+    @FXML
     public TextField vValInput;
 
     @FXML
@@ -31,7 +34,10 @@ public class VertexDetailController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        auxGrid.setPadding(new Insets(10, 10, 10, 10));
         mainGrid.setPadding(new Insets(10, 10, 10, 10));
+
+        noVertexSelected();
     }
 
     @FXML
@@ -45,6 +51,11 @@ public class VertexDetailController implements Initializable {
 
         messageBus.subscribe("vertex.selected", vId -> {
             selectedVertexId = vId;
+            vertexSelected();
+        });
+
+        messageBus.subscribe("graph.vertex.remove", msg -> {
+            noVertexSelected();
         });
     }
 
@@ -52,7 +63,18 @@ public class VertexDetailController implements Initializable {
     public void handleRemoveBtAction(ActionEvent actionEvent) {
         if (selectedVertexId != null) {
             messageBus.emit("vertex.remove", selectedVertexId);
+            noVertexSelected();
             selectedVertexId = null;
         }
+    }
+
+    private void noVertexSelected() {
+        mainGrid.setVisible(false);
+        auxGrid.setVisible(true);
+    }
+
+    private void vertexSelected() {
+        mainGrid.setVisible(true);
+        auxGrid.setVisible(false);
     }
 }

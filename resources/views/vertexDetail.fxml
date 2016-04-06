@@ -2,23 +2,39 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.libal.intrographs.presentation.controllers.VertexDetailController">
-    <GridPane fx:id="mainGrid">
-        <hgap>10</hgap>
-        <vgap>10</vgap>
+    <StackPane>
+        <GridPane fx:id="auxGrid" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="1" GridPane.rowSpan="6" visible="false">
+            <Pane style="-fx-background-color: #d3d3d3;">
+                <Text translateY="100" translateX="10">Select a vertex to display details</Text>
+            </Pane>
 
-        <Label GridPane.columnIndex="0" GridPane.rowIndex="0">
-            Vertex ID</Label>
-        <TextField GridPane.columnIndex="0" GridPane.rowIndex="1" fx:id="vIDInput"/>
+            <rowConstraints>
+                <RowConstraints maxHeight="200.0" minHeight="200.0" prefHeight="200.0" />
+            </rowConstraints>
 
-        <Label GridPane.columnIndex="0" GridPane.rowIndex="2">Vertex Value</Label>
-        <TextField GridPane.columnIndex="0" GridPane.rowIndex="3" editable="true" fx:id="vValInput"/>
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" />
+            </columnConstraints>
+        </GridPane>
+        <GridPane fx:id="mainGrid">
+            <vgap>10</vgap>
+            <hgap>10</hgap>
 
-        <Button GridPane.columnIndex="0" GridPane.rowIndex="4" onAction="#handleUpdateBtAction">Update</Button>
-        <Button GridPane.columnIndex="0" GridPane.rowIndex="5" onAction="#handleRemoveBtAction">Remove</Button>
+            <Label GridPane.columnIndex="0" GridPane.rowIndex="0">
+                Vertex ID</Label>
+            <TextField GridPane.columnIndex="0" GridPane.rowIndex="1" fx:id="vIDInput"/>
 
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" />
-        </columnConstraints>
-    </GridPane>
+            <Label GridPane.columnIndex="0" GridPane.rowIndex="2">Vertex Value</Label>
+            <TextField GridPane.columnIndex="0" GridPane.rowIndex="3" editable="true" fx:id="vValInput"/>
+
+            <Button GridPane.columnIndex="0" GridPane.rowIndex="4" onAction="#handleUpdateBtAction">Update</Button>
+            <Button GridPane.columnIndex="0" GridPane.rowIndex="5" onAction="#handleRemoveBtAction">Remove</Button>
+
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" />
+            </columnConstraints>
+        </GridPane>
+    </StackPane>
 </VBox>
