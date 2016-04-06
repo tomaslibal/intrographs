@@ -86,4 +86,11 @@ public class VertexTest {
 
         assertThat(v.compareTo(w), is(Matchers.lessThan(0)));
     }
+
+    @Test
+    public void shouldReturnFalseWhenCallingEqualsWithNull() {
+        Vertex<Double> v = new Vertex<>("foo");
+
+        assertThat(v.equals(null), is(false));
+    }
 }
