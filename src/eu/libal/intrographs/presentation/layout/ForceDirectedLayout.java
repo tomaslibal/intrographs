@@ -14,9 +14,9 @@ public class ForceDirectedLayout implements Runnable {
     private final GraphRenderer<Integer, Edge> graphRenderer;
     private final MessageBus messageBus;
     private final Semaphore canUpdateLayout;
-    private final Double K_CONSTANT;
-    private static final Double MAX_MOVE = 3d;
-    private static final Double MAX_FORCE = 1000d;
+    private final static double C = 10;
+    private Double k;
+    private Double speed = 1d;
     private final int NUM_STEPS = 50;
     private double temperature;
 
@@ -24,14 +24,6 @@ public class ForceDirectedLayout implements Runnable {
         this.graphRenderer = graphRenderer;
         this.messageBus = messageBus;
         this.canUpdateLayout = canUpdateLayout;
-
-        K_CONSTANT = (1/50) * Math.sqrt(
-                (graphRenderer.getCanvas().getWidth() * graphRenderer.getCanvas().getHeight())
-                        /
-                graphRenderer.getVertexShapes().size()
-        );
-
-        temperature = this.graphRenderer.getCanvas().getWidth() / 10;
     }
 
     private double getTemperature() {
@@ -42,43 +34,25 @@ public class ForceDirectedLayout implements Runnable {
         temperature -= temperature / NUM_STEPS;
     }
 
-    private Pair<Double, Double> forceAttractive(Pair<Double, Double> d) {
-        Double xx = d.getKey() * d.getKey();
-        Double yy = d.getValue() * d.getValue();
-
-        xx /= K_CONSTANT;
-        yy /= K_CONSTANT;
-
-        return new Pair<>(xx, yy);
-    }
-
-    private Pair<Double, Double> forceRepulsive(Pair<Double, Double> d) {
-        Double x = (1 / Math.abs(d.getKey())) * (-1) * (K_CONSTANT*K_CONSTANT);
-        Double y = (1 / Math.abs(d.getValue())) * (-1) * (K_CONSTANT*K_CONSTANT);
-
-        return new Pair<>(x, y);
-    }
-
-    private Pair<Double, Double> getDifference(VertexShape2D v, VertexShape2D u) {
+    private Pair<Double, Double> getDxAndDy(VertexShape2D v, VertexShape2D u) {
         Double x = (double) v.getCoords().getX() - u.getCoords().getX();
         Double y = (double) v.getCoords().getY() - u.getCoords().getY();
 
         return new Pair<>(x, y);
     }
 
-    private Double normalizeForce(Double force) {
-        return (force / MAX_FORCE) * MAX_MOVE;
-    }
-
-    private Pair<Double, Double> normalizeVector(Pair<Double, Double> v) {
-        Double x = normalizeForce(v.getKey());
-        Double y = normalizeForce(v.getValue());
-
-        return new Pair<>(x, y);
+    private double getDistance(Pair<Double, Double> deltas) {
+        return Math.sqrt(deltas.getKey()*deltas.getKey() + deltas.getValue()*deltas.getValue());
     }
 
     @Override
     public void run() {
+        double area = graphRenderer.getCanvas().getWidth() * graphRenderer.getCanvas().getHeight();
+        k = C * Math.sqrt( area / (1 + graphRenderer.getVertexShapes().size()) );
+        temperature = this.graphRenderer.getCanvas().getWidth() / 10;
+        speed = 1d;
+        Double maxDisplace = Math.sqrt(C * area / 10);
+
         for (int i = 0; i < NUM_STEPS; i++) {
             Set<VertexShape2D<Integer>> vertexShapes = graphRenderer.getVertexShapes();
 
@@ -88,9 +62,12 @@ public class ForceDirectedLayout implements Runnable {
 
                 vertexShapes.forEach(anotherVertexShape2D -> {
                     if (!vertexShape2D.equals(anotherVertexShape2D)) {
-                        Pair<Double, Double> difference = getDifference(vertexShape2D, anotherVertexShape2D);
-                        Pair<Double, Double> normalizedForce = normalizeVector(forceRepulsive(difference));
-                        updateVertexPosition(vertexShape2D, difference, normalizedForce, 1);
+                        Pair<Double, Double> dxAndDy = getDxAndDy(vertexShape2D, anotherVertexShape2D);
+                        Double dist = getDistance(dxAndDy);
+                        Double fRepulsive = (k * k) / Math.abs(dist);
+
+                        vertexShape2D.addDisplacementX(getDisplacementDirection(dxAndDy.getKey()) * fRepulsive);
+                        vertexShape2D.addDisplacementY(getDisplacementDirection(dxAndDy.getValue()) * fRepulsive);
                     }
                 });
 
@@ -99,28 +76,45 @@ public class ForceDirectedLayout implements Runnable {
 
             graphRenderer.getEdgeShapes()
                     .forEach(edgeShape2D -> {
-                        Pair<Double, Double> difference = getDifference(edgeShape2D.getSourceVertexShape2D(), edgeShape2D.getTargetVertexShape2D());
-                        Pair<Double, Double> normalizedForce = normalizeVector(forceAttractive(difference));
-                        updateVertexPosition(edgeShape2D.getSourceVertexShape2D(), difference, normalizedForce, -1);
-                        updateVertexPosition(edgeShape2D.getTargetVertexShape2D(), difference, normalizedForce, 1);
+                        Pair<Double, Double> difference = getDxAndDy(edgeShape2D.getSourceVertexShape2D(), edgeShape2D.getTargetVertexShape2D());
+                        Double dist = getDistance(difference);
+                        Double fAttractive = dist * dist / k;
+
+                        VertexShape2D source = edgeShape2D.getSourceVertexShape2D();
+                        VertexShape2D target = edgeShape2D.getTargetVertexShape2D();
+
+                        if (dist > 0) {
+                            source.addDisplacementX(-1* difference.getKey() / dist *fAttractive);
+                            source.addDisplacementY(-1* difference.getKey() / dist *fAttractive);
+
+                            target.addDisplacementX(-1* difference.getValue() / dist *fAttractive);
+                            target.addDisplacementY(-1* difference.getValue() / dist *fAttractive);
+                        }
                     });
 
-            vertexShapes.forEach(vertexShape2D -> {
-                Integer x = vertexShape2D.getX();
-                Integer y = vertexShape2D.getY();
+            vertexShapes.forEach(s -> {
+                double d = Math.sqrt(s.getX() * s.getX() + s.getY() * s.getY());
+                double fGravity = 0.01f * k * 9.37 * d;
+                s.addDisplacementX(-1 * (fGravity * s.getX() / d));
+                s.addDisplacementY(-1 * (fGravity * s.getY() / d));
 
-                Integer displacementX = vertexShape2D.getDisplacement().getX();
-                x = x + (getDisplacementDirection(displacementX) * Math.min(displacementX, (int) getTemperature()));
-                double width = graphRenderer.getCanvas().getWidth();
-                x = (int) Math.round(Math.min(width / 2, Math.max(-width / 2, x)));
+                double speedDivisor = 500;
+                s.multDisplacementX(speed / speedDivisor);
+                s.multDisplacementY(speed / speedDivisor);
+                Double x = s.getX();
+                Double y = s.getY();
 
-                Integer displacementY = vertexShape2D.getDisplacement().getY();
-                y = y + ((getDisplacementDirection(displacementY)) * Math.min(displacementY, (int) getTemperature()));
-                double height = graphRenderer.getCanvas().getHeight();
-                y = (int) Math.round(Math.min(height / 2, Math.max(-height / 2, y)));
+                Double displX = s.getDisplacement().getX();
+                Double displY = s.getDisplacement().getY();
+                double d2 = Math.sqrt((displX * displX) + (displY * displY));
 
-                vertexShape2D.setX(x);
-                vertexShape2D.setY(y);
+                if (d2 > 0) {
+                    double limitor = Math.min(maxDisplace * (speed / speedDivisor), d2);
+                    Double nx = x + displX / d2 * limitor;
+                    Double ny = y + displY / d2 * limitor;
+                    s.setX(nx);
+                    s.setY(ny);
+                }
             });
 
             cool();
@@ -136,19 +130,11 @@ public class ForceDirectedLayout implements Runnable {
         canUpdateLayout.release();
     }
 
-    private int getDisplacementDirection(Integer displacement) {
+    private double getDisplacementDirection(Double displacement) {
         if (displacement == 0) {
             return 1;
         }
 
         return displacement/Math.abs(displacement);
-    }
-
-    private void updateVertexPosition(VertexShape2D vertexShape2D, Pair<Double, Double> difference, Pair<Double, Double> normalizedForce, int signChange) {
-        Integer x = vertexShape2D.getDisplacement().getX();
-        Integer y = vertexShape2D.getDisplacement().getY();
-
-        vertexShape2D.setDisplacementX(x + (signChange * (int) Math.round((difference.getKey() / Math.abs(difference.getKey()) * normalizedForce.getKey()))));
-        vertexShape2D.setDisplacementY(y + (signChange * (int) Math.round((difference.getValue() / Math.abs(difference.getValue()) * normalizedForce.getValue()))));
     }
 }
