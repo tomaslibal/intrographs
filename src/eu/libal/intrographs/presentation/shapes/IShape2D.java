@@ -4,11 +4,13 @@ package eu.libal.intrographs.presentation.shapes;
  *
  */
 public interface IShape2D {
-    Integer getX();
-    Integer getY();
+    Double getX();
+    Double getY();
     Coordinates2D getCoords();
     void setX(int x);
     void setY(int y);
+    void setX(double x);
+    void setY(double y);
 
     Integer getWidth();
     Integer getHeight();

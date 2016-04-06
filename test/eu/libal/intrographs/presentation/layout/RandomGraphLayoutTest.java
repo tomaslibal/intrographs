@@ -15,10 +15,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Semaphore;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.anyFloat;
+import static org.mockito.Mockito.*;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 /**
@@ -65,10 +63,10 @@ public class RandomGraphLayoutTest {
 
         randomLayout.run();
 
-        verify(a, times(RandomGraphLayout.NUM_STEPS)).setX(anyInt());
-        verify(a, times(RandomGraphLayout.NUM_STEPS)).setY(anyInt());
-        verify(b, times(RandomGraphLayout.NUM_STEPS)).setX(anyInt());
-        verify(b, times(RandomGraphLayout.NUM_STEPS)).setY(anyInt());
+        verify(a, times(RandomGraphLayout.NUM_STEPS)).setX(anyFloat());
+        verify(a, times(RandomGraphLayout.NUM_STEPS)).setY(anyFloat());
+        verify(b, times(RandomGraphLayout.NUM_STEPS)).setX(anyFloat());
+        verify(b, times(RandomGraphLayout.NUM_STEPS)).setY(anyFloat());
 
     }
 }

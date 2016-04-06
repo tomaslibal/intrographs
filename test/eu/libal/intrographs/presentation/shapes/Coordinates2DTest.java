@@ -20,16 +20,16 @@ public class Coordinates2DTest {
 
     @Test
     public void shouldInitWithVectorZeroZeroWhenNoArgumentsPassedToConstructor() {
-        assertThat(coords.getX(), is(0));
-        assertThat(coords.getY(), is(0));
+        assertThat(coords.getX(), is(0d));
+        assertThat(coords.getY(), is(0d));
     }
 
     @Test
     public void shouldInitWithGivenCoords() {
         Coordinates2D xy = new Coordinates2D(42, 43);
 
-        assertThat(xy.getX(), is(42));
-        assertThat(xy.getY(), is(43));
+        assertThat(xy.getX(), is(42d));
+        assertThat(xy.getY(), is(43d));
     }
 
     @Test
@@ -38,15 +38,15 @@ public class Coordinates2DTest {
 
         xy.set(100, 101);
 
-        assertThat(xy.getX(), is(100));
-        assertThat(xy.getY(), is(101));
+        assertThat(xy.getX(), is(100d));
+        assertThat(xy.getY(), is(101d));
     }
 
     @Test
     public void shouldInitCoordinatesFromDouble() {
         Coordinates2D xy = new Coordinates2D(1.0, 2.0);
 
-        assertThat(xy.getX(), is(1));
-        assertThat(xy.getY(), is(2));
+        assertThat(xy.getX(), is(1d));
+        assertThat(xy.getY(), is(2d));
     }
 }

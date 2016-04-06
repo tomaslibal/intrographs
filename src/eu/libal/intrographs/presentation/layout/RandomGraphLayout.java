@@ -45,13 +45,13 @@ public class RandomGraphLayout implements Runnable {
             int numStepsRemaining = NUM_STEPS - i;
 
             vertexShapes.forEach(vertexShape2D -> {
-                Integer x = vertexShape2D.getX();
-                Integer y = vertexShape2D.getY();
+                Double x = vertexShape2D.getX();
+                Double y = vertexShape2D.getY();
 
                 Coordinates2D destination = finalCoordinates.get(vertexShape2D);
 
-                Integer dx = (destination.getX() - x) / numStepsRemaining;
-                Integer dy = (destination.getY() - y) / numStepsRemaining;
+                Double dx = (destination.getX() - x) / numStepsRemaining;
+                Double dy = (destination.getY() - y) / numStepsRemaining;
 
                 vertexShape2D.setX(x + dx);
                 vertexShape2D.setY(y + dy);
