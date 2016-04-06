@@ -95,7 +95,7 @@ public class Vertex<T> implements Comparable<Vertex<?>> {
      * @return true if vertices are equal, false otherwise
      */
     public boolean equals(Vertex<T> v) {
-        return v.getId().equals(id);
+        return v != null && v.getId().equals(id);
 
     }
 
