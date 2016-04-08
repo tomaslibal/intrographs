@@ -5,7 +5,7 @@ import java.util.Vector;
 /**
  *
  */
-public class Coordinates2D<T> {
+public class Coordinates2D {
     private Vector<Double> coordsXY = new Vector<>(2);
 
     public Coordinates2D() {
