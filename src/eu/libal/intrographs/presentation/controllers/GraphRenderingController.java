@@ -3,6 +3,7 @@ package eu.libal.intrographs.presentation.controllers;
 import eu.libal.intrographs.common.MessageBus;
 import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
+import eu.libal.intrographs.graphs.factories.UtilityGraphFactory;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import eu.libal.intrographs.presentation.CanvasStates;
 import eu.libal.intrographs.presentation.GraphRedrawTimer;
@@ -106,25 +107,7 @@ public class GraphRenderingController implements Initializable {
     }
 
     public void setup() {
-        this.graph = Graph.getNewGraph(Integer.class);
-        this.graph.addVertex(0, "a");
-        this.graph.addVertex(1, "b");
-        this.graph.addVertex(2, "c");
-        this.graph.addVertex(3, "m");
-        this.graph.addVertex(4, "n");
-        this.graph.addVertex(5, "o");
-
-        this.graph.addEdge("a", "m");
-        this.graph.addEdge("a", "n");
-        this.graph.addEdge("a", "o");
-
-        this.graph.addEdge("b", "m");
-        this.graph.addEdge("b", "n");
-        this.graph.addEdge("b", "o");
-
-        this.graph.addEdge("c", "m");
-        this.graph.addEdge("c", "n");
-        this.graph.addEdge("c", "o");
+        this.graph = UtilityGraphFactory.get();
 
         graphRenderer = new GraphRenderer<>(this.graph, canvas, messageBus);
         graphRenderer.render();
