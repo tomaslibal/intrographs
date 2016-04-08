@@ -20,6 +20,7 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.time.Instant;
@@ -189,6 +190,17 @@ public class GraphRenderingController implements Initializable {
     private void subscribeToVertexDialogEvents(MessageBus messageBus) {
         messageBus.subscribe("vertex.remove", vId -> {
             graph.removeVertex(vId);
+            messageBus.emit("renderer.update", "render");
+        });
+
+        messageBus.subscribe("vertex.color.update", msg -> {
+            String[] parts = msg.split(";");
+            String vId = parts[0];
+            graphRenderer.getVertexShapes().stream()
+                    .filter(shape -> shape.getVertex().getId().equals(vId))
+                    .forEach(matchingShape -> {
+                        matchingShape.setVertexColor(Color.valueOf(parts[1]));
+                    });
             messageBus.emit("renderer.update", "render");
         });
     }

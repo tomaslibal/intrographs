@@ -3,6 +3,7 @@ package eu.libal.intrographs.presentation.shapes;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import javafx.scene.paint.Color;
 
+
 /**
  *
  */
@@ -12,10 +13,20 @@ public class VertexShape2D<T> extends BasicShape2D {
     private final Coordinates2D displacement = new Coordinates2D();
 
     private boolean isHighlighted = false;
+    private Color vertexColor;
 
     public VertexShape2D(int x, int y, Vertex<T> vertex) {
         super(x, y, 10, 10);
         this.vertex = vertex;
+        vertexColor = new Color(0, 0, 0.99, 1);
+    }
+
+    public Color getVertexColor() {
+        return vertexColor;
+    }
+
+    public void setVertexColor(Color vertexColor) {
+        this.vertexColor = vertexColor;
     }
 
     public boolean isHighlighted() {
@@ -40,7 +51,7 @@ public class VertexShape2D<T> extends BasicShape2D {
             throw new Exception("No GraphicsContext");
         }
 
-        ctx.setFill(new Color(0, 0, 0.99, 1));
+        ctx.setFill(vertexColor);
 
         Integer width = getWidth();
         Integer height = getHeight();
@@ -100,6 +111,10 @@ public class VertexShape2D<T> extends BasicShape2D {
 
     public void setDisplacementY(int y) {
         displacement.setY(y);
+    }
+
+    public static Color getDefaultColor() {
+        return new Color(0, 0, 1, 1);
     }
 
     public static class VertexShapeBuilder<T> {

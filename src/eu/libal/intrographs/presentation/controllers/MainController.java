@@ -1,11 +1,10 @@
 package eu.libal.intrographs.presentation.controllers;
 
 import eu.libal.intrographs.common.MessageBus;
-import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import eu.libal.intrographs.presentation.CanvasStates;
-import eu.libal.intrographs.presentation.GraphRenderer;
+import eu.libal.intrographs.presentation.shapes.VertexShape2D;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +16,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Pair;
@@ -110,9 +110,16 @@ public class MainController implements Initializable {
 
         messageBus.subscribe("#addEdgeBt.text.change", newLabel -> setButtonText(addEdgeBt, newLabel));
 
+        /**
+         * This event is emitted when a vertex is selected
+         */
         messageBus.subscribe("#vIDInput.text.change", newText -> {
             TextField idNode = (TextField) infoWindowStage.getScene().lookup("#vIDInput");
             idNode.setText(newText);
+            ColorPicker colorPicker = (ColorPicker) infoWindowStage.getScene().lookup("#colorPicker");
+            Optional<VertexShape2D<Integer>> vertexShape2D = graphRenderingController.getGraphRenderer().getVertexShapes().stream().filter(vs -> vs.getVertex().getId().equals(newText)).findFirst();
+            Color vertexColor = vertexShape2D.flatMap(shape -> Optional.of(shape.getVertexColor())).orElseGet(VertexShape2D::getDefaultColor);
+            colorPicker.setValue(vertexColor);
             messageBus.emit("vertex.selected", newText);
         });
 
@@ -315,5 +322,9 @@ public class MainController implements Initializable {
 
     public void handleRandomLayoutAction(ActionEvent actionEvent) {
         graphRenderingController.updateLayoutRandom();
+    }
+
+    public void handleSaveAsAction(ActionEvent actionEvent) {
+
     }
 }
