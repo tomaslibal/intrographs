@@ -28,7 +28,7 @@ public class GraphRenderer<T, U extends Edge> {
     private GraphicsContext ctx;
 
     private Set<EdgeShape2D> edgeShapes;
-    private Map<VertexShape2D<T>, TextShape2D> verticesWithLabels;
+    private Map<VertexShape2D<T>, VertexLabelShape2D> verticesWithLabels;
 
     private VertexShape2D<T> highlightedVertex = null;
 
@@ -86,7 +86,7 @@ public class GraphRenderer<T, U extends Edge> {
                     .withYCoordinate((int) Math.round(Double.parseDouble(yCoord)))
                     .create();
 
-            TextShape2D label = new TextShape2D();
+            VertexLabelShape2D label = new VertexLabelShape2D(vertexShape2D);
             label.setText(vertexShape2D.getVertexId());
             label.setX(vertexShape2D.getX() - 5);
             label.setY(vertexShape2D.getY() + 20);
@@ -186,7 +186,7 @@ public class GraphRenderer<T, U extends Edge> {
         return verticesWithLabels.get(v);
     }
 
-    public Collection<TextShape2D> getLabelShapes() {
+    public Collection<VertexLabelShape2D> getLabelShapes() {
         return verticesWithLabels.values();
     }
 
@@ -199,10 +199,10 @@ public class GraphRenderer<T, U extends Edge> {
         ctx.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
-    private Map<VertexShape2D<T>, TextShape2D> createVerticesWithLabels() {
+    private Map<VertexShape2D<T>, VertexLabelShape2D> createVerticesWithLabels() {
         Set<Vertex<T>> vertexSet = graph.vertexSet();
 
-        Stream<Pair<VertexShape2D<T>, TextShape2D>> pairStream = vertexSet.stream()
+        Stream<Pair<VertexShape2D<T>, VertexLabelShape2D>> pairStream = vertexSet.stream()
                 .map(v -> {
                     VertexShape2D<T> vertexShape2D = VertexShape2D.VertexShapeBuilder.buildAndCreate(
                             v,
@@ -210,7 +210,7 @@ public class GraphRenderer<T, U extends Edge> {
                             (int) Math.round((canvas.getHeight() / 2) + (getRandomSign())*(Math.random()*100))
                     );
 
-                    TextShape2D label = new TextShape2D();
+                    VertexLabelShape2D label = new VertexLabelShape2D(vertexShape2D);
                     label.setContext(ctx);
                     label.setX(vertexShape2D.getX() - 5);
                     label.setY(vertexShape2D.getY() + 20);

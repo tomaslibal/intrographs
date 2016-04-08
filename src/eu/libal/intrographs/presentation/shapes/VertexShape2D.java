@@ -1,5 +1,6 @@
 package eu.libal.intrographs.presentation.shapes;
 
+import eu.libal.intrographs.common.ListenableField;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import javafx.scene.paint.Color;
 
@@ -9,6 +10,8 @@ import javafx.scene.paint.Color;
  */
 public class VertexShape2D<T> extends BasicShape2D {
 
+    public final ListenableField<Coordinates2D> listenableCoords = new ListenableField<>();
+
     private final Vertex<T> vertex;
     private final Coordinates2D displacement = new Coordinates2D();
 
@@ -17,6 +20,7 @@ public class VertexShape2D<T> extends BasicShape2D {
 
     public VertexShape2D(int x, int y, Vertex<T> vertex) {
         super(x, y, 10, 10);
+        listenableCoords.setValue(coords);
         this.vertex = vertex;
         vertexColor = new Color(0, 0, 0.99, 1);
     }
@@ -83,6 +87,18 @@ public class VertexShape2D<T> extends BasicShape2D {
     @Override
     public Double getY() {
         return coords.getY();
+    }
+
+    @Override
+    public void setX(double x) {
+        super.setX(x);
+        listenableCoords.setValue(coords);
+    }
+
+    @Override
+    public void setY(double y) {
+        super.setY(y);
+        listenableCoords.setValue(coords);
     }
 
     public Coordinates2D getDisplacement() {

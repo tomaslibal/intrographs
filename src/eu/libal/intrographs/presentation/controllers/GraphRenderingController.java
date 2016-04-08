@@ -282,13 +282,10 @@ public class GraphRenderingController implements Initializable {
         double ty = dy - prevDy;
 
         if (canvasState == CanvasStates.TRANSLATING_VERTEX && translateVertex != null) {
-            Integer x = (int) Math.round(translateVertex.getX());
-            Integer y = (int) Math.round(translateVertex.getY());
-            translateVertex.setX(x + Double.valueOf( tx ).intValue());
-            translateVertex.setY(y + Double.valueOf( ty ).intValue());
-            TextShape2D textLabel = graphRenderer.getTextLabel(translateVertex);
-            textLabel.setX(textLabel.getX() + Double.valueOf( tx ).intValue());
-            textLabel.setY(textLabel.getY() + Double.valueOf( ty ).intValue());
+            Double x = translateVertex.getX();
+            Double y = translateVertex.getY();
+            translateVertex.setX(x + tx);
+            translateVertex.setY(y + ty);
             messageBus.emit("renderer.update", "render");
         } else {
             ox += tx;
