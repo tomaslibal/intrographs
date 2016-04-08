@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
@@ -27,6 +28,9 @@ public class VertexDetailController implements Initializable {
 
     @FXML
     public TextField vIDInput;
+
+    @FXML
+    public ColorPicker colorPicker;
 
     private MessageBus messageBus;
 
@@ -76,5 +80,9 @@ public class VertexDetailController implements Initializable {
     private void vertexSelected() {
         mainGrid.setVisible(true);
         auxGrid.setVisible(false);
+    }
+
+    public void handleColorPickerAction(ActionEvent actionEvent) {
+        messageBus.emit("vertex.color.update", selectedVertexId + ";" + colorPicker.getValue().toString());
     }
 }
