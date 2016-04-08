@@ -12,7 +12,7 @@
         <Menu text="File">
             <MenuItem onAction="#handleNewGraphAction" text="New Graph..."/>
             <!--<MenuItem text="Save"/>-->
-            <!--<MenuItem text="Save as..."/>-->
+            <MenuItem onAction="#handleSaveAsAction" text="Save as..."/>
             <SeparatorMenuItem/>
             <MenuItem onAction="#handleMenuExitAction" text="Exit">
                 <accelerator>
