@@ -7,7 +7,9 @@ public interface IShape2D {
     Double getX();
     Double getY();
     Coordinates2D getCoords();
+    @Deprecated
     void setX(int x);
+    @Deprecated
     void setY(int y);
     void setX(double x);
     void setY(double y);
