@@ -11,7 +11,7 @@ import eu.libal.intrographs.presentation.GraphRenderer;
 import eu.libal.intrographs.presentation.layout.ForceDirectedLayout;
 import eu.libal.intrographs.presentation.layout.RandomGraphLayout;
 import eu.libal.intrographs.presentation.shapes.Coordinates2D;
-import eu.libal.intrographs.presentation.shapes.TextShape2D;
+import eu.libal.intrographs.presentation.shapes.EdgeShape2D;
 import eu.libal.intrographs.presentation.shapes.VertexShape2D;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -189,7 +189,8 @@ public class GraphRenderingController implements Initializable {
     }
 
     public void handleMouseClick(MouseEvent event) {
-        Optional<VertexShape2D<Integer>> selectedVertex = getVertexAtMouseClick(event);
+        Optional<VertexShape2D<Integer>> vertexAtMouseClick = getVertexAtMouseClick(event);
+        Optional<EdgeShape2D> edgeAtMouseClick = getEdgeAtMouseClick(event);
         MouseButton clickedButton = event.getButton();
 
         if (clickedButton.equals(MouseButton.SECONDARY)) {
@@ -199,7 +200,7 @@ public class GraphRenderingController implements Initializable {
             if (items != null) {
                 if (items.size() > 0) { items.removeAll(items); }
 
-                if (selectedVertex.isPresent()) {
+                if (vertexAtMouseClick.isPresent()) {
                     items.addAll(menuItemRemoveVertex, menuItemSpanningTree);
                 } else {
                     items.addAll(menuItemAddVertex);
@@ -213,8 +214,8 @@ public class GraphRenderingController implements Initializable {
             addVertexAtCoords(event.getX(), event.getY());
         }
 
-        if (canvasState == CanvasStates.REMOVING_VERTEX && selectedVertex.isPresent()) {
-            String vertexId = selectedVertex.get().getVertexId();
+        if (canvasState == CanvasStates.REMOVING_VERTEX && vertexAtMouseClick.isPresent()) {
+            String vertexId = vertexAtMouseClick.get().getVertexId();
             Optional<Vertex<Integer>> v = graph.lookupVertex(vertexId);
 
             if (v.isPresent()) {
@@ -230,12 +231,12 @@ public class GraphRenderingController implements Initializable {
             canvasState = CanvasStates.PANNING;
         }
 
-        if (canvasState == CanvasStates.ADDING_EDGE && selectedVertex.isPresent()) {
+        if (canvasState == CanvasStates.ADDING_EDGE && vertexAtMouseClick.isPresent()) {
 
             if (sel1 == null) {
-                sel1 = selectedVertex.get();
+                sel1 = vertexAtMouseClick.get();
             } else {
-                VertexShape2D sel2 = selectedVertex.get();
+                VertexShape2D sel2 = vertexAtMouseClick.get();
                 graph.addEdge(sel1.getVertexId(), sel2.getVertexId());
 
                 sel1 = null;
@@ -243,6 +244,58 @@ public class GraphRenderingController implements Initializable {
                 messageBus.emit("#addEdgeBt.text.change", "Add edge");
             }
         }
+
+        if (canvasState == CanvasStates.PANNING && edgeAtMouseClick.isPresent() && !vertexAtMouseClick.isPresent()) {
+            edgeAtMouseClick.get().toggleHighlight();
+            messageBus.emit("renderer.update", "render");
+        }
+    }
+
+    private Optional<EdgeShape2D> getEdgeAtMouseClick(MouseEvent click) {
+        return getEdgeAtCoordinates(click.getX(), click.getY());
+    }
+
+    private double distSquared(Coordinates2D s, Coordinates2D t) {
+        double dx = s.getX() - t.getX();
+        double dy = s.getY() - t.getY();
+
+        return (dx * dx) + (dy * dy);
+    }
+
+    private double distFromLineSegment(Coordinates2D s, Coordinates2D t, Coordinates2D p) {
+        double lm = distSquared(s, t);
+
+        if (lm == 0) {
+            return Math.sqrt(distSquared(p, s));
+        }
+
+        double u = ((p.getX() - s.getX()) * (t.getX() - s.getX()) + (p.getY() - s.getY()) * (t.getY() - s.getY())) / lm;
+        u = Math.max(0, Math.min(1, u));
+
+        Coordinates2D w = new Coordinates2D(s.getX() + u * (t.getX() - s.getX()), s.getY() + u * (t.getY() - s.getY()));
+
+        return Math.sqrt(distSquared(p, w));
+    }
+
+    private Optional<EdgeShape2D> getEdgeAtCoordinates(double dblX, double dblY) {
+        Coordinates2D coords = new Coordinates2D(dblX - ox, dblY - oy);
+
+        int leniency = 5;
+
+        return graphRenderer.getEdgeShapes().stream()
+                .filter(shape -> {
+                    Coordinates2D translatedOrigin = new Coordinates2D(ox, oy);
+                    Coordinates2D sourceVertex = Coordinates2D.sub(shape.getSourceVertexShape2D().getCoords(), translatedOrigin);
+                    Coordinates2D targetVertex = Coordinates2D.sub(shape.getTargetVertexShape2D().getCoords(), translatedOrigin);
+                    double d = distFromLineSegment(
+                            sourceVertex,
+                            targetVertex,
+                            coords
+                    );
+
+                    return d <= leniency;
+                })
+                .findFirst();
     }
 
     public void addVertexAtCoords(double x, double y) {
