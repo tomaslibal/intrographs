@@ -30,6 +30,10 @@ public class EdgeShape2D extends BasicShape2D {
         isHighlighted = highlighted;
     }
 
+    public boolean toggleHighlight() {
+        return isHighlighted = !isHighlighted;
+    }
+
     @Override
     public void paint() throws Exception {
         if (ctx == null) {
