@@ -49,4 +49,62 @@ public class Coordinates2DTest {
         assertThat(xy.getX(), is(1d));
         assertThat(xy.getY(), is(2d));
     }
+
+    @Test
+    public void shouldAddAScalarValueToXY() {
+        Coordinates2D xy = new Coordinates2D(1.0, 2.0);
+
+        Coordinates2D result = Coordinates2D.add(xy, 42);
+
+        assertThat(result.getX(), is(43d));
+        assertThat(result.getY(), is(44d));
+    }
+
+    @Test
+    public void shouldAddTwoVectorsTogether() {
+        Coordinates2D xy = new Coordinates2D(1.0, 2.0);
+        Coordinates2D uv = new Coordinates2D(3.0, 4.0);
+
+        Coordinates2D result = Coordinates2D.add(xy, uv);
+
+        assertThat(result.getX(), is(4d));
+        assertThat(result.getY(), is(6d));
+    }
+
+    @Test
+    public void shouldSubtractTwoVectors() {
+        Coordinates2D xy = new Coordinates2D(1.0, 2.0);
+        Coordinates2D uv = new Coordinates2D(3.0, 4.0);
+
+        Coordinates2D result = Coordinates2D.sub(xy, uv);
+
+        assertThat(result.getX(), is(-2d));
+        assertThat(result.getY(), is(-2d));
+    }
+
+    @Test
+    public void shouldMultiplyVectorByAScalar() {
+        Coordinates2D xy = new Coordinates2D(1.0, 2.0);
+
+        Coordinates2D result = Coordinates2D.mult(xy, 10);
+
+        assertThat(result.getX(), is(10d));
+        assertThat(result.getY(), is(20d));
+    }
+
+    @Test
+    public void shouldReturnADotProduct() {
+        Coordinates2D xy = new Coordinates2D(1.0, 2.0);
+        Coordinates2D uv = new Coordinates2D(3.0, 4.0);
+        Coordinates2D mn = new Coordinates2D(0, 0);
+        Coordinates2D st = new Coordinates2D(-1, 1);
+
+        double result1 = Coordinates2D.dot(xy, uv);
+        double result2 = Coordinates2D.dot(xy, mn);
+        double result3 = Coordinates2D.dot(xy, st);
+
+        assertThat(result1, is(11d));
+        assertThat(result2, is(0d));
+        assertThat(result3, is(1d));
+    }
 }

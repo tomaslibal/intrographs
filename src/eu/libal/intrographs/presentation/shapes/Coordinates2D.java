@@ -60,4 +60,24 @@ public class Coordinates2D {
         setX(x);
         setY(y);
     }
+
+    public static Coordinates2D add(Coordinates2D s, double scalar) {
+        return new Coordinates2D(s.getX() + scalar, s.getY() + scalar);
+    }
+
+    public static Coordinates2D add(Coordinates2D s, Coordinates2D t) {
+        return new Coordinates2D(s.getX() + t.getX(), s.getY() + t.getY());
+    }
+
+    public static Coordinates2D sub(Coordinates2D s, Coordinates2D t) {
+        return new Coordinates2D(s.getX() - t.getX(), s.getY() - t.getY());
+    }
+
+    public static Coordinates2D mult(Coordinates2D s, double scalar) {
+        return new Coordinates2D(s.getX() * scalar, s.getY() * scalar);
+    }
+
+    public static double dot(Coordinates2D s, Coordinates2D t) {
+        return s.getX() * t.getX() + s.getY() * t.getY();
+    }
 }
