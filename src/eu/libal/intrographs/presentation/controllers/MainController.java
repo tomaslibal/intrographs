@@ -231,7 +231,7 @@ public class MainController implements Initializable {
     public void handleNewGraphAction(ActionEvent actionEvent) {
         Pair<NewGraphDialogController, Stage> newModalDialog = createNewModalDialog(
                 "Choose new graph",
-                getClass().getResource("/views/NewGraphDialog.fxml")
+                getClass().getResource("/views/newGraphDialog.fxml")
         );
 
         Stage stage = newModalDialog.getValue();
