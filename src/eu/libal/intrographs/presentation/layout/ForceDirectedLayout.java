@@ -9,12 +9,41 @@ import javafx.util.Pair;
 import java.util.Set;
 import java.util.concurrent.Semaphore;
 
+/**
+ * Layout which calculates attractive and repulsive forces on edges and vertices respectively to find a minimal energy
+ * state.
+ *
+ * attractive f_a(x) = x*x / k
+ * repulsive f_r(x) = k*k / |x|
+ *
+ * where x is the euclidean distance between two vertices.
+ */
 public class ForceDirectedLayout implements Runnable {
 
+    /**
+     * Graph renderer is used to obtain the canvas shapes of the vertices and edges.
+     */
     private final GraphRenderer<Integer, Edge> graphRenderer;
+
+    /**
+     * This message bus is used to request a graph canvas redraw
+     */
     private final MessageBus messageBus;
+
+    /**
+     * Shared semaphore. The current thread must release this lock otherwise other threads will be blocked from updating
+     * the layout.
+     */
     private final Semaphore canUpdateLayout;
-    private final static double C = 10;
+
+    /**
+     * Constant multiplier of the ideal space between vertices k
+     */
+    private final static double C = 100;
+
+    /**
+     * The ideal space between vertices
+     */
     private Double k;
     private Double speed = 1d;
     private final int NUM_STEPS = 50;
@@ -47,9 +76,9 @@ public class ForceDirectedLayout implements Runnable {
 
     @Override
     public void run() {
-        double area = graphRenderer.getCanvas().getWidth() * graphRenderer.getCanvas().getHeight();
+        double area = 10000;
         k = C * Math.sqrt( area / (1 + graphRenderer.getVertexShapes().size()) );
-        temperature = this.graphRenderer.getCanvas().getWidth() / 10;
+        temperature = 15;
         speed = 1d;
         Double maxDisplace = Math.sqrt(C * area / 10);
 
@@ -84,21 +113,21 @@ public class ForceDirectedLayout implements Runnable {
                         VertexShape2D target = edgeShape2D.getTargetVertexShape2D();
 
                         if (dist > 0) {
-                            source.addDisplacementX(-1* difference.getKey() / dist *fAttractive);
-                            source.addDisplacementY(-1* difference.getKey() / dist *fAttractive);
+                            source.addDisplacementX(-1* (difference.getKey() / dist *fAttractive));
+                            source.addDisplacementY(-1* (difference.getKey() / dist *fAttractive));
 
-                            target.addDisplacementX(-1* difference.getValue() / dist *fAttractive);
-                            target.addDisplacementY(-1* difference.getValue() / dist *fAttractive);
+                            target.addDisplacementX(difference.getValue() / dist *fAttractive);
+                            target.addDisplacementY(difference.getValue() / dist *fAttractive);
                         }
                     });
 
             vertexShapes.forEach(s -> {
                 double d = Math.sqrt(s.getX() * s.getX() + s.getY() * s.getY());
-                double fGravity = 0.01f * k * 9.37 * d;
+                double fGravity = 0.05f * k * 9.37 * d;
                 s.addDisplacementX(-1 * (fGravity * s.getX() / d));
                 s.addDisplacementY(-1 * (fGravity * s.getY() / d));
 
-                double speedDivisor = 500;
+                double speedDivisor = 400;
                 s.multDisplacementX(speed / speedDivisor);
                 s.multDisplacementY(speed / speedDivisor);
                 Double x = s.getX();
