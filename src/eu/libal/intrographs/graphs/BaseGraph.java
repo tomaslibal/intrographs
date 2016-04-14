@@ -267,4 +267,8 @@ abstract public class BaseGraph<T, U extends Edge> implements Listenable {
     public boolean removeVertices(List<Vertex<T>> v) {
         return vertices.removeAll(v);
     }
+
+    public void addAllVertices(List<Vertex<T>> vertices) {
+        vertexSet().addAll(vertices);
+    }
 }
