@@ -93,7 +93,7 @@ public class ForceDirectedLayout implements Runnable {
                     if (!vertexShape2D.equals(anotherVertexShape2D)) {
                         Pair<Double, Double> dxAndDy = getDxAndDy(vertexShape2D, anotherVertexShape2D);
                         Double dist = getDistance(dxAndDy);
-                        Double fRepulsive = (k * k) / Math.abs(dist);
+                        Double fRepulsive = (k * k) / dist;
 
                         vertexShape2D.addDisplacementX(getDisplacementDirection(dxAndDy.getKey()) * fRepulsive);
                         vertexShape2D.addDisplacementY(getDisplacementDirection(dxAndDy.getValue()) * fRepulsive);
@@ -123,7 +123,7 @@ public class ForceDirectedLayout implements Runnable {
 
             vertexShapes.forEach(s -> {
                 double d = Math.sqrt(s.getX() * s.getX() + s.getY() * s.getY());
-                double fGravity = 0.05f * k * 9.37 * d;
+                double fGravity = 0.01f * k * 9.37 * d;
                 s.addDisplacementX(-1 * (fGravity * s.getX() / d));
                 s.addDisplacementY(-1 * (fGravity * s.getY() / d));
 
@@ -161,7 +161,7 @@ public class ForceDirectedLayout implements Runnable {
 
     private double getDisplacementDirection(Double displacement) {
         if (displacement == 0) {
-            return 1;
+            return 0;
         }
 
         return displacement/Math.abs(displacement);
