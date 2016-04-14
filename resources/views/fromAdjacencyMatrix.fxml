@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.libal.intrographs.presentation.controllers.NewGraphFromAdjMatrixController">
+    <GridPane fx:id="mainGrid">
+        <hgap>10</hgap>
+        <vgap>10</vgap>
+
+        <TextArea GridPane.rowIndex="0" GridPane.rowSpan="5" fx:id="textAreaAdjMatrix" prefWidth="400.0" prefHeight="260.0"/>
+
+        <Button GridPane.rowIndex="6" onAction="#handleOKAction">OK</Button>
+        <Button GridPane.rowIndex="7" onAction="#handleCancelAction">Cancel</Button>
+
+    </GridPane>
+</VBox>

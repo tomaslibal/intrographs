@@ -239,6 +239,8 @@ public class MainController implements Initializable {
 
         controller.setGraphRenderingController(graphRenderingController);
         controller.setStage(stage);
+        controller.setPrimaryStage(this.stage);
+        controller.setMessageBus(this.messageBus);
 
         stage.show();
     }

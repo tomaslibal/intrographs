@@ -3,6 +3,7 @@ package eu.libal.intrographs.presentation.controllers;
 import eu.libal.intrographs.common.MessageBus;
 import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
+import eu.libal.intrographs.graphs.factories.FromAdjacencyMatrixGraphFactory;
 import eu.libal.intrographs.graphs.factories.UtilityGraphFactory;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import eu.libal.intrographs.presentation.CanvasStates;
@@ -167,7 +168,28 @@ public class GraphRenderingController implements Initializable {
     public void setMessageBus(MessageBus messageBus) {
         this.messageBus = messageBus;
         subscribeToVertexDialogEvents(this.messageBus);
+        subscribeToNewGraphEvents(this.messageBus);
         GraphRedrawTimer timer = new GraphRedrawTimer(graphRenderer, messageBus);
+    }
+
+    private void subscribeToNewGraphEvents(MessageBus messageBus) {
+        messageBus.subscribe("new.graph.fromAdjacencyMatrix", adjMatrixString -> {
+            String[] rows = adjMatrixString.split("\n");
+            int[][] adjMatrix = new int[rows.length][rows.length];
+
+            for (int i = 0; i < rows.length; i++) {
+                String row = rows[i];
+                String[] columns = row.split(" ");
+
+                for (int j = 0; j < columns.length; j++) {
+                    adjMatrix[i][j] = Integer.valueOf(columns[j]);
+                }
+            }
+
+            Graph<Integer, Edge> graph = FromAdjacencyMatrixGraphFactory.get(adjMatrix);
+
+            setGraph(graph);
+        });
     }
 
     private void subscribeToVertexDialogEvents(MessageBus messageBus) {
