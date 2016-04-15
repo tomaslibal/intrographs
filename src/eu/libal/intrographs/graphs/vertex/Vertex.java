@@ -1,5 +1,6 @@
 package eu.libal.intrographs.graphs.vertex;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,11 +8,11 @@ import java.util.Set;
  * Vertex represents a node in a graph.
  *
  */
-public class Vertex<T> implements Comparable<Vertex<?>> {
+public class Vertex<T> implements Comparable<Vertex<?>>, Serializable {
 
     private T value;
     private String id;
-    private final Set<Vertex<T>> adjacent;
+    private final HashSet<Vertex<T>> adjacent;
 
     /**
      * Constructs a vertex with a given ID and null value.
