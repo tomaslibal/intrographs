@@ -15,8 +15,18 @@ Brief overview of the features
 
 - add/remove vertex
 - add/remove edge
+- update vertex (incl. color)
 - show labels
 - translate vertices
+
+### Layouts
+
+- Force directed algorithm
+- Random layout
+
+### Files
+
+- save/load graph
 
 ### Running the project
 
