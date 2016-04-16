@@ -2,12 +2,14 @@ package eu.libal.intrographs.graphs.edge;
 
 import eu.libal.intrographs.graphs.vertex.Vertex;
 
+import java.io.Serializable;
+
 /**
  * Represents and edge in a graph, on which two vertices are incident.
  *
  * @param <T> Type of the value in Vertex
  */
-public class Edge<T> implements Comparable<Edge<T>> {
+public class Edge<T> implements Comparable<Edge<T>>, Serializable {
 
     private Vertex<T> source;
     private Vertex<T> target;
