@@ -1,11 +1,12 @@
 package eu.libal.intrographs.presentation.shapes;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 /**
  *
  */
-public class Coordinates2D {
+public class Coordinates2D implements Serializable {
     private Vector<Double> coordsXY = new Vector<>(2);
 
     public Coordinates2D() {
@@ -61,22 +62,53 @@ public class Coordinates2D {
         setY(y);
     }
 
+    /**
+     * Adds a scalar to each element of the coordiantes
+     * @param s coordinates
+     * @param scalar the scalar value to be added to x, y of the coordinates
+     * @return new coordinates
+     */
     public static Coordinates2D add(Coordinates2D s, double scalar) {
         return new Coordinates2D(s.getX() + scalar, s.getY() + scalar);
     }
 
+    /**
+     * Adds two coordinates together
+     * @param s first coordinates
+     * @param t second coordinates
+     * @return new coordinates
+     */
     public static Coordinates2D add(Coordinates2D s, Coordinates2D t) {
         return new Coordinates2D(s.getX() + t.getX(), s.getY() + t.getY());
     }
 
+    /**
+     * Subtracts one coordinates from another coordinates
+     * @param s the coordinates being subtracted from
+     * @param t the coordinates whose values will be subtracted from the first vector
+     * @return new coordinates
+     */
     public static Coordinates2D sub(Coordinates2D s, Coordinates2D t) {
         return new Coordinates2D(s.getX() - t.getX(), s.getY() - t.getY());
     }
 
+    /**
+     * Multiplies the coordinates by a scalar value
+     * @param s coordinates vector
+     * @param scalar scalar value
+     * @return new coordinates
+     */
     public static Coordinates2D mult(Coordinates2D s, double scalar) {
         return new Coordinates2D(s.getX() * scalar, s.getY() * scalar);
     }
 
+    /**
+     * Returns the dot product between two coordinates (2d vectors)
+     *
+     * @param s first coordinate (2d vector)
+     * @param t second coordinate (2d vector)
+     * @return the dot product between s and t (a scalar value)
+     */
     public static double dot(Coordinates2D s, Coordinates2D t) {
         return s.getX() * t.getX() + s.getY() * t.getY();
     }
