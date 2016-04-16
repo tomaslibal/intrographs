@@ -11,6 +11,7 @@
     <MenuBar>
         <Menu text="File">
             <MenuItem onAction="#handleNewGraphAction" text="New Graph..."/>
+            <MenuItem onAction="#handleOpenGraphAction" text="Open..."/>
             <!--<MenuItem text="Save"/>-->
             <MenuItem onAction="#handleSaveAsAction" text="Save as..."/>
             <SeparatorMenuItem/>

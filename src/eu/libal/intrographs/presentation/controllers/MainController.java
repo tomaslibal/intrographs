@@ -1,9 +1,12 @@
 package eu.libal.intrographs.presentation.controllers;
 
 import eu.libal.intrographs.common.MessageBus;
+import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import eu.libal.intrographs.presentation.CanvasStates;
+import eu.libal.intrographs.presentation.shapes.EdgeShape2D;
+import eu.libal.intrographs.presentation.shapes.VertexLabelShape2D;
 import eu.libal.intrographs.presentation.shapes.VertexShape2D;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,15 +20,14 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
 /**
  *
@@ -326,7 +328,43 @@ public class MainController implements Initializable {
         graphRenderingController.updateLayoutRandom();
     }
 
-    public void handleSaveAsAction(ActionEvent actionEvent) {
+    public void handleSaveAsAction(ActionEvent actionEvent) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Graph File");
+        fileChooser.setInitialFileName("graph.gdt");
+        File graphFile = fileChooser.showSaveDialog(stage);
 
+        if (graphFile != null) {
+            FileOutputStream ostream = new FileOutputStream(graphFile.getPath());
+            ObjectOutputStream p = new ObjectOutputStream(ostream);
+            p.writeObject(graphRenderingController.getGraph());
+            p.writeObject(graphRenderingController.getGraphRenderer().getVerticesWithLabels());
+            p.writeObject(graphRenderingController.getGraphRenderer().getEdgeShapes());
+            p.flush();
+            ostream.close();
+        }
+    }
+
+    public void handleOpenGraphAction(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Graph File");
+        fileChooser.getExtensionFilters().addAll(
+            new FileChooser.ExtensionFilter("Graph files", "*.gdt"),
+            new FileChooser.ExtensionFilter("All Files", "*.*")
+        );
+        File graphFile = fileChooser.showOpenDialog(stage);
+
+        if (graphFile != null) {
+            FileInputStream istream = new FileInputStream(graphFile.getPath());
+            ObjectInputStream p = new ObjectInputStream(istream);
+            Graph<Integer, Edge> graph = (Graph<Integer, Edge>) p.readObject();
+            HashMap<VertexShape2D<Integer>, VertexLabelShape2D> vertexShapes = (HashMap<VertexShape2D<Integer>, VertexLabelShape2D>) p.readObject();
+            HashSet<EdgeShape2D> edgeShapes = (HashSet<EdgeShape2D>) p.readObject();
+            istream.close();
+
+            graphRenderingController.getGraphRenderer().setVerticesWithLabels(vertexShapes);
+            graphRenderingController.getGraphRenderer().setEdgeShapes(edgeShapes);
+            graphRenderingController.setGraph(graph);
+        }
     }
 }
