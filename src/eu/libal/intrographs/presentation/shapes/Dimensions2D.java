@@ -1,11 +1,12 @@
 package eu.libal.intrographs.presentation.shapes;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 /**
  *
  */
-public class Dimensions2D {
+public class Dimensions2D implements Serializable {
     private Vector<Integer> dims = new Vector<>(2);
 
     public Dimensions2D() {
