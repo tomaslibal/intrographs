@@ -1,9 +1,11 @@
 package eu.libal.intrographs.presentation.shapes;
 
+import java.io.Serializable;
+
 /**
  *
  */
-public abstract class BasicShape2D extends BasicRenderableShape implements IShape2D {
+public abstract class BasicShape2D extends BasicRenderableShape implements IShape2D, Serializable {
 
     protected final Coordinates2D coords = new Coordinates2D();
     private Dimensions2D dims = new Dimensions2D();
