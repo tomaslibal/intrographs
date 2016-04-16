@@ -4,16 +4,22 @@ import eu.libal.intrographs.common.ListenableField;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import javafx.scene.paint.Color;
 
+import java.io.IOException;
+import java.io.ObjectStreamException;
+import java.io.Serializable;
+
 
 /**
  *
  */
-public class VertexShape2D<T> extends BasicShape2D {
+public class VertexShape2D<T> extends BasicShape2D implements Serializable {
 
-    public final ListenableField<Coordinates2D> listenableCoords = new ListenableField<>();
+    private static final long serialVersionUID = 4412345678L;
 
-    private final Vertex<T> vertex;
-    private final Coordinates2D displacement = new Coordinates2D();
+    public ListenableField<Coordinates2D> listenableCoords = new ListenableField<>();
+
+    private Vertex<T> vertex;
+    private Coordinates2D displacement = new Coordinates2D();
 
     private boolean isHighlighted = false;
     private Color vertexColor;
@@ -131,6 +137,24 @@ public class VertexShape2D<T> extends BasicShape2D {
 
     public static Color getDefaultColor() {
         return new Color(0, 0, 1, 1);
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+        out.writeObject(listenableCoords);
+        out.writeObject(vertex);
+        out.writeObject(isHighlighted);
+        out.writeObject(vertexColor.toString());
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+        listenableCoords = (ListenableField<Coordinates2D>) in.readObject();
+        vertex = (Vertex<T>) in.readObject();
+        isHighlighted = (boolean) in.readObject();
+        vertexColor = Color.valueOf((String) in.readObject());
+    }
+
+    private void readObjectNoData() throws ObjectStreamException {
+
     }
 
     public static class VertexShapeBuilder<T> {
