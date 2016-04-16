@@ -1,6 +1,8 @@
 package eu.libal.intrographs.presentation.shapes;
 
-public class VertexLabelShape2D extends TextShape2D {
+import java.io.Serializable;
+
+public class VertexLabelShape2D extends TextShape2D implements Serializable {
     private final VertexShape2D<?> vertexShape;
 
     public VertexLabelShape2D(VertexShape2D<?> vertexShape) {
