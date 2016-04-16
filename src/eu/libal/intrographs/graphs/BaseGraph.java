@@ -6,6 +6,9 @@ import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import javafx.util.Pair;
 
+import java.io.IOException;
+import java.io.ObjectStreamException;
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -16,12 +19,31 @@ import java.util.stream.Collectors;
  * @param <T> Type which each vertex uses for storing the vertex's value
  * @param <U> Type of the Edge (e.g. weighted edge or non-weighted edge, ...)
  */
-abstract public class BaseGraph<T, U extends Edge> implements Listenable {
+abstract public class BaseGraph<T, U extends Edge> implements Listenable, Serializable {
 
-    protected final Set<Vertex<T>> vertices = new HashSet<>();
-    protected final Set<U> edges = new HashSet<>();
+    private static final long serialVersionUID = 421234567890L;
+
+    protected HashSet<Vertex<T>> vertices = new HashSet<>();
+    protected HashSet<U> edges = new HashSet<>();
 
     private List<Pair<String, Notifiable>> callbacks = new LinkedList<>();
+
+    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+        out.writeObject(vertices);
+        out.writeObject(edges);
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+        vertices = (HashSet<Vertex<T>>) in.readObject();
+        edges = (HashSet<U>) in.readObject();
+        callbacks = new LinkedList<>();
+    }
+
+    private void readObjectNoData() throws ObjectStreamException {
+        vertices = new HashSet<>();
+        edges = new HashSet<>();
+        callbacks = new LinkedList<>();
+    }
 
     /**
      * Returns the degree of a node (undirected)
@@ -109,7 +131,7 @@ abstract public class BaseGraph<T, U extends Edge> implements Listenable {
      *
      * @return Set of all edges in the graph
      */
-    public Set<U> edgeSet() {
+    public HashSet<U> edgeSet() {
         return edges;
     }
 
@@ -118,7 +140,7 @@ abstract public class BaseGraph<T, U extends Edge> implements Listenable {
      *
      * @return Set of Vertices
      */
-    public Set<Vertex<T>> vertexSet() {
+    public HashSet<Vertex<T>> vertexSet() {
         return vertices;
     }
 
