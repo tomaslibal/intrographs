@@ -1,11 +1,19 @@
 package eu.libal.intrographs.common;
 
-import java.util.*;
+import java.io.IOException;
+import java.io.ObjectStreamException;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 
-public class ListenableField<T> implements Listenable {
+public class ListenableField<T> implements Listenable, Serializable {
+
+    private static final long serialVersionUID = 1421234567890L;
 
     private T value = null;
-    private final Map<String, List<Notifiable>> callbacks;
+    private HashMap<String, List<Notifiable>> callbacks;
 
     public ListenableField(T value) {
         this();
@@ -31,5 +39,19 @@ public class ListenableField<T> implements Listenable {
 
     public T getValue() {
         return value;
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+        out.writeObject(value);
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+        value = (T) in.readObject();
+        callbacks = new LinkedHashMap<>();
+        callbacks.put("update", new LinkedList<>());
+    }
+
+    private void readObjectNoData() throws ObjectStreamException {
+
     }
 }
