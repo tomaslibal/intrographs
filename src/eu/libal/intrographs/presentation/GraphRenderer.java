@@ -8,14 +8,9 @@ import eu.libal.intrographs.presentation.shapes.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.util.Pair;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  *
@@ -27,8 +22,8 @@ public class GraphRenderer<T, U extends Edge> {
     private final MessageBus messageBus;
     private GraphicsContext ctx;
 
-    private Set<EdgeShape2D> edgeShapes;
-    private Map<VertexShape2D<T>, VertexLabelShape2D> verticesWithLabels;
+    private HashSet<EdgeShape2D> edgeShapes;
+    private HashMap<VertexShape2D<T>, VertexLabelShape2D> verticesWithLabels;
 
     private VertexShape2D<T> highlightedVertex = null;
 
@@ -45,8 +40,13 @@ public class GraphRenderer<T, U extends Edge> {
     }
 
     private void setup() {
-        verticesWithLabels = createVerticesWithLabels();
-        edgeShapes = createEdgeShapes();
+        if (verticesWithLabels == null) {
+            verticesWithLabels = createVerticesWithLabels();
+        }
+
+        if (edgeShapes == null) {
+            edgeShapes = createEdgeShapes();
+        }
 
         graph.subscribe("graph.edge.add", (String message) -> {
             String[] parts = message.split(";");
@@ -106,7 +106,7 @@ public class GraphRenderer<T, U extends Edge> {
                 edgeShapes = edgeShapes.stream()
                         .filter(edgeShape2D -> !edgeShape2D.getSourceVertexShape2D().getVertexId().equals(removedVertexId)
                                 && !edgeShape2D.getTargetVertexShape2D().getVertexId().equals(removedVertexId))
-                        .collect(Collectors.toSet());
+                        .collect(Collectors.toCollection(HashSet<EdgeShape2D>::new));
 
                 // remove the vertexShape
                 verticesWithLabels.remove(vertexToDelete.get());
@@ -174,12 +174,24 @@ public class GraphRenderer<T, U extends Edge> {
         return ctx;
     }
 
-    public Set<VertexShape2D<T>> getVertexShapes() {
-        return verticesWithLabels.keySet();
+    public HashMap<VertexShape2D<T>, VertexLabelShape2D> getVerticesWithLabels() {
+        return verticesWithLabels;
     }
 
-    public Set<EdgeShape2D> getEdgeShapes() {
+    public HashSet<VertexShape2D<T>> getVertexShapes() {
+        return verticesWithLabels.keySet().stream().collect(Collectors.toCollection(HashSet::new));
+    }
+
+    public HashSet<EdgeShape2D> getEdgeShapes() {
         return edgeShapes;
+    }
+
+    public void setEdgeShapes(HashSet<EdgeShape2D> edgeShapes) {
+        this.edgeShapes = edgeShapes;
+    }
+
+    public void setVerticesWithLabels(HashMap<VertexShape2D<T>, VertexLabelShape2D> verticesWithLabels) {
+        this.verticesWithLabels = verticesWithLabels;
     }
 
     public TextShape2D getTextLabel(VertexShape2D v) {
@@ -199,11 +211,11 @@ public class GraphRenderer<T, U extends Edge> {
         ctx.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
-    private Map<VertexShape2D<T>, VertexLabelShape2D> createVerticesWithLabels() {
-        Set<Vertex<T>> vertexSet = graph.vertexSet();
+    private HashMap<VertexShape2D<T>, VertexLabelShape2D> createVerticesWithLabels() {
+        HashMap<VertexShape2D<T>, VertexLabelShape2D> result = new HashMap<>();
 
-        Stream<Pair<VertexShape2D<T>, VertexLabelShape2D>> pairStream = vertexSet.stream()
-                .map(v -> {
+        graph.vertexSet().stream()
+                .forEach(v -> {
                     VertexShape2D<T> vertexShape2D = VertexShape2D.VertexShapeBuilder.buildAndCreate(
                             v,
                             (int) Math.round((canvas.getWidth() / 2) + (getRandomSign())*(Math.random()*100)),
@@ -216,18 +228,19 @@ public class GraphRenderer<T, U extends Edge> {
                     label.setY(vertexShape2D.getY() + 20);
                     label.setText(vertexShape2D.getVertexId());
 
-                    return new Pair<>(vertexShape2D, label);
+
+                    result.put(vertexShape2D, label);
                 });
 
-        return pairStream.collect(Collectors.toMap(Pair::getKey, Pair::getValue));
+        return result;
     }
 
     private int getRandomSign() {
         return Math.random() > 0.5 ? -1 : 1;
     }
 
-    private Set<EdgeShape2D> createEdgeShapes() {
-        Set<U> edgeSet = graph.edgeSet();
+    private HashSet<EdgeShape2D> createEdgeShapes() {
+        HashSet<U> edgeSet = graph.edgeSet();
 
         return edgeSet.stream()
                 .map(e -> {
@@ -236,7 +249,7 @@ public class GraphRenderer<T, U extends Edge> {
 
                     return getEdgeShape2D(sourceId, targetId);
                 })
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(HashSet<EdgeShape2D>::new));
     }
 
     private EdgeShape2D getEdgeShape2D(String sourceId, String targetId) {

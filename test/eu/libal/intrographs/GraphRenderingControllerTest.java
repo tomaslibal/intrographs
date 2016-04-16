@@ -1,7 +1,7 @@
 package eu.libal.intrographs;
 
-import eu.libal.intrographs.common.Notifiable;
 import eu.libal.intrographs.common.MessageBus;
+import eu.libal.intrographs.common.Notifiable;
 import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
@@ -24,7 +24,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.HashSet;
-import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -98,7 +97,7 @@ public class GraphRenderingControllerTest {
         MouseEvent mockEvent = new MouseEvent(MouseEvent.MOUSE_MOVED, 150, 150, 0, 0, MouseButton.NONE, 1, true, true, true, true, true, true, true, true, true, true, null);
         Vertex<Integer> v = new Vertex<>("foo");
         VertexShape2D<Integer> v1 = new VertexShape2D<>(150, 150, v);
-        Set<VertexShape2D> vertexShape2DSet = new HashSet<>();
+        HashSet<VertexShape2D> vertexShape2DSet = new HashSet<>();
 
         vertexShape2DSet.add(v1);
 
