@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.HashSet;
-import java.util.Set;
 import java.util.concurrent.Semaphore;
 
 import static org.mockito.Matchers.anyFloat;
@@ -51,8 +50,8 @@ public class RandomGraphLayoutTest {
 
     @Test
     public void shouldUpdateRandomlyXYCoordinatesOfEachVertex() throws Exception {
-        Set<VertexShape2D<Integer>> vertices = new HashSet<>();
-        Set<EdgeShape2D> edges = new HashSet<EdgeShape2D>();
+        HashSet<VertexShape2D<Integer>> vertices = new HashSet<>();
+        HashSet<EdgeShape2D> edges = new HashSet<EdgeShape2D>();
 
         VertexShape2D a = mock(VertexShape2D.class);
         vertices.add(a);
