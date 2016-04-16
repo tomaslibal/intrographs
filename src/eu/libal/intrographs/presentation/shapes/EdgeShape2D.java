@@ -2,10 +2,12 @@ package eu.libal.intrographs.presentation.shapes;
 
 import javafx.scene.paint.Color;
 
+import java.io.Serializable;
+
 /**
  *
  */
-public class EdgeShape2D extends BasicShape2D {
+public class EdgeShape2D extends BasicShape2D implements Serializable {
 
     private VertexShape2D sourceVertexShape2D;
     private VertexShape2D targetVertexShape2D;
