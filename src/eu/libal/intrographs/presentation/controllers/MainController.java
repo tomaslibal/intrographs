@@ -61,8 +61,6 @@ public class MainController implements Initializable {
     @FXML
     private Button execBt;
 
-    private CanvasStates canvasState = CanvasStates.PANNING;
-
     /**
      * Reference to the stage of the main window
      */
