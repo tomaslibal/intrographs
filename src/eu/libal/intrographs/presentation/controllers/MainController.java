@@ -1,5 +1,6 @@
 package eu.libal.intrographs.presentation.controllers;
 
+import eu.libal.intrographs.common.ListenableField;
 import eu.libal.intrographs.common.MessageBus;
 import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
@@ -73,6 +74,16 @@ public class MainController implements Initializable {
     private GraphRenderingController graphRenderingController;
     private MessageBus messageBus;
 
+    /**
+     * Keeps track whether the current open file has changed or not. Saving the graph into a file reverts the
+     * state to changed = false. Any other change changes the state to true.
+     *
+     */
+    private ListenableField<Boolean> fileChanged = new ListenableField<>(false);
+
+    public ListenableField<Boolean> getFileChanged() {
+        return fileChanged;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -160,6 +171,10 @@ public class MainController implements Initializable {
         } else {
             graphRenderingController.hideLabels();
         }
+    }
+
+    public void setCanvasState(CanvasStates state) {
+        graphRenderingController.setCanvasState(state);
     }
 
     public void handleDrag(MouseEvent event) {
