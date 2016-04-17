@@ -45,8 +45,6 @@ public class VertexLabelShape2DTest {
 
     @Test
     public void shouldUpdateItsCoordinatesWhenVertexShapeUpdatesCoordinates() {
-        VertexLabelShape2D spy = Mockito.spy(labelShape);
-
         assertThat(labelShape.getX(), is(vertex_x + VertexLabelShape2D.X_OFFSET));
         assertThat(labelShape.getY(), is(vertex_y + VertexLabelShape2D.Y_OFFSET));
 
