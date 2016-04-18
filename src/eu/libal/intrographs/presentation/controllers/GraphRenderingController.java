@@ -186,9 +186,13 @@ public class GraphRenderingController implements Initializable {
                 }
             }
 
-            Graph<Integer, Edge> graph = FromAdjacencyMatrixGraphFactory.get(adjMatrix);
-
-            setGraph(graph);
+            Graph<Integer, Edge> graph = null;
+            try {
+                graph = FromAdjacencyMatrixGraphFactory.get(adjMatrix);
+                setGraph(graph);
+            } catch (FromAdjacencyMatrixGraphFactory.NotASquareMatrixException e) {
+                e.printStackTrace();
+            }
         });
     }
 

@@ -19,7 +19,7 @@ public final class FromAdjacencyMatrixGraphFactory {
      * @param adjMatrix n*n matrix
      * @return Graph
      */
-    public static Graph<Integer, Edge> get(int[][] adjMatrix) {
+    public static Graph<Integer, Edge> get(int[][] adjMatrix) throws NotASquareMatrixException {
         Graph<Integer, Edge> graph = new Graph<>();
         List<Vertex<Integer>> vertices = new LinkedList<>();
 
@@ -32,10 +32,14 @@ public final class FromAdjacencyMatrixGraphFactory {
             idx++;
         }
         // add adjacent vertices
-        for (int i = 0; i < adjMatrix.length; i++) {
+        int length = adjMatrix.length;
+        for (int i = 0; i < length; i++) {
             Vertex<Integer> c = vertices.get(i);
             int[] adjacent = adjMatrix[i];
-            for (int j = 0; j < adjacent.length; j++) {
+            for (int j = 0; j < length; j++) {
+                if (adjMatrix[i].length != length) {
+                    throw new NotASquareMatrixException("Not a square matrix");
+                }
                 if (adjacent[j] == 1) {
                     c.addAdjacentVertex(vertices.get(j));
                     Edge<Integer> e = new Edge<>(c, vertices.get(j));
@@ -47,5 +51,11 @@ public final class FromAdjacencyMatrixGraphFactory {
         graph.addAllVertices(vertices);
 
         return graph;
+    }
+
+    public static class NotASquareMatrixException extends Throwable {
+        NotASquareMatrixException(String message) {
+            super(message);
+        }
     }
 }
