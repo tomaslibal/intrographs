@@ -49,6 +49,12 @@ public class MainController implements Initializable {
     public CheckBox labelsCheckbox;
 
     @FXML
+    public Button removeEdgeBt;
+
+    @FXML
+    public Button removeVertexBt;
+
+    @FXML
     private Canvas mainCanvas;
 
     @FXML
@@ -158,12 +164,32 @@ public class MainController implements Initializable {
     @FXML
     public void setCanvasStatusToAddingVertex(ActionEvent actionEvent) {
         addVertexBt.setText("Click on canvas");
+        addClassToButton(addVertexBt, "btHighlighted");
         graphRenderingController.setCanvasState(CanvasStates.ADDING_VERTEX);
+    }
+
+    public void addClassToButton(Button bt, String className) {
+        resetBtStyles();
+        bt.getStyleClass().add(className);
+    }
+
+    public void resetBtStyles() {
+        List<Button> buttons = Arrays.asList(
+                addVertexBt,
+                addEdgeBt,
+                removeVertexBt,
+                removeEdgeBt
+        );
+
+        buttons.forEach(bt -> {
+            bt.getStyleClass().remove("btHighlighted");
+        });
     }
 
     @FXML
     public void setCanvasStatusToAddingEdge(ActionEvent actionEvent) {
         addEdgeBt.setText("Choose vertices");
+        addClassToButton(addEdgeBt, "btHighlighted");
         graphRenderingController.setCanvasState(CanvasStates.ADDING_EDGE);
     }
 

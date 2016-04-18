@@ -8,6 +8,12 @@
     -fx-background-size: 32px 32px;
 }
 
+.btHighlighted {
+    -fx-border-width: 3px;
+    -fx-border-style: solid;
+    -fx-border-color: red;
+}
+
 #addEdgeBt {
     -fx-background-image: url('/images/intrographs_icon_add_edge.png');
     -fx-background-position: center center;
