@@ -4,7 +4,7 @@ import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 
-public class UtilityGraphFactory {
+public final class UtilityGraphFactory {
 
     private static Vertex<Integer> getVertex(Integer value, String id) {
         return new Vertex<>(value, id);
