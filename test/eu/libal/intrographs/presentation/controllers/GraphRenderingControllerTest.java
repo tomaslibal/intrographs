@@ -1,5 +1,6 @@
-package eu.libal.intrographs;
+package eu.libal.intrographs.presentation.controllers;
 
+import eu.libal.intrographs.JavaFXThreadingRule;
 import eu.libal.intrographs.common.MessageBus;
 import eu.libal.intrographs.common.Notifiable;
 import eu.libal.intrographs.graphs.Graph;
@@ -7,7 +8,6 @@ import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import eu.libal.intrographs.presentation.CanvasStates;
 import eu.libal.intrographs.presentation.GraphRenderer;
-import eu.libal.intrographs.presentation.controllers.GraphRenderingController;
 import eu.libal.intrographs.presentation.shapes.VertexShape2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;

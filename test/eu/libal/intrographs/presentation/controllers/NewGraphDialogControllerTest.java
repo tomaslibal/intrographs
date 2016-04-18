@@ -1,6 +1,6 @@
-package eu.libal.intrographs;
+package eu.libal.intrographs.presentation.controllers;
 
-import eu.libal.intrographs.presentation.controllers.NewGraphDialogController;
+import eu.libal.intrographs.JavaFXThreadingRule;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
