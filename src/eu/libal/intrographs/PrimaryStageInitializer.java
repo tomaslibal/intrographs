@@ -65,7 +65,6 @@ public class PrimaryStageInitializer implements StageInitializer {
 
     @Override
     public void initWindow() {
-        stage.setTitle("Intrographs 2");
     }
 
     @Override
