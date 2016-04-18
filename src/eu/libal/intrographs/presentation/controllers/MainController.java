@@ -415,6 +415,8 @@ public class MainController implements Initializable {
         File graphFile = fileChooser.showOpenDialog(stage);
 
         if (graphFile != null) {
+            mainStageTitle.setTitle(graphFile.getName());
+            fileChanged.setValue(false);
             FileInputStream istream = new FileInputStream(graphFile.getPath());
             ObjectInputStream p = new ObjectInputStream(istream);
             Graph<Integer, Edge> graph = (Graph<Integer, Edge>) p.readObject();
