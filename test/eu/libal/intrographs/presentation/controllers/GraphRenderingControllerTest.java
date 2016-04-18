@@ -33,7 +33,7 @@ import static org.mockito.Mockito.when;
 
 public class GraphRenderingControllerTest {
 
-    GraphRenderingController controller;
+    private GraphRenderingController controller;
 
     @Rule
     public JavaFXThreadingRule jfxRule = new JavaFXThreadingRule();
