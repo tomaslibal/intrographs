@@ -215,6 +215,7 @@ public class GraphRenderingController implements Initializable {
         Optional<EdgeShape2D> edgeAtMouseClick = getEdgeAtMouseClick(event);
         MouseButton clickedButton = event.getButton();
 
+        // delegate to a method
         if (clickedButton.equals(MouseButton.SECONDARY)) {
             lastSecondaryClickCoords = new Coordinates2D(event.getX(), event.getY());
             ObservableList<MenuItem> items = contextMenu.getItems();
@@ -236,6 +237,7 @@ public class GraphRenderingController implements Initializable {
             addVertexAtCoords(event.getX(), event.getY());
         }
 
+        // delegate to a method
         if (canvasState == CanvasStates.REMOVING_VERTEX && vertexAtMouseClick.isPresent()) {
             String vertexId = vertexAtMouseClick.get().getVertexId();
             Optional<Vertex<Integer>> v = graph.lookupVertex(vertexId);
@@ -248,17 +250,20 @@ public class GraphRenderingController implements Initializable {
 
                 // remove vertex
                 graph.removeVertex(v.get());
+                messageBus.emit("graphFile.changed", "true");
             }
 
             canvasState = CanvasStates.PANNING;
         }
 
+        // delegate to a method
         if (canvasState == CanvasStates.ADDING_EDGE && vertexAtMouseClick.isPresent()) {
 
             if (sel1 == null) {
                 sel1 = vertexAtMouseClick.get();
             } else {
                 VertexShape2D sel2 = vertexAtMouseClick.get();
+                messageBus.emit("graphFile.changed", "true");
                 graph.addEdge(sel1.getVertexId(), sel2.getVertexId());
 
                 sel1 = null;
@@ -267,6 +272,7 @@ public class GraphRenderingController implements Initializable {
             }
         }
 
+        // delegate to a method
         if (canvasState == CanvasStates.PANNING && edgeAtMouseClick.isPresent() && !vertexAtMouseClick.isPresent()) {
             edgeAtMouseClick.get().toggleHighlight();
             messageBus.emit("renderer.update", "render");
@@ -325,6 +331,7 @@ public class GraphRenderingController implements Initializable {
         graph.addVertex(new Vertex<>(id));
         graph.dispatch("graph.vertex.add", id.concat(";x:").concat(String.valueOf(x)).concat(";y:").concat(String.valueOf(y)));
         canvasState = CanvasStates.PANNING;
+        messageBus.emit("graphFile.changed", "true");
         messageBus.emit("#addVertexBt.text.change", "Add vertex");
         messageBus.emit("renderer.update", "render");
     }
