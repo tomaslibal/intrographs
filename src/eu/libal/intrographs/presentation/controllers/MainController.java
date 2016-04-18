@@ -6,6 +6,7 @@ import eu.libal.intrographs.graphs.Graph;
 import eu.libal.intrographs.graphs.edge.Edge;
 import eu.libal.intrographs.graphs.vertex.Vertex;
 import eu.libal.intrographs.presentation.CanvasStates;
+import eu.libal.intrographs.presentation.StageTitle;
 import eu.libal.intrographs.presentation.shapes.EdgeShape2D;
 import eu.libal.intrographs.presentation.shapes.VertexLabelShape2D;
 import eu.libal.intrographs.presentation.shapes.VertexShape2D;
@@ -80,6 +81,8 @@ public class MainController implements Initializable {
      *
      */
     private ListenableField<Boolean> fileChanged = new ListenableField<>(false);
+
+    private StageTitle mainStageTitle = new StageTitle("Intrographs2", "no_name.gdt");
 
     public ListenableField<Boolean> getFileChanged() {
         return fileChanged;
@@ -190,6 +193,17 @@ public class MainController implements Initializable {
         this.stage = stage;
         String buttonCss = this.getClass().getResource("/styles/button.css").toExternalForm();
         this.stage.getScene().getStylesheets().add(buttonCss);
+
+        stage.setTitle(mainStageTitle.toString());
+
+        fileChanged.subscribe("update", bool -> {
+            if (Boolean.valueOf(bool)) {
+                mainStageTitle.setSuffix("(changed)");
+            } else {
+                mainStageTitle.setSuffix("");
+            }
+            stage.setTitle(mainStageTitle.toString());
+        });
     }
 
     public void handleMouseRelease(MouseEvent event) {
@@ -286,6 +300,13 @@ public class MainController implements Initializable {
         graphRenderingController.setMessageBus(this.messageBus);
         subscribeToGraphRenderingCtrlEvents(this.messageBus);
         subscribeToVertexUpdateEvents(this.messageBus);
+        subscribeToFileChangedEvents(this.messageBus);
+    }
+
+    private void subscribeToFileChangedEvents(MessageBus messageBus) {
+        messageBus.subscribe("graphFile.changed", strBool -> {
+            fileChanged.setValue(Boolean.valueOf(strBool));
+        });
     }
 
     private void subscribeToVertexUpdateEvents(MessageBus messageBus) {
