@@ -7,7 +7,18 @@ import eu.libal.intrographs.graphs.vertex.Vertex;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FromAdjacencyMatrixGraphFactory {
+/**
+ * Factory for creating graphs from vertex adjacency matrix, which is a n*n matrix where a_ii = arc from and to the same
+ * vertex, and a_ij = arc originating at vertices(i) and ending in vertices(j).
+ */
+public final class FromAdjacencyMatrixGraphFactory {
+
+    /**
+     * Given a n*n matrix this method returns a new instance of Graph.
+     *
+     * @param adjMatrix n*n matrix
+     * @return Graph
+     */
     public static Graph<Integer, Edge> get(int[][] adjMatrix) {
         Graph<Integer, Edge> graph = new Graph<>();
         List<Vertex<Integer>> vertices = new LinkedList<>();
