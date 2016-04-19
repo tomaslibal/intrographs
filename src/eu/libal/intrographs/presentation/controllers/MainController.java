@@ -149,6 +149,12 @@ public class MainController implements Initializable {
         });
 
         messageBus.subscribe("Cursor.cursor.change", newCursorId -> stage.getScene().setCursor(Cursor.cursor(newCursorId)));
+
+        messageBus.subscribe("canvas.state.update", stateStr -> {
+            CanvasStates state = CanvasStates.valueOf(stateStr);
+
+            resetBtStyles();
+        });
     }
 
     @FXML
@@ -276,10 +282,12 @@ public class MainController implements Initializable {
 
     public void setCanvasStatusToRemovingVertex(ActionEvent actionEvent) {
         graphRenderingController.setCanvasState(CanvasStates.REMOVING_VERTEX);
+        addClassToButton(removeVertexBt, "btHighlighted");
     }
 
     public void setCanvasStatusToRemovingEdge(ActionEvent actionEvent) {
         graphRenderingController.setCanvasState(CanvasStates.REMOVING_EDGE);
+        addClassToButton(removeEdgeBt, "btHighlighted");
     }
 
     @FXML

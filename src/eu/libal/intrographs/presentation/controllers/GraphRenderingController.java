@@ -159,6 +159,10 @@ public class GraphRenderingController implements Initializable {
 
     public void setCanvasState(CanvasStates canvasState) {
         this.canvasState = canvasState;
+
+        if (messageBus != null) {
+            messageBus.emit("cavas.state.update", canvasState.toString());
+        }
     }
 
     public CanvasStates getCanvasState() {
@@ -257,7 +261,7 @@ public class GraphRenderingController implements Initializable {
                 messageBus.emit("graphFile.changed", "true");
             }
 
-            canvasState = CanvasStates.PANNING;
+            setCanvasState(CanvasStates.PANNING);
         }
 
         // delegate to a method
@@ -271,7 +275,7 @@ public class GraphRenderingController implements Initializable {
                 graph.addEdge(sel1.getVertexId(), sel2.getVertexId());
 
                 sel1 = null;
-                canvasState = CanvasStates.PANNING;
+                setCanvasState(CanvasStates.PANNING);
                 messageBus.emit("#addEdgeBt.text.change", "Add edge");
             }
         }
@@ -334,7 +338,7 @@ public class GraphRenderingController implements Initializable {
         String id = String.valueOf(Instant.now().getEpochSecond());
         graph.addVertex(new Vertex<>(id));
         graph.dispatch("graph.vertex.add", id.concat(";x:").concat(String.valueOf(x)).concat(";y:").concat(String.valueOf(y)));
-        canvasState = CanvasStates.PANNING;
+        setCanvasState(CanvasStates.PANNING);
         messageBus.emit("graphFile.changed", "true");
         messageBus.emit("#addVertexBt.text.change", "Add vertex");
         messageBus.emit("renderer.update", "render");
