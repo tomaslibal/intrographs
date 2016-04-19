@@ -229,7 +229,7 @@ public class GraphRenderingController implements Initializable {
             ObservableList<MenuItem> items = contextMenu.getItems();
 
             if (items != null) {
-                if (items.size() > 0) { items.removeAll(items); }
+                if (items.size() > 0) { items.clear(); }
 
                 if (vertexAtMouseClick.isPresent()) {
                     items.addAll(menuItemRemoveVertex, menuItemSpanningTree);
