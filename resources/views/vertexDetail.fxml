@@ -11,7 +11,7 @@
             </Pane>
 
             <rowConstraints>
-                <RowConstraints maxHeight="200.0" minHeight="200.0" prefHeight="200.0" />
+                <RowConstraints prefHeight="220.0" />
             </rowConstraints>
 
             <columnConstraints>
