@@ -127,9 +127,9 @@ public class GraphRenderer<T, U extends Edge> {
         ox = x;
         oy = y;
         ctx.translate(x, y);
+        renderEdges();
         renderVertexHighlighter();
         renderVertices();
-        renderEdges();
         ctx.restore();
     }
 
