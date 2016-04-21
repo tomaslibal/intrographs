@@ -55,6 +55,9 @@ public class MainController implements Initializable {
     public Button removeVertexBt;
 
     @FXML
+    public Button selectVertexBt;
+
+    @FXML
     private Canvas mainCanvas;
 
     @FXML
@@ -152,8 +155,29 @@ public class MainController implements Initializable {
 
         messageBus.subscribe("canvas.state.update", stateStr -> {
             CanvasStates state = CanvasStates.valueOf(stateStr);
+            String btHighlighted = "btHighlighted";
 
             resetBtStyles();
+
+            if (state == CanvasStates.ADDING_VERTEX) {
+                addClassToButton(addVertexBt, btHighlighted);
+            }
+
+            if (state == CanvasStates.ADDING_EDGE) {
+                addClassToButton(addEdgeBt, btHighlighted);
+            }
+
+            if (state == CanvasStates.REMOVING_VERTEX) {
+                addClassToButton(removeVertexBt, btHighlighted);
+            }
+
+            if (state == CanvasStates.REMOVING_EDGE) {
+                addClassToButton(removeEdgeBt, btHighlighted);
+            }
+
+//            if (state == CanvasStates.PANNING) {
+//                addClassToButton(selectVertexBt, btHighlighted);
+//            }
         });
     }
 
@@ -209,6 +233,7 @@ public class MainController implements Initializable {
     }
 
     public void setCanvasState(CanvasStates state) {
+        messageBus.emit("canvas.state.change", state.toString());
         graphRenderingController.setCanvasState(state);
     }
 
@@ -436,5 +461,9 @@ public class MainController implements Initializable {
             graphRenderingController.getGraphRenderer().setEdgeShapes(edgeShapes);
             graphRenderingController.setGraph(graph);
         }
+    }
+
+    public void setCanvasToPanning(ActionEvent actionEvent) {
+        setCanvasState(CanvasStates.PANNING);
     }
 }

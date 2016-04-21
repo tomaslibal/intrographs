@@ -1,6 +1,13 @@
 .button {
 }
 
+#selectVertexBt {
+    -fx-background-image: url('/images/intrographs_icon_select_vertex.png');
+    -fx-background-position: center;
+    -fx-background-repeat: stretch;
+    -fx-background-size: 32px 32px;
+}
+
 #addVertexBt {
     -fx-background-image: url('/images/intrographs_icon_add_vertex.png');
     -fx-background-position: center;
