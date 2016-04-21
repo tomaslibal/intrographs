@@ -161,7 +161,7 @@ public class GraphRenderingController implements Initializable {
         this.canvasState = canvasState;
 
         if (messageBus != null) {
-            messageBus.emit("cavas.state.update", canvasState.toString());
+            messageBus.emit("canvas.state.update", canvasState.toString());
         }
     }
 
