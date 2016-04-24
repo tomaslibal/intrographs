@@ -59,6 +59,7 @@ public class LayoutDialogController implements Initializable {
         }
 
         if (area != null) {
+            area.setValue(10000d);
             area.valueProperty().addListener((observable, oldValue, newValue) -> {
                 if (areaLabel != null) {
                     areaLabel.setText(String.format("%.0f", newValue));
