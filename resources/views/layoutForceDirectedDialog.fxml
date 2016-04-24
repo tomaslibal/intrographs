@@ -18,11 +18,11 @@
         <Text GridPane.rowIndex="0" GridPane.columnIndex="2">5</Text>
 
         <Text GridPane.rowIndex="1" GridPane.columnIndex="0">Constant C</Text>
-        <Slider GridPane.rowIndex="1" GridPane.columnIndex="1" blockIncrement="100" min="0" max="1000" showTickLabels="true" showTickMarks="true"></Slider>
+        <Slider GridPane.rowIndex="1" GridPane.columnIndex="1" blockIncrement="100" min="0" max="1000" majorTickUnit="250" showTickLabels="true" showTickMarks="true"></Slider>
         <Text GridPane.rowIndex="1" GridPane.columnIndex="2">5</Text>
 
         <Text GridPane.rowIndex="2" GridPane.columnIndex="0">Area</Text>
-        <Slider GridPane.rowIndex="2" GridPane.columnIndex="1" blockIncrement="1000" min="0" max="20000" showTickLabels="true" showTickMarks="true"></Slider>
+        <Slider GridPane.rowIndex="2" GridPane.columnIndex="1" blockIncrement="1000" min="0" max="20000" majorTickUnit="5000" showTickLabels="true" showTickMarks="true"></Slider>
         <Text GridPane.rowIndex="2" GridPane.columnIndex="2">5</Text>
 
         <Button GridPane.rowIndex="3" onAction="#handleForceDirectedLayoutRun">Run</Button>
