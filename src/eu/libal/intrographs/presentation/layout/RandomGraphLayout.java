@@ -18,12 +18,15 @@ public class RandomGraphLayout implements Runnable {
     private final GraphRenderer<Integer, Edge> graphRenderer;
     private final MessageBus messageBus;
     private final Semaphore canUpdateLayout;
-    public final static int NUM_STEPS = 25;
+    public final int NUM_STEPS;
+    public final static int MILLIS = 100;
 
-    public RandomGraphLayout(GraphRenderer<Integer, Edge> graphRenderer, MessageBus messageBus, Semaphore canUpdateLayout) {
+    public RandomGraphLayout(GraphRenderer<Integer, Edge> graphRenderer, MessageBus messageBus, Semaphore canUpdateLayout, Double runLength) {
         this.graphRenderer = graphRenderer;
         this.messageBus = messageBus;
         this.canUpdateLayout = canUpdateLayout;
+
+        NUM_STEPS = (int) Math.round(runLength * (1000 / MILLIS));
     }
 
     @Override
@@ -60,7 +63,7 @@ public class RandomGraphLayout implements Runnable {
             messageBus.emit("renderer.update", "update");
 
             try {
-                Thread.sleep(100);
+                Thread.sleep(MILLIS);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

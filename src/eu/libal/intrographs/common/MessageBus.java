@@ -1,5 +1,6 @@
 package eu.libal.intrographs.common;
 
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,7 +37,15 @@ public class MessageBus implements Listenable {
         List<Notifiable> notifiables = listeners.get(eventName);
 
         if (notifiables != null) {
-            notifiables.forEach(callback -> callback.call(value));
+            notifiables.forEach(callback -> {
+                try {
+                    callback.call(value);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            });
         }
     }
 }

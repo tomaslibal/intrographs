@@ -18,6 +18,7 @@ public class Main extends Application {
         Stage                   infoStage               = new Stage();
         PrimaryStageInitializer primaryStageInitializer = new PrimaryStageInitializer(primaryStage, infoStage, messageBus);
         InfoStageInitializer    infoStageInitializer    = new InfoStageInitializer(primaryStage, infoStage, messageBus);
+        LayoutStageInitializer  layoutStageInitializer  = new LayoutStageInitializer(primaryStage, messageBus);
 
         primaryStageInitializer.initAll();
         infoStageInitializer.initAll();

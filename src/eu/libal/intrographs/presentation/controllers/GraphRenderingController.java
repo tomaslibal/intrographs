@@ -10,6 +10,7 @@ import eu.libal.intrographs.presentation.CanvasStates;
 import eu.libal.intrographs.presentation.GraphRedrawTimer;
 import eu.libal.intrographs.presentation.GraphRenderer;
 import eu.libal.intrographs.presentation.layout.ForceDirectedLayout;
+import eu.libal.intrographs.presentation.layout.LayoutMessage;
 import eu.libal.intrographs.presentation.layout.RandomGraphLayout;
 import eu.libal.intrographs.presentation.shapes.Coordinates2D;
 import eu.libal.intrographs.presentation.shapes.EdgeShape2D;
@@ -24,12 +25,11 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+import java.io.ByteArrayInputStream;
+import java.io.ObjectInputStream;
 import java.net.URL;
 import java.time.Instant;
-import java.util.LinkedList;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -173,7 +173,36 @@ public class GraphRenderingController implements Initializable {
         this.messageBus = messageBus;
         subscribeToVertexDialogEvents(this.messageBus);
         subscribeToNewGraphEvents(this.messageBus);
+        subscribeToLayoutEvents(this.messageBus);
         GraphRedrawTimer timer = new GraphRedrawTimer(graphRenderer, messageBus);
+    }
+
+    private void subscribeToLayoutEvents(MessageBus messageBus) {
+        messageBus.subscribe("layout.run", layoutMsg -> {
+            String[] bv = layoutMsg.substring(1, layoutMsg.length() - 1).split(",");
+            byte[] bytes = new byte[bv.length];
+
+            for (int i = 0, len = bytes.length; i < len; i++) {
+                bytes[i] = Byte.parseByte(bv[i].trim());
+            }
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+            ObjectInputStream in = new ObjectInputStream(bais);
+            LayoutMessage msg = (LayoutMessage) in.readObject();
+            in.close();
+            HashMap<String, Double> vars;
+
+            switch (msg.getLayoutAlgorithm()) {
+                case "random":
+                    vars = msg.getVariables();
+                    updateLayoutRandom(vars.get("runLength"));
+                    break;
+                case "forceDirected":
+                    vars = msg.getVariables();
+                    updateLayoutForceDirected(vars.get("constantC"), vars.get("area"));
+                    break;
+            }
+        });
     }
 
     private void subscribeToNewGraphEvents(MessageBus messageBus) {
@@ -496,18 +525,18 @@ public class GraphRenderingController implements Initializable {
         messageBus.emit("renderer.update", "render");
     }
 
-    public void updateLayoutForceDirected() {
+    public void updateLayoutForceDirected(Double constantC, Double area) {
         if (canUpdateLayout.tryAcquire()) {
-            ForceDirectedLayout forceDirectedLayout = new ForceDirectedLayout(graphRenderer, messageBus, canUpdateLayout);
+            ForceDirectedLayout forceDirectedLayout = new ForceDirectedLayout(graphRenderer, messageBus, canUpdateLayout, constantC, area);
             Thread layoutThread = new Thread(forceDirectedLayout);
             layoutThread.setPriority(Thread.MIN_PRIORITY);
             layoutThread.start();
         }
     }
 
-    public void updateLayoutRandom() {
+    public void updateLayoutRandom(Double runLength) {
         if (canUpdateLayout.tryAcquire()) {
-            RandomGraphLayout randomGraphLayout = new RandomGraphLayout(graphRenderer, messageBus, canUpdateLayout);
+            RandomGraphLayout randomGraphLayout = new RandomGraphLayout(graphRenderer, messageBus, canUpdateLayout, runLength);
             Thread layoutThread = new Thread(randomGraphLayout);
             layoutThread.setPriority(Thread.MIN_PRIORITY);
             layoutThread.start();

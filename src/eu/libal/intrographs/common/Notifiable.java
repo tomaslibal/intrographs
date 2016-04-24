@@ -1,5 +1,7 @@
 package eu.libal.intrographs.common;
 
+import java.io.IOException;
+
 /**
  * A functional interface for callbacks that take a string message when invoked.
  *
@@ -12,5 +14,5 @@ public interface Notifiable {
      *
      * @param message message from the invoking object
      */
-    void call(String message);
+    void call(String message) throws IOException, ClassNotFoundException;
 }

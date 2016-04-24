@@ -34,7 +34,15 @@ public class ListenableField<T> implements Listenable, Serializable {
 
     public void setValue(T value) {
         this.value = value;
-        callbacks.get("update").forEach(fn -> fn.call(value.toString()));
+        callbacks.get("update").forEach(fn -> {
+            try {
+                fn.call(value.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public T getValue() {

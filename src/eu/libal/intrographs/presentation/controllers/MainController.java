@@ -414,11 +414,14 @@ public class MainController implements Initializable {
 
     @FXML
     public void handleForceDirectedLayoutAction(ActionEvent actionEvent) {
-        graphRenderingController.updateLayoutForceDirected();
+        messageBus.emit("layout.dialog.show", "forceDirected");
+        //graphRenderingController.updateLayoutForceDirected();
     }
 
     public void handleRandomLayoutAction(ActionEvent actionEvent) {
-        graphRenderingController.updateLayoutRandom();
+        messageBus.emit("layout.dialog.show", "random");
+
+        //graphRenderingController.updateLayoutRandom();
     }
 
     public void handleSaveAsAction(ActionEvent actionEvent) throws IOException {

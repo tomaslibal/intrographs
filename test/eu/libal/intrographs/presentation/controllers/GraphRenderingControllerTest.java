@@ -23,6 +23,7 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import java.io.IOException;
 import java.util.HashSet;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -109,7 +110,7 @@ public class GraphRenderingControllerTest {
     }
 
     @Test
-    public void shouldAddVertexToGraphAndDispatchTheEventWhenAddingVertexAtCoords() {
+    public void shouldAddVertexToGraphAndDispatchTheEventWhenAddingVertexAtCoords() throws IOException, ClassNotFoundException {
         Graph<Integer, Edge> graph = controller.getGraph();
         Notifiable vertexAddEmittedCheck = Mockito.mock(Notifiable.class);
 

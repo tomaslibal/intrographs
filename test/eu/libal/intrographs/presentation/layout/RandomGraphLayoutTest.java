@@ -36,6 +36,8 @@ public class RandomGraphLayoutTest {
 
     Canvas canvas;
 
+    private Double runLength = 5d;
+
     @Before
     public void setup() {
         mockGraphRenderer = Mockito.mock(GraphRenderer.class);
@@ -45,7 +47,7 @@ public class RandomGraphLayoutTest {
 
         when(mockGraphRenderer.getCanvas()).thenReturn(canvas);
 
-        randomLayout = new RandomGraphLayout(mockGraphRenderer, mockMessageBus, mockCanUpdateLayout);
+        randomLayout = new RandomGraphLayout(mockGraphRenderer, mockMessageBus, mockCanUpdateLayout, runLength);
     }
 
     @Test
@@ -62,10 +64,12 @@ public class RandomGraphLayoutTest {
 
         randomLayout.run();
 
-        verify(a, times(RandomGraphLayout.NUM_STEPS)).setX(anyFloat());
-        verify(a, times(RandomGraphLayout.NUM_STEPS)).setY(anyFloat());
-        verify(b, times(RandomGraphLayout.NUM_STEPS)).setX(anyFloat());
-        verify(b, times(RandomGraphLayout.NUM_STEPS)).setY(anyFloat());
+        int NUM_STEPS = (int) Math.round(runLength * (1000 / RandomGraphLayout.MILLIS));
+
+        verify(a, times(NUM_STEPS)).setX(anyFloat());
+        verify(a, times(NUM_STEPS)).setY(anyFloat());
+        verify(b, times(NUM_STEPS)).setX(anyFloat());
+        verify(b, times(NUM_STEPS)).setY(anyFloat());
 
     }
 }

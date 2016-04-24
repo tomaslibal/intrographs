@@ -6,8 +6,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.io.IOException;
+
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
 
 public class WeightedEdgeTest {
@@ -29,7 +31,7 @@ public class WeightedEdgeTest {
     }
 
     @Test
-    public void shouldEmitUpdateEventWhenWeightUpdated() {
+    public void shouldEmitUpdateEventWhenWeightUpdated() throws IOException, ClassNotFoundException {
         Notifiable notifiable = Mockito.mock(Notifiable.class);
 
         wEdge.subscribe(notifiable);

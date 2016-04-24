@@ -14,16 +14,16 @@
         <vgap>10</vgap>
 
         <Text GridPane.rowIndex="0" GridPane.columnIndex="0">Run time (seconds)</Text>
-        <Slider GridPane.rowIndex="0" GridPane.columnIndex="1" blockIncrement="1" min="0" max="20" showTickLabels="true" showTickMarks="true"></Slider>
-        <Text GridPane.rowIndex="0" GridPane.columnIndex="2">5</Text>
+        <Slider fx:id="runTime" value="5" GridPane.rowIndex="0" GridPane.columnIndex="1" blockIncrement="1" min="0" max="20" showTickLabels="true" showTickMarks="true"></Slider>
+        <Text GridPane.rowIndex="0" GridPane.columnIndex="2" fx:id="runTimeLabel">5 seconds</Text>
 
         <Text GridPane.rowIndex="1" GridPane.columnIndex="0">Constant C</Text>
-        <Slider GridPane.rowIndex="1" GridPane.columnIndex="1" blockIncrement="100" min="0" max="1000" majorTickUnit="250" showTickLabels="true" showTickMarks="true"></Slider>
-        <Text GridPane.rowIndex="1" GridPane.columnIndex="2">5</Text>
+        <Slider fx:id="constantC" value="100" GridPane.rowIndex="1" GridPane.columnIndex="1" blockIncrement="100" min="0" max="1000" majorTickUnit="250" showTickLabels="true" showTickMarks="true"></Slider>
+        <Text GridPane.rowIndex="1" GridPane.columnIndex="2" fx:id="constantCLabel">100</Text>
 
         <Text GridPane.rowIndex="2" GridPane.columnIndex="0">Area</Text>
-        <Slider GridPane.rowIndex="2" GridPane.columnIndex="1" blockIncrement="1000" min="0" max="20000" majorTickUnit="5000" showTickLabels="true" showTickMarks="true"></Slider>
-        <Text GridPane.rowIndex="2" GridPane.columnIndex="2">5</Text>
+        <Slider fx:id="area" value="10000" GridPane.rowIndex="2" GridPane.columnIndex="1" blockIncrement="1000" min="0" max="20000" majorTickUnit="5000" showTickLabels="true" showTickMarks="true"></Slider>
+        <Text GridPane.rowIndex="2" GridPane.columnIndex="2" fx:id="areaLabel">10000</Text>
 
         <Button GridPane.rowIndex="3" onAction="#handleForceDirectedLayoutRun">Run</Button>
 

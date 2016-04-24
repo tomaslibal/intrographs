@@ -39,7 +39,8 @@ public class ForceDirectedLayout implements Runnable {
     /**
      * Constant multiplier of the ideal space between vertices k
      */
-    private final static double C = 100;
+    private final double C;
+    private final Double area;
 
     /**
      * The ideal space between vertices
@@ -49,10 +50,12 @@ public class ForceDirectedLayout implements Runnable {
     private final int NUM_STEPS = 50;
     private double temperature;
 
-    public ForceDirectedLayout(GraphRenderer<Integer, Edge> graphRenderer, MessageBus messageBus, Semaphore canUpdateLayout) {
+    public ForceDirectedLayout(GraphRenderer<Integer, Edge> graphRenderer, MessageBus messageBus, Semaphore canUpdateLayout, Double constantC, Double area) {
         this.graphRenderer = graphRenderer;
         this.messageBus = messageBus;
         this.canUpdateLayout = canUpdateLayout;
+        C = constantC;
+        this.area = area;
     }
 
     private double getTemperature() {
@@ -76,7 +79,7 @@ public class ForceDirectedLayout implements Runnable {
 
     @Override
     public void run() {
-        double area = 10000;
+        //double area = 10000;
         k = C * Math.sqrt( area / (1 + graphRenderer.getVertexShapes().size()) );
         temperature = 15;
         speed = 1d;

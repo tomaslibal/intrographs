@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.io.IOException;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -31,7 +33,7 @@ public class ListenableFieldTest {
     }
 
     @Test
-    public void shouldEmitUpdateEventEveryTimeValueIsUpdated() {
+    public void shouldEmitUpdateEventEveryTimeValueIsUpdated() throws IOException, ClassNotFoundException {
         Notifiable notifiable = Mockito.mock(Notifiable.class);
         listenableField.subscribe("update", notifiable);
 
