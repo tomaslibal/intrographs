@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 import java.io.ByteArrayOutputStream;
@@ -35,6 +36,9 @@ public class LayoutDialogController implements Initializable {
 
     @FXML
     public Text areaLabel;
+
+    @FXML
+    public GridPane mainGrid;
 
     private MessageBus messageBus;
 
