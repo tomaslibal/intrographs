@@ -199,7 +199,7 @@ public class GraphRenderingController implements Initializable {
                     break;
                 case "forceDirected":
                     vars = msg.getVariables();
-                    updateLayoutForceDirected(vars.get("constantC"), vars.get("area"));
+                    updateLayoutForceDirected(vars.get("constantC"), vars.get("area"), vars.get("runLength"));
                     break;
             }
         });
@@ -525,9 +525,9 @@ public class GraphRenderingController implements Initializable {
         messageBus.emit("renderer.update", "render");
     }
 
-    public void updateLayoutForceDirected(Double constantC, Double area) {
+    public void updateLayoutForceDirected(Double constantC, Double area, Double runLength) {
         if (canUpdateLayout.tryAcquire()) {
-            ForceDirectedLayout forceDirectedLayout = new ForceDirectedLayout(graphRenderer, messageBus, canUpdateLayout, constantC, area);
+            ForceDirectedLayout forceDirectedLayout = new ForceDirectedLayout(graphRenderer, messageBus, canUpdateLayout, constantC, area, runLength);
             Thread layoutThread = new Thread(forceDirectedLayout);
             layoutThread.setPriority(Thread.MIN_PRIORITY);
             layoutThread.start();

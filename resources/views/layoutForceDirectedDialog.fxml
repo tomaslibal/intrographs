@@ -24,7 +24,7 @@
         <Text GridPane.rowIndex="1" GridPane.columnIndex="2" fx:id="constantCLabel">100</Text>
 
         <Text GridPane.rowIndex="2" GridPane.columnIndex="0">Area</Text>
-        <Slider fx:id="area" value="10000" GridPane.rowIndex="2" GridPane.columnIndex="1" blockIncrement="1000" min="0"
+        <Slider fx:id="area" value="10000" GridPane.rowIndex="2" GridPane.columnIndex="1" min="0"
                 max="20000" majorTickUnit="5000" showTickLabels="true" showTickMarks="true"/>
         <Text GridPane.rowIndex="2" GridPane.columnIndex="2" fx:id="areaLabel">10000</Text>
 

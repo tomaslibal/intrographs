@@ -41,21 +41,24 @@ public class ForceDirectedLayout implements Runnable {
      */
     private final double C;
     private final Double area;
+    private final int millis = 50;
 
     /**
      * The ideal space between vertices
      */
     private Double k;
     private Double speed = 1d;
-    private final int NUM_STEPS = 50;
+    private final int NUM_STEPS;
     private double temperature;
 
-    public ForceDirectedLayout(GraphRenderer<Integer, Edge> graphRenderer, MessageBus messageBus, Semaphore canUpdateLayout, Double constantC, Double area) {
+    public ForceDirectedLayout(GraphRenderer<Integer, Edge> graphRenderer, MessageBus messageBus, Semaphore canUpdateLayout, Double constantC, Double area, Double runLength) {
         this.graphRenderer = graphRenderer;
         this.messageBus = messageBus;
         this.canUpdateLayout = canUpdateLayout;
         C = constantC;
         this.area = area;
+
+        NUM_STEPS = (int) Math.round(runLength * (1000 / millis));
     }
 
     private double getTemperature() {
@@ -154,7 +157,7 @@ public class ForceDirectedLayout implements Runnable {
             messageBus.emit("renderer.update", "render");
 
             try {
-                Thread.sleep(50);
+                Thread.sleep(millis);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
