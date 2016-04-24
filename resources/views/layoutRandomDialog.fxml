@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.libal.intrographs.presentation.controllers.LayoutDialogController">
+    <GridPane fx:id="mainGrid">
+        <padding>
+            <Insets left="10" top="10" right="10" bottom="10"/>
+        </padding>
+        <hgap>10</hgap>
+        <vgap>10</vgap>
+
+        <Text GridPane.rowIndex="0" GridPane.columnIndex="0">Run time (seconds)</Text>
+        <TextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="runTime"></TextField>
+        <Button GridPane.rowIndex="1" onAction="#handleRandomLayoutRun">Run</Button>
+    </GridPane>
+</VBox>
