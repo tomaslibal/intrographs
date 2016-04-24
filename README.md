@@ -9,7 +9,7 @@ to modify them and explore their properties.
 
 Brief overview of the features
 
-![Intrographs Main Screen](http://libal.eu/imghost/intrographs/intrographs1.png)
+![Intrographs Main Screen](http://libal.eu/imghost/intrographs/intrographs2_1920.png)
 
 ### Graphs
 
@@ -21,8 +21,8 @@ Brief overview of the features
 
 ### Layouts
 
-- Force directed algorithm
-- Random layout
+- force directed algorithm
+- random layout
 
 ### Files
 
@@ -103,3 +103,4 @@ Run the Main class which contains main entry point.
 10. Chiba, N. and Nishizeki T. (2008) *Planar Graphs: Theory and Algorithms.* Reprint, USA: Courier Corporation.
 11. Moehring, H. R. (1997) "Graph-Theoretic Concepts in Computer Science: 23rd International Workshop, WG'97, Berlin, Germany" June 18-20, 1997. Proceedings, Volume 23
 12. Skiena, S. (2009) *The Algorithm Design Manual.* London: Springer.
+13. Tamassia, R. (2013) *Handbook of Graph Drawing and Visualisation*. CRC Press.
