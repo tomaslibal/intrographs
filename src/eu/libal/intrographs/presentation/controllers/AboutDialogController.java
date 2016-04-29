@@ -8,6 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -37,5 +41,13 @@ public class AboutDialogController implements Initializable {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public void handleHomepageLinkClick(ActionEvent actionEvent) throws IOException {
+        try {
+            Desktop.getDesktop().browse(new URI("https://github.com/tomaslibal/intrographs"));
+        } catch (URISyntaxException e1) {
+            e1.printStackTrace();
+        }
     }
 }

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.text.Text?>
-
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="eu.libal.intrographs.presentation.controllers.AboutDialogController">
     <GridPane fx:id="mainGrid">
         <hgap>10</hgap>
@@ -12,7 +11,7 @@
 
         <Text GridPane.rowIndex="0">Intrographs</Text>
 
-        <Text GridPane.rowIndex="1">https://github.com/tomaslibal/intrographs</Text>
+        <Hyperlink GridPane.rowIndex="1" onAction="#handleHomepageLinkClick">https://github.com/tomaslibal/intrographs</Hyperlink>
 
         <Button GridPane.rowIndex="2" fx:id="okBt" onAction="#handleOKBtAction">Okay</Button>
     </GridPane>
