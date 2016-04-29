@@ -122,6 +122,15 @@ public class MainController implements Initializable {
                 mainCanvas.setWidth(originalCanvasWidth + (newGridWidth.doubleValue() - oldGridWidth.doubleValue()));
             }
         });
+
+        mainGrid.heightProperty().addListener(((observable, oldHeight, newHeight) -> {
+            if (oldHeight.intValue() >= 480) {
+                double originalCanvasHeight = mainCanvas.getHeight();
+                mainCanvas.setHeight(originalCanvasHeight + (newHeight.doubleValue() - oldHeight.doubleValue()));
+            }
+        }));
+
+
     }
 
     private void setButtonText(Button button, String text) {
