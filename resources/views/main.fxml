@@ -59,28 +59,26 @@
                 onMouseClicked="#handleMouseClick"
                 onMouseMoved="#handleMouseMoved"/>
 
-        <GridPane GridPane.columnIndex="0" GridPane.rowIndex="2">
-            <padding><Insets top="15" right="15" bottom="15" left="0"/></padding>
-            <hgap>10</hgap>
+        <!--<GridPane GridPane.columnIndex="0" GridPane.rowIndex="2">-->
+            <!--<padding><Insets top="15" right="15" bottom="15" left="0"/></padding>-->
+            <!--<hgap>10</hgap>-->
 
-            <Label GridPane.columnIndex="0" GridPane.rowIndex="0"
-                   minWidth="80" prefWidth="80"
-                fx:id="cmdLabel">Command</Label>
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="0"
-                       minWidth="360" prefWidth="360"
-                fx:id="cmdInput"/>
-            <Button GridPane.columnIndex="2" GridPane.rowIndex="0"
-                    minWidth="80" prefWidth="80"
-                fx:id="execBt">Exec</Button>
+            <!--<Label GridPane.columnIndex="0" GridPane.rowIndex="0"-->
+                   <!--minWidth="80" prefWidth="80"-->
+                <!--fx:id="cmdLabel">Command</Label>-->
+            <!--<TextField GridPane.columnIndex="1" GridPane.rowIndex="0"-->
+                       <!--minWidth="360" prefWidth="360"-->
+                <!--fx:id="cmdInput"/>-->
+            <!--<Button GridPane.columnIndex="2" GridPane.rowIndex="0"-->
+                    <!--minWidth="80" prefWidth="80"-->
+                <!--fx:id="execBt">Exec</Button>-->
 
-            <Button GridPane.columnIndex="3" GridPane.rowIndex="0"
-                    minWidth="80" prefWidth="80"
-                    fx:id="refreshCanvasBt" onAction="#refreshCanvas">Refresh
-            </Button>
+            <!--<Button GridPane.columnIndex="3" GridPane.rowIndex="0"-->
+                    <!--minWidth="80" prefWidth="80"-->
+                    <!--fx:id="refreshCanvasBt" onAction="#refreshCanvas">Refresh-->
+            <!--</Button>-->
+        <!--</GridPane>-->
 
-
-
-        </GridPane>
         <!-- -->
 
         <GridPane GridPane.columnIndex="4" GridPane.rowIndex="0">
@@ -142,13 +140,6 @@
                 <ColumnConstraints maxWidth="42.0" prefWidth="42.0"/>
             </columnConstraints>
         </GridPane>
-
-
-        <!--<rowConstraints>-->
-            <!--<RowConstraints maxHeight="60"></RowConstraints>-->
-            <!--<RowConstraints maxHeight="640"></RowConstraints>-->
-            <!--<RowConstraints maxHeight="120"></RowConstraints>-->
-        <!--</rowConstraints>-->
 
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="80.0" prefWidth="80.0" />
