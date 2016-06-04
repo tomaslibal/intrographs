@@ -48,7 +48,7 @@
 
 
 
-    <GridPane fx:id="mainGrid">
+    <GridPane prefHeight="480" fx:id="mainGrid">
         <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
 
         <Canvas GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="3" GridPane.rowSpan="2"
